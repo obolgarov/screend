@@ -33,7 +33,7 @@ server.listen(expressApp.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-var mongoConnStr = "localhost:27017screend";
+var mongoConnStr = "localhost:27017/screend";
 
 io.on('connection', function (socket) {
   console.log('a user connected');
