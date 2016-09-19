@@ -1,0 +1,17 @@
+{
+  "name":"Screen'd",
+  "version":"0.0.0",
+  "description":"Another hiring website",
+  "main":"app.js",
+
+  "author": {
+    "name":"Solutions Bureau",
+    "email":""
+  },
+
+  "dependencies": {
+    "express":"*",
+    "mongodb":"*",
+    "react":"*"
+  }
+}
