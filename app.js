@@ -1,12 +1,12 @@
 var express = require ('express');
-var routes = require ('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
-var mongo = require('mongodb').MongoClient;
+var db = require('./db');
+
 var expressApp = express();
 
+// express settings
 expressApp.set('port', process.enb.PORT || 3000);
 expressApp.set('views', path.join(__dirname, 'views'));
 expressApp.set('view engine', 'jade');
@@ -23,10 +23,25 @@ if ('development' == app.get('env')) {
   expressApp.use(express.errorHandler());
 }
 
-expressApp.get('/', routes.index);
-expressApp.get('/users', user.list);
+// website access logic
+expressApp.get('/', function(){
 
-var server = http.createServer(app);
+});
+
+//
+db.connect('mongodb://localhost:27017/screend', function(err){
+  if (err){
+    console.log(err)
+    process.exit(1);
+  } else {
+    expressApp.listen(3000, function(){
+      console.log('Express listening on port 3000...');
+    });
+  }
+});
+
+// websockets or some shit
+/*var server = http.createServer(app);
 var io = require('socket.io')(server);
 
 server.listen(expressApp.get('port'), function() {
@@ -72,4 +87,4 @@ io.on('connection', function (socket) {
     });
   });
 
-});
+});*/
