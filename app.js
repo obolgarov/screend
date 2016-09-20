@@ -17,7 +17,7 @@ expressApp.use(express.urlencoded());
 expressApp.use(express.methodOverride());
 expressApp.use(expressApp.router);
 expressApp.use(require('stylus').middleware(path.join(__dirname, 'public')));
-expressApp.use(express.static(path.join(__dirname, 'public'))):
+expressApp.use(express.static(path.join(__dirname, 'public')));
 
 if ('development' == app.get('env')) {
   expressApp.use(express.errorHandler());
