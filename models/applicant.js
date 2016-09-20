@@ -14,6 +14,22 @@ exports.all = function(callback){
   });
 }
 
+exports.select = function(){
+  //TODO: generic select
+}
+
+exports.insert = function(){
+  //TODO: generic insert
+}
+
+exports.delete = function(){
+  //TODO: generic delete
+}
+
+exports.update = function(){
+  //TODO: generic update
+}
+
 exports.authenticate = function(username, password, callback){
   // TODO: find user collection here
   // likely an array of 1 or 0 objects for 'found' or 'not found' respectively
@@ -36,18 +52,6 @@ exports.authenticate = function(username, password, callback){
 }
 
 exports.changePassword = function(id, password, callback){
-
-}
-
-exports.insert = function(){
-
-}
-
-exports.delete = function(){
-
-}
-
-exports.update = function(){
 
 }
 
