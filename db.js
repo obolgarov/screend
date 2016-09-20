@@ -3,7 +3,7 @@ var mongoCLient = require('mongodb').MongoClient;
 // example gives this for checking if the db is instantiated, not sure why
 // regular variables aren't used but I'll go with it.
 var state = {
-  db: null;
+  db: null
 };
 
 exports.connect = function (url, done){
