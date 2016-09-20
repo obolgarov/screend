@@ -3,7 +3,7 @@ var React = require('react');
 var Login = React.createClass({
   render: function(){
     return(
-      <h2>Login</h2>
+      <h2>Login </h2>
     );
   }
 });
