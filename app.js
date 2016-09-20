@@ -4,22 +4,33 @@ var path = require('path');
 
 var db = require('./db');
 
-var expressApp = express();
+var app = express();
 
+//app.engine('react', require('react').__express);
+//app.set('view engine', 'react');
+
+app.use(express.static(__dirname + '/public'));
+
+app.listen(3000, function() {
+  console.log('Listening on port 3000...');
+});
+
+
+/*
 // express settings
-expressApp.set('port', process.enb.PORT || 3000);
+expressApp.set('port', 3000);
 expressApp.set('views', path.join(__dirname, 'views'));
-expressApp.set('view engine', 'jade');
-expressApp.use(express.favicon());
-expressApp.use(express.logger('dev'));
-expressApp.use(express.json());
-expressApp.use(express.urlencoded());
-expressApp.use(express.methodOverride());
-expressApp.use(expressApp.router);
-expressApp.use(require('stylus').middleware(path.join(__dirname, 'public')));
+expressApp.set('view engine', 'react');
+//expressApp.use(express.favicon());
+//expressApp.use(express.logger('dev'));
+//expressApp.use(express.json());
+//expressApp.use(express.urlencoded());
+//expressApp.use(express.methodOverride());
+//expressApp.use(expressApp.router);
+//expressApp.use(require('stylus').middleware(path.join(__dirname, 'public')));
 expressApp.use(express.static(path.join(__dirname, 'public')));
 
-if ('development' == app.get('env')) {
+if ('development' == expressApp.get('env')) {
   expressApp.use(express.errorHandler());
 }
 
@@ -39,7 +50,7 @@ db.connect('mongodb://localhost:27017/screend', function(err){
     });
   }
 });
-
+*/
 // websockets or some shit
 /*var server = http.createServer(app);
 var io = require('socket.io')(server);
