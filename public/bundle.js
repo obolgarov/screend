@@ -26779,20 +26779,124 @@
 /* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var RegEmployer = React.createClass({
-	  displayName: 'RegEmployer',
+	    displayName: "RegEmployer",
 
-	  render: function render() {
-	    return React.createElement(
-	      'h2',
-	      null,
-	      'Register Account - Employer'
-	    );
-	  }
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            React.createElement(
+	                "h2",
+	                null,
+	                "Register Account - Employer"
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "First Name:"
+	                ),
+	                React.createElement("input", { type: "text", name: "first" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Last Name:"
+	                ),
+	                React.createElement("input", { type: "text", name: "last" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Email:"
+	                ),
+	                React.createElement("input", { type: "email", name: "email" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Preferred Username:"
+	                ),
+	                React.createElement("input", { type: "text", name: "user" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Password:"
+	                ),
+	                React.createElement("input", { type: "password", name: "password" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Confirm Password:"
+	                ),
+	                React.createElement("input", { type: "password", name: "confirmPassword" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Company Name:"
+	                ),
+	                React.createElement("input", { type: "text", name: "companyName" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Company Address:"
+	                ),
+	                React.createElement("input", { type: "text", name: "companyAddress" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Industry:"
+	                ),
+	                React.createElement("input", { type: "text", name: "industry" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Attributes:"
+	                ),
+	                React.createElement("textarea", { name: "attributes" })
+	            )
+	        );
+	    }
 	});
 
 	module.exports = RegEmployer;
