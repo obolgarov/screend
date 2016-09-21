@@ -14,8 +14,9 @@ module.exports = {
       Messages: 'app/components/Messages.jsx',
       UploadResume: 'app/components/UploadResume.jsx',
       JobPosting: 'app/components/JobPostings.jsx',
-      Login: 'app/components/Login.jsx'
-
+      Login: 'app/components/Login.jsx',
+      RegSeeker: 'app/components/RegSeeker.jsx',
+      RegEmployer: 'app/components/RegEmployer.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },
