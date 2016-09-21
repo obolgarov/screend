@@ -7,6 +7,7 @@ var JobPosting = require('JobPosting');
 var Messages = require('Messages');
 var UploadResume = require('UploadResume');
 var ContactUs = require('ContactUs');
+var Login = require('Login');
 
 ReactDOM.render(
 <Router history={hashHistory}>
@@ -15,6 +16,7 @@ ReactDOM.render(
   <Route path="JobPosting" components={JobPosting}/>
   <Route path="UploadResume" components={UploadResume}/>
   <Route path="ContactUs" components={ContactUs}/>
+  <Route path="Login" components={Login}/>
   <IndexRoute component={Home}/>
   </Route>
 </Router>,
