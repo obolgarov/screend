@@ -26729,20 +26729,44 @@
 /* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var Login = React.createClass({
-	  displayName: 'Login',
+	    displayName: "Login",
 
-	  render: function render() {
-	    return React.createElement(
-	      'h2',
-	      null,
-	      'Login'
-	    );
-	  }
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            React.createElement(
+	                "h2",
+	                null,
+	                "Login"
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "User Name:"
+	                ),
+	                React.createElement("input", { type: "text", name: "username" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Password"
+	                ),
+	                React.createElement("input", { type: "text", name: "password" })
+	            )
+	        );
+	    }
 	});
 
 	module.exports = Login;
