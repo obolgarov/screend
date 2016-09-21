@@ -63,6 +63,8 @@
 	var UploadResume = __webpack_require__(234);
 	var ContactUs = __webpack_require__(235);
 	var Login = __webpack_require__(236);
+	var RegEmployer = __webpack_require__(237);
+	var RegSeeker = __webpack_require__(238);
 
 	ReactDOM.render(React.createElement(
 	  Router,
@@ -75,6 +77,8 @@
 	    React.createElement(Route, { path: 'UploadResume', components: UploadResume }),
 	    React.createElement(Route, { path: 'ContactUs', components: ContactUs }),
 	    React.createElement(Route, { path: 'Login', components: Login }),
+	    React.createElement(Route, { path: 'RegEmployer', components: RegEmployer }),
+	    React.createElement(Route, { path: 'RegSeeker', components: RegSeeker }),
 	    React.createElement(IndexRoute, { component: Home })
 	  )
 	), document.getElementById('app'));
@@ -26770,6 +26774,50 @@
 	});
 
 	module.exports = Login;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var RegEmployer = React.createClass({
+	  displayName: 'RegEmployer',
+
+	  render: function render() {
+	    return React.createElement(
+	      'h2',
+	      null,
+	      'Register Account - Employer'
+	    );
+	  }
+	});
+
+	module.exports = RegEmployer;
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var RegSeeker = React.createClass({
+	  displayName: 'RegSeeker',
+
+	  render: function render() {
+	    return React.createElement(
+	      'h2',
+	      null,
+	      'Register Account - Job Seeker'
+	    );
+	  }
+	});
+
+	module.exports = RegSeeker;
 
 /***/ }
 /******/ ]);
