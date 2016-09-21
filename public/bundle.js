@@ -26755,7 +26755,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "User Name:"
+	                    "User Name: "
 	                ),
 	                React.createElement("input", { type: "text", name: "username" })
 	            ),
@@ -26765,7 +26765,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Password"
+	                    "Password: "
 	                ),
 	                React.createElement("input", { type: "text", name: "password" })
 	            )
@@ -26801,7 +26801,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "First Name:"
+	                    "First Name: "
 	                ),
 	                React.createElement("input", { type: "text", name: "first" })
 	            ),
@@ -26811,7 +26811,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Last Name:"
+	                    "Last Name: "
 	                ),
 	                React.createElement("input", { type: "text", name: "last" })
 	            ),
@@ -26821,7 +26821,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Email:"
+	                    "Email: "
 	                ),
 	                React.createElement("input", { type: "email", name: "email" })
 	            ),
@@ -26831,7 +26831,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Preferred Username:"
+	                    "Preferred Username: "
 	                ),
 	                React.createElement("input", { type: "text", name: "user" })
 	            ),
@@ -26841,7 +26841,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Password:"
+	                    "Password: "
 	                ),
 	                React.createElement("input", { type: "password", name: "password" })
 	            ),
@@ -26851,7 +26851,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Confirm Password:"
+	                    "Confirm Password: "
 	                ),
 	                React.createElement("input", { type: "password", name: "confirmPassword" })
 	            ),
@@ -26861,7 +26861,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Company Name:"
+	                    "Company Name: "
 	                ),
 	                React.createElement("input", { type: "text", name: "companyName" })
 	            ),
@@ -26871,7 +26871,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Company Address:"
+	                    "Company Address: "
 	                ),
 	                React.createElement("input", { type: "text", name: "companyAddress" })
 	            ),
@@ -26881,7 +26881,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Industry:"
+	                    "Industry: "
 	                ),
 	                React.createElement("input", { type: "text", name: "industry" })
 	            ),
@@ -26891,7 +26891,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Attributes:"
+	                    "Attributes: "
 	                ),
 	                React.createElement("textarea", { name: "attributes" })
 	            )
@@ -26927,7 +26927,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "First Name:"
+	                    "First Name: "
 	                ),
 	                React.createElement("input", { type: "text", name: "first" })
 	            ),
@@ -26937,7 +26937,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Last Name:"
+	                    "Last Name: "
 	                ),
 	                React.createElement("input", { type: "text", name: "last" })
 	            ),
@@ -26947,7 +26947,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Email:"
+	                    "Email: "
 	                ),
 	                React.createElement("input", { type: "email", name: "email" })
 	            ),
@@ -26957,7 +26957,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Preferred Username:"
+	                    "Preferred Username: "
 	                ),
 	                React.createElement("input", { type: "text", name: "user" })
 	            ),
@@ -26967,7 +26967,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Password:"
+	                    "Password: "
 	                ),
 	                React.createElement("input", { type: "password", name: "password" })
 	            ),
@@ -26977,7 +26977,7 @@
 	                React.createElement(
 	                    "label",
 	                    null,
-	                    "Confirm Password:"
+	                    "Confirm Password: "
 	                ),
 	                React.createElement("input", { type: "password", name: "confirmPassword" })
 	            )

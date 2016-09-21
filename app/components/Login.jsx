@@ -6,11 +6,11 @@ var Login = React.createClass({
 <div>
       <h2>Login</h2>
 <div>
-    <label>User Name:</label>
+    <label>User Name: </label>
     <input type="text" name="username"/>
 </div>
 <div>
-    <label>Password</label>
+    <label>Password: </label>
     <input type="text" name="password"/>
 </div>
 
