@@ -13,7 +13,9 @@ module.exports = {
       Home: 'app/components/Home.jsx',
       Messages: 'app/components/Messages.jsx',
       UploadResume: 'app/components/UploadResume.jsx',
-      JobPosting: 'app/components/JobPostings.jsx'
+      JobPosting: 'app/components/JobPostings.jsx',
+      Login: 'app/components/Login.jsx'
+
     },
     extensions: ['', '.js', '.jsx']
   },
