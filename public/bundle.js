@@ -26801,20 +26801,84 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var RegSeeker = React.createClass({
-	  displayName: 'RegSeeker',
+	    displayName: "RegSeeker",
 
-	  render: function render() {
-	    return React.createElement(
-	      'h2',
-	      null,
-	      'Register Account - Job Seeker'
-	    );
-	  }
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            null,
+	            React.createElement(
+	                "h2",
+	                null,
+	                "Register Account - Job Seeker"
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "First Name:"
+	                ),
+	                React.createElement("input", { type: "text", name: "first" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Last Name:"
+	                ),
+	                React.createElement("input", { type: "text", name: "last" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Email:"
+	                ),
+	                React.createElement("input", { type: "email", name: "email" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Preferred Username:"
+	                ),
+	                React.createElement("input", { type: "text", name: "user" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Password:"
+	                ),
+	                React.createElement("input", { type: "password", name: "password" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "label",
+	                    null,
+	                    "Confirm Password:"
+	                ),
+	                React.createElement("input", { type: "password", name: "confirmPassword" })
+	            )
+	        );
+	    }
 	});
 
 	module.exports = RegSeeker;
