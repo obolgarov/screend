@@ -14,6 +14,9 @@ var Login = React.createClass({
     <input type="text" name="password"/>
 </div>
 
+<div>
+  <button type="submit">Submit</button>
+</div>
 </div>
     );
   }

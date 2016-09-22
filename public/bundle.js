@@ -26738,39 +26738,48 @@
 	var React = __webpack_require__(1);
 
 	var Login = React.createClass({
-	    displayName: "Login",
+	  displayName: "Login",
 
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            null,
-	            React.createElement(
-	                "h2",
-	                null,
-	                "Login"
-	            ),
-	            React.createElement(
-	                "div",
-	                null,
-	                React.createElement(
-	                    "label",
-	                    null,
-	                    "User Name: "
-	                ),
-	                React.createElement("input", { type: "text", name: "username" })
-	            ),
-	            React.createElement(
-	                "div",
-	                null,
-	                React.createElement(
-	                    "label",
-	                    null,
-	                    "Password: "
-	                ),
-	                React.createElement("input", { type: "text", name: "password" })
-	            )
-	        );
-	    }
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(
+	        "h2",
+	        null,
+	        "Login"
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "User Name: "
+	        ),
+	        React.createElement("input", { type: "text", name: "username" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Password: "
+	        ),
+	        React.createElement("input", { type: "text", name: "password" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "button",
+	          { type: "submit" },
+	          "Submit"
+	        )
+	      )
+	    );
+	  }
 	});
 
 	module.exports = Login;
@@ -26894,6 +26903,15 @@
 	                    "Attributes: "
 	                ),
 	                React.createElement("textarea", { name: "attributes" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "button",
+	                    { type: "submit" },
+	                    "Submit"
+	                )
 	            )
 	        );
 	    }
@@ -26980,6 +26998,15 @@
 	                    "Confirm Password: "
 	                ),
 	                React.createElement("input", { type: "password", name: "confirmPassword" })
+	            ),
+	            React.createElement(
+	                "div",
+	                null,
+	                React.createElement(
+	                    "button",
+	                    { type: "submit" },
+	                    "Submit"
+	                )
 	            )
 	        );
 	    }

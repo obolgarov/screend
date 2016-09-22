@@ -56,6 +56,9 @@ var RegEmployer = React.createClass({
         <textarea name="attributes"></textarea>
         </div>
 
+        <div>
+          <button type="submit">Submit</button>
+        </div>
 
   </div>
   );

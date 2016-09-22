@@ -35,6 +35,10 @@ var RegSeeker = React.createClass({
         <label>Confirm Password: </label>
         <input type="password" name="confirmPassword"/>
     </div>
+
+    <div>
+      <button type="submit">Submit</button>
+    </div>
 </div>
     );
   }
