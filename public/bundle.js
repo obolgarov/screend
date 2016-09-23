@@ -26932,7 +26932,12 @@
 
 
 	    onSubmit: function onSubmit(e) {
-	        console.log("test");
+	        var data = {
+	            firstName: this.refs.first.getDOMNode.value,
+	            lastName: this.refs.last.getDOMNode.value,
+	            userEmail: this.refs.email.getDOMNode.value,
+	            userName: this.refs.user.getDOMNode.value
+	        };
 	    },
 
 	    render: function render() {
@@ -26955,7 +26960,7 @@
 	                        null,
 	                        'First Name: '
 	                    ),
-	                    React.createElement('input', { type: 'text', name: 'first' })
+	                    React.createElement('input', { type: 'text', ref: 'first' })
 	                ),
 	                React.createElement(
 	                    'div',
@@ -26965,7 +26970,7 @@
 	                        null,
 	                        'Last Name: '
 	                    ),
-	                    React.createElement('input', { type: 'text', name: 'last' })
+	                    React.createElement('input', { type: 'text', ref: 'last' })
 	                ),
 	                React.createElement(
 	                    'div',
@@ -26975,7 +26980,7 @@
 	                        null,
 	                        'Email: '
 	                    ),
-	                    React.createElement('input', { type: 'email', name: 'email' })
+	                    React.createElement('input', { type: 'email', ref: 'email' })
 	                ),
 	                React.createElement(
 	                    'div',
@@ -26985,7 +26990,7 @@
 	                        null,
 	                        'Preferred Username: '
 	                    ),
-	                    React.createElement('input', { type: 'text', name: 'user' })
+	                    React.createElement('input', { type: 'text', ref: 'user' })
 	                ),
 	                React.createElement(
 	                    'div',
@@ -26995,7 +27000,7 @@
 	                        null,
 	                        'Password: '
 	                    ),
-	                    React.createElement('input', { type: 'password', name: 'password' })
+	                    React.createElement('input', { type: 'password', ref: 'password' })
 	                ),
 	                React.createElement(
 	                    'div',
@@ -27005,7 +27010,7 @@
 	                        null,
 	                        'Confirm Password: '
 	                    ),
-	                    React.createElement('input', { type: 'password', name: 'confirmPassword' })
+	                    React.createElement('input', { type: 'password', ref: 'confirmPassword' })
 	                ),
 	                React.createElement(
 	                    'div',
