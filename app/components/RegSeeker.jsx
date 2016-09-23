@@ -1,15 +1,80 @@
 var React = require('react');
+var http = require('http'); // to send request
+var config = require('../../config')(); // to get the port
+var querystring = require('querystring'); // to send data inside the request
+
 
 var RegSeeker = React.createClass({
 
   onSubmit: function (e) {
+
     var data = {
-      firstName : this.refs.first.getDOMNode.value,
-      lastName : this.refs.last.getDOMNode.value,
-      userEmail : this.refs.email.getDOMNode.value,
-      userName : this.refs.user.getDOMNode.value,
-      userPass : this.refs.password.getDOMNode.value
-       }
+      firstname : this.refs.first.value,
+      lastname : this.refs.last.value,
+      email : this.refs.email.value,
+      username : this.refs.user.value,
+      password : this.refs.password.value
+    }
+
+/*
+    // unused now, kept in case it might help somewhere
+    var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
+      'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
+      'output_format' : 'json',
+      'output_info' : 'compiled_code',
+      'warning_level' : 'QUIET',
+      'js_code' : data // this is how the user's data is sent, including password through http. Safe.
+    }
+*/
+
+    var dataQuerystring = querystring.stringify(data);
+
+    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+    var httpOptions = {
+      port: config.port,
+      path: "/applicants",
+      method: "POST", // insert data
+      headers: {
+        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Content-Lenfth' : Buffer.byteLength(dataQuerystring),
+        'Accept' : 'application/json'
+      },
+      body: dataQuerystring
+    }
+
+    console.log("body: " + JSON.stringify(data));
+
+    console.log("sending");
+
+    var req = http.request(httpOptions, function(res){
+
+      console.log("sent");
+
+      // res now contains new applicant data already inserted
+      var output = '';
+      console.log(options.path + ':' + res.satusCode);
+      res.setEncoding('utf8');
+
+      res.on('data', function (dataBlob){
+        output += dataBlob;
+        console.log("output: " + output);
+      });
+
+      res.on('end', function() {
+        var obj = JSON.parse(output);
+      });
+
+      // TODO: do something with the data for the applicant just inserted
+
+    });
+
+    req.on('error', function(err){
+      res.send('error: ' + err.message);
+    })
+
+    req.write(dataQuerystring);
+
+    req.end();
 
   },
 
@@ -18,7 +83,7 @@ var RegSeeker = React.createClass({
 <div>
   <h2>Register Account - Job Seeker</h2>
 
-<form ref='user_form' onSubmit={this.onSubmit}>
+  <form ref='user_form' onSubmit={this.onSubmit}>
     <div>
         <label>First Name: </label>
         <input type="text" ref="first"/>
@@ -52,7 +117,7 @@ var RegSeeker = React.createClass({
     <div>
       <button type="submit">Submit</button>
     </div>
-    </form>
+  </form>
 </div>
     );
   }

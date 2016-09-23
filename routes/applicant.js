@@ -1,8 +1,9 @@
-var applicant = require('../models/applicant.js');
 
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var applicant = require('../models/applicant.js');
+var bodyParser = require('body-parser');
 
 module.exports = router;
 
@@ -12,39 +13,51 @@ exports.list = function(req, res) {
   });
 }
 
+// replace the confusing event calling scheme for data to use a more imperative style
+router.use(bodyParser.urlencoded({ extended: true }));
+
+// -------------- public-facing routes ---------------
+
 router.route('/')
 .get(function(req, res, callback) {
-  console.log("test");
-    res.send("test");
+
+  // TODO: validate user here, res.send error page if user doesn't have access
+  // to view users
+
   // get all
   mongoose.model('applicant').find({}, function (err, applicants){
+
     if (err) {
       return console.error(err);
     } else {
-      res.send("test");
-      // respond to call with information
-      /*res.format({
 
-        // html response
+      //res.json(applicants);
+
+      // respond to call with information
+      res.format({
+
+        /*// html response
         html: function() {
-          res.render('applicants/index', {
+          res.render('jobposting', {
             title: 'all applicants',
             "applicants" : applicants
           })
         },
-
+        */
         // json response
         json: function() {
           res.json(applicants);
         }
 
-      });*/
+      });
     }
   });
 
   // end of get
-});
-/*.post(function(req, res){
+})
+.post(function(req, res){
+
+  console.log(req.body);
 
   // insert one
   var username = req.body.username;
@@ -65,7 +78,7 @@ router.route('/')
     } else {
       // insertion/creation complete
       console.log('POST inserting new applicant: ' + applicant);
-      res.format({
+      /*res.format({
 
         //html response
         html: function() {
@@ -78,12 +91,14 @@ router.route('/')
           res.json(applicant);
         }
 
-      });
+      });*/
+
+      res.send("poop");
     }
   });
 
   // end of post
-});*/
+});
 /*
 router.get('/new', function(req, res) {
   res.render('applicants/new', { title: 'create applicant' });
@@ -215,35 +230,4 @@ router.delete('/:id/edit', function(req, res) {
 });
 */
 
-/*
-// what the hell do these mean? tutorials explain nothing!
-module.exports.controller = function (app) {
-
-  // how are these called? accessing the website from the browser? does that
-  // mean users have access to all information just by typing a url they weren't
-  // supposed to? Is it instead some special express way of distributing
-  // functions? If so, is there is control over how these functions are called,
-  // why is it done through some special express method instead of the regular
-  // javascript functions?
-
-  app.get('/applicant/signup', function (req, res) {
-    //TODO: signup applicant
-    res.render('users/signup');
-  })
-
-  app.get('/applicant/login', function (req, res) {
-    //TODO: login applicant
-    res.render('users/signup');
-  })
-
-  app.get('/applicant/delete', function (req, res) {
-    //TODO: delete applicant (possibly not an option)
-    res.render('users/signup');
-  })
-
-  app.get('/applicant/update', function (req, res) {
-    //TODO: update applicant
-    res.render('users/signup');
-  })
-
-}*/
+// --------- controller functions -----------

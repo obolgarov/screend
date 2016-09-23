@@ -2,11 +2,6 @@
 var mongoose = require('mongoose');
 var config = require('./config');
 
-// when requiring with a function call, will return the db object to check if connected
-module.exports = function() {
-  var db = mongoose.connect(config.db.connstr);
-  return db;
-}
 
 // example gives this for checking if the db is instantiated, not sure why
 // regular variables aren't used but I'll go with it.
@@ -14,31 +9,34 @@ var state = {
   db: null
 };
 
-exports.connect = function (url, done){
+module.exports.connect = function (url, callback){
   if (state.db) {
     return done();
   }
 
-  mongoClient.connect(url, function(err, db){
+  mongoose.connect(url, function(err, db){
     if (err){
-      return done(err);
+      console.log("couldn't connect to database");
+      return callback(err);
     }
 
+    console.log("connected to database");
+
     state.db = db;
-    done();
+    callback();
   });
 }
 
-exports.get = function(){
+module.exports.get = function(){
   return state.db;
 }
 
-exports.close = function(done){
+module.exports.close = function(callback){
   if (state.db){
     state.db.close(function(err, result){
       state.db = null;
       state.mode = null;
-      done(err);
+      callback(err);
     });
   }
 }
