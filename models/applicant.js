@@ -1,35 +1,25 @@
 var db = require('../db.js');
-var crypto = require(crypto);
+var crypto = require('crypto');
+var mongoCollection = "applicants";
+var mongoose = require('mongoose')
 
+var applicantSchema = new mongoose.Schema( {
+  username: String,
+  password: String,
+  email: String,
+  firstname: String,
+  lastname: String
+})
+
+module.exports = mongoose.model('applicant', applicantSchema);
+
+console.log("test");
 // password encryption
 var hash = function(pass){
   return crypto.createHash('sha1').update(pass).digest('base64');
 }
 
-exports.all = function(callback){
-  var collection = db.get().collections('applicants');
-
-  collection.find().toArray(function(err, documents){
-    callback(err, documents);
-  });
-}
-
-exports.select = function(){
-  //TODO: generic select
-}
-
-exports.insert = function(){
-  //TODO: generic insert
-}
-
-exports.delete = function(){
-  //TODO: generic delete
-}
-
-exports.update = function(){
-  //TODO: generic update
-}
-
+// authenticates user with password
 exports.authenticate = function(username, password, callback){
   // TODO: find user collection here
   // likely an array of 1 or 0 objects for 'found' or 'not found' respectively
@@ -51,14 +41,61 @@ exports.authenticate = function(username, password, callback){
   }
 }
 
+/*
+// get all documents from this collection
+exports.all = function(callback){
+  var collection = db.get().collections(mongoCollection);
+
+  collection.find().toArray(function(err, documents){
+    callback(err, documents);
+  });
+}
+
+// get all documents from this collection that fit a query
+exports.select = function(query, callback){
+  var collection = db.get().collections(mongoCollection);
+
+  collection.find(query).toArray(function(err, documents){
+    callback(err, documents);
+  })
+}
+
+// get one document that fits a query
+exports.selectOne = function(query, callback){
+  var collection = db.get().collections(mongoCollection);
+
+  callback(null, collection.findOne(query););
+}
+
+// insert any number of documents
+exports.insert = function(statement){
+  var collection = db.get().collections(mongoCollection);
+
+  collection.insert(statement)
+}
+
+// delete any number of documents (be careful!)
+exports.delete = function(){
+  //TODO: generic delete
+}
+
+// updates any number of documents
+exports.update = function(){
+  //TODO: generic update
+}
+
+// change user password
 exports.changePassword = function(id, password, callback){
 
 }
 
+// add profile to this user
 exports.addProfile = function(){
 
 }
 
+// delete profile from this user
 exports.deleteProfile = function(){
 
 }
+*/
