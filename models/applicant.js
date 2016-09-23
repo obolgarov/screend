@@ -13,7 +13,6 @@ var applicantSchema = new mongoose.Schema( {
 
 module.exports = mongoose.model('applicant', applicantSchema);
 
-console.log("test");
 // password encryption
 var hash = function(pass){
   return crypto.createHash('sha1').update(pass).digest('base64');

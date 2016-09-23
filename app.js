@@ -2,6 +2,7 @@ var express = require ('express');
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
+var React = require('react');
 
 var config = require('./config')();
 
@@ -17,6 +18,8 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use('/', routes);
 app.use('/applicants', applicants);
+app.set('view engine', 'react');
+app.set('views', __dirname + '/app');
 
 /*
 // uses 'fs' to grab all files/names from a directory, then 'require' each file
@@ -29,9 +32,19 @@ fs.readdirSync('./models').forEach(function (file) {
 });
 */
 
-app.listen(config.port, function() {
-  console.log('Listening on port ' + config.port + '...');
+
+db.connect(config.connstr, function (err){
+  if(err){
+    console.err(err);
+  } else {
+
+    app.listen(config.port, function() {
+      console.log('Listening on port ' + config.port + '...');
+    });
+
+  }
 });
+
 
 
 /*

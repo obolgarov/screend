@@ -1,15 +1,18 @@
 var config = {
   local: {
     mode: 'local',
-    port: 3000
+    port: 3000,
+    connstr: 'mongodb://localhost:27017/screend'
   },
   staging: {
     mode: 'staging',
-    port: 4000
+    port: 4000,
+    connstr: 'mongodb://localhost:27017/screend'
   },
   production: {
     mode: 'production',
-    port: 5000
+    port: 5000,
+    connstr: 'mongodb://localhost:27017/screend'
   }
 }
 
