@@ -26923,89 +26923,98 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var RegSeeker = React.createClass({
-	    displayName: "RegSeeker",
+	    displayName: 'RegSeeker',
+
+
+	    onSubmit: function onSubmit(e) {
+	        console.log("test");
+	    },
 
 	    render: function render() {
 	        return React.createElement(
-	            "div",
+	            'div',
 	            null,
 	            React.createElement(
-	                "h2",
+	                'h2',
 	                null,
-	                "Register Account - Job Seeker"
+	                'Register Account - Job Seeker'
 	            ),
 	            React.createElement(
-	                "div",
-	                null,
+	                'form',
+	                { ref: 'user_form', onSubmit: this.onSubmit },
 	                React.createElement(
-	                    "label",
+	                    'div',
 	                    null,
-	                    "First Name: "
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'First Name: '
+	                    ),
+	                    React.createElement('input', { type: 'text', name: 'first' })
 	                ),
-	                React.createElement("input", { type: "text", name: "first" })
-	            ),
-	            React.createElement(
-	                "div",
-	                null,
 	                React.createElement(
-	                    "label",
+	                    'div',
 	                    null,
-	                    "Last Name: "
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Last Name: '
+	                    ),
+	                    React.createElement('input', { type: 'text', name: 'last' })
 	                ),
-	                React.createElement("input", { type: "text", name: "last" })
-	            ),
-	            React.createElement(
-	                "div",
-	                null,
 	                React.createElement(
-	                    "label",
+	                    'div',
 	                    null,
-	                    "Email: "
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Email: '
+	                    ),
+	                    React.createElement('input', { type: 'email', name: 'email' })
 	                ),
-	                React.createElement("input", { type: "email", name: "email" })
-	            ),
-	            React.createElement(
-	                "div",
-	                null,
 	                React.createElement(
-	                    "label",
+	                    'div',
 	                    null,
-	                    "Preferred Username: "
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Preferred Username: '
+	                    ),
+	                    React.createElement('input', { type: 'text', name: 'user' })
 	                ),
-	                React.createElement("input", { type: "text", name: "user" })
-	            ),
-	            React.createElement(
-	                "div",
-	                null,
 	                React.createElement(
-	                    "label",
+	                    'div',
 	                    null,
-	                    "Password: "
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Password: '
+	                    ),
+	                    React.createElement('input', { type: 'password', name: 'password' })
 	                ),
-	                React.createElement("input", { type: "password", name: "password" })
-	            ),
-	            React.createElement(
-	                "div",
-	                null,
 	                React.createElement(
-	                    "label",
+	                    'div',
 	                    null,
-	                    "Confirm Password: "
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Confirm Password: '
+	                    ),
+	                    React.createElement('input', { type: 'password', name: 'confirmPassword' })
 	                ),
-	                React.createElement("input", { type: "password", name: "confirmPassword" })
-	            ),
-	            React.createElement(
-	                "div",
-	                null,
 	                React.createElement(
-	                    "button",
-	                    { type: "submit" },
-	                    "Submit"
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'button',
+	                        { type: 'submit' },
+	                        'Submit'
+	                    )
 	                )
 	            )
 	        );

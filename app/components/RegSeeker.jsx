@@ -1,11 +1,17 @@
 var React = require('react');
 
 var RegSeeker = React.createClass({
+
+  onSubmit: function (e) {
+ console.log("test");
+  },
+
   render: function(){
     return(
 <div>
   <h2>Register Account - Job Seeker</h2>
 
+<form ref='user_form' onSubmit={this.onSubmit}>
     <div>
         <label>First Name: </label>
         <input type="text" name="first"/>
@@ -39,6 +45,7 @@ var RegSeeker = React.createClass({
     <div>
       <button type="submit">Submit</button>
     </div>
+    </form>
 </div>
     );
   }
