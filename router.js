@@ -8,3 +8,5 @@ router.get('/', function (request, response){
 router.get('/:id', function (request, response){
   // get all applicants by id
 });
+
+module.export = router;

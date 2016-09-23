@@ -4,6 +4,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
+module.exports = router;
+
 exports.list = function(req, res) {
   applicant.find(function(err, applicants) {
     res.send(applicants);
@@ -12,14 +14,16 @@ exports.list = function(req, res) {
 
 router.route('/')
 .get(function(req, res, callback) {
-
+  console.log("test");
+    res.send("test");
   // get all
   mongoose.model('applicant').find({}, function (err, applicants){
     if (err) {
       return console.error(err);
     } else {
+      res.send("test");
       // respond to call with information
-      res.format({
+      /*res.format({
 
         // html response
         html: function() {
@@ -34,13 +38,13 @@ router.route('/')
           res.json(applicants);
         }
 
-      });
+      });*/
     }
   });
 
   // end of get
-})
-.post(function(req, res){
+});
+/*.post(function(req, res){
 
   // insert one
   var username = req.body.username;
@@ -79,8 +83,8 @@ router.route('/')
   });
 
   // end of post
-});
-
+});*/
+/*
 router.get('/new', function(req, res) {
   res.render('applicants/new', { title: 'create applicant' });
 });
@@ -209,8 +213,7 @@ router.delete('/:id/edit', function(req, res) {
     }
   });
 });
-
-module.exports = router;
+*/
 
 /*
 // what the hell do these mean? tutorials explain nothing!

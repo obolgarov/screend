@@ -15,7 +15,7 @@ var app = express();
 //app.set('view engine', 'react');
 
 app.use(express.static(__dirname + '/public'));
-app.use(app.router);
+app.use('/', routes);
 app.use('/applicants', applicants);
 
 /*
