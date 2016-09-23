@@ -7,9 +7,10 @@ var RegSeeker = React.createClass({
       firstName : this.refs.first.getDOMNode.value,
       lastName : this.refs.last.getDOMNode.value,
       userEmail : this.refs.email.getDOMNode.value,
-      userName : this.refs.user.getDOMNode.value
+      userName : this.refs.user.getDOMNode.value,
+      userPass : this.refs.password.getDOMNode.value
        }
-      
+
   },
 
   render: function(){

@@ -25056,49 +25056,61 @@
 /* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var Login = React.createClass({
-	  displayName: "Login",
+	  displayName: 'Login',
+
+
+	  onSubmit: function onSubmit(e) {
+	    var data = {
+	      userName: this.refs.username.getDOMNode.value,
+	      userPass: this.refs.password.getDOMNode.value
+	    };
+	  },
 
 	  render: function render() {
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
 	      React.createElement(
-	        "h2",
+	        'h2',
 	        null,
-	        "Login"
+	        'Login'
 	      ),
 	      React.createElement(
-	        "div",
-	        null,
+	        'form',
+	        { ref: 'login', onSubmit: this.onSubmit },
 	        React.createElement(
-	          "label",
+	          'div',
 	          null,
-	          "User Name: "
+	          React.createElement(
+	            'label',
+	            null,
+	            'User Name: '
+	          ),
+	          React.createElement('input', { type: 'text', name: 'username' })
 	        ),
-	        React.createElement("input", { type: "text", name: "username" })
-	      ),
-	      React.createElement(
-	        "div",
-	        null,
 	        React.createElement(
-	          "label",
+	          'div',
 	          null,
-	          "Password: "
+	          React.createElement(
+	            'label',
+	            null,
+	            'Password: '
+	          ),
+	          React.createElement('input', { type: 'text', name: 'password' })
 	        ),
-	        React.createElement("input", { type: "text", name: "password" })
-	      ),
-	      React.createElement(
-	        "div",
-	        null,
 	        React.createElement(
-	          "button",
-	          { type: "submit" },
-	          "Submit"
+	          'div',
+	          null,
+	          React.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Submit'
+	          )
 	        )
 	      )
 	    );
@@ -25278,7 +25290,8 @@
 	            firstName: this.refs.first.getDOMNode.value,
 	            lastName: this.refs.last.getDOMNode.value,
 	            userEmail: this.refs.email.getDOMNode.value,
-	            userName: this.refs.user.getDOMNode.value
+	            userName: this.refs.user.getDOMNode.value,
+	            userPass: this.refs.password.getDOMNode.value
 	        };
 	    },
 
