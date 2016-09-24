@@ -17,7 +17,8 @@ module.exports = {
       Login: 'app/components/Login.jsx',
       RegSeeker: 'app/components/RegSeeker.jsx',
       RegEmployer: 'app/components/RegEmployer.jsx',
-      PasswordReset: 'app/components/PasswordReset.jsx'
+      PasswordReset: 'app/components/PasswordReset.jsx',
+      ChooseAccount: 'app/components/ChooseAccount.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },
