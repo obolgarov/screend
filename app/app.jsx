@@ -10,6 +10,7 @@ var ContactUs = require('ContactUs');
 var Login = require('Login');
 var RegEmployer = require('RegEmployer');
 var RegSeeker = require('RegSeeker');
+var PasswordReset =require('PasswordReset');
 
 ReactDOM.render(
 <Router history={hashHistory}>
@@ -21,6 +22,7 @@ ReactDOM.render(
   <Route path="Login" components={Login}/>
   <Route path="RegEmployer" components={RegEmployer}/>
   <Route path="RegSeeker" components={RegSeeker}/>
+  <Route path="PasswordReset" components={PasswordReset}/>
   <IndexRoute component={Home}/>
   </Route>
 </Router>,
