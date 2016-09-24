@@ -15,6 +15,10 @@ var ChooseAccount =  React.createClass({
     <Link to="/RegEmployer">Register Employer Account</Link>
 </div>
 
+<div>
+  <Link to="/Login">Back</Link>
+</div>
+
 </div>
   );
 }

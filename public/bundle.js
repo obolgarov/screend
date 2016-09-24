@@ -32866,6 +32866,15 @@
 	          { to: '/RegEmployer' },
 	          'Register Employer Account'
 	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/Login' },
+	          'Back'
+	        )
 	      )
 	    );
 	  }
