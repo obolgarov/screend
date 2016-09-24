@@ -11,6 +11,7 @@ var Login = require('Login');
 var RegEmployer = require('RegEmployer');
 var RegSeeker = require('RegSeeker');
 var PasswordReset =require('PasswordReset');
+var ChooseAccount = require('ChooseAccount');
 
 ReactDOM.render(
 <Router history={hashHistory}>
@@ -23,6 +24,7 @@ ReactDOM.render(
   <Route path="RegEmployer" components={RegEmployer}/>
   <Route path="RegSeeker" components={RegSeeker}/>
   <Route path="PasswordReset" components={PasswordReset}/>
+  <Route path="ChooseAccount" components={ChooseAccount}/>
   <IndexRoute component={Home}/>
   </Route>
 </Router>,
