@@ -66,6 +66,7 @@
 	var RegEmployer = __webpack_require__(224);
 	var RegSeeker = __webpack_require__(225);
 	var PasswordReset = __webpack_require__(260);
+	var ChooseAccount = __webpack_require__(261);
 
 	ReactDOM.render(React.createElement(
 	  Router,
@@ -81,6 +82,7 @@
 	    React.createElement(Route, { path: 'RegEmployer', components: RegEmployer }),
 	    React.createElement(Route, { path: 'RegSeeker', components: RegSeeker }),
 	    React.createElement(Route, { path: 'PasswordReset', components: PasswordReset }),
+	    React.createElement(Route, { path: 'ChooseAccount', components: ChooseAccount }),
 	    React.createElement(IndexRoute, { component: Home })
 	  )
 	), document.getElementById('app'));
@@ -25058,54 +25060,64 @@
 /* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
+	var _require = __webpack_require__(159);
+
+	var Link = _require.Link;
+
+
 	var Login = React.createClass({
-	  displayName: "Login",
+	  displayName: 'Login',
 
 	  render: function render() {
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
 	      React.createElement(
-	        "h2",
+	        'h2',
 	        null,
-	        "Login"
+	        'Login'
 	      ),
 	      React.createElement(
-	        "form",
-	        { method: "POST", action: "/applicants" },
+	        'form',
+	        { method: 'POST', action: '/applicants' },
 	        React.createElement(
-	          "div",
+	          'div',
 	          null,
 	          React.createElement(
-	            "label",
+	            'label',
 	            null,
-	            "User Name: "
+	            'User Name: '
 	          ),
-	          React.createElement("input", { type: "text", name: "username" })
+	          React.createElement('input', { type: 'text', name: 'username' })
 	        ),
 	        React.createElement(
-	          "div",
+	          'div',
 	          null,
 	          React.createElement(
-	            "label",
+	            'label',
 	            null,
-	            "Password: "
+	            'Password: '
 	          ),
-	          React.createElement("input", { type: "text", name: "password" })
+	          React.createElement('input', { type: 'text', name: 'password' })
 	        ),
 	        React.createElement(
-	          "div",
+	          'div',
 	          null,
 	          React.createElement(
-	            "button",
-	            { type: "submit" },
-	            "Submit"
+	            'button',
+	            { type: 'submit' },
+	            'Submit'
 	          )
 	        )
+	      ),
+	      React.createElement(
+	        Link,
+	        { to: '/ChooseAccount' },
+	        'Register Account'
 	      )
 	    );
 	  }
@@ -32811,6 +32823,55 @@
 	});
 
 	module.exports = PasswordReset;
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(159);
+
+	var Link = _require.Link;
+
+
+	var ChooseAccount = React.createClass({
+	  displayName: 'ChooseAccount',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'What Kind of Account Would You Like To Create'
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/RegSeeker' },
+	          'Register Job Seeker Account'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/RegEmployer' },
+	          'Register Employer Account'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = ChooseAccount;
 
 /***/ }
 /******/ ]);

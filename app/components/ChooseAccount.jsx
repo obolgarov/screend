@@ -1,34 +1,20 @@
 var React = require('react');
+var {Link} = require('react-router');
 
-var ChooseAccount = React.createClass({
-
-  onSubmit: function (e) {
-
-  },
-
-render: function(){
-  return(
+var ChooseAccount =  React.createClass({
+  render: function(){
+    return(
 <div>
   <h2>What Kind of Account Would You Like To Create</h2>
 
-    <form ref='reset' onSubmit={this.onSubmit}>
+<div>
+    <Link to="/RegSeeker">Register Job Seeker Account</Link>
+</div>
 
-    <div>
-        <label>Employer: </label>
-        <input type="radio" ref="employer" value="employer"/>
-    </div>
+<div>
+    <Link to="/RegEmployer">Register Employer Account</Link>
+</div>
 
-    <div>
-        <label>Job Seeker: </label>
-        <input type="radio" ref="seeker" value="seeker"/>
-    </div>
-
-
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-
-    </form>
 </div>
   );
 }

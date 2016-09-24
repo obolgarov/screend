@@ -1,4 +1,5 @@
 var React = require('react');
+var {Link} = require('react-router');
 
 var Login = React.createClass({
   render: function(){
@@ -20,6 +21,8 @@ var Login = React.createClass({
       <button type="submit">Submit</button>
     </div>
   </form>
+
+    <Link to="/ChooseAccount">Register Account</Link>
 </div>
 
     );
