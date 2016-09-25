@@ -1,4 +1,5 @@
 var React = require('react');
+var {Link} = require('react-router');
 
 var RegEmployer = React.createClass({
 
@@ -74,6 +75,10 @@ var RegEmployer = React.createClass({
 
         <div>
           <button type="submit">Submit</button>
+        </div>
+
+        <div>
+          <Link to="/ChooseAccount">Back</Link>
         </div>
 
       </form>

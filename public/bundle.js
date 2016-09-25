@@ -25133,6 +25133,11 @@
 
 	var React = __webpack_require__(1);
 
+	var _require = __webpack_require__(159);
+
+	var Link = _require.Link;
+
+
 	var RegEmployer = React.createClass({
 	    displayName: 'RegEmployer',
 
@@ -25271,6 +25276,15 @@
 	                        { type: 'submit' },
 	                        'Submit'
 	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        Link,
+	                        { to: '/ChooseAccount' },
+	                        'Back'
+	                    )
 	                )
 	            )
 	        );
@@ -25289,6 +25303,10 @@
 	var http = __webpack_require__(230); // to send request
 	var config = __webpack_require__(259)(); // to get the port
 	var querystring = __webpack_require__(256); // to send data inside the request
+
+	var _require = __webpack_require__(159);
+
+	var Link = _require.Link;
 
 
 	var RegSeeker = React.createClass({
@@ -25445,6 +25463,15 @@
 	            { type: 'submit' },
 	            'Submit'
 	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/ChooseAccount' },
+	          'Back'
 	        )
 	      )
 	    );

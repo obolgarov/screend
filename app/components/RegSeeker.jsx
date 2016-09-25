@@ -2,6 +2,7 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
+var {Link} = require('react-router');
 
 
 var RegSeeker = React.createClass({
@@ -118,6 +119,11 @@ var RegSeeker = React.createClass({
       <button type="submit">Submit</button>
     </div>
   </form>
+
+  <div>
+    <Link to="/ChooseAccount">Back</Link>
+  </div>
+
 </div>
     );
   }
