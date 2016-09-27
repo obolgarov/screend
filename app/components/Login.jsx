@@ -22,7 +22,13 @@ var Login = React.createClass({
     </div>
   </form>
 
-    <Link to="/ChooseAccount">Register Account</Link>
+<div>
+  <Link to="/ChooseAccount">Register Account</Link>
+</div>
+
+<div>
+  <Link to="/PasswordReset">Forget Password</Link>
+</div>
 </div>
 
     );

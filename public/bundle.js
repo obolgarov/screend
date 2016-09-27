@@ -25115,9 +25115,22 @@
 	        )
 	      ),
 	      React.createElement(
-	        Link,
-	        { to: '/ChooseAccount' },
-	        'Register Account'
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/ChooseAccount' },
+	          'Register Account'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/PasswordReset' },
+	          'Forget Password'
+	        )
 	      )
 	    );
 	  }
