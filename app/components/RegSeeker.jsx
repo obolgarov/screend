@@ -37,7 +37,7 @@ var RegSeeker = React.createClass({
       method: "POST", // insert data
       headers: {
         'Content-Type' : 'application/x-www-form-urlencoded',
-        'Content-Lenfth' : Buffer.byteLength(dataQuerystring),
+        'Content-Length' : Buffer.byteLength(dataQuerystring),
         'Accept' : 'application/json'
       },
       body: dataQuerystring

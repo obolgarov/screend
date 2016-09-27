@@ -9,6 +9,7 @@ var config = require('./config')();
 var db = require('./db.js');
 var routes = require('./routes/index');
 var applicants = require('./routes/applicant');
+var employer = require('./routes/employer');
 
 var app = express();
 
@@ -18,6 +19,7 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use('/', routes);
 app.use('/applicants', applicants);
+app.use('/employer', employer);
 app.set('view engine', 'react');
 app.set('views', __dirname + '/app');
 
@@ -35,7 +37,7 @@ fs.readdirSync('./models').forEach(function (file) {
 
 db.connect(config.connstr, function (err){
   if(err){
-    console.err(err);
+    console.error(err);
   } else {
 
     app.listen(config.port, function() {

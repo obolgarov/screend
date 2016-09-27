@@ -64,7 +64,7 @@
 	var ContactUs = __webpack_require__(222);
 	var Login = __webpack_require__(223);
 	var RegEmployer = __webpack_require__(224);
-	var RegSeeker = __webpack_require__(225);
+	var RegSeeker = __webpack_require__(259);
 	var PasswordReset = __webpack_require__(260);
 	var ChooseAccount = __webpack_require__(261);
 
@@ -25142,9 +25142,12 @@
 /* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
 	var React = __webpack_require__(1);
+	var http = __webpack_require__(229); // to send request
+	var config = __webpack_require__(258)(); // to get the port
+	var querystring = __webpack_require__(255); // to send data inside the request
 
 	var _require = __webpack_require__(159);
 
@@ -25152,211 +25155,32 @@
 
 
 	var RegEmployer = React.createClass({
-	    displayName: 'RegEmployer',
-
-
-	    onSubmit: function onSubmit(e) {
-	        var data = {
-	            firstName: this.refs.first.getDOMNode.value,
-	            lastName: this.refs.last.getDOMNode.value,
-	            userEmail: this.refs.email.getDOMNode.value,
-	            userName: this.refs.user.getDOMNode.value,
-	            userPass: this.refs.password.getDOMNode.value,
-	            comName: this.refs.companyName.getDOMNode.value,
-	            comAddress: this.refs.companyAddress.getDOMNode.value,
-	            comIndustry: this.refs.industry.getDOMNode.value,
-	            comAttributes: this.refs.comAttributes.getDOMNode.value
-	        };
-	    },
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'h2',
-	                null,
-	                'Register Account - Employer'
-	            ),
-	            React.createElement(
-	                'form',
-	                { ref: 'employer_form', onSubmit: this.onSubmit },
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'First Name: '
-	                    ),
-	                    React.createElement('input', { type: 'text', ref: 'first' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Last Name: '
-	                    ),
-	                    React.createElement('input', { type: 'text', ref: 'last' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Email: '
-	                    ),
-	                    React.createElement('input', { type: 'email', ref: 'email' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Preferred Username: '
-	                    ),
-	                    React.createElement('input', { type: 'text', ref: 'user' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Password: '
-	                    ),
-	                    React.createElement('input', { type: 'password', ref: 'password' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Confirm Password: '
-	                    ),
-	                    React.createElement('input', { type: 'password', ref: 'confirmPassword' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Company Name: '
-	                    ),
-	                    React.createElement('input', { type: 'text', ref: 'companyName' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Company Address: '
-	                    ),
-	                    React.createElement('input', { type: 'text', ref: 'companyAddress' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Industry: '
-	                    ),
-	                    React.createElement('input', { type: 'text', ref: 'industry' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Attributes: '
-	                    ),
-	                    React.createElement('textarea', { ref: 'attributes' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'button',
-	                        { type: 'submit' },
-	                        'Submit'
-	                    )
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        Link,
-	                        { to: '/ChooseAccount' },
-	                        'Back'
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-
-	module.exports = RegEmployer;
-
-/***/ },
-/* 225 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
-
-	var React = __webpack_require__(1);
-	var http = __webpack_require__(230); // to send request
-	var config = __webpack_require__(259)(); // to get the port
-	var querystring = __webpack_require__(256); // to send data inside the request
-
-	var _require = __webpack_require__(159);
-
-	var Link = _require.Link;
-
-
-	var RegSeeker = React.createClass({
-	  displayName: 'RegSeeker',
+	  displayName: 'RegEmployer',
 
 
 	  onSubmit: function onSubmit(e) {
-
 	    var data = {
-	      firstname: this.refs.first.value,
-	      lastname: this.refs.last.value,
-	      email: this.refs.email.value,
-	      username: this.refs.user.value,
-	      password: this.refs.password.value
+	      firstName: this.refs.first.value,
+	      lastName: this.refs.last.value,
+	      userEmail: this.refs.email.value,
+	      userName: this.refs.user.value,
+	      userPass: this.refs.password.value,
+	      comName: this.refs.companyName.value,
+	      comAddress: this.refs.companyAddress.value,
+	      comIndustry: this.refs.industry.value,
+	      comAttributes: this.refs.comAttributes.value
 	    };
-
-	    /*
-	        // unused now, kept in case it might help somewhere
-	        var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
-	          'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
-	          'output_format' : 'json',
-	          'output_info' : 'compiled_code',
-	          'warning_level' : 'QUIET',
-	          'js_code' : data // this is how the user's data is sent, including password through http. Safe.
-	        }
-	    */
 
 	    var dataQuerystring = querystring.stringify(data);
 
 	    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
 	    var httpOptions = {
 	      port: config.port,
-	      path: "/applicants",
+	      path: "/employer",
 	      method: "POST", // insert data
 	      headers: {
 	        'Content-Type': 'application/x-www-form-urlencoded',
-	        'Content-Lenfth': Buffer.byteLength(dataQuerystring),
+	        'Content-Length': Buffer.byteLength(dataQuerystring),
 	        'Accept': 'application/json'
 	      },
 	      body: dataQuerystring
@@ -25403,11 +25227,11 @@
 	      React.createElement(
 	        'h2',
 	        null,
-	        'Register Account - Job Seeker'
+	        'Register Account - Employer'
 	      ),
 	      React.createElement(
 	        'form',
-	        { ref: 'user_form', onSubmit: this.onSubmit },
+	        { ref: 'employer_form', onSubmit: this.onSubmit },
 	        React.createElement(
 	          'div',
 	          null,
@@ -25472,30 +25296,70 @@
 	          'div',
 	          null,
 	          React.createElement(
+	            'label',
+	            null,
+	            'Company Name: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'companyName' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Company Address: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'companyAddress' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Industry: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'industry' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Attributes: '
+	          ),
+	          React.createElement('textarea', { ref: 'attributes' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
 	            'button',
 	            { type: 'submit' },
 	            'Submit'
 	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        null,
+	        ),
 	        React.createElement(
-	          Link,
-	          { to: '/ChooseAccount' },
-	          'Back'
+	          'div',
+	          null,
+	          React.createElement(
+	            Link,
+	            { to: '/ChooseAccount' },
+	            'Back'
+	          )
 	        )
 	      )
 	    );
 	  }
 	});
 
-	module.exports = RegSeeker;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(226).Buffer))
+	module.exports = RegEmployer;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(225).Buffer))
 
 /***/ },
-/* 226 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -25508,9 +25372,9 @@
 
 	'use strict'
 
-	var base64 = __webpack_require__(227)
-	var ieee754 = __webpack_require__(228)
-	var isArray = __webpack_require__(229)
+	var base64 = __webpack_require__(226)
+	var ieee754 = __webpack_require__(227)
+	var isArray = __webpack_require__(228)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -27288,10 +27152,10 @@
 	  return val !== val // eslint-disable-line no-self-compare
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(226).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(225).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 227 */
+/* 226 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -27406,7 +27270,7 @@
 
 
 /***/ },
-/* 228 */
+/* 227 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -27496,7 +27360,7 @@
 
 
 /***/ },
-/* 229 */
+/* 228 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -27507,13 +27371,13 @@
 
 
 /***/ },
-/* 230 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var http = module.exports;
-	var EventEmitter = __webpack_require__(231).EventEmitter;
-	var Request = __webpack_require__(232);
-	var url = __webpack_require__(253)
+	var EventEmitter = __webpack_require__(230).EventEmitter;
+	var Request = __webpack_require__(231);
+	var url = __webpack_require__(252)
 
 	http.request = function (params, cb) {
 	    if (typeof params === 'string') {
@@ -27657,7 +27521,7 @@
 	};
 
 /***/ },
-/* 231 */
+/* 230 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -27965,13 +27829,13 @@
 
 
 /***/ },
-/* 232 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Stream = __webpack_require__(233);
-	var Response = __webpack_require__(249);
-	var Base64 = __webpack_require__(252);
-	var inherits = __webpack_require__(234);
+	var Stream = __webpack_require__(232);
+	var Response = __webpack_require__(248);
+	var Base64 = __webpack_require__(251);
+	var inherits = __webpack_require__(233);
 
 	var Request = module.exports = function (xhr, params) {
 	    var self = this;
@@ -28180,7 +28044,7 @@
 
 
 /***/ },
-/* 233 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -28206,15 +28070,15 @@
 
 	module.exports = Stream;
 
-	var EE = __webpack_require__(231).EventEmitter;
-	var inherits = __webpack_require__(234);
+	var EE = __webpack_require__(230).EventEmitter;
+	var inherits = __webpack_require__(233);
 
 	inherits(Stream, EE);
-	Stream.Readable = __webpack_require__(235);
-	Stream.Writable = __webpack_require__(245);
-	Stream.Duplex = __webpack_require__(246);
-	Stream.Transform = __webpack_require__(247);
-	Stream.PassThrough = __webpack_require__(248);
+	Stream.Readable = __webpack_require__(234);
+	Stream.Writable = __webpack_require__(244);
+	Stream.Duplex = __webpack_require__(245);
+	Stream.Transform = __webpack_require__(246);
+	Stream.PassThrough = __webpack_require__(247);
 
 	// Backwards-compat with node 0.4.x
 	Stream.Stream = Stream;
@@ -28313,7 +28177,7 @@
 
 
 /***/ },
-/* 234 */
+/* 233 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -28342,24 +28206,24 @@
 
 
 /***/ },
-/* 235 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {exports = module.exports = __webpack_require__(236);
-	exports.Stream = __webpack_require__(233);
+	/* WEBPACK VAR INJECTION */(function(process) {exports = module.exports = __webpack_require__(235);
+	exports.Stream = __webpack_require__(232);
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(241);
-	exports.Duplex = __webpack_require__(240);
-	exports.Transform = __webpack_require__(243);
-	exports.PassThrough = __webpack_require__(244);
+	exports.Writable = __webpack_require__(240);
+	exports.Duplex = __webpack_require__(239);
+	exports.Transform = __webpack_require__(242);
+	exports.PassThrough = __webpack_require__(243);
 	if (!process.browser && process.env.READABLE_STREAM === 'disable') {
-	  module.exports = __webpack_require__(233);
+	  module.exports = __webpack_require__(232);
 	}
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 236 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -28386,17 +28250,17 @@
 	module.exports = Readable;
 
 	/*<replacement>*/
-	var isArray = __webpack_require__(237);
+	var isArray = __webpack_require__(236);
 	/*</replacement>*/
 
 
 	/*<replacement>*/
-	var Buffer = __webpack_require__(226).Buffer;
+	var Buffer = __webpack_require__(225).Buffer;
 	/*</replacement>*/
 
 	Readable.ReadableState = ReadableState;
 
-	var EE = __webpack_require__(231).EventEmitter;
+	var EE = __webpack_require__(230).EventEmitter;
 
 	/*<replacement>*/
 	if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
@@ -28404,18 +28268,18 @@
 	};
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(233);
+	var Stream = __webpack_require__(232);
 
 	/*<replacement>*/
-	var util = __webpack_require__(238);
-	util.inherits = __webpack_require__(234);
+	var util = __webpack_require__(237);
+	util.inherits = __webpack_require__(233);
 	/*</replacement>*/
 
 	var StringDecoder;
 
 
 	/*<replacement>*/
-	var debug = __webpack_require__(239);
+	var debug = __webpack_require__(238);
 	if (debug && debug.debuglog) {
 	  debug = debug.debuglog('stream');
 	} else {
@@ -28427,7 +28291,7 @@
 	util.inherits(Readable, Stream);
 
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(240);
+	  var Duplex = __webpack_require__(239);
 
 	  options = options || {};
 
@@ -28488,14 +28352,14 @@
 	  this.encoding = null;
 	  if (options.encoding) {
 	    if (!StringDecoder)
-	      StringDecoder = __webpack_require__(242).StringDecoder;
+	      StringDecoder = __webpack_require__(241).StringDecoder;
 	    this.decoder = new StringDecoder(options.encoding);
 	    this.encoding = options.encoding;
 	  }
 	}
 
 	function Readable(options) {
-	  var Duplex = __webpack_require__(240);
+	  var Duplex = __webpack_require__(239);
 
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -28598,7 +28462,7 @@
 	// backwards compatibility.
 	Readable.prototype.setEncoding = function(enc) {
 	  if (!StringDecoder)
-	    StringDecoder = __webpack_require__(242).StringDecoder;
+	    StringDecoder = __webpack_require__(241).StringDecoder;
 	  this._readableState.decoder = new StringDecoder(enc);
 	  this._readableState.encoding = enc;
 	  return this;
@@ -29317,7 +29181,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 237 */
+/* 236 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -29326,7 +29190,7 @@
 
 
 /***/ },
-/* 238 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
@@ -29437,16 +29301,16 @@
 	  return Object.prototype.toString.call(o);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(226).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(225).Buffer))
 
 /***/ },
-/* 239 */
+/* 238 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 240 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -29487,12 +29351,12 @@
 
 
 	/*<replacement>*/
-	var util = __webpack_require__(238);
-	util.inherits = __webpack_require__(234);
+	var util = __webpack_require__(237);
+	util.inherits = __webpack_require__(233);
 	/*</replacement>*/
 
-	var Readable = __webpack_require__(236);
-	var Writable = __webpack_require__(241);
+	var Readable = __webpack_require__(235);
+	var Writable = __webpack_require__(240);
 
 	util.inherits(Duplex, Readable);
 
@@ -29542,7 +29406,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 241 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -29573,18 +29437,18 @@
 	module.exports = Writable;
 
 	/*<replacement>*/
-	var Buffer = __webpack_require__(226).Buffer;
+	var Buffer = __webpack_require__(225).Buffer;
 	/*</replacement>*/
 
 	Writable.WritableState = WritableState;
 
 
 	/*<replacement>*/
-	var util = __webpack_require__(238);
-	util.inherits = __webpack_require__(234);
+	var util = __webpack_require__(237);
+	util.inherits = __webpack_require__(233);
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(233);
+	var Stream = __webpack_require__(232);
 
 	util.inherits(Writable, Stream);
 
@@ -29595,7 +29459,7 @@
 	}
 
 	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(240);
+	  var Duplex = __webpack_require__(239);
 
 	  options = options || {};
 
@@ -29683,7 +29547,7 @@
 	}
 
 	function Writable(options) {
-	  var Duplex = __webpack_require__(240);
+	  var Duplex = __webpack_require__(239);
 
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -30026,7 +29890,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 242 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -30050,7 +29914,7 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var Buffer = __webpack_require__(226).Buffer;
+	var Buffer = __webpack_require__(225).Buffer;
 
 	var isBufferEncoding = Buffer.isEncoding
 	  || function(encoding) {
@@ -30253,7 +30117,7 @@
 
 
 /***/ },
-/* 243 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -30322,11 +30186,11 @@
 
 	module.exports = Transform;
 
-	var Duplex = __webpack_require__(240);
+	var Duplex = __webpack_require__(239);
 
 	/*<replacement>*/
-	var util = __webpack_require__(238);
-	util.inherits = __webpack_require__(234);
+	var util = __webpack_require__(237);
+	util.inherits = __webpack_require__(233);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -30468,7 +30332,7 @@
 
 
 /***/ },
-/* 244 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -30498,11 +30362,11 @@
 
 	module.exports = PassThrough;
 
-	var Transform = __webpack_require__(243);
+	var Transform = __webpack_require__(242);
 
 	/*<replacement>*/
-	var util = __webpack_require__(238);
-	util.inherits = __webpack_require__(234);
+	var util = __webpack_require__(237);
+	util.inherits = __webpack_require__(233);
 	/*</replacement>*/
 
 	util.inherits(PassThrough, Transform);
@@ -30520,17 +30384,24 @@
 
 
 /***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(240)
+
+
+/***/ },
 /* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(241)
+	module.exports = __webpack_require__(239)
 
 
 /***/ },
 /* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(240)
+	module.exports = __webpack_require__(242)
 
 
 /***/ },
@@ -30544,15 +30415,8 @@
 /* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(244)
-
-
-/***/ },
-/* 249 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Stream = __webpack_require__(233);
-	var util = __webpack_require__(250);
+	var Stream = __webpack_require__(232);
+	var util = __webpack_require__(249);
 
 	var Response = module.exports = function (res) {
 	    this.offset = 0;
@@ -30674,7 +30538,7 @@
 
 
 /***/ },
-/* 250 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -31202,7 +31066,7 @@
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(251);
+	exports.isBuffer = __webpack_require__(250);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -31246,7 +31110,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(234);
+	exports.inherits = __webpack_require__(233);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -31267,7 +31131,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(4)))
 
 /***/ },
-/* 251 */
+/* 250 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -31278,7 +31142,7 @@
 	}
 
 /***/ },
-/* 252 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	;(function () {
@@ -31344,7 +31208,7 @@
 
 
 /***/ },
-/* 253 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -31368,7 +31232,7 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var punycode = __webpack_require__(254);
+	var punycode = __webpack_require__(253);
 
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -31440,7 +31304,7 @@
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(256);
+	    querystring = __webpack_require__(255);
 
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && isObject(url) && url instanceof Url) return url;
@@ -32057,7 +31921,7 @@
 
 
 /***/ },
-/* 254 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -32589,10 +32453,10 @@
 
 	}(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(255)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(254)(module), (function() { return this; }())))
 
 /***/ },
-/* 255 */
+/* 254 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -32608,17 +32472,17 @@
 
 
 /***/ },
-/* 256 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.decode = exports.parse = __webpack_require__(257);
-	exports.encode = exports.stringify = __webpack_require__(258);
+	exports.decode = exports.parse = __webpack_require__(256);
+	exports.encode = exports.stringify = __webpack_require__(257);
 
 
 /***/ },
-/* 257 */
+/* 256 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -32704,7 +32568,7 @@
 
 
 /***/ },
-/* 258 */
+/* 257 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -32774,7 +32638,7 @@
 
 
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -32801,6 +32665,194 @@
 	  return config[mode || process.argv[2] || 'local'] || config.local;
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
+
+	var React = __webpack_require__(1);
+	var http = __webpack_require__(229); // to send request
+	var config = __webpack_require__(258)(); // to get the port
+	var querystring = __webpack_require__(255); // to send data inside the request
+
+	var _require = __webpack_require__(159);
+
+	var Link = _require.Link;
+
+
+	var RegSeeker = React.createClass({
+	  displayName: 'RegSeeker',
+
+
+	  onSubmit: function onSubmit(e) {
+
+	    var data = {
+	      firstname: this.refs.first.value,
+	      lastname: this.refs.last.value,
+	      email: this.refs.email.value,
+	      username: this.refs.user.value,
+	      password: this.refs.password.value
+	    };
+
+	    /*
+	        // unused now, kept in case it might help somewhere
+	        var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
+	          'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
+	          'output_format' : 'json',
+	          'output_info' : 'compiled_code',
+	          'warning_level' : 'QUIET',
+	          'js_code' : data // this is how the user's data is sent, including password through http. Safe.
+	        }
+	    */
+
+	    var dataQuerystring = querystring.stringify(data);
+
+	    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+	    var httpOptions = {
+	      port: config.port,
+	      path: "/applicants",
+	      method: "POST", // insert data
+	      headers: {
+	        'Content-Type': 'application/x-www-form-urlencoded',
+	        'Content-Length': Buffer.byteLength(dataQuerystring),
+	        'Accept': 'application/json'
+	      },
+	      body: dataQuerystring
+	    };
+
+	    console.log("body: " + JSON.stringify(data));
+
+	    console.log("sending");
+
+	    var req = http.request(httpOptions, function (res) {
+
+	      console.log("sent");
+
+	      // res now contains new applicant data already inserted
+	      var output = '';
+	      console.log(options.path + ':' + res.satusCode);
+	      res.setEncoding('utf8');
+
+	      res.on('data', function (dataBlob) {
+	        output += dataBlob;
+	        console.log("output: " + output);
+	      });
+
+	      res.on('end', function () {
+	        var obj = JSON.parse(output);
+	      });
+
+	      // TODO: do something with the data for the applicant just inserted
+	    });
+
+	    req.on('error', function (err) {
+	      res.send('error: ' + err.message);
+	    });
+
+	    req.write(dataQuerystring);
+
+	    req.end();
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Register Account - Job Seeker'
+	      ),
+	      React.createElement(
+	        'form',
+	        { ref: 'user_form', onSubmit: this.onSubmit },
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'First Name: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'first' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Last Name: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'last' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Email: '
+	          ),
+	          React.createElement('input', { type: 'email', ref: 'email' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Preferred Username: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'user' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Password: '
+	          ),
+	          React.createElement('input', { type: 'password', ref: 'password' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Confirm Password: '
+	          ),
+	          React.createElement('input', { type: 'password', ref: 'confirmPassword' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Submit'
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/ChooseAccount' },
+	          'Back'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = RegSeeker;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(225).Buffer))
 
 /***/ },
 /* 260 */
