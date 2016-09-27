@@ -25168,7 +25168,7 @@
 	      comName: this.refs.companyName.value,
 	      comAddress: this.refs.companyAddress.value,
 	      comIndustry: this.refs.industry.value,
-	      comAttributes: this.refs.comAttributes.value
+	      comAttributes: this.refs.attributes.value
 	    };
 
 	    var dataQuerystring = querystring.stringify(data);
