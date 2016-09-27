@@ -3,6 +3,7 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 var React = require('react');
+var favicon = require('serve-favicon');
 
 var config = require('./config')();
 
@@ -16,12 +17,15 @@ var app = express();
 //app.engine('react', require('react').__express);
 //app.set('view engine', 'react');
 
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(__dirname + '/public'));
 app.use('/', routes);
 app.use('/applicants', applicants);
 app.use('/employer', employer);
 app.set('view engine', 'react');
 app.set('views', __dirname + '/app');
+app.use(favicon(__dirname + '/public/favicon.ico'));
+
 
 /*
 // uses 'fs' to grab all files/names from a directory, then 'require' each file
