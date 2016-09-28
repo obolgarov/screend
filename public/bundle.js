@@ -25072,6 +25072,15 @@
 	var Login = React.createClass({
 	  displayName: 'Login',
 
+
+	  onSubmit: function onSubmit(e) {
+
+	    var data = {
+
+	      user: this.refs.username.value,
+	      pass: this.refs.password.value
+	    };
+	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
@@ -25083,7 +25092,7 @@
 	      ),
 	      React.createElement(
 	        'form',
-	        { method: 'POST', action: '/applicants' },
+	        { ref: 'LogIn', onSubmit: this.onSubmit },
 	        React.createElement(
 	          'div',
 	          null,
