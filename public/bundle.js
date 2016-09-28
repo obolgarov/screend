@@ -25155,204 +25155,204 @@
 
 
 	var RegEmployer = React.createClass({
-	  displayName: 'RegEmployer',
+	        displayName: 'RegEmployer',
 
 
-	  onSubmit: function onSubmit(e) {
-	    var data = {
-	      firstName: this.refs.first.value,
-	      lastName: this.refs.last.value,
-	      userEmail: this.refs.email.value,
-	      userName: this.refs.user.value,
-	      userPass: this.refs.password.value,
-	      comName: this.refs.companyName.value,
-	      comAddress: this.refs.companyAddress.value,
-	      comIndustry: this.refs.industry.value,
-	      comAttributes: this.refs.attributes.value
-	    };
+	        onSubmit: function onSubmit(e) {
+	                var data = {
+	                        firstName: this.refs.first.value,
+	                        lastName: this.refs.last.value,
+	                        userEmail: this.refs.email.value,
+	                        userName: this.refs.user.value,
+	                        userPass: this.refs.password.value,
+	                        comName: this.refs.companyName.value,
+	                        comAddress: this.refs.companyAddress.value,
+	                        comIndustry: this.refs.industry.value,
+	                        comAttributes: this.refs.attributes.value
+	                };
 
-	    var dataQuerystring = querystring.stringify(data);
+	                var dataQuerystring = querystring.stringify(data);
 
-	    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
-	    var httpOptions = {
-	      port: config.port,
-	      path: "/employer",
-	      method: "POST", // insert data
-	      headers: {
-	        'Content-Type': 'application/x-www-form-urlencoded',
-	        'Content-Length': Buffer.byteLength(dataQuerystring),
-	        'Accept': 'application/json'
-	      },
-	      body: dataQuerystring
-	    };
+	                // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+	                var httpOptions = {
+	                        port: config.port,
+	                        path: "/employer",
+	                        method: "POST", // insert data
+	                        headers: {
+	                                'Content-Type': 'application/x-www-form-urlencoded',
+	                                'Content-Length': Buffer.byteLength(dataQuerystring),
+	                                'Accept': 'application/json'
+	                        },
+	                        body: dataQuerystring
+	                };
 
-	    console.log("body: " + JSON.stringify(data));
+	                console.log("body: " + JSON.stringify(data));
 
-	    console.log("sending");
+	                console.log("sending");
 
-	    var req = http.request(httpOptions, function (res) {
+	                var req = http.request(httpOptions, function (res) {
 
-	      console.log("sent");
+	                        console.log("sent");
 
-	      // res now contains new applicant data already inserted
-	      var output = '';
-	      console.log(options.path + ':' + res.satusCode);
-	      res.setEncoding('utf8');
+	                        // res now contains new applicant data already inserted
+	                        var output = '';
+	                        console.log(options.path + ':' + res.satusCode);
+	                        res.setEncoding('utf8');
 
-	      res.on('data', function (dataBlob) {
-	        output += dataBlob;
-	        console.log("output: " + output);
-	      });
+	                        res.on('data', function (dataBlob) {
+	                                output += dataBlob;
+	                                console.log("output: " + output);
+	                        });
 
-	      res.on('end', function () {
-	        var obj = JSON.parse(output);
-	      });
+	                        res.on('end', function () {
+	                                var obj = JSON.parse(output);
+	                        });
 
-	      // TODO: do something with the data for the applicant just inserted
-	    });
+	                        // TODO: do something with the data for the applicant just inserted
+	                });
 
-	    req.on('error', function (err) {
-	      res.send('error: ' + err.message);
-	    });
+	                req.on('error', function (err) {
+	                        res.send('error: ' + err.message);
+	                });
 
-	    req.write(dataQuerystring);
+	                req.write(dataQuerystring);
 
-	    req.end();
-	  },
+	                req.end();
+	        },
 
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Register Account - Employer'
-	      ),
-	      React.createElement(
-	        'form',
-	        { ref: 'employer_form', onSubmit: this.onSubmit },
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'First Name: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'first' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Last Name: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'last' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Email: '
-	          ),
-	          React.createElement('input', { type: 'email', ref: 'email' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Preferred Username: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'user' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Password: '
-	          ),
-	          React.createElement('input', { type: 'password', ref: 'password' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Confirm Password: '
-	          ),
-	          React.createElement('input', { type: 'password', ref: 'confirmPassword' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Company Name: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'companyName' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Company Address: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'companyAddress' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Industry: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'industry' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Attributes: '
-	          ),
-	          React.createElement('textarea', { ref: 'attributes' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'button',
-	            { type: 'submit' },
-	            'Submit'
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            Link,
-	            { to: '/ChooseAccount' },
-	            'Back'
-	          )
-	        )
-	      )
-	    );
-	  }
+	        render: function render() {
+	                return React.createElement(
+	                        'div',
+	                        null,
+	                        React.createElement(
+	                                'h2',
+	                                null,
+	                                'Register Account - Employer'
+	                        ),
+	                        React.createElement(
+	                                'form',
+	                                { ref: 'employer_form', onSubmit: this.onSubmit },
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'First Name: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'first' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Last Name: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'last' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Email: '
+	                                        ),
+	                                        React.createElement('input', { type: 'email', ref: 'email' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Preferred Username: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'user' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Password: '
+	                                        ),
+	                                        React.createElement('input', { type: 'password', ref: 'password' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Confirm Password: '
+	                                        ),
+	                                        React.createElement('input', { type: 'password', ref: 'confirmPassword' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Company Name: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'companyName' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Company Address: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'companyAddress' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Industry: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'industry' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'label',
+	                                                null,
+	                                                'Attributes: '
+	                                        ),
+	                                        React.createElement('textarea', { ref: 'attributes' })
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                'button',
+	                                                { type: 'submit' },
+	                                                'Submit'
+	                                        )
+	                                ),
+	                                React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                Link,
+	                                                { to: '/ChooseAccount' },
+	                                                'Back'
+	                                        )
+	                                )
+	                        )
+	                );
+	        }
 	});
 
 	module.exports = RegEmployer;
@@ -32683,172 +32683,172 @@
 
 
 	var RegSeeker = React.createClass({
-	  displayName: 'RegSeeker',
+	    displayName: 'RegSeeker',
 
 
-	  onSubmit: function onSubmit(e) {
+	    onSubmit: function onSubmit(e) {
 
-	    var data = {
-	      firstname: this.refs.first.value,
-	      lastname: this.refs.last.value,
-	      email: this.refs.email.value,
-	      username: this.refs.user.value,
-	      password: this.refs.password.value
-	    };
+	        var data = {
+	            firstname: this.refs.first.value,
+	            lastname: this.refs.last.value,
+	            email: this.refs.email.value,
+	            username: this.refs.user.value,
+	            password: this.refs.password.value
+	        };
 
-	    /*
-	        // unused now, kept in case it might help somewhere
-	        var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
-	          'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
-	          'output_format' : 'json',
-	          'output_info' : 'compiled_code',
-	          'warning_level' : 'QUIET',
-	          'js_code' : data // this is how the user's data is sent, including password through http. Safe.
-	        }
-	    */
+	        /*
+	            // unused now, kept in case it might help somewhere
+	            var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
+	              'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
+	              'output_format' : 'json',
+	              'output_info' : 'compiled_code',
+	              'warning_level' : 'QUIET',
+	              'js_code' : data // this is how the user's data is sent, including password through http. Safe.
+	            }
+	        */
 
-	    var dataQuerystring = querystring.stringify(data);
+	        var dataQuerystring = querystring.stringify(data);
 
-	    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
-	    var httpOptions = {
-	      port: config.port,
-	      path: "/applicants",
-	      method: "POST", // insert data
-	      headers: {
-	        'Content-Type': 'application/x-www-form-urlencoded',
-	        'Content-Length': Buffer.byteLength(dataQuerystring),
-	        'Accept': 'application/json'
-	      },
-	      body: dataQuerystring
-	    };
+	        // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+	        var httpOptions = {
+	            port: config.port,
+	            path: "/applicants",
+	            method: "POST", // insert data
+	            headers: {
+	                'Content-Type': 'application/x-www-form-urlencoded',
+	                'Content-Length': Buffer.byteLength(dataQuerystring),
+	                'Accept': 'application/json'
+	            },
+	            body: dataQuerystring
+	        };
 
-	    console.log("body: " + JSON.stringify(data));
+	        console.log("body: " + JSON.stringify(data));
 
-	    console.log("sending");
+	        console.log("sending");
 
-	    var req = http.request(httpOptions, function (res) {
+	        var req = http.request(httpOptions, function (res) {
 
-	      console.log("sent");
+	            console.log("sent");
 
-	      // res now contains new applicant data already inserted
-	      var output = '';
-	      console.log(options.path + ':' + res.satusCode);
-	      res.setEncoding('utf8');
+	            // res now contains new applicant data already inserted
+	            var output = '';
+	            console.log(options.path + ':' + res.satusCode);
+	            res.setEncoding('utf8');
 
-	      res.on('data', function (dataBlob) {
-	        output += dataBlob;
-	        console.log("output: " + output);
-	      });
+	            res.on('data', function (dataBlob) {
+	                output += dataBlob;
+	                console.log("output: " + output);
+	            });
 
-	      res.on('end', function () {
-	        var obj = JSON.parse(output);
-	      });
+	            res.on('end', function () {
+	                var obj = JSON.parse(output);
+	            });
 
-	      // TODO: do something with the data for the applicant just inserted
-	    });
+	            // TODO: do something with the data for the applicant just inserted
+	        });
 
-	    req.on('error', function (err) {
-	      res.send('error: ' + err.message);
-	    });
+	        req.on('error', function (err) {
+	            res.send('error: ' + err.message);
+	        });
 
-	    req.write(dataQuerystring);
+	        req.write(dataQuerystring);
 
-	    req.end();
-	  },
+	        req.end();
+	    },
 
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Register Account - Job Seeker'
-	      ),
-	      React.createElement(
-	        'form',
-	        { ref: 'user_form', onSubmit: this.onSubmit },
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
+	    render: function render() {
+	        return React.createElement(
+	            'div',
 	            null,
-	            'First Name: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'first' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Last Name: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'last' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Email: '
-	          ),
-	          React.createElement('input', { type: 'email', ref: 'email' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Preferred Username: '
-	          ),
-	          React.createElement('input', { type: 'text', ref: 'user' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Password: '
-	          ),
-	          React.createElement('input', { type: 'password', ref: 'password' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Confirm Password: '
-	          ),
-	          React.createElement('input', { type: 'password', ref: 'confirmPassword' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'button',
-	            { type: 'submit' },
-	            'Submit'
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          Link,
-	          { to: '/ChooseAccount' },
-	          'Back'
-	        )
-	      )
-	    );
-	  }
+	            React.createElement(
+	                'h2',
+	                null,
+	                'Register Account - Job Seeker'
+	            ),
+	            React.createElement(
+	                'form',
+	                { ref: 'user_form', onSubmit: this.onSubmit },
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'First Name: '
+	                    ),
+	                    React.createElement('input', { type: 'text', ref: 'first' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Last Name: '
+	                    ),
+	                    React.createElement('input', { type: 'text', ref: 'last' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Email: '
+	                    ),
+	                    React.createElement('input', { type: 'email', ref: 'email' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Preferred Username: '
+	                    ),
+	                    React.createElement('input', { type: 'text', ref: 'user' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Password: '
+	                    ),
+	                    React.createElement('input', { type: 'password', ref: 'password' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Confirm Password: '
+	                    ),
+	                    React.createElement('input', { type: 'password', ref: 'confirmPassword' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'button',
+	                        { type: 'submit' },
+	                        'Submit'
+	                    )
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    Link,
+	                    { to: '/ChooseAccount' },
+	                    'Back'
+	                )
+	            )
+	        );
+	    }
 	});
 
 	module.exports = RegSeeker;
