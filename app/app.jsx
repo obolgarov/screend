@@ -13,6 +13,9 @@ var RegSeeker = require('RegSeeker');
 var PasswordReset =require('PasswordReset');
 var ChooseAccount = require('ChooseAccount');
 
+require('style!css!foundation-sites/dist/foundation.min.css')
+$(document).foundation();
+
 ReactDOM.render(
 <Router history={hashHistory}>
   <Route path="/" component={Main}>
