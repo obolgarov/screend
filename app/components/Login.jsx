@@ -28,6 +28,18 @@ var Login = React.createClass({
         <input type="text" name="password"/>
     </div>
 
+<h4>What Kind of Account Would You Like To Login With?</h4>
+
+  <div>
+    <label>Employer</label>
+    <input type="radio" name="empButton" value="employer"/>
+  </div>
+
+  <div>
+    <label>Job Seeker</label>
+    <input type="radio" name="seekButton" value="seeker"/>
+  </div>
+
     <div>
       <button type="submit">Submit</button>
     </div>

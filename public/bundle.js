@@ -25114,6 +25114,31 @@
 	          React.createElement('input', { type: 'text', name: 'password' })
 	        ),
 	        React.createElement(
+	          'h4',
+	          null,
+	          'What Kind of Account Would You Like To Login With?'
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Employer'
+	          ),
+	          React.createElement('input', { type: 'radio', name: 'empButton', value: 'employer' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Job Seeker'
+	          ),
+	          React.createElement('input', { type: 'radio', name: 'seekButton', value: 'seeker' })
+	        ),
+	        React.createElement(
 	          'div',
 	          null,
 	          React.createElement(
