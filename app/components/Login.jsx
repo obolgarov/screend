@@ -2,12 +2,23 @@ var React = require('react');
 var {Link} = require('react-router');
 
 var Login = React.createClass({
+
+  onSubmit: function (e) {
+
+    var data = {
+
+      user : this.refs.username.value,
+      pass : this.refs.password.value
+    }
+
+
+  },
   render: function(){
     return(
 
 <div>
   <h2>Login</h2>
-  <form method="POST" action="/applicants">
+    <form ref='LogIn' onSubmit={this.onSubmit}>
     <div>
         <label>User Name: </label>
         <input type="text" name="username"/>
