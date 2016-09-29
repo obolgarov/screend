@@ -101,40 +101,53 @@ router.route('/')
   // end of post
 });
 
-router.route('/').get(function(req, res, callback) {
+router.route('/verify').get(function(req, res, callback) {
 
-  // TODO: validate user here, res.send error page if user doesn't have access
-  // to view users
+  // get specific uservar username = req.body.username;
+  if (req.body.username != null && req.body.password != null){
+    var username = req.body.username;
+    var password = req.body.password;
 
-  // get specific user
-  mongoose.model('applicant').find({}, function (err, applicants){
+    mongoose.model('applicant').findOne({
+      username : username
+    }, function (err, applicant){
 
-    if (err) {
-      return console.error(err);
-    } else {
+      if (err) {
+        return console.error(err);
+      } else {
 
-      //res.json(applicants);
+        if (applicant.password == password){
+          res.format({
 
-      // respond to call with information
-      res.format({
+            // json response
+            json: function() {
+              res.json({ verified: "true"});
+            }
 
-        /*// html response
-        html: function() {
-          res.render('jobposting', {
-            title: 'all applicants',
-            "applicants" : applicants
-          })
-        },
-        */
-        // json response
-        json: function() {
-          res.json(applicants);
+          });
+        } else {
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({ verified: "false"});
+
+            }
+          });
         }
+      }
+    });
+  } else {
+    res.format({
 
-      });
-    }
-  });
-})
+      // json response
+      json: function() {
+        res.json({ verified: "false"});
+      }
+
+    });
+  }
+});
 
 /*
 router.get('/new', function(req, res) {
