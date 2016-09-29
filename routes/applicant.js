@@ -24,6 +24,7 @@ router.route('/')
   // TODO: validate user here, res.send error page if user doesn't have access
   // to view users
 
+
   // get all
   mongoose.model('applicant').find({}, function (err, applicants){
 
@@ -99,11 +100,49 @@ router.route('/')
 
   // end of post
 });
+
+router.route('/').get(function(req, res, callback) {
+
+  // TODO: validate user here, res.send error page if user doesn't have access
+  // to view users
+
+  // get specific user
+  mongoose.model('applicant').find({}, function (err, applicants){
+
+    if (err) {
+      return console.error(err);
+    } else {
+
+      //res.json(applicants);
+
+      // respond to call with information
+      res.format({
+
+        /*// html response
+        html: function() {
+          res.render('jobposting', {
+            title: 'all applicants',
+            "applicants" : applicants
+          })
+        },
+        */
+        // json response
+        json: function() {
+          res.json(applicants);
+        }
+
+      });
+    }
+  });
+})
+
 /*
 router.get('/new', function(req, res) {
   res.render('applicants/new', { title: 'create applicant' });
 });
+*/
 
+/*
 router.param('id', function(req, res, callback, id) {
   mongoose.model('applicant').findById(id, function (err, applicant) {
     if (err) { // it is not found
