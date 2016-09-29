@@ -35,7 +35,7 @@ var Messages = React.createClass({
                 <label>Salary: </label>
                 <input type="text" ref="salary"/>
             </div>
-
+``
             <div>
                 <label>Description: </label>
                 <input type="text" ref="companyName"/>
