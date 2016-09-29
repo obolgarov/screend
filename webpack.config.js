@@ -6,19 +6,20 @@ module.exports = {
   'script!foundation-sites/dist/foundation.min.js',
   './app/app.jsx'
   ],
-  output: {
-    path: __dirname,
-    filename: './public/bundle.js'
-  },
   externals:{
   jquery: 'jQuery'
 },
 plugins:[
     new webpack.ProvidePlugin({
-      '$': 'jqery',
+      '$': 'jquery',
       'jQuery': 'jquery'
     })
 ],
+  output: {
+    path: __dirname,
+    filename: './public/bundle.js'
+  },
+
   resolve: {
     root: __dirname,
     alias: {
