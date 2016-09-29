@@ -24,6 +24,7 @@ router.route('/')
   // TODO: validate user here, res.send error page if user doesn't have access
   // to view users
 
+
   // get all
   mongoose.model('applicant').find({}, function (err, applicants){
 
