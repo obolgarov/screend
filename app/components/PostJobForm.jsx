@@ -6,7 +6,7 @@ var Messages = React.createClass({
       <div>
 
 
-        <form ref='employee_form' onSubmit={this.onSubmit}>
+        <form ref='Job_form' onSubmit={this.onSubmit}>
             <div>
                 <label>Company Name: </label>
                 <input type="text" ref="Company"/>
@@ -40,7 +40,9 @@ var Messages = React.createClass({
                 <label>Description: </label>
                 <input type="text" ref="companyName"/>
             </div>
-
+            <div>
+                <button type="submit">Submit</button>
+            </div>
           </form>
 
           <label>Description</label>
