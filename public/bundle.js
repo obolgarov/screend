@@ -33321,10 +33321,12 @@
 /* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
 	var React = __webpack_require__(8);
-	var Nav = __webpack_require__(224);
+	var http = __webpack_require__(234); // to send request
+	var config = __webpack_require__(263)(); // to get the port
+	var querystring = __webpack_require__(260); // to send data inside the request
 
 	var _require = __webpack_require__(166);
 
@@ -33332,73 +33334,136 @@
 
 
 	var LoginEmployer = React.createClass({
-	    displayName: 'LoginEmployer',
+	  displayName: 'LoginEmployer',
 
-	    render: function render() {
-	        return React.createElement(
-	            'div',
+	  onSubmit: function onSubmit(e) {
+
+	    var data = {
+	      username: this.refs.user.value,
+	      password: this.refs.password.value,
+	      firstName: "",
+	      lastName: "",
+	      userEmail: "",
+	      comName: "",
+	      comAddress: "",
+	      comIndustry: "",
+	      comAttributes: ""
+	    };
+	    var dataQuerystring = querystring.stringify(data);
+
+	    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+	    var httpOptions = {
+	      port: config.port,
+	      path: "/employer/verify",
+	      method: "POST", // insert data
+	      headers: {
+	        'Content-Type': 'application/x-www-form-urlencoded',
+	        'Content-Length': Buffer.byteLength(dataQuerystring),
+	        'Accept': 'application/json'
+	      },
+	      body: dataQuerystring
+	    };
+
+	    console.log("body: " + JSON.stringify(data));
+
+	    console.log("sending");
+
+	    var req = http.request(httpOptions, function (res) {
+
+	      console.log("sent");
+
+	      // res now contains new applicant data already inserted
+	      var output = '';
+	      console.log(options.path + ':' + res.satusCode);
+	      res.setEncoding('utf8');
+
+	      res.on('data', function (dataBlob) {
+	        output += dataBlob;
+	        console.log("output: " + output);
+	      });
+
+	      res.on('end', function () {
+	        var obj = JSON.parse(output);
+	      });
+
+	      // TODO: do something with the data for the applicant just inserted
+	    });
+
+	    req.on('error', function (err) {
+	      res.send('error: ' + err.message);
+	    });
+
+	    req.write(dataQuerystring);
+
+	    req.end();
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Login - Employer'
+	      ),
+	      React.createElement(
+	        'form',
+	        { ref: 'LogIn', onSubmit: this.onSubmit },
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
 	            null,
-	            React.createElement(
-	                'h2',
-	                null,
-	                'Login - Employer'
-	            ),
-	            React.createElement(
-	                'form',
-	                { ref: 'LogIn', onSubmit: this.onSubmit },
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Username: '
-	                    ),
-	                    React.createElement('input', { type: 'text', ref: 'user' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'label',
-	                        null,
-	                        'Password: '
-	                    ),
-	                    React.createElement('input', { type: 'password', ref: 'password' })
-	                ),
-	                React.createElement(
-	                    'div',
-	                    null,
-	                    React.createElement(
-	                        'button',
-	                        { type: 'submit' },
-	                        'Submit'
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    Link,
-	                    { to: '/RegEmployer' },
-	                    'Register Account'
-	                )
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    Link,
-	                    { to: '/PasswordReset' },
-	                    'Forget Password'
-	                )
-	            )
-	        );
-	    }
+	            'Username: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'user' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Password: '
+	          ),
+	          React.createElement('input', { type: 'password', ref: 'password' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Submit'
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/RegEmployer' },
+	          'Register Account'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/PasswordReset' },
+	          'Forget Password'
+	        )
+	      )
+	    );
+	  }
 	});
 
 	module.exports = LoginEmployer;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(230).Buffer))
 
 /***/ },
 /* 272 */
