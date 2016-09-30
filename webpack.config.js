@@ -29,12 +29,15 @@ plugins:[
       Home: 'app/components/Home.jsx',
       Messages: 'app/components/Messages.jsx',
       UploadResume: 'app/components/UploadResume.jsx',
-      JobPosting: 'app/components/JobPostings.jsx',
+      JobPostings: 'app/components/JobPostings.jsx',
       Login: 'app/components/Login.jsx',
       RegSeeker: 'app/components/RegSeeker.jsx',
       RegEmployer: 'app/components/RegEmployer.jsx',
       PasswordReset: 'app/components/PasswordReset.jsx',
-      ChooseAccount: 'app/components/ChooseAccount.jsx'
+      ChooseAccount: 'app/components/ChooseAccount.jsx',
+      postJobForm: 'app/components/PostJobForm.jsx',
+      jobDescription: 'app/components/jobDescription.jsx'
+
     },
     extensions: ['', '.js', '.jsx']
   },

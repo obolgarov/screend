@@ -5,7 +5,6 @@ var Nav = React.createClass({
   render: function(){
     return(
       <div>
-      <h2>Nav Component</h2>
       <Link to="/">Home</Link>
       <Link to="/jobposting">JobPosting</Link>
       <Link to="/messages">Messages</Link>

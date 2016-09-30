@@ -1,11 +1,14 @@
 var React = require('react');
 
-var JobPosting = React.createClass({
+var JobPostings = React.createClass({
   render: function(){
     return(
-      <h2>JobPosting Component</h2>
+      <div>
+        <h2>Job Postings</h2>
+        <table id="jobposts"></table>
+      </div>
     );
   }
 });
 
-module.exports = JobPosting;
+module.exports = JobPostings;
