@@ -108,6 +108,7 @@ router.route('/')
   // end of post
 });
 
+
 router.route('/verify').post(function(req, res, callback) {
   var username = req.body.username;
   var password = req.body.password;
@@ -146,6 +147,7 @@ router.route('/verify').post(function(req, res, callback) {
               console.log("false");
 
             }
+
           });
         }
 

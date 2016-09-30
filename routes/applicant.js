@@ -125,7 +125,7 @@ router.route('/verify').post(function(req, res, callback) {
 
             // json response
             json: function() {
-              res.json({ verified: "true"});
+            res.json({ verified: "true"});
                console.log("true");
             }
 

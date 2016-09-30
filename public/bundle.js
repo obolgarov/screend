@@ -25140,6 +25140,7 @@
 	        'Accept': 'application/json'
 	      },
 	      body: dataQuerystring
+
 	    };
 
 	    console.log("body: " + JSON.stringify(data));
@@ -25152,8 +25153,8 @@
 
 	      // res now contains new applicant data already inserted
 	      var output = '';
-	      console.log(options.path + ':' + res.satusCode);
-	      res.setEncoding('utf8');
+	      //  console.log(options.path + ':' + res.satusCode);
+	      //res.setEncoding('utf8');
 
 	      res.on('data', function (dataBlob) {
 	        output += dataBlob;
