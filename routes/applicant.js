@@ -101,7 +101,7 @@ router.route('/')
   // end of post
 });
 
-router.route('/verify').get(function(req, res, callback) {
+router.route('/verify').post(function(req, res, callback) {
 
   // get specific uservar username = req.body.username;
   if (req.body.username != null && req.body.password != null){
