@@ -118,23 +118,25 @@ router.route('/verify').post(function(req, res, callback) {
         return console.error(err);
       } else {
 
-        if (applicant.password == password ){
+        console.log(applicant);
+
+        if ( applicant != null && applicant.password == password ){
+          console.log("true");
           res.format({
 
             // json response
             json: function() {
               res.json({ verified: "true"});
-               console.log("true");
             }
 
           });
         } else {
+          console.log("false");
           res.format({
 
             // json response
             json: function() {
               res.json({ verified: "false"});
-              console.log("false");
 
             }
           });
@@ -142,6 +144,7 @@ router.route('/verify').post(function(req, res, callback) {
       }
     });
   } else {
+    // user somehow sent empty fields, despite the form sending empty strings anyway
     res.format({
 
       // json response

@@ -12,10 +12,11 @@ var Login = React.createClass({
 
     var data = {
       username : this.refs.user.value,
-      password : this.refs.password.value,
-      firstname : "",
-      lastname : "",
-      email : ""
+      password : this.refs.password.value
+      // don't need these
+      //firstname : "",
+      //lastname : "",
+      //email : ""
     }
     var dataQuerystring = querystring.stringify(data);
 
