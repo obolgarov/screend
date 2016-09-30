@@ -3,6 +3,7 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var {Link} = require('react-router');
+import { hashHistory } from 'react-router';
 
 
 
@@ -49,6 +50,17 @@ var Login = React.createClass({
       res.on('data', function (dataBlob){
         output += dataBlob;
         console.log("output: " + output);
+
+          if(output == "{\"verified\":\"true\"}")
+          {
+            hashHistory.push('?');
+
+        }  else
+          {
+            hashHistory.push('Login');
+
+          }
+
       });
 
       res.on('end', function() {

@@ -25104,6 +25104,8 @@
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
+	var _reactRouter = __webpack_require__(166);
+
 	var React = __webpack_require__(8);
 	var http = __webpack_require__(234); // to send request
 	var config = __webpack_require__(263)(); // to get the port
@@ -25159,6 +25161,12 @@
 	      res.on('data', function (dataBlob) {
 	        output += dataBlob;
 	        console.log("output: " + output);
+
+	        if (output == "{\"verified\":\"true\"}") {
+	          _reactRouter.hashHistory.push('?');
+	        } else {
+	          _reactRouter.hashHistory.push('Login');
+	        }
 	      });
 
 	      res.on('end', function () {
@@ -33324,6 +33332,8 @@
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
+	var _reactRouter = __webpack_require__(166);
+
 	var React = __webpack_require__(8);
 	var http = __webpack_require__(234); // to send request
 	var config = __webpack_require__(263)(); // to get the port
@@ -33375,12 +33385,18 @@
 
 	      // res now contains new applicant data already inserted
 	      var output = '';
-	      console.log(options.path + ':' + res.satusCode);
-	      res.setEncoding('utf8');
+	      //  console.log(options.path + ':' + res.satusCode);
+	      //res.setEncoding('utf8');
 
 	      res.on('data', function (dataBlob) {
 	        output += dataBlob;
 	        console.log("output: " + output);
+
+	        if (output == "{\"verified\":\"true\"}") {
+	          _reactRouter.hashHistory.push('?');
+	        } else {
+	          _reactRouter.hashHistory.push('LoginEmployer');
+	        }
 	      });
 
 	      res.on('end', function () {
