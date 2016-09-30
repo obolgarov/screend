@@ -22,7 +22,7 @@ var Login = React.createClass({
     // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
     var httpOptions = {
       port: config.port,
-      path: "/loginReg",
+      path: "/applicants/verify",
       method: "POST", // insert data
       headers: {
         'Content-Type' : 'application/x-www-form-urlencoded',
