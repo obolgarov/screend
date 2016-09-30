@@ -6,7 +6,7 @@ var Nav = React.createClass({
     return(
       <div>
       <Link to="/">Home</Link>
-      <Link to="/jobposting">JobPosting</Link>
+      <Link to="/JobPostings">JobPosting</Link>
       <Link to="/messages">Messages</Link>
       <Link to="/UploadResume">Upload Resume</Link>
       <Link to="/ContactUs">Contact Us</Link>
