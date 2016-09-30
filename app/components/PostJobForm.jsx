@@ -1,15 +1,15 @@
 var React = require('react');
 
-var Messages = React.createClass({
+
+var postJobForm = React.createClass({
+
   render: function(){
     return(
-      <div>
 
-
-        <form ref='Job_form' onSubmit={this.onSubmit}>
+         <form ref='Job_form' method="Post">
             <div>
                 <label>Company Name: </label>
-                <input type="text" ref="Company"/>
+                <input type="text" ref="companyform"/>
             </div>
 
             <div>
@@ -22,8 +22,8 @@ var Messages = React.createClass({
             </div>
 
             <div>
-                <label>Education: </label>
-                <input type="text" ref="education"/>
+                <label>Required Education: </label>
+                <input type="text" ref="requirededucation"/>>
             </div>
 
             <div>
@@ -35,22 +35,19 @@ var Messages = React.createClass({
                 <label>Salary: </label>
                 <input type="text" ref="salary"/>
             </div>
-``
+
             <div>
                 <label>Description: </label>
-                <input type="text" ref="companyName"/>
+                <textarea type="text"></textarea>
             </div>
+
             <div>
-                <button type="submit">Submit</button>
+                  <input type="submit" value="Submit Resume" ref="submitResume" name="submit"></input>
             </div>
           </form>
 
-          <label>Description</label>
-          <textarea form="employee_form" name="Description"></textarea>
-
-      </div>
     );
   }
 });
 
-module.exports = Messages;
+module.exports = postJobForm;

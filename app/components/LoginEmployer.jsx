@@ -6,25 +6,26 @@ var {Link} = require('react-router');
 import { hashHistory } from 'react-router';
 
 
-
-var Login = React.createClass({
-
+var LoginEmployer = React.createClass({
   onSubmit: function (e) {
 
     var data = {
       username : this.refs.user.value,
-      password : this.refs.password.value
-      // don't need these
-      //firstname : "",
-      //lastname : "",
-      //email : ""
+      password : this.refs.password.value,
+      firstName : "",
+      lastName : "",
+      userEmail : "",
+      comName : "",
+      comAddress : "",
+      comIndustry : "",
+      comAttributes : ""
     }
     var dataQuerystring = querystring.stringify(data);
 
     // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
     var httpOptions = {
       port: config.port,
-      path: "/applicants/verify",
+      path: "/employer/verify",
       method: "POST", // insert data
       headers: {
         'Content-Type' : 'application/x-www-form-urlencoded',
@@ -32,7 +33,6 @@ var Login = React.createClass({
         'Accept' : 'application/json'
       },
       body: dataQuerystring
-
     }
 
     console.log("body: " + JSON.stringify(data));
@@ -45,22 +45,22 @@ var Login = React.createClass({
 
       // res now contains new applicant data already inserted
       var output = '';
-      //  console.log(options.path + ':' + res.satusCode);
+    //  console.log(options.path + ':' + res.satusCode);
       //res.setEncoding('utf8');
 
       res.on('data', function (dataBlob){
         output += dataBlob;
         console.log("output: " + output);
 
-          if(output == "{\"verified\":\"true\"}")
-          {
-            hashHistory.push('?');
+        if(output == "{\"verified\":\"true\"}")
+        {
+          hashHistory.push('?');
 
-        }  else
-          {
-            hashHistory.push('Login');
+      }  else
+        {
+          hashHistory.push('LoginEmployer');
 
-          }
+        }
 
       });
 
@@ -81,43 +81,42 @@ var Login = React.createClass({
     req.end();
 
 
-
   },
-  render: function(){
-    return(
 
-<div>
-  <h2>Login - Job Seeker</h2>
-    <form ref='LogIn' onSubmit={this.onSubmit}>
-
+    render: function() {
+        return (
       <div>
-          <label>Username: </label>
-          <input type="text" ref="user"/>
+        <h2>Login - Employer</h2>
+
+        <form ref='LogIn' onSubmit={this.onSubmit}>
+
+            <div>
+                <label>Username: </label>
+                <input type="text" ref="user"/>
+            </div>
+
+            <div>
+                <label>Password: </label>
+                <input type="password" ref="password"/>
+            </div>
+
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+
+        </form>
+
+        <div>
+            <Link to="/RegEmployer">Register Account</Link>
+        </div>
+
+
+        <div>
+        <Link to="/PasswordReset">Forget Password</Link>
+        </div>
       </div>
-
-      <div>
-          <label>Password: </label>
-          <input type="password" ref="password"/>
-      </div>
-
-    <div>
-      <button type="submit">Submit</button>
-    </div>
-
-  </form>
-
-  <div>
-      <Link to="/RegSeeker">Register Account</Link>
-  </div>
-
-
-<div>
-  <Link to="/PasswordReset">Forget Password</Link>
-</div>
-</div>
-
     );
   }
 });
 
-module.exports = Login;
+module.exports = LoginEmployer;

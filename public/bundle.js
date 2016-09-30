@@ -106,17 +106,20 @@
 
 	var Main = __webpack_require__(223);
 	var Home = __webpack_require__(225);
-	var JobPosting = __webpack_require__(226);
-	var Messages = __webpack_require__(227);
-	var UploadResume = __webpack_require__(228);
-	var ContactUs = __webpack_require__(229);
-	var Login = __webpack_require__(230);
-	var RegEmployer = __webpack_require__(265);
-	var RegSeeker = __webpack_require__(266);
-	var PasswordReset = __webpack_require__(267);
-	var ChooseAccount = __webpack_require__(268);
+	var Messages = __webpack_require__(226);
+	var UploadResume = __webpack_require__(227);
+	var ContactUs = __webpack_require__(228);
+	var Login = __webpack_require__(229);
+	var RegEmployer = __webpack_require__(264);
+	var RegSeeker = __webpack_require__(265);
+	var PasswordReset = __webpack_require__(266);
+	var postJobForm = __webpack_require__(267);
+	var jobDescription = __webpack_require__(268);
+	var JobPostings = __webpack_require__(269);
+	var Welcome = __webpack_require__(270);
+	var LoginEmployer = __webpack_require__(271);
 
-	__webpack_require__(269);
+	__webpack_require__(272);
 	$(document).foundation();
 
 	ReactDOM.render(React.createElement(
@@ -126,14 +129,17 @@
 	    Route,
 	    { path: '/', component: Main },
 	    React.createElement(Route, { path: 'Messages', components: Messages }),
-	    React.createElement(Route, { path: 'JobPosting', components: JobPosting }),
+	    React.createElement(Route, { path: 'postJobForm', components: postJobForm }),
+	    React.createElement(Route, { path: 'jobDescription', components: jobDescription }),
+	    React.createElement(Route, { path: 'JobPostings', components: JobPostings }),
 	    React.createElement(Route, { path: 'UploadResume', components: UploadResume }),
 	    React.createElement(Route, { path: 'ContactUs', components: ContactUs }),
 	    React.createElement(Route, { path: 'Login', components: Login }),
 	    React.createElement(Route, { path: 'RegEmployer', components: RegEmployer }),
 	    React.createElement(Route, { path: 'RegSeeker', components: RegSeeker }),
 	    React.createElement(Route, { path: 'PasswordReset', components: PasswordReset }),
-	    React.createElement(Route, { path: 'ChooseAccount', components: ChooseAccount }),
+	    React.createElement(Route, { path: 'Welcome', components: Welcome }),
+	    React.createElement(Route, { path: 'LoginEmployer', components: LoginEmployer }),
 	    React.createElement(IndexRoute, { component: Home })
 	  )
 	), document.getElementById('app'));
@@ -24969,18 +24975,13 @@
 	      'div',
 	      null,
 	      React.createElement(
-	        'h2',
-	        null,
-	        'Nav Component'
-	      ),
-	      React.createElement(
 	        Link,
 	        { to: '/' },
 	        'Home'
 	      ),
 	      React.createElement(
 	        Link,
-	        { to: '/jobposting' },
+	        { to: '/JobPostings' },
 	        'JobPosting'
 	      ),
 	      React.createElement(
@@ -25034,28 +25035,6 @@
 
 	var React = __webpack_require__(8);
 
-	var JobPosting = React.createClass({
-	  displayName: 'JobPosting',
-
-	  render: function render() {
-	    return React.createElement(
-	      'h2',
-	      null,
-	      'JobPosting Component'
-	    );
-	  }
-	});
-
-	module.exports = JobPosting;
-
-/***/ },
-/* 227 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(8);
-
 	var Messages = React.createClass({
 	  displayName: 'Messages',
 
@@ -25071,21 +25050,26 @@
 	module.exports = Messages;
 
 /***/ },
-/* 228 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 
 	var UploadResume = React.createClass({
-	  displayName: 'UploadResume',
+	  displayName: "UploadResume",
 
 	  render: function render() {
 	    return React.createElement(
-	      'h2',
+	      "div",
 	      null,
-	      'UpLoad Resume Component'
+	      React.createElement(
+	        "form",
+	        { ref: "resume", method: "post", encType: "multipart/form-data" },
+	        React.createElement("input", { type: "file", name: "resume", ref: "resumeupload" }),
+	        React.createElement("input", { type: "submit", value: "UploadResume", ref: "resumesubmit", name: "submit" })
+	      )
 	    );
 	  }
 	});
@@ -25093,7 +25077,7 @@
 	module.exports = UploadResume;
 
 /***/ },
-/* 229 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25115,15 +25099,17 @@
 	module.exports = ContactUs;
 
 /***/ },
-/* 230 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
+	var _reactRouter = __webpack_require__(166);
+
 	var React = __webpack_require__(8);
-	var http = __webpack_require__(235); // to send request
-	var config = __webpack_require__(264)(); // to get the port
-	var querystring = __webpack_require__(261); // to send data inside the request
+	var http = __webpack_require__(234); // to send request
+	var config = __webpack_require__(263)(); // to get the port
+	var querystring = __webpack_require__(260); // to send data inside the request
 
 	var _require = __webpack_require__(166);
 
@@ -25156,6 +25142,7 @@
 	        'Accept': 'application/json'
 	      },
 	      body: dataQuerystring
+
 	    };
 
 	    console.log("body: " + JSON.stringify(data));
@@ -25168,12 +25155,18 @@
 
 	      // res now contains new applicant data already inserted
 	      var output = '';
-	      console.log(options.path + ':' + res.satusCode);
-	      res.setEncoding('utf8');
+	      //  console.log(options.path + ':' + res.satusCode);
+	      //res.setEncoding('utf8');
 
 	      res.on('data', function (dataBlob) {
 	        output += dataBlob;
 	        console.log("output: " + output);
+
+	        if (output == "{\"verified\":\"true\"}") {
+	          _reactRouter.hashHistory.push('?');
+	        } else {
+	          _reactRouter.hashHistory.push('Login');
+	        }
 	      });
 
 	      res.on('end', function () {
@@ -25198,7 +25191,7 @@
 	      React.createElement(
 	        'h2',
 	        null,
-	        'Login'
+	        'Login - Job Seeker'
 	      ),
 	      React.createElement(
 	        'form',
@@ -25224,31 +25217,6 @@
 	          React.createElement('input', { type: 'password', ref: 'password' })
 	        ),
 	        React.createElement(
-	          'h4',
-	          null,
-	          'What Kind of Account Would You Like To Login With?'
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Employer'
-	          ),
-	          React.createElement('input', { type: 'radio', name: 'empButton', value: 'employer' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Job Seeker'
-	          ),
-	          React.createElement('input', { type: 'radio', name: 'seekButton', value: 'seeker' })
-	        ),
-	        React.createElement(
 	          'div',
 	          null,
 	          React.createElement(
@@ -25263,7 +25231,7 @@
 	        null,
 	        React.createElement(
 	          Link,
-	          { to: '/ChooseAccount' },
+	          { to: '/RegSeeker' },
 	          'Register Account'
 	        )
 	      ),
@@ -25281,10 +25249,10 @@
 	});
 
 	module.exports = Login;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(231).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(230).Buffer))
 
 /***/ },
-/* 231 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -25297,9 +25265,9 @@
 
 	'use strict'
 
-	var base64 = __webpack_require__(232)
-	var ieee754 = __webpack_require__(233)
-	var isArray = __webpack_require__(234)
+	var base64 = __webpack_require__(231)
+	var ieee754 = __webpack_require__(232)
+	var isArray = __webpack_require__(233)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -27077,10 +27045,10 @@
 	  return val !== val // eslint-disable-line no-self-compare
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(231).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(230).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 232 */
+/* 231 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -27195,7 +27163,7 @@
 
 
 /***/ },
-/* 233 */
+/* 232 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -27285,7 +27253,7 @@
 
 
 /***/ },
-/* 234 */
+/* 233 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -27296,13 +27264,13 @@
 
 
 /***/ },
-/* 235 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var http = module.exports;
-	var EventEmitter = __webpack_require__(236).EventEmitter;
-	var Request = __webpack_require__(237);
-	var url = __webpack_require__(258)
+	var EventEmitter = __webpack_require__(235).EventEmitter;
+	var Request = __webpack_require__(236);
+	var url = __webpack_require__(257)
 
 	http.request = function (params, cb) {
 	    if (typeof params === 'string') {
@@ -27446,7 +27414,7 @@
 	};
 
 /***/ },
-/* 236 */
+/* 235 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -27754,13 +27722,13 @@
 
 
 /***/ },
-/* 237 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Stream = __webpack_require__(238);
-	var Response = __webpack_require__(254);
-	var Base64 = __webpack_require__(257);
-	var inherits = __webpack_require__(239);
+	var Stream = __webpack_require__(237);
+	var Response = __webpack_require__(253);
+	var Base64 = __webpack_require__(256);
+	var inherits = __webpack_require__(238);
 
 	var Request = module.exports = function (xhr, params) {
 	    var self = this;
@@ -27969,7 +27937,7 @@
 
 
 /***/ },
-/* 238 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -27995,15 +27963,15 @@
 
 	module.exports = Stream;
 
-	var EE = __webpack_require__(236).EventEmitter;
-	var inherits = __webpack_require__(239);
+	var EE = __webpack_require__(235).EventEmitter;
+	var inherits = __webpack_require__(238);
 
 	inherits(Stream, EE);
-	Stream.Readable = __webpack_require__(240);
-	Stream.Writable = __webpack_require__(250);
-	Stream.Duplex = __webpack_require__(251);
-	Stream.Transform = __webpack_require__(252);
-	Stream.PassThrough = __webpack_require__(253);
+	Stream.Readable = __webpack_require__(239);
+	Stream.Writable = __webpack_require__(249);
+	Stream.Duplex = __webpack_require__(250);
+	Stream.Transform = __webpack_require__(251);
+	Stream.PassThrough = __webpack_require__(252);
 
 	// Backwards-compat with node 0.4.x
 	Stream.Stream = Stream;
@@ -28102,7 +28070,7 @@
 
 
 /***/ },
-/* 239 */
+/* 238 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -28131,24 +28099,24 @@
 
 
 /***/ },
-/* 240 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {exports = module.exports = __webpack_require__(241);
-	exports.Stream = __webpack_require__(238);
+	/* WEBPACK VAR INJECTION */(function(process) {exports = module.exports = __webpack_require__(240);
+	exports.Stream = __webpack_require__(237);
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(246);
-	exports.Duplex = __webpack_require__(245);
-	exports.Transform = __webpack_require__(248);
-	exports.PassThrough = __webpack_require__(249);
+	exports.Writable = __webpack_require__(245);
+	exports.Duplex = __webpack_require__(244);
+	exports.Transform = __webpack_require__(247);
+	exports.PassThrough = __webpack_require__(248);
 	if (!process.browser && process.env.READABLE_STREAM === 'disable') {
-	  module.exports = __webpack_require__(238);
+	  module.exports = __webpack_require__(237);
 	}
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 241 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -28175,17 +28143,17 @@
 	module.exports = Readable;
 
 	/*<replacement>*/
-	var isArray = __webpack_require__(242);
+	var isArray = __webpack_require__(241);
 	/*</replacement>*/
 
 
 	/*<replacement>*/
-	var Buffer = __webpack_require__(231).Buffer;
+	var Buffer = __webpack_require__(230).Buffer;
 	/*</replacement>*/
 
 	Readable.ReadableState = ReadableState;
 
-	var EE = __webpack_require__(236).EventEmitter;
+	var EE = __webpack_require__(235).EventEmitter;
 
 	/*<replacement>*/
 	if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
@@ -28193,18 +28161,18 @@
 	};
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(238);
+	var Stream = __webpack_require__(237);
 
 	/*<replacement>*/
-	var util = __webpack_require__(243);
-	util.inherits = __webpack_require__(239);
+	var util = __webpack_require__(242);
+	util.inherits = __webpack_require__(238);
 	/*</replacement>*/
 
 	var StringDecoder;
 
 
 	/*<replacement>*/
-	var debug = __webpack_require__(244);
+	var debug = __webpack_require__(243);
 	if (debug && debug.debuglog) {
 	  debug = debug.debuglog('stream');
 	} else {
@@ -28216,7 +28184,7 @@
 	util.inherits(Readable, Stream);
 
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(245);
+	  var Duplex = __webpack_require__(244);
 
 	  options = options || {};
 
@@ -28277,14 +28245,14 @@
 	  this.encoding = null;
 	  if (options.encoding) {
 	    if (!StringDecoder)
-	      StringDecoder = __webpack_require__(247).StringDecoder;
+	      StringDecoder = __webpack_require__(246).StringDecoder;
 	    this.decoder = new StringDecoder(options.encoding);
 	    this.encoding = options.encoding;
 	  }
 	}
 
 	function Readable(options) {
-	  var Duplex = __webpack_require__(245);
+	  var Duplex = __webpack_require__(244);
 
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -28387,7 +28355,7 @@
 	// backwards compatibility.
 	Readable.prototype.setEncoding = function(enc) {
 	  if (!StringDecoder)
-	    StringDecoder = __webpack_require__(247).StringDecoder;
+	    StringDecoder = __webpack_require__(246).StringDecoder;
 	  this._readableState.decoder = new StringDecoder(enc);
 	  this._readableState.encoding = enc;
 	  return this;
@@ -29106,7 +29074,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 242 */
+/* 241 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -29115,7 +29083,7 @@
 
 
 /***/ },
-/* 243 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
@@ -29226,16 +29194,16 @@
 	  return Object.prototype.toString.call(o);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(231).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(230).Buffer))
 
 /***/ },
-/* 244 */
+/* 243 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 245 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -29276,12 +29244,12 @@
 
 
 	/*<replacement>*/
-	var util = __webpack_require__(243);
-	util.inherits = __webpack_require__(239);
+	var util = __webpack_require__(242);
+	util.inherits = __webpack_require__(238);
 	/*</replacement>*/
 
-	var Readable = __webpack_require__(241);
-	var Writable = __webpack_require__(246);
+	var Readable = __webpack_require__(240);
+	var Writable = __webpack_require__(245);
 
 	util.inherits(Duplex, Readable);
 
@@ -29331,7 +29299,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 246 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -29362,18 +29330,18 @@
 	module.exports = Writable;
 
 	/*<replacement>*/
-	var Buffer = __webpack_require__(231).Buffer;
+	var Buffer = __webpack_require__(230).Buffer;
 	/*</replacement>*/
 
 	Writable.WritableState = WritableState;
 
 
 	/*<replacement>*/
-	var util = __webpack_require__(243);
-	util.inherits = __webpack_require__(239);
+	var util = __webpack_require__(242);
+	util.inherits = __webpack_require__(238);
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(238);
+	var Stream = __webpack_require__(237);
 
 	util.inherits(Writable, Stream);
 
@@ -29384,7 +29352,7 @@
 	}
 
 	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(245);
+	  var Duplex = __webpack_require__(244);
 
 	  options = options || {};
 
@@ -29472,7 +29440,7 @@
 	}
 
 	function Writable(options) {
-	  var Duplex = __webpack_require__(245);
+	  var Duplex = __webpack_require__(244);
 
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -29815,7 +29783,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 247 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -29839,7 +29807,7 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var Buffer = __webpack_require__(231).Buffer;
+	var Buffer = __webpack_require__(230).Buffer;
 
 	var isBufferEncoding = Buffer.isEncoding
 	  || function(encoding) {
@@ -30042,7 +30010,7 @@
 
 
 /***/ },
-/* 248 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -30111,11 +30079,11 @@
 
 	module.exports = Transform;
 
-	var Duplex = __webpack_require__(245);
+	var Duplex = __webpack_require__(244);
 
 	/*<replacement>*/
-	var util = __webpack_require__(243);
-	util.inherits = __webpack_require__(239);
+	var util = __webpack_require__(242);
+	util.inherits = __webpack_require__(238);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -30257,7 +30225,7 @@
 
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -30287,11 +30255,11 @@
 
 	module.exports = PassThrough;
 
-	var Transform = __webpack_require__(248);
+	var Transform = __webpack_require__(247);
 
 	/*<replacement>*/
-	var util = __webpack_require__(243);
-	util.inherits = __webpack_require__(239);
+	var util = __webpack_require__(242);
+	util.inherits = __webpack_require__(238);
 	/*</replacement>*/
 
 	util.inherits(PassThrough, Transform);
@@ -30309,17 +30277,24 @@
 
 
 /***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(245)
+
+
+/***/ },
 /* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(246)
+	module.exports = __webpack_require__(244)
 
 
 /***/ },
 /* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(245)
+	module.exports = __webpack_require__(247)
 
 
 /***/ },
@@ -30333,15 +30308,8 @@
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(249)
-
-
-/***/ },
-/* 254 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Stream = __webpack_require__(238);
-	var util = __webpack_require__(255);
+	var Stream = __webpack_require__(237);
+	var util = __webpack_require__(254);
 
 	var Response = module.exports = function (res) {
 	    this.offset = 0;
@@ -30463,7 +30431,7 @@
 
 
 /***/ },
-/* 255 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -30991,7 +30959,7 @@
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(256);
+	exports.isBuffer = __webpack_require__(255);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -31035,7 +31003,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(239);
+	exports.inherits = __webpack_require__(238);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -31056,7 +31024,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(11)))
 
 /***/ },
-/* 256 */
+/* 255 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -31067,7 +31035,7 @@
 	}
 
 /***/ },
-/* 257 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	;(function () {
@@ -31133,7 +31101,7 @@
 
 
 /***/ },
-/* 258 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -31157,7 +31125,7 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var punycode = __webpack_require__(259);
+	var punycode = __webpack_require__(258);
 
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -31229,7 +31197,7 @@
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(261);
+	    querystring = __webpack_require__(260);
 
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && isObject(url) && url instanceof Url) return url;
@@ -31846,7 +31814,7 @@
 
 
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -32378,10 +32346,10 @@
 
 	}(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(260)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(259)(module), (function() { return this; }())))
 
 /***/ },
-/* 260 */
+/* 259 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -32397,17 +32365,17 @@
 
 
 /***/ },
-/* 261 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.decode = exports.parse = __webpack_require__(262);
-	exports.encode = exports.stringify = __webpack_require__(263);
+	exports.decode = exports.parse = __webpack_require__(261);
+	exports.encode = exports.stringify = __webpack_require__(262);
 
 
 /***/ },
-/* 262 */
+/* 261 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -32493,7 +32461,7 @@
 
 
 /***/ },
-/* 263 */
+/* 262 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -32563,7 +32531,7 @@
 
 
 /***/ },
-/* 264 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -32592,15 +32560,15 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 265 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
 	var React = __webpack_require__(8);
-	var http = __webpack_require__(235); // to send request
-	var config = __webpack_require__(264)(); // to get the port
-	var querystring = __webpack_require__(261); // to send data inside the request
+	var http = __webpack_require__(234); // to send request
+	var config = __webpack_require__(263)(); // to get the port
+	var querystring = __webpack_require__(260); // to send data inside the request
 
 	var _require = __webpack_require__(166);
 
@@ -32799,7 +32767,7 @@
 	          null,
 	          React.createElement(
 	            Link,
-	            { to: '/ChooseAccount' },
+	            { to: '/LoginEmployer' },
 	            'Back'
 	          )
 	        )
@@ -32809,18 +32777,18 @@
 	});
 
 	module.exports = RegEmployer;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(231).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(230).Buffer))
 
 /***/ },
-/* 266 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
 	var React = __webpack_require__(8);
-	var http = __webpack_require__(235); // to send request
-	var config = __webpack_require__(264)(); // to get the port
-	var querystring = __webpack_require__(261); // to send data inside the request
+	var http = __webpack_require__(234); // to send request
+	var config = __webpack_require__(263)(); // to get the port
+	var querystring = __webpack_require__(260); // to send data inside the request
 
 	var _require = __webpack_require__(166);
 
@@ -32988,7 +32956,7 @@
 	                null,
 	                React.createElement(
 	                    Link,
-	                    { to: '/ChooseAccount' },
+	                    { to: '/Login' },
 	                    'Back'
 	                )
 	            )
@@ -32997,10 +32965,10 @@
 	});
 
 	module.exports = RegSeeker;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(231).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(230).Buffer))
 
 /***/ },
-/* 267 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33062,20 +33030,263 @@
 	module.exports = PasswordReset;
 
 /***/ },
-/* 268 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(8);
 
+	var postJobForm = React.createClass({
+	    displayName: 'postJobForm',
+
+
+	    render: function render() {
+	        return React.createElement(
+	            'form',
+	            { ref: 'Job_form', method: 'Post' },
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'label',
+	                    null,
+	                    'Company Name: '
+	                ),
+	                React.createElement('input', { type: 'text', ref: 'companyform' })
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'label',
+	                    null,
+	                    'Location: '
+	                ),
+	                React.createElement('input', { type: 'text', ref: 'location' })
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'label',
+	                    null,
+	                    'Certification: '
+	                ),
+	                React.createElement('input', { type: 'text', ref: 'certification' })
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'label',
+	                    null,
+	                    'Required Education: '
+	                ),
+	                React.createElement('input', { type: 'text', ref: 'requirededucation' }),
+	                '>'
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'label',
+	                    null,
+	                    'Experience: '
+	                ),
+	                React.createElement('input', { type: 'text', ref: 'experience' })
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'label',
+	                    null,
+	                    'Salary: '
+	                ),
+	                React.createElement('input', { type: 'text', ref: 'salary' })
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    'label',
+	                    null,
+	                    'Description: '
+	                ),
+	                React.createElement('textarea', { type: 'text' })
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement('input', { type: 'submit', value: 'Submit Resume', ref: 'submitResume', name: 'submit' })
+	            )
+	        );
+	    }
+	});
+
+	module.exports = postJobForm;
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(8);
+
+	var Home = React.createClass({
+	  displayName: "Home",
+
+	  render: function render() {
+	    return React.createElement(
+	      "form",
+	      { ref: "jobDescription", method: "post" },
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Company Name:"
+	        ),
+	        React.createElement("label", { id: "companyname" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Certification:"
+	        ),
+	        React.createElement("label", { id: "certification" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Required Experience:"
+	        ),
+	        React.createElement("label", { id: "requiredexperience" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Location:"
+	        ),
+	        React.createElement("label", { id: "location" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Required Education:"
+	        ),
+	        React.createElement("label", { id: "requirededucation" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Salary:"
+	        ),
+	        React.createElement("label", { id: "salary" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Description:"
+	        )
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement("p", { id: "description" })
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "select",
+	          null,
+	          React.createElement(
+	            "option",
+	            { value: "resume" },
+	            "Resume"
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        "div",
+	        null,
+	        React.createElement(
+	          "button",
+	          { type: "submit", value: "Apply For Job" },
+	          "Submit Resume"
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Home;
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(8);
+
+	var JobPostings = React.createClass({
+	  displayName: "JobPostings",
+
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(
+	        "h2",
+	        null,
+	        "Job Postings"
+	      ),
+	      React.createElement("table", { id: "jobposts" })
+	    );
+	  }
+	});
+
+	module.exports = JobPostings;
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(8);
+	var Nav = __webpack_require__(224);
+
 	var _require = __webpack_require__(166);
 
 	var Link = _require.Link;
 
 
-	var ChooseAccount = React.createClass({
-	  displayName: 'ChooseAccount',
+	var Welcome = React.createClass({
+	  displayName: 'Welcome',
 
 	  render: function render() {
 	    return React.createElement(
@@ -33084,15 +33295,166 @@
 	      React.createElement(
 	        'h2',
 	        null,
-	        'What Kind of Account Would You Like To Create'
+	        'Welcome'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Are you an Employer or a Job Seeker?'
 	      ),
 	      React.createElement(
 	        'div',
 	        null,
 	        React.createElement(
 	          Link,
-	          { to: '/RegSeeker' },
-	          'Register Job Seeker Account'
+	          { to: '/Login' },
+	          'Job Seeker'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/LoginEmployer' },
+	          'Employer'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Welcome;
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
+
+	var _reactRouter = __webpack_require__(166);
+
+	var React = __webpack_require__(8);
+	var http = __webpack_require__(234); // to send request
+	var config = __webpack_require__(263)(); // to get the port
+	var querystring = __webpack_require__(260); // to send data inside the request
+
+	var _require = __webpack_require__(166);
+
+	var Link = _require.Link;
+
+
+	var LoginEmployer = React.createClass({
+	  displayName: 'LoginEmployer',
+
+	  onSubmit: function onSubmit(e) {
+
+	    var data = {
+	      username: this.refs.user.value,
+	      password: this.refs.password.value,
+	      firstName: "",
+	      lastName: "",
+	      userEmail: "",
+	      comName: "",
+	      comAddress: "",
+	      comIndustry: "",
+	      comAttributes: ""
+	    };
+	    var dataQuerystring = querystring.stringify(data);
+
+	    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+	    var httpOptions = {
+	      port: config.port,
+	      path: "/employer/verify",
+	      method: "POST", // insert data
+	      headers: {
+	        'Content-Type': 'application/x-www-form-urlencoded',
+	        'Content-Length': Buffer.byteLength(dataQuerystring),
+	        'Accept': 'application/json'
+	      },
+	      body: dataQuerystring
+	    };
+
+	    console.log("body: " + JSON.stringify(data));
+
+	    console.log("sending");
+
+	    var req = http.request(httpOptions, function (res) {
+
+	      console.log("sent");
+
+	      // res now contains new applicant data already inserted
+	      var output = '';
+	      //  console.log(options.path + ':' + res.satusCode);
+	      //res.setEncoding('utf8');
+
+	      res.on('data', function (dataBlob) {
+	        output += dataBlob;
+	        console.log("output: " + output);
+
+	        if (output == "{\"verified\":\"true\"}") {
+	          _reactRouter.hashHistory.push('?');
+	        } else {
+	          _reactRouter.hashHistory.push('LoginEmployer');
+	        }
+	      });
+
+	      res.on('end', function () {
+	        var obj = JSON.parse(output);
+	      });
+
+	      // TODO: do something with the data for the applicant just inserted
+	    });
+
+	    req.on('error', function (err) {
+	      res.send('error: ' + err.message);
+	    });
+
+	    req.write(dataQuerystring);
+
+	    req.end();
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Login - Employer'
+	      ),
+	      React.createElement(
+	        'form',
+	        { ref: 'LogIn', onSubmit: this.onSubmit },
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Username: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'user' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Password: '
+	          ),
+	          React.createElement('input', { type: 'password', ref: 'password' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Submit'
+	          )
 	        )
 	      ),
 	      React.createElement(
@@ -33101,7 +33463,7 @@
 	        React.createElement(
 	          Link,
 	          { to: '/RegEmployer' },
-	          'Register Employer Account'
+	          'Register Account'
 	        )
 	      ),
 	      React.createElement(
@@ -33109,27 +33471,28 @@
 	        null,
 	        React.createElement(
 	          Link,
-	          { to: '/Login' },
-	          'Back'
+	          { to: '/PasswordReset' },
+	          'Forget Password'
 	        )
 	      )
 	    );
 	  }
 	});
 
-	module.exports = ChooseAccount;
+	module.exports = LoginEmployer;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(230).Buffer))
 
 /***/ },
-/* 269 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(270);
+	var content = __webpack_require__(273);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(272)(content, {});
+	var update = __webpack_require__(275)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -33146,10 +33509,10 @@
 	}
 
 /***/ },
-/* 270 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(271)();
+	exports = module.exports = __webpack_require__(274)();
 	// imports
 
 
@@ -33160,7 +33523,7 @@
 
 
 /***/ },
-/* 271 */
+/* 274 */
 /***/ function(module, exports) {
 
 	/*
@@ -33216,7 +33579,7 @@
 
 
 /***/ },
-/* 272 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
