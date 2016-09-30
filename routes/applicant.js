@@ -111,14 +111,16 @@ router.route('/verify').post(function(req, res, callback) {
     var password = req.body.password;
 
     mongoose.model('applicant').findOne({
-      username : username
+      username : username,
+      password :password
     }, function (err, applicant){
 
       if (err) {
         return console.error(err);
       } else {
 
-        if (applicant.password == password ){
+        if (applicant != null ){
+
           res.format({
 
             // json response
@@ -139,6 +141,8 @@ router.route('/verify').post(function(req, res, callback) {
             }
           });
         }
+
+
       }
     });
   } else {
