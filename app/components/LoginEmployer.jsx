@@ -8,7 +8,32 @@ var LoginEmployer = React.createClass({
       <div>
         <h2>Login - Employer</h2>
 
+        <form ref='LogIn' onSubmit={this.onSubmit}>
 
+            <div>
+                <label>Username: </label>
+                <input type="text" ref="user"/>
+            </div>
+
+            <div>
+                <label>Password: </label>
+                <input type="password" ref="password"/>
+            </div>
+
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+
+        </form>
+
+        <div>
+            <Link to="/RegEmployer">Register Account</Link>
+        </div>
+
+
+        <div>
+        <Link to="/PasswordReset">Forget Password</Link>
+        </div>
       </div>
     );
   }

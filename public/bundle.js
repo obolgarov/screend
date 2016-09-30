@@ -113,14 +113,13 @@
 	var RegEmployer = __webpack_require__(264);
 	var RegSeeker = __webpack_require__(265);
 	var PasswordReset = __webpack_require__(266);
-	var ChooseAccount = __webpack_require__(267);
-	var postJobForm = __webpack_require__(268);
-	var jobDescription = __webpack_require__(269);
-	var JobPostings = __webpack_require__(270);
-	var Welcome = __webpack_require__(271);
-	var LoginEmployer = __webpack_require__(272);
+	var postJobForm = __webpack_require__(267);
+	var jobDescription = __webpack_require__(268);
+	var JobPostings = __webpack_require__(269);
+	var Welcome = __webpack_require__(270);
+	var LoginEmployer = __webpack_require__(271);
 
-	__webpack_require__(273);
+	__webpack_require__(272);
 	$(document).foundation();
 
 	ReactDOM.render(React.createElement(
@@ -139,7 +138,6 @@
 	    React.createElement(Route, { path: 'RegEmployer', components: RegEmployer }),
 	    React.createElement(Route, { path: 'RegSeeker', components: RegSeeker }),
 	    React.createElement(Route, { path: 'PasswordReset', components: PasswordReset }),
-	    React.createElement(Route, { path: 'ChooseAccount', components: ChooseAccount }),
 	    React.createElement(Route, { path: 'Welcome', components: Welcome }),
 	    React.createElement(Route, { path: 'LoginEmployer', components: LoginEmployer }),
 	    React.createElement(IndexRoute, { component: Home })
@@ -32760,7 +32758,7 @@
 	          null,
 	          React.createElement(
 	            Link,
-	            { to: '/ChooseAccount' },
+	            { to: '/LoginEmployer' },
 	            'Back'
 	          )
 	        )
@@ -32949,7 +32947,7 @@
 	                null,
 	                React.createElement(
 	                    Link,
-	                    { to: '/ChooseAccount' },
+	                    { to: '/Login' },
 	                    'Back'
 	                )
 	            )
@@ -33024,64 +33022,6 @@
 
 /***/ },
 /* 267 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(8);
-
-	var _require = __webpack_require__(166);
-
-	var Link = _require.Link;
-
-
-	var ChooseAccount = React.createClass({
-	  displayName: 'ChooseAccount',
-
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'What Kind of Account Would You Like To Create'
-	      ),
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          Link,
-	          { to: '/RegSeeker' },
-	          'Register Account'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          Link,
-	          { to: '/RegEmployer' },
-	          'Register Employer Account'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          Link,
-	          { to: '/Login' },
-	          'Back'
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = ChooseAccount;
-
-/***/ },
-/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33179,7 +33119,7 @@
 	module.exports = postJobForm;
 
 /***/ },
-/* 269 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33296,7 +33236,7 @@
 	module.exports = Home;
 
 /***/ },
-/* 270 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33323,7 +33263,7 @@
 	module.exports = JobPostings;
 
 /***/ },
-/* 271 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33378,7 +33318,7 @@
 	module.exports = Welcome;
 
 /***/ },
-/* 272 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33392,34 +33332,85 @@
 
 
 	var LoginEmployer = React.createClass({
-	  displayName: 'LoginEmployer',
+	    displayName: 'LoginEmployer',
 
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Login - Employer'
-	      )
-	    );
-	  }
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'h2',
+	                null,
+	                'Login - Employer'
+	            ),
+	            React.createElement(
+	                'form',
+	                { ref: 'LogIn', onSubmit: this.onSubmit },
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Username: '
+	                    ),
+	                    React.createElement('input', { type: 'text', ref: 'user' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'label',
+	                        null,
+	                        'Password: '
+	                    ),
+	                    React.createElement('input', { type: 'password', ref: 'password' })
+	                ),
+	                React.createElement(
+	                    'div',
+	                    null,
+	                    React.createElement(
+	                        'button',
+	                        { type: 'submit' },
+	                        'Submit'
+	                    )
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    Link,
+	                    { to: '/RegEmployer' },
+	                    'Register Account'
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                    Link,
+	                    { to: '/PasswordReset' },
+	                    'Forget Password'
+	                )
+	            )
+	        );
+	    }
 	});
 
 	module.exports = LoginEmployer;
 
 /***/ },
-/* 273 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(274);
+	var content = __webpack_require__(273);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(276)(content, {});
+	var update = __webpack_require__(275)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -33436,10 +33427,10 @@
 	}
 
 /***/ },
-/* 274 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(275)();
+	exports = module.exports = __webpack_require__(274)();
 	// imports
 
 
@@ -33450,7 +33441,7 @@
 
 
 /***/ },
-/* 275 */
+/* 274 */
 /***/ function(module, exports) {
 
 	/*
@@ -33506,7 +33497,7 @@
 
 
 /***/ },
-/* 276 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

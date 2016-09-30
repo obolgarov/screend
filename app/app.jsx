@@ -10,7 +10,6 @@ var Login = require('Login');
 var RegEmployer = require('RegEmployer');
 var RegSeeker = require('RegSeeker');
 var PasswordReset =require('PasswordReset');
-var ChooseAccount = require('ChooseAccount');
 var postJobForm = require('postJobForm');
 var jobDescription = require('jobDescription');
 var JobPostings = require('JobPostings');
@@ -33,7 +32,6 @@ ReactDOM.render(
   <Route path="RegEmployer" components={RegEmployer}/>
   <Route path="RegSeeker" components={RegSeeker}/>
   <Route path="PasswordReset" components={PasswordReset}/>
-  <Route path="ChooseAccount" components={ChooseAccount}/>
   <Route path="Welcome" components={Welcome}/>
   <Route path="LoginEmployer" components={LoginEmployer}/>
   <IndexRoute component={Home}/>
