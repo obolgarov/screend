@@ -126,7 +126,7 @@ var RegSeeker = React.createClass({
                 </form>
 
                 <div>
-                    <Link to="/ChooseAccount">Back</Link>
+                    <Link to="/Login">Back</Link>
                 </div>
 
             </div>

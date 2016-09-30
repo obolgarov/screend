@@ -36,8 +36,9 @@ plugins:[
       PasswordReset: 'app/components/PasswordReset.jsx',
       ChooseAccount: 'app/components/ChooseAccount.jsx',
       postJobForm: 'app/components/PostJobForm.jsx',
-      jobDescription: 'app/components/jobDescription.jsx'
-
+      jobDescription: 'app/components/jobDescription.jsx',
+      Welcome : 'app/components/Welcome.jsx',
+      LoginEmployer: 'app/components/LoginEmployer.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

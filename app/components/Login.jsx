@@ -72,7 +72,7 @@ var Login = React.createClass({
     return(
 
 <div>
-  <h2>Login</h2>
+  <h2>Login - Job Seeker</h2>
     <form ref='LogIn' onSubmit={this.onSubmit}>
 
       <div>
@@ -85,26 +85,16 @@ var Login = React.createClass({
           <input type="password" ref="password"/>
       </div>
 
-<h4>What Kind of Account Would You Like To Login With?</h4>
-
-  <div>
-    <label>Employer</label>
-    <input type="radio" name="empButton" value="employer"/>
-  </div>
-
-  <div>
-    <label>Job Seeker</label>
-    <input type="radio" name="seekButton" value="seeker"/>
-  </div>
-
     <div>
       <button type="submit">Submit</button>
     </div>
+
   </form>
 
-<div>
-  <Link to="/ChooseAccount">Register Account</Link>
-</div>
+  <div>
+      <Link to="/RegSeeker">Register Account</Link>
+  </div>
+
 
 <div>
   <Link to="/PasswordReset">Forget Password</Link>

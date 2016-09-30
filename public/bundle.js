@@ -117,8 +117,10 @@
 	var postJobForm = __webpack_require__(268);
 	var jobDescription = __webpack_require__(269);
 	var JobPostings = __webpack_require__(270);
+	var Welcome = __webpack_require__(271);
+	var LoginEmployer = __webpack_require__(272);
 
-	__webpack_require__(271);
+	__webpack_require__(273);
 	$(document).foundation();
 
 	ReactDOM.render(React.createElement(
@@ -138,6 +140,8 @@
 	    React.createElement(Route, { path: 'RegSeeker', components: RegSeeker }),
 	    React.createElement(Route, { path: 'PasswordReset', components: PasswordReset }),
 	    React.createElement(Route, { path: 'ChooseAccount', components: ChooseAccount }),
+	    React.createElement(Route, { path: 'Welcome', components: Welcome }),
+	    React.createElement(Route, { path: 'LoginEmployer', components: LoginEmployer }),
 	    React.createElement(IndexRoute, { component: Home })
 	  )
 	), document.getElementById('app'));
@@ -25180,7 +25184,7 @@
 	      React.createElement(
 	        'h2',
 	        null,
-	        'Login'
+	        'Login - Job Seeker'
 	      ),
 	      React.createElement(
 	        'form',
@@ -25206,31 +25210,6 @@
 	          React.createElement('input', { type: 'password', ref: 'password' })
 	        ),
 	        React.createElement(
-	          'h4',
-	          null,
-	          'What Kind of Account Would You Like To Login With?'
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Employer'
-	          ),
-	          React.createElement('input', { type: 'radio', name: 'empButton', value: 'employer' })
-	        ),
-	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            'label',
-	            null,
-	            'Job Seeker'
-	          ),
-	          React.createElement('input', { type: 'radio', name: 'seekButton', value: 'seeker' })
-	        ),
-	        React.createElement(
 	          'div',
 	          null,
 	          React.createElement(
@@ -25245,7 +25224,7 @@
 	        null,
 	        React.createElement(
 	          Link,
-	          { to: '/ChooseAccount' },
+	          { to: '/RegSeeker' },
 	          'Register Account'
 	        )
 	      ),
@@ -32590,204 +32569,204 @@
 
 
 	var RegEmployer = React.createClass({
-	        displayName: 'RegEmployer',
+	  displayName: 'RegEmployer',
 
 
-	        onSubmit: function onSubmit(e) {
-	                var data = {
-	                        firstName: this.refs.first.value,
-	                        lastName: this.refs.last.value,
-	                        userEmail: this.refs.email.value,
-	                        userName: this.refs.user.value,
-	                        userPass: this.refs.password.value,
-	                        comName: this.refs.companyName.value,
-	                        comAddress: this.refs.companyAddress.value,
-	                        comIndustry: this.refs.industry.value,
-	                        comAttributes: this.refs.attributes.value
-	                };
+	  onSubmit: function onSubmit(e) {
+	    var data = {
+	      firstName: this.refs.first.value,
+	      lastName: this.refs.last.value,
+	      userEmail: this.refs.email.value,
+	      userName: this.refs.user.value,
+	      userPass: this.refs.password.value,
+	      comName: this.refs.companyName.value,
+	      comAddress: this.refs.companyAddress.value,
+	      comIndustry: this.refs.industry.value,
+	      comAttributes: this.refs.attributes.value
+	    };
 
-	                var dataQuerystring = querystring.stringify(data);
+	    var dataQuerystring = querystring.stringify(data);
 
-	                // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
-	                var httpOptions = {
-	                        port: config.port,
-	                        path: "/employer",
-	                        method: "POST", // insert data
-	                        headers: {
-	                                'Content-Type': 'application/x-www-form-urlencoded',
-	                                'Content-Length': Buffer.byteLength(dataQuerystring),
-	                                'Accept': 'application/json'
-	                        },
-	                        body: dataQuerystring
-	                };
+	    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+	    var httpOptions = {
+	      port: config.port,
+	      path: "/employer",
+	      method: "POST", // insert data
+	      headers: {
+	        'Content-Type': 'application/x-www-form-urlencoded',
+	        'Content-Length': Buffer.byteLength(dataQuerystring),
+	        'Accept': 'application/json'
+	      },
+	      body: dataQuerystring
+	    };
 
-	                console.log("body: " + JSON.stringify(data));
+	    console.log("body: " + JSON.stringify(data));
 
-	                console.log("sending");
+	    console.log("sending");
 
-	                var req = http.request(httpOptions, function (res) {
+	    var req = http.request(httpOptions, function (res) {
 
-	                        console.log("sent");
+	      console.log("sent");
 
-	                        // res now contains new applicant data already inserted
-	                        var output = '';
-	                        console.log(options.path + ':' + res.satusCode);
-	                        res.setEncoding('utf8');
+	      // res now contains new applicant data already inserted
+	      var output = '';
+	      console.log(options.path + ':' + res.satusCode);
+	      res.setEncoding('utf8');
 
-	                        res.on('data', function (dataBlob) {
-	                                output += dataBlob;
-	                                console.log("output: " + output);
-	                        });
+	      res.on('data', function (dataBlob) {
+	        output += dataBlob;
+	        console.log("output: " + output);
+	      });
 
-	                        res.on('end', function () {
-	                                var obj = JSON.parse(output);
-	                        });
+	      res.on('end', function () {
+	        var obj = JSON.parse(output);
+	      });
 
-	                        // TODO: do something with the data for the applicant just inserted
-	                });
+	      // TODO: do something with the data for the applicant just inserted
+	    });
 
-	                req.on('error', function (err) {
-	                        res.send('error: ' + err.message);
-	                });
+	    req.on('error', function (err) {
+	      res.send('error: ' + err.message);
+	    });
 
-	                req.write(dataQuerystring);
+	    req.write(dataQuerystring);
 
-	                req.end();
-	        },
+	    req.end();
+	  },
 
-	        render: function render() {
-	                return React.createElement(
-	                        'div',
-	                        null,
-	                        React.createElement(
-	                                'h2',
-	                                null,
-	                                'Register Account - Employer'
-	                        ),
-	                        React.createElement(
-	                                'form',
-	                                { ref: 'employer_form', onSubmit: this.onSubmit },
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'First Name: '
-	                                        ),
-	                                        React.createElement('input', { type: 'text', ref: 'first' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Last Name: '
-	                                        ),
-	                                        React.createElement('input', { type: 'text', ref: 'last' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Email: '
-	                                        ),
-	                                        React.createElement('input', { type: 'email', ref: 'email' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Preferred Username: '
-	                                        ),
-	                                        React.createElement('input', { type: 'text', ref: 'user' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Password: '
-	                                        ),
-	                                        React.createElement('input', { type: 'password', ref: 'password' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Confirm Password: '
-	                                        ),
-	                                        React.createElement('input', { type: 'password', ref: 'confirmPassword' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Company Name: '
-	                                        ),
-	                                        React.createElement('input', { type: 'text', ref: 'companyName' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Company Address: '
-	                                        ),
-	                                        React.createElement('input', { type: 'text', ref: 'companyAddress' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Industry: '
-	                                        ),
-	                                        React.createElement('input', { type: 'text', ref: 'industry' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'label',
-	                                                null,
-	                                                'Attributes: '
-	                                        ),
-	                                        React.createElement('textarea', { ref: 'attributes' })
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                'button',
-	                                                { type: 'submit' },
-	                                                'Submit'
-	                                        )
-	                                ),
-	                                React.createElement(
-	                                        'div',
-	                                        null,
-	                                        React.createElement(
-	                                                Link,
-	                                                { to: '/ChooseAccount' },
-	                                                'Back'
-	                                        )
-	                                )
-	                        )
-	                );
-	        }
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Register Account - Employer'
+	      ),
+	      React.createElement(
+	        'form',
+	        { ref: 'employer_form', onSubmit: this.onSubmit },
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'First Name: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'first' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Last Name: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'last' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Email: '
+	          ),
+	          React.createElement('input', { type: 'email', ref: 'email' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Preferred Username: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'user' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Password: '
+	          ),
+	          React.createElement('input', { type: 'password', ref: 'password' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Confirm Password: '
+	          ),
+	          React.createElement('input', { type: 'password', ref: 'confirmPassword' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Company Name: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'companyName' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Company Address: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'companyAddress' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Industry: '
+	          ),
+	          React.createElement('input', { type: 'text', ref: 'industry' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Attributes: '
+	          ),
+	          React.createElement('textarea', { ref: 'attributes' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Submit'
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            Link,
+	            { to: '/ChooseAccount' },
+	            'Back'
+	          )
+	        )
+	      )
+	    );
+	  }
 	});
 
 	module.exports = RegEmployer;
@@ -33074,7 +33053,7 @@
 	        React.createElement(
 	          Link,
 	          { to: '/RegSeeker' },
-	          'Register Job Seeker Account'
+	          'Register Account'
 	        )
 	      ),
 	      React.createElement(
@@ -33347,13 +33326,100 @@
 /* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var React = __webpack_require__(8);
+	var Nav = __webpack_require__(224);
+
+	var _require = __webpack_require__(166);
+
+	var Link = _require.Link;
+
+
+	var Welcome = React.createClass({
+	  displayName: 'Welcome',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Welcome'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Are you an Employer or a Job Seeker?'
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/Login' },
+	          'Job Seeker'
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/LoginEmployer' },
+	          'Employer'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Welcome;
+
+/***/ },
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(8);
+	var Nav = __webpack_require__(224);
+
+	var _require = __webpack_require__(166);
+
+	var Link = _require.Link;
+
+
+	var LoginEmployer = React.createClass({
+	  displayName: 'LoginEmployer',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Login - Employer'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = LoginEmployer;
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(272);
+	var content = __webpack_require__(274);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(274)(content, {});
+	var update = __webpack_require__(276)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -33370,10 +33436,10 @@
 	}
 
 /***/ },
-/* 272 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(273)();
+	exports = module.exports = __webpack_require__(275)();
 	// imports
 
 
@@ -33384,7 +33450,7 @@
 
 
 /***/ },
-/* 273 */
+/* 275 */
 /***/ function(module, exports) {
 
 	/*
@@ -33440,7 +33506,7 @@
 
 
 /***/ },
-/* 274 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

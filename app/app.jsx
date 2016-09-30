@@ -14,6 +14,8 @@ var ChooseAccount = require('ChooseAccount');
 var postJobForm = require('postJobForm');
 var jobDescription = require('jobDescription');
 var JobPostings = require('JobPostings');
+var Welcome = require('Welcome');
+var LoginEmployer = require('LoginEmployer');
 
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
@@ -32,6 +34,8 @@ ReactDOM.render(
   <Route path="RegSeeker" components={RegSeeker}/>
   <Route path="PasswordReset" components={PasswordReset}/>
   <Route path="ChooseAccount" components={ChooseAccount}/>
+  <Route path="Welcome" components={Welcome}/>
+  <Route path="LoginEmployer" components={LoginEmployer}/>
   <IndexRoute component={Home}/>
   </Route>
 </Router>,
