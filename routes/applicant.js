@@ -170,11 +170,14 @@ router.route('/reset').post(function(req, res, callback) {
       } else {
         if (applicant != null ){
 
+
+          var query = { username: username };
+          mongoose.model('applicant').update(query, { password: password }, callback);
           res.format({
 
             // json response
             json: function() {
-              res.json({ verified: "true"});
+              res.json({ reset: "true"});
             }
 
           });
@@ -184,7 +187,7 @@ router.route('/reset').post(function(req, res, callback) {
 
             // json response
             json: function() {
-              res.json({ verified: "false"});
+              res.json({ reset: "false"});
 
             }
           });
@@ -199,7 +202,7 @@ router.route('/reset').post(function(req, res, callback) {
 
       // json response
       json: function() {
-        res.json({ verified: "false"});
+        res.json({ reset: "false"});
       }
 
     });
