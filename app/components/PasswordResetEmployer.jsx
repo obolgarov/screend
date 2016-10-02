@@ -2,6 +2,7 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
+var {Link} = require('react-router');
 
 var PasswordResetEmployer = React.createClass({
 
@@ -91,6 +92,11 @@ render: function(){
         <button type="submit">Submit</button>
       </div>
     </form>
+
+    <div>
+      <Link to="/PasswordResetEmployer">Forget Password</Link>
+    </div>
+
 </div>
   );
 }

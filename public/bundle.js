@@ -33567,6 +33567,11 @@
 	var config = __webpack_require__(263)(); // to get the port
 	var querystring = __webpack_require__(260); // to send data inside the request
 
+	var _require = __webpack_require__(166);
+
+	var Link = _require.Link;
+
+
 	var PasswordResetEmployer = React.createClass({
 	  displayName: 'PasswordResetEmployer',
 
@@ -33678,6 +33683,15 @@
 	            { type: 'submit' },
 	            'Submit'
 	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/PasswordResetEmployer' },
+	          'Forget Password'
 	        )
 	      )
 	    );
