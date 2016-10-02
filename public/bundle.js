@@ -118,8 +118,9 @@
 	var JobPostings = __webpack_require__(269);
 	var Welcome = __webpack_require__(270);
 	var LoginEmployer = __webpack_require__(271);
+	var PasswordResetEmployer = __webpack_require__(272);
 
-	__webpack_require__(272);
+	__webpack_require__(273);
 	$(document).foundation();
 
 	ReactDOM.render(React.createElement(
@@ -140,6 +141,7 @@
 	    React.createElement(Route, { path: 'PasswordReset', components: PasswordReset }),
 	    React.createElement(Route, { path: 'Welcome', components: Welcome }),
 	    React.createElement(Route, { path: 'LoginEmployer', components: LoginEmployer }),
+	    React.createElement(Route, { path: 'PasswordResetEmployer', components: PasswordResetEmployer }),
 	    React.createElement(IndexRoute, { component: Home })
 	  )
 	), document.getElementById('app'));
@@ -25124,10 +25126,11 @@
 
 	    var data = {
 	      username: this.refs.user.value,
-	      password: this.refs.password.value,
-	      firstname: "",
-	      lastname: "",
-	      email: ""
+	      password: this.refs.password.value
+	      // don't need these
+	      //firstname : "",
+	      //lastname : "",
+	      //email : ""
 	    };
 	    var dataQuerystring = querystring.stringify(data);
 
@@ -32974,12 +32977,22 @@
 	'use strict';
 
 	var React = __webpack_require__(8);
+	var http = __webpack_require__(234); // to send request
+	var config = __webpack_require__(263)(); // to get the port
+	var querystring = __webpack_require__(260); // to send data inside the request
 
 	var PasswordReset = React.createClass({
 	  displayName: 'PasswordReset',
 
 
-	  onSubmit: function onSubmit(e) {},
+	  onSubmit: function onSubmit(e) {
+
+	    var data = {
+	      username: this.refs.user.value,
+	      password: this.refs.pass1.value,
+	      newPassword: this.refs.pass2.value
+	    };
+	  },
 
 	  render: function render() {
 	    return React.createElement(
@@ -32988,11 +33001,21 @@
 	      React.createElement(
 	        'h2',
 	        null,
-	        'Password Reset'
+	        'Password Reset - Job Seeker'
 	      ),
 	      React.createElement(
 	        'form',
 	        { ref: 'reset', onSubmit: this.onSubmit },
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Username:'
+	          ),
+	          React.createElement('input', { type: 'username', ref: 'user' })
+	        ),
 	        React.createElement(
 	          'div',
 	          null,
@@ -33025,6 +33048,7 @@
 	      )
 	    );
 	  }
+
 	});
 
 	module.exports = PasswordReset;
@@ -33486,13 +33510,95 @@
 /* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var React = __webpack_require__(8);
+	var http = __webpack_require__(234); // to send request
+	var config = __webpack_require__(263)(); // to get the port
+	var querystring = __webpack_require__(260); // to send data inside the request
+
+	var PasswordResetEmployer = React.createClass({
+	  displayName: 'PasswordResetEmployer',
+
+
+	  onSubmit: function onSubmit(e) {
+
+	    var data = {
+	      username: this.refs.user.value,
+	      password: this.refs.pass1.value,
+	      newPassword: this.refs.pass2.value
+	    };
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Password Reset - Employer'
+	      ),
+	      React.createElement(
+	        'form',
+	        { ref: 'reset', onSubmit: this.onSubmit },
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Username:'
+	          ),
+	          React.createElement('input', { type: 'username', ref: 'user' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'New Password: '
+	          ),
+	          React.createElement('input', { type: 'password', ref: 'pass1' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'label',
+	            null,
+	            'Confirm New Password: '
+	          ),
+	          React.createElement('input', { type: 'password', ref: 'pass2' })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'button',
+	            { type: 'submit' },
+	            'Submit'
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = PasswordResetEmployer;
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(273);
+	var content = __webpack_require__(274);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(275)(content, {});
+	var update = __webpack_require__(276)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -33509,10 +33615,10 @@
 	}
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(274)();
+	exports = module.exports = __webpack_require__(275)();
 	// imports
 
 
@@ -33523,7 +33629,7 @@
 
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports) {
 
 	/*
@@ -33579,7 +33685,7 @@
 
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

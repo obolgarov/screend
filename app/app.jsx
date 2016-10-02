@@ -15,6 +15,7 @@ var jobDescription = require('jobDescription');
 var JobPostings = require('JobPostings');
 var Welcome = require('Welcome');
 var LoginEmployer = require('LoginEmployer');
+var PasswordResetEmployer = require('PasswordResetEmployer');
 
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
@@ -34,6 +35,7 @@ ReactDOM.render(
   <Route path="PasswordReset" components={PasswordReset}/>
   <Route path="Welcome" components={Welcome}/>
   <Route path="LoginEmployer" components={LoginEmployer}/>
+  <Route path="PasswordResetEmployer" components={PasswordResetEmployer}/>
   <IndexRoute component={Home}/>
   </Route>
 </Router>,

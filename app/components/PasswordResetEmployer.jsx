@@ -3,7 +3,7 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 
-var PasswordReset = React.createClass({
+var PasswordResetEmployer = React.createClass({
 
   onSubmit: function (e) {
 
@@ -18,7 +18,7 @@ var PasswordReset = React.createClass({
 render: function(){
   return(
 <div>
-  <h2>Password Reset - Job Seeker</h2>
+  <h2>Password Reset - Employer</h2>
 
     <form ref='reset' onSubmit={this.onSubmit}>
 
@@ -40,12 +40,10 @@ render: function(){
       <div>
         <button type="submit">Submit</button>
       </div>
-
     </form>
 </div>
   );
 }
-
 });
 
-module.exports = PasswordReset;
+module.exports = PasswordResetEmployer;
