@@ -142,7 +142,8 @@
 	    React.createElement(Route, { path: 'Welcome', components: Welcome }),
 	    React.createElement(Route, { path: 'LoginEmployer', components: LoginEmployer }),
 	    React.createElement(Route, { path: 'PasswordResetEmployer', components: PasswordResetEmployer }),
-	    React.createElement(IndexRoute, { component: Home })
+	    React.createElement(Route, { path: 'Main', components: Main }),
+	    React.createElement(IndexRoute, { component: Welcome })
 	  )
 	), document.getElementById('app'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
@@ -25166,7 +25167,7 @@
 	        console.log("output: " + output);
 
 	        if (output == "{\"verified\":\"true\"}") {
-	          _reactRouter.hashHistory.push('?');
+	          _reactRouter.hashHistory.push('Main');
 	        } else {
 	          _reactRouter.hashHistory.push('Login');
 	        }
@@ -33467,7 +33468,7 @@
 	        console.log("output: " + output);
 
 	        if (output == "{\"verified\":\"true\"}") {
-	          _reactRouter.hashHistory.push('?');
+	          _reactRouter.hashHistory.push('Main');
 	        } else {
 	          _reactRouter.hashHistory.push('LoginEmployer');
 	        }

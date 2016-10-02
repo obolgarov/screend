@@ -36,7 +36,8 @@ ReactDOM.render(
   <Route path="Welcome" components={Welcome}/>
   <Route path="LoginEmployer" components={LoginEmployer}/>
   <Route path="PasswordResetEmployer" components={PasswordResetEmployer}/>
-  <IndexRoute component={Home}/>
+  <Route path="Main"  components={Main}/>
+  <IndexRoute component={Welcome}/>
   </Route>
 </Router>,
 

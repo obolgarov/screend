@@ -54,7 +54,7 @@ var Login = React.createClass({
 
           if(output == "{\"verified\":\"true\"}")
           {
-            hashHistory.push('?');
+            hashHistory.push('Main');
 
         }  else
           {
