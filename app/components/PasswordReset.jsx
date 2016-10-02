@@ -13,6 +13,59 @@ var PasswordReset = React.createClass({
       newPassword : this.refs.pass2.value
     }
 
+    var dataQuerystring = querystring.stringify(data);
+
+    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+    var httpOptions = {
+      port: config.port,
+      path: "/applicants/reset",
+      method: "POST", // insert data
+      headers: {
+        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Content-Length' : Buffer.byteLength(dataQuerystring),
+        'Accept' : 'application/json'
+      },
+      body: dataQuerystring
+
+    }
+
+    console.log("body: " + JSON.stringify(data));
+
+    console.log("sending");
+
+    var req = http.request(httpOptions, function(res){
+
+      console.log("sent");
+
+      // res now contains new applicant data already inserted
+      var output = '';
+      //  console.log(options.path + ':' + res.satusCode);
+      //res.setEncoding('utf8');
+
+      res.on('data', function (dataBlob){
+        output += dataBlob;
+        console.log("output: " + output);
+
+      });
+
+      res.on('end', function() {
+        var obj = JSON.parse(output);
+      });
+
+      // TODO: do something with the data for the applicant just inserted
+
+    });
+
+    req.on('error', function(err){
+      res.send('error: ' + err.message);
+    })
+
+    req.write(dataQuerystring);
+
+    req.end();
+
+
+
   },
 
 render: function(){

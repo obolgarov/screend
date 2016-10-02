@@ -156,6 +156,60 @@ router.route('/verify').post(function(req, res, callback) {
   }
 });
 
+router.route('/reset').post(function(req, res, callback) {
+  if (req.body.username != null && req.body.password != null ){
+    var username = req.body.username;
+    var password = req.body.password;
+
+    mongoose.model('applicant').findOne({
+      username : username,
+    }, function (err, applicant){
+
+      if (err) {
+        return console.error(err);
+      } else {
+        if (applicant != null ){
+
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({ verified: "true"});
+            }
+
+          });
+        } else {
+          console.log("false");
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({ verified: "false"});
+
+            }
+          });
+        }
+
+
+      }
+    });
+  } else {
+    // user somehow sent empty fields, despite the form sending empty strings anyway
+    res.format({
+
+      // json response
+      json: function() {
+        res.json({ verified: "false"});
+      }
+
+    });
+  }
+
+
+
+
+});
+
 /*
 router.get('/new', function(req, res) {
   res.render('applicants/new', { title: 'create applicant' });
