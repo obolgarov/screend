@@ -131,7 +131,7 @@ var RegEmployer = React.createClass({
         </div>
 
         <div>
-          <Link to="/ChooseAccount">Back</Link>
+          <Link to="/LoginEmployer">Back</Link>
         </div>
 
       </form>

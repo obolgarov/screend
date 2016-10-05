@@ -34,10 +34,11 @@ plugins:[
       RegSeeker: 'app/components/RegSeeker.jsx',
       RegEmployer: 'app/components/RegEmployer.jsx',
       PasswordReset: 'app/components/PasswordReset.jsx',
-      ChooseAccount: 'app/components/ChooseAccount.jsx',
       postJobForm: 'app/components/PostJobForm.jsx',
-      jobDescription: 'app/components/jobDescription.jsx'
-
+      jobDescription: 'app/components/jobDescription.jsx',
+      Welcome : 'app/components/Welcome.jsx',
+      LoginEmployer: 'app/components/LoginEmployer.jsx',
+      PasswordResetEmployer:'app/components/PasswordResetEmployer.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

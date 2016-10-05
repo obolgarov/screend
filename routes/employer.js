@@ -107,6 +107,124 @@ router.route('/')
 
   // end of post
 });
+
+
+router.route('/verify').post(function(req, res, callback) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  // get specific uservar username = req.body.username;
+  if (req.body.username != null && req.body.password != null){
+    var username = req.body.username;
+    var password = req.body.password;
+
+    mongoose.model('employer').findOne({
+      username : username,
+      password :password
+    }, function (err, employer){
+
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (employer != null ){
+
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({ verified: "true"});
+               console.log("true");
+            }
+
+          });
+        } else {
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({ verified: "false"});
+              console.log("false");
+
+            }
+
+          });
+        }
+
+
+      }
+    });
+  } else {
+    res.format({
+
+      // json response
+      json: function() {
+        res.json({ verified: "false"});
+      }
+
+    });
+  }
+});
+
+
+router.route('/reset').post(function(req, res, callback) {
+  if (req.body.username != null && req.body.password != null ){
+    var username = req.body.username;
+    var password = req.body.password;
+
+    mongoose.model('employer').findOne({
+      username : username,
+    }, function (err, employer){
+
+      if (err) {
+        return console.error(err);
+      } else {
+        if (employer != null ){
+
+
+          var query = { username: username };
+          mongoose.model('employer').update(query, { password: password }, callback);
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({ reset: "true"});
+            }
+
+          });
+        } else {
+          console.log("false");
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({ reset: "false"});
+
+            }
+          });
+        }
+
+
+      }
+    });
+  } else {
+    // user somehow sent empty fields, despite the form sending empty strings anyway
+    res.format({
+
+      // json response
+      json: function() {
+        res.json({ reset: "false"});
+      }
+
+    });
+  }
+
+
+
+
+});
+
+
 /*
 router.get('/new', function(req, res) {
   res.render('applicants/new', { title: 'create applicant' });

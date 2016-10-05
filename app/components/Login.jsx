@@ -3,6 +3,7 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var {Link} = require('react-router');
+import { hashHistory } from 'react-router';
 
 
 
@@ -12,10 +13,11 @@ var Login = React.createClass({
 
     var data = {
       username : this.refs.user.value,
-      password : this.refs.password.value,
-      firstname : "",
-      lastname : "",
-      email : ""
+      password : this.refs.password.value
+      // don't need these
+      //firstname : "",
+      //lastname : "",
+      //email : ""
     }
     var dataQuerystring = querystring.stringify(data);
 
@@ -30,6 +32,7 @@ var Login = React.createClass({
         'Accept' : 'application/json'
       },
       body: dataQuerystring
+
     }
 
     console.log("body: " + JSON.stringify(data));
@@ -42,12 +45,23 @@ var Login = React.createClass({
 
       // res now contains new applicant data already inserted
       var output = '';
-      console.log(options.path + ':' + res.satusCode);
-      res.setEncoding('utf8');
+      //  console.log(options.path + ':' + res.satusCode);
+      //res.setEncoding('utf8');
 
       res.on('data', function (dataBlob){
         output += dataBlob;
         console.log("output: " + output);
+
+          if(output == "{\"verified\":\"true\"}")
+          {
+            hashHistory.push('Main');
+
+        }  else
+          {
+            hashHistory.push('Login');
+
+          }
+
       });
 
       res.on('end', function() {
@@ -67,12 +81,13 @@ var Login = React.createClass({
     req.end();
 
 
+
   },
   render: function(){
     return(
 
 <div>
-  <h2>Login</h2>
+  <h2>Login - Job Seeker</h2>
     <form ref='LogIn' onSubmit={this.onSubmit}>
 
       <div>
@@ -85,26 +100,16 @@ var Login = React.createClass({
           <input type="password" ref="password"/>
       </div>
 
-<h4>What Kind of Account Would You Like To Login With?</h4>
-
-  <div>
-    <label>Employer</label>
-    <input type="radio" name="empButton" value="employer"/>
-  </div>
-
-  <div>
-    <label>Job Seeker</label>
-    <input type="radio" name="seekButton" value="seeker"/>
-  </div>
-
     <div>
       <button type="submit">Submit</button>
     </div>
+
   </form>
 
-<div>
-  <Link to="/ChooseAccount">Register Account</Link>
-</div>
+  <div>
+      <Link to="/RegSeeker">Register Account</Link>
+  </div>
+
 
 <div>
   <Link to="/PasswordReset">Forget Password</Link>

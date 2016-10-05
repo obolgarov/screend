@@ -2,8 +2,9 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
+var {Link} = require('react-router');
 
-var PasswordReset = React.createClass({
+var PasswordResetEmployer = React.createClass({
 
   onSubmit: function (e) {
 
@@ -12,13 +13,12 @@ var PasswordReset = React.createClass({
       password : this.refs.pass1.value,
       newPassword : this.refs.pass2.value
     }
-
     var dataQuerystring = querystring.stringify(data);
 
     // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
     var httpOptions = {
       port: config.port,
-      path: "/applicants/reset",
+      path: "/employer/reset",
       method: "POST", // insert data
       headers: {
         'Content-Type' : 'application/x-www-form-urlencoded',
@@ -64,14 +64,12 @@ var PasswordReset = React.createClass({
 
     req.end();
 
-
-
   },
 
 render: function(){
   return(
 <div>
-  <h2>Password Reset - Job Seeker</h2>
+  <h2>Password Reset - Employer</h2>
 
     <form ref='reset' onSubmit={this.onSubmit}>
 
@@ -93,12 +91,15 @@ render: function(){
       <div>
         <button type="submit">Submit</button>
       </div>
-
     </form>
+
+    <div>
+      <Link to="/PasswordResetEmployer">Forget Password</Link>
+    </div>
+
 </div>
   );
 }
-
 });
 
-module.exports = PasswordReset;
+module.exports = PasswordResetEmployer;
