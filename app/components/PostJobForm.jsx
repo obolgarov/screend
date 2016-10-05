@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 
 var postJobForm = React.createClass({
 
-        onSubmit: function (e) {
+      handleSubmit: function (e) {
           e.preventDefault();
           console.log("Been here")
           var data = {
@@ -46,8 +46,8 @@ var postJobForm = React.createClass({
 
             // res now contains new applicant data already inserted
             var output = '';
-            console.log(options.path + ':' + res.satusCode);
-            res.setEncoding('utf8');
+          //  console.log(options.path + ':' + res.statusCode);
+          //  res.setEncoding('utf8');
 
             res.on('data', function (dataBlob){
               output += dataBlob;
@@ -74,7 +74,7 @@ var postJobForm = React.createClass({
     return(
 
 
-         <form ref='Job_form' method="Post" onSubmit={this.onSubmit}>
+         <form ref='Job_form' method="Post" onSubmit={this.handleSubmit}>
                     <div>
                         <label>Company Name: </label>
                         <input type="text" ref="companyform"/>
