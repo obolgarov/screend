@@ -24996,6 +24996,11 @@
 	        Link,
 	        { to: '/ContactUs' },
 	        'Contact Us'
+	      ),
+	      React.createElement(
+	        'link',
+	        { to: '/PostJobForm' },
+	        'Post Job'
 	      )
 	    );
 	  }
@@ -33105,99 +33110,168 @@
 /* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';
 
 	var React = __webpack_require__(8);
+	var http = __webpack_require__(234); // to send request
+	var config = __webpack_require__(263)(); // to get the port
+	var querystring = __webpack_require__(260); // to send data inside the request
+
+	var _require = __webpack_require__(166);
+
+	var Link = _require.Link;
+
 
 	var postJobForm = React.createClass({
-	    displayName: 'postJobForm',
+	          displayName: 'postJobForm',
 
 
-	    render: function render() {
-	        return React.createElement(
-	            'form',
-	            { ref: 'Job_form', method: 'Post' },
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'label',
-	                    null,
-	                    'Company Name: '
-	                ),
-	                React.createElement('input', { type: 'text', ref: 'companyform' })
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'label',
-	                    null,
-	                    'Location: '
-	                ),
-	                React.createElement('input', { type: 'text', ref: 'location' })
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'label',
-	                    null,
-	                    'Certification: '
-	                ),
-	                React.createElement('input', { type: 'text', ref: 'certification' })
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'label',
-	                    null,
-	                    'Required Education: '
-	                ),
-	                React.createElement('input', { type: 'text', ref: 'requirededucation' }),
-	                '>'
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'label',
-	                    null,
-	                    'Experience: '
-	                ),
-	                React.createElement('input', { type: 'text', ref: 'experience' })
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'label',
-	                    null,
-	                    'Salary: '
-	                ),
-	                React.createElement('input', { type: 'text', ref: 'salary' })
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                    'label',
-	                    null,
-	                    'Description: '
-	                ),
-	                React.createElement('textarea', { type: 'text' })
-	            ),
-	            React.createElement(
-	                'div',
-	                null,
-	                React.createElement('input', { type: 'submit', value: 'Submit Resume', ref: 'submitResume', name: 'submit' })
-	            )
-	        );
-	    }
+	          handleSubmit: function handleSubmit(e) {
+	                    e.preventDefault();
+	                    console.log("Been here");
+	                    var data = {
+	                              CompanyName: this.refs.companyform.value,
+	                              Location: this.refs.location.value,
+	                              Certification: this.refs.certification.value,
+	                              Requirededucation: this.refs.requirededucation.value,
+	                              Experience: this.refs.experience.value,
+	                              Salary: this.refs.salary.value,
+	                              Description: this.refs.description.value
+	                    };
+
+	                    var dataQuerystring = querystring.stringify(data);
+
+	                    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
+	                    var httpOptions = {
+	                              port: config.port,
+	                              path: "/employer",
+	                              method: "POST", // insert data
+	                              headers: {
+	                                        'Content-Type': 'application/x-www-form-urlencoded',
+	                                        'Content-Length': Buffer.byteLength(dataQuerystring),
+	                                        'Accept': 'application/json'
+	                              },
+	                              body: dataQuerystring
+	                    };
+
+	                    console.log("body: " + JSON.stringify(data));
+
+	                    console.log("sending");
+
+	                    var req = http.request(httpOptions, function (res) {
+
+	                              console.log("sent");
+
+	                              // res now contains new applicant data already inserted
+	                              var output = '';
+	                              console.log(options.path + ':' + res.satusCode);
+	                              res.setEncoding('utf8');
+
+	                              res.on('data', function (dataBlob) {
+	                                        output += dataBlob;
+	                                        console.log("output: " + output);
+	                              });
+
+	                              res.on('end', function () {
+	                                        var obj = JSON.parse(output);
+	                              });
+
+	                              // TODO: do something with the data for the applicant just inserted
+	                    });
+
+	                    req.on('error', function (err) {
+	                              res.send('error: ' + err.message);
+	                    });
+
+	                    req.write(dataQuerystring);
+
+	                    req.end();
+	          },
+	          render: function render() {
+	                    return React.createElement(
+	                              'form',
+	                              { ref: 'Job_form', method: 'Post', onSubmit: this.handleSubmit },
+	                              React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                  'label',
+	                                                  null,
+	                                                  'Company Name: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'companyform' })
+	                              ),
+	                              React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                  'label',
+	                                                  null,
+	                                                  'Location: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'location' })
+	                              ),
+	                              React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                  'label',
+	                                                  null,
+	                                                  'Certification: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'certification' })
+	                              ),
+	                              React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                  'label',
+	                                                  null,
+	                                                  'Required Education: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'requirededucation' })
+	                              ),
+	                              React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                  'label',
+	                                                  null,
+	                                                  'Experience: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'experience' })
+	                              ),
+	                              React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                  'label',
+	                                                  null,
+	                                                  'Salary: '
+	                                        ),
+	                                        React.createElement('input', { type: 'text', ref: 'salary' })
+	                              ),
+	                              React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement(
+	                                                  'label',
+	                                                  null,
+	                                                  'Description: '
+	                                        ),
+	                                        React.createElement('textarea', { ref: 'description' })
+	                              ),
+	                              React.createElement(
+	                                        'div',
+	                                        null,
+	                                        React.createElement('input', { type: 'submit' })
+	                              )
+	                    );
+	          }
 	});
 
 	module.exports = postJobForm;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(230).Buffer))
 
 /***/ },
 /* 269 */
@@ -33212,8 +33286,8 @@
 
 	  render: function render() {
 	    return React.createElement(
-	      "form",
-	      { ref: "jobDescription", method: "post" },
+	      "div",
+	      null,
 	      React.createElement(
 	        "div",
 	        null,
@@ -33302,12 +33376,16 @@
 	        )
 	      ),
 	      React.createElement(
-	        "div",
-	        null,
+	        "form",
+	        { ref: "jobDescription", method: "post" },
 	        React.createElement(
-	          "button",
-	          { type: "submit", value: "Apply For Job" },
-	          "Submit Resume"
+	          "div",
+	          null,
+	          React.createElement(
+	            "button",
+	            { type: "submit", value: "Apply For Job" },
+	            "Submit Resume"
+	          )
 	        )
 	      )
 	    );
