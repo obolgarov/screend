@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 
 var postJobForm = React.createClass({
 
-        handleSubmit: function (e) {
+        onSubmit: function (e) {
           e.preventDefault();
           console.log("Been here")
           var data = {
@@ -74,7 +74,7 @@ var postJobForm = React.createClass({
     return(
 
 
-         <form ref='Job_form' method="Post" onSubmit={this.handleSubmit}>
+         <form ref='Job_form' method="Post" onSubmit={this.onSubmit}>
                     <div>
                         <label>Company Name: </label>
                         <input type="text" ref="companyform"/>

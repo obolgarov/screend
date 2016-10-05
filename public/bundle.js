@@ -33126,7 +33126,7 @@
 	          displayName: 'postJobForm',
 
 
-	          handleSubmit: function handleSubmit(e) {
+	          onSubmit: function onSubmit(e) {
 	                    e.preventDefault();
 	                    console.log("Been here");
 	                    var data = {
@@ -33190,7 +33190,7 @@
 	          render: function render() {
 	                    return React.createElement(
 	                              'form',
-	                              { ref: 'Job_form', method: 'Post', onSubmit: this.handleSubmit },
+	                              { ref: 'Job_form', method: 'Post', onSubmit: this.onSubmit },
 	                              React.createElement(
 	                                        'div',
 	                                        null,
