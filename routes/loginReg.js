@@ -79,7 +79,7 @@ mongoose.model('applicant').findOne({username: username,password: password}, fun
 
 
 
-      res.send("poop");
+      res.send("response test string");
 
 
 
