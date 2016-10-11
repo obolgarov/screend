@@ -24,7 +24,7 @@ router.route('/')
   // setup e-mail data with unicode symbols
   var mailOptions = {
       from: '"Test123  👥" <nodemailer.test123@gmail.com>', // sender address
-      to: 'cgoguen1994@gmail.com', // list of receivers
+      to: 'nodemail.test234@gmail.com', // list of receivers
       subject: 'Welcome', // Subject line
       text: 'Thanks for Joining', // plaintext body
       html: '<b>Thanks for Joining</b>' // html body
