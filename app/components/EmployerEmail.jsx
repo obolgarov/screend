@@ -2,29 +2,20 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
-var {Link} = require('react-router');
-import { hashHistory } from 'react-router';
 
-
-
-var Login = React.createClass({
+var EmployerEmail = React.createClass({
 
   onSubmit: function (e) {
 
     var data = {
-      username : this.refs.user.value,
-      password : this.refs.password.value
-      // don't need these
-      //firstname : "",
-      //lastname : "",
-      //email : ""
+      email : this.refs.email
     }
     var dataQuerystring = querystring.stringify(data);
 
     // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
     var httpOptions = {
       port: config.port,
-      path: "/applicants/verify",
+      path: "/mail/empreset",
       method: "POST", // insert data
       headers: {
         'Content-Type' : 'application/x-www-form-urlencoded',
@@ -35,7 +26,7 @@ var Login = React.createClass({
 
     }
 
-    console.log("body: " + JSON.stringify(data));
+  //  console.log("body: " + JSON.stringify(data));
 
     console.log("sending");
 
@@ -51,16 +42,6 @@ var Login = React.createClass({
       res.on('data', function (dataBlob){
         output += dataBlob;
         console.log("output: " + output);
-
-          if(output == "{\"verified\":\"true\"}")
-          {
-            hashHistory.push('Main');
-
-        }  else
-          {
-            hashHistory.push('Login');
-
-          }
 
       });
 
@@ -82,42 +63,28 @@ var Login = React.createClass({
 
 
 
-  },
-  render: function(){
-    return(
+    },
 
-<div>
-  <h2>Login - Job Seeker</h2>
-    <form ref='LogIn' onSubmit={this.onSubmit}>
 
+    render: function() {
+        return (
       <div>
-          <label>Username: </label>
-          <input type="text" ref="user"/>
+        <h3>Enter your email account to recieve a password reset link: </h3>
+
+          <form ref='EmployerEmail' onSubmit={this.onSubmit}>
+            <div>
+                <label>Email: </label>
+                <input type="email" ref="email"/>
+            </div>
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+
+          </form>
+
       </div>
-
-      <div>
-          <label>Password: </label>
-          <input type="password" ref="password"/>
-      </div>
-
-    <div>
-      <button type="submit">Submit</button>
-    </div>
-
-  </form>
-
-  <div>
-      <Link to="/RegSeeker">Register Account</Link>
-  </div>
-
-
-<div>
-  <Link to="/ApplicantEmail">Forget Password</Link>
-</div>
-</div>
-
     );
   }
 });
 
-module.exports = Login;
+module.exports = EmployerEmail;

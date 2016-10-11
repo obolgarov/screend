@@ -112,7 +112,7 @@ var LoginEmployer = React.createClass({
 
 
         <div>
-        <Link to="/PasswordResetEmployer">Forget Password</Link>
+        <Link to="/EmployerEmail">Forget Password</Link>
         </div>
       </div>
     );

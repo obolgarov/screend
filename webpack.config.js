@@ -38,7 +38,9 @@ plugins:[
       jobDescription: 'app/components/jobDescription.jsx',
       Welcome : 'app/components/Welcome.jsx',
       LoginEmployer: 'app/components/LoginEmployer.jsx',
-      PasswordResetEmployer:'app/components/PasswordResetEmployer.jsx'
+      PasswordResetEmployer:'app/components/PasswordResetEmployer.jsx',
+      ApplicantEmail: 'app/components/ApplicantEmail.jsx',
+      EmployerEmail: 'app/components/EmployerEmail.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

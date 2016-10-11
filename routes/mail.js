@@ -39,3 +39,54 @@ router.route('/')
   });
 
   });
+
+router.route('/empreset').post(function(req, res, callback) {
+
+    var nodemailer = require('nodemailer');
+
+    // create reusable transporter object using the default SMTP transport
+    var transporter = nodemailer.createTransport('smtps://nodemail.test123%40gmail.com:screend123@smtp.gmail.com');
+
+    // setup e-mail data with unicode symbols
+    var mailOptions = {
+        from: '"Test123  👥" <nodemailer.test123@gmail.com>', // sender address
+        to: 'nodemail.test234@gmail.com', // list of receivers
+        subject: 'Password Reset Link ', // Subject line
+        text: 'Click here to reset your password : http://localhost:3000/#/PasswordResetEmployer?_k=b01wv3', // plaintext body
+        html: '<b>Click here to reset your password : http://localhost:3000/#/PasswordResetEmployer?_k=b01wv3</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+});
+
+
+router.route('/appreset').post(function(req, res, callback) {
+
+    var nodemailer = require('nodemailer');
+
+    // create reusable transporter object using the default SMTP transport
+    var transporter = nodemailer.createTransport('smtps://nodemail.test123%40gmail.com:screend123@smtp.gmail.com');
+
+    // setup e-mail data with unicode symbols
+    var mailOptions = {
+        from: '"Test123  👥" <nodemailer.test123@gmail.com>', // sender address
+        to: 'nodemail.test234@gmail.com', // list of receivers
+        subject: 'Password Reset Link ', // Subject line
+        text: 'Click here to reset your password : http://localhost:3000/#/PasswordReset?_k=edt440', // plaintext body
+        html: '<b>Click here to reset your password : http://localhost:3000/#/PasswordReset?_k=edt440</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+});
