@@ -12,7 +12,8 @@ var routes = require('./routes/index');
 var applicants = require('./routes/applicant');
 var employer = require('./routes/employer');
 var job = require('./routes/job');
-var message = require('./routes/message')
+var message = require('./routes/message');
+var mail = require('./routes/mail');
 var app = express();
 
 //app.engine('react', require('react').__express);
@@ -24,6 +25,7 @@ app.use('/', routes);
 app.use('/applicants', applicants);
 app.use('/employer', employer);
 app.use('/job',job);
+app.use('/mail',mail);
 app.use('/messages',message);
 app.set('view engine', 'react');
 app.set('views', __dirname + '/app');
