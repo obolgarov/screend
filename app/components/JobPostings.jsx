@@ -4,33 +4,28 @@ var React = require('react');
 var JobPostings = React.createClass({
 
 
-    jobLink: function(e){
+    onSubmit: function(e){
 
-      var words = [ 'hello', 'goodbye', 'bonjour'];
-        return(
-          <table>
+document.write('<table>');
+document.write('<tr>');
+  document.write('<td>Taco</td>');
+  document.write('</tr>');
+document.write('</table>');
 
-            <tr><td> hello</td></tr>
+    },
 
-
-
-          </table>
-        );
-  },
-
-  render: function(){
-    return(
+    render: function(){
+      return(
       <div>
         <h2>Job Postings</h2>
 
-          <form ref='metric_results' onSubmit={this.jobLink}>
+          <form ref='metric_results' onSubmit={this.onSubmit}>
             <div>
               <button type="submit">Submit</button>
             </div>
         </form>
       </div>
     );
-
   }
 });
 module.exports = JobPostings;
