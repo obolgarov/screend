@@ -87,11 +87,15 @@ var RegEmployer = React.createClass({
       var req = http.request(httpThanks, function(res){
 
         console.log("sent");
+        var output = '';
 
+        res.on('data', function (dataBlob){
+          output += dataBlob;
+          console.log("output: " + output);
 
-
+        });
         res.on('end', function() {
-
+          var obj = JSON.parse(output);
         });
 
 
@@ -101,6 +105,7 @@ var RegEmployer = React.createClass({
         res.send('error: ' + err.message);
       })
 
+      req.write(dataQuerystring);
 
       req.end();
 
