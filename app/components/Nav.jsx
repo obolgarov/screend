@@ -10,7 +10,7 @@ var Nav = React.createClass({
         <Link to="/messages">Messages</Link>
         <Link to="/UploadResume">Upload Resume</Link>
         <Link to="/ContactUs">Contact Us</Link>
-        <link to="/PostJobForm">Post Job</link>
+        <Link to="/PostJobForm">Post Job</Link>
       </div>
 
     );
