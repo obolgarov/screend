@@ -33,6 +33,13 @@ var JobPostings = React.createClass({
 
   }
 });
+module.exports = JobPostings;
+
+
+
+
+
+
 //
 //     render: function render() {
 //         var _self = this;
