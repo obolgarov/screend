@@ -25,9 +25,9 @@ router.route('/')
   var mailOptions = {
       from: '"Test123  👥" <nodemailer.test123@gmail.com>', // sender address
       to: 'cgoguen1994@gmail.com', // list of receivers
-      subject: 'Hello ✔', // Subject line
-      text: 'Hello world 🐴', // plaintext body
-      html: '<b>Hello world 🐴</b>' // html body
+      subject: 'Welcome', // Subject line
+      text: 'Thanks for Joining', // plaintext body
+      html: '<b>Thanks for Joining</b>' // html body
   };
 
   // send mail with defined transport object

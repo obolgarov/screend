@@ -94,7 +94,6 @@ router.route('/')
 
       });*/
 
-      res.send("poop");
     }
   });
 

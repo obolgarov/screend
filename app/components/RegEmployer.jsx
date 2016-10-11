@@ -34,6 +34,8 @@ var RegEmployer = React.createClass({
         body: dataQuerystring
       }
 
+
+
       console.log("body: " + JSON.stringify(data));
 
       console.log("sending");
@@ -50,6 +52,7 @@ var RegEmployer = React.createClass({
         res.on('data', function (dataBlob){
           output += dataBlob;
           console.log("output: " + output);
+
         });
 
         res.on('end', function() {
@@ -67,6 +70,44 @@ var RegEmployer = React.createClass({
       req.write(dataQuerystring);
 
       req.end();
+
+      var httpThanks = {
+        port: config.port,
+        path: "/mail",
+        method: "POST", // insert data
+        headers: {
+          'Content-Type' : 'application/x-www-form-urlencoded',
+          'Content-Length' : Buffer.byteLength(dataQuerystring),
+          'Accept' : 'application/json'
+        }
+      }
+
+      console.log("sending");
+
+      var req = http.request(httpThanks, function(res){
+
+        console.log("sent");
+
+
+
+        res.on('end', function() {
+
+        });
+
+
+      });
+
+      req.on('error', function(err){
+        res.send('error: ' + err.message);
+      })
+
+
+      req.end();
+
+
+
+
+
     },
 
 
