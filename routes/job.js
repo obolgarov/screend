@@ -69,7 +69,7 @@ router.route('/')
   var Description = req.body.Description;
 
   mongoose.model('job').create({
-    JobTitle: Title,
+    JobTitle: JobTitle,
     CompanyName:CompanyName,
     Location : Location,
     Certification : Certification,

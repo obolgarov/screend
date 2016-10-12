@@ -2,6 +2,7 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
+
 var JobPostings = React.createClass({
 
 
@@ -32,10 +33,10 @@ var JobPostings = React.createClass({
       res.on('data', function (dataBlob){
         output += dataBlob;
         console.log("output: " + output);
-
+        
       });
 
-      
+
 
 
       });
@@ -51,20 +52,44 @@ var JobPostings = React.createClass({
 
     },
 
-    render: function(){
-      return(
-      <div>
-        <h2>Job Postings</h2>
+render: function(){
 
+return(
+      <div>
           <form ref='metric_results' onSubmit={this.onSubmit}>
             <div>
               <button type="submit">Submit</button>
             </div>
+
         </form>
       </div>
     );
   }
 });
+
+var Job = React.createClass({
+  render: function(){
+    <div>
+        <h2> Job Title: {output.Jobs.JobTitle}, Company Name: {output.Jobs.CompanyName}</h2>
+    </div>
+  }
+});
+
+var JobList = React.createClass({
+
+  render: function(){
+    var jobs = output.data.map(function(job){
+      return <Job Title={Job.JobTitle} CompanyName={Job.CompanyName}/>
+    });
+    return(
+      <div>
+        {jobs}
+      </div>
+    )
+  }
+});
+
+
 module.exports = JobPostings;
 
 

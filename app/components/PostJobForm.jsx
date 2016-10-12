@@ -12,13 +12,14 @@ var postJobForm = React.createClass({
           e.preventDefault();
           console.log("Been here")
           var data = {
+            JobTitle: this.refs.jobtitle.value,
             CompanyName: this.refs.companyform.value,
             Location: this.refs.location.value,
             Certification: this.refs.certification.value,
             Requirededucation: this.refs.requirededucation.value,
             Experience: this.refs.experience.value,
             Salary: this.refs.salary.value,
-            Description: this.refs.description.value,
+            Description: this.refs.description.value
           }
 
           var dataQuerystring = querystring.stringify(data);
@@ -79,6 +80,11 @@ var postJobForm = React.createClass({
 
 
          <form ref='Job_form' method="Post" onSubmit={this.handleSubmit}>
+
+                    <div>
+                      <label>Job Title:</label>
+                      <input type="text" ref="jobtitle"/>
+                    </div>
                     <div>
                         <label>Company Name: </label>
                         <input type="text" ref="companyform"/>
