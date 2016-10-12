@@ -22,12 +22,12 @@ var postJobForm = React.createClass({
           }
 
           var dataQuerystring = querystring.stringify(data);
-
+//copy
           // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
           var httpOptions = {
             port: config.port,
             path: "/job",
-            method: "POST", // insert data
+            method: "POST", // insert data // change to get
             headers: {
               'Content-Type' : 'application/x-www-form-urlencoded',
               'Content-Length' : Buffer.byteLength(dataQuerystring),
@@ -52,6 +52,10 @@ var postJobForm = React.createClass({
             res.on('data', function (dataBlob){
               output += dataBlob;
               console.log("output: " + output);
+
+
+
+
             });
 
             res.on('end', function() {
@@ -69,7 +73,7 @@ var postJobForm = React.createClass({
           req.write(dataQuerystring);
 
           req.end();
-  },
+  }, //copy
   render: function(){
     return(
 

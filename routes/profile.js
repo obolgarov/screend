@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var job = require('../models/job.js');
+var profile = require('../models/profile.js');
 var bodyParser = require('body-parser');
 
 module.exports = router;
 
 exports.list = function(req, res) {
-  applicant.find(function(err, job) {
-    res.send(applicants);
+  profile.find(function(err, profile) {
+    res.send(profile);
   });
 }
 
@@ -25,7 +25,7 @@ router.route('/')
 
 
   // get all
-  mongoose.model('job').find({}, function (err, job){
+  mongoose.model('profile').find({}, function (err, profile){
 
     if (err) {
       return console.error(err);
@@ -46,7 +46,7 @@ router.route('/')
         */
         // json response
         json: function() {
-          res.json(job);
+          res.json(profile);
         }
 
       });
@@ -59,31 +59,30 @@ router.route('/')
 
   console.log(req.body);
 
-  var JobTitle = req.body.JobTitle;
-  var CompanyName = req.body.CompanyName;
-  var Location = req.body.Location;
-  var Certification = req.body.Certification;
-  var Requirededucation = req.body.Requirededucation;
-  var Experience = req.body.Experience;
-  var Salary = req.body.Salary;
-  var Description = req.body.Description;
 
-  mongoose.model('job').create({
-    JobTitle: Title,
-    CompanyName:CompanyName,
-    Location : Location,
-    Certification : Certification,
-    Requirededucation : Requirededucation,
-    Experience:Experience,
-    Salary:Salary,
-    Description :Description
+var history = req.body.history;
+var jobTitle = req.body.jobTitle;
+var years = req.body.years;
+var education = req.body.education;
+var certification = req.body.certification;
+var achievements = req.body.achievements;
+var privacy = req.body.privacy;
 
-  }, function (err, applicant) {
+  mongoose.model('profile').create({
+  history : history,
+  jobTitle : jobTitle,
+  years : years,
+  education: education,
+  certification: certification,
+  achievements : achievements,
+  privacy : privacy
+
+  }, function (err, profile) {
     if (err) {
       return console.error(err)
     } else {
       // insertion/creation complete
-      console.log('POST inserting new Job: ' + job);
+      console.log('POST inserting new profile: ' + profile);
       /*res.format({
 
         //html response

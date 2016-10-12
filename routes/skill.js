@@ -1,14 +1,15 @@
+
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var job = require('../models/job.js');
+var applicant = require('../models/skill.js');
 var bodyParser = require('body-parser');
 
 module.exports = router;
 
 exports.list = function(req, res) {
-  applicant.find(function(err, job) {
-    res.send(applicants);
+  applicant.find(function(err, skill) {
+    res.send(skill);
   });
 }
 
@@ -25,7 +26,7 @@ router.route('/')
 
 
   // get all
-  mongoose.model('job').find({}, function (err, job){
+  mongoose.model('skill').find({}, function (err, skill){
 
     if (err) {
       return console.error(err);
@@ -46,7 +47,7 @@ router.route('/')
         */
         // json response
         json: function() {
-          res.json(job);
+          res.json(skill);
         }
 
       });
@@ -59,31 +60,22 @@ router.route('/')
 
   console.log(req.body);
 
-  var JobTitle = req.body.JobTitle;
-  var CompanyName = req.body.CompanyName;
-  var Location = req.body.Location;
-  var Certification = req.body.Certification;
-  var Requirededucation = req.body.Requirededucation;
-  var Experience = req.body.Experience;
-  var Salary = req.body.Salary;
-  var Description = req.body.Description;
+  // insert one
+  var skillName = req.body.skillName;
+  var skillType = req.body.skillType;
+  var Years = req.body.years;
 
-  mongoose.model('job').create({
-    JobTitle: Title,
-    CompanyName:CompanyName,
-    Location : Location,
-    Certification : Certification,
-    Requirededucation : Requirededucation,
-    Experience:Experience,
-    Salary:Salary,
-    Description :Description
+  mongoose.model('skill').create({
+    skillName : skillName,
+    skillType : skillType,
+    years : years
 
-  }, function (err, applicant) {
+  }, function (err, skill) {
     if (err) {
       return console.error(err)
     } else {
       // insertion/creation complete
-      console.log('POST inserting new Job: ' + job);
+      console.log('POST inserting new skill: ' + skill);
       /*res.format({
 
         //html response
@@ -99,7 +91,7 @@ router.route('/')
 
       });*/
 
-      res.send("Done");
+      res.send("done");
     }
   });
 
