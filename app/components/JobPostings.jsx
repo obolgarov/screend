@@ -20,6 +20,7 @@ var JobPostings = React.createClass({
           'Accept' : 'application/json'
         }
       }
+      var output = '';
 
       //  console.log("body: " + JSON.stringify(data));
 
@@ -29,7 +30,6 @@ var JobPostings = React.createClass({
 
       console.log('sent');
 
-      var output = '';
     //  console.log(options.path + ':' + res.statusCode);
     //  res.setEncoding('utf8');
 
@@ -42,8 +42,8 @@ var JobPostings = React.createClass({
       return(
         <a href="#" >
               <h4 >
-                  <span >{ output.Jobs.JobTitle }</span>
-                  <small >{ output.Jobs.CompanyName }</small>
+                  <span >{ output.job.JobTitle }</span>
+                  <small >{ output.job.CompanyName }</small>
               </h4>
 
           </a>
