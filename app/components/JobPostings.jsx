@@ -37,19 +37,21 @@ var JobPostings = React.createClass({
         output += dataBlob;
         console.log("output: " + output);
 
+      var x = document.createElement("TABLE");
+      x.setAttribute("id", "myTable");
+      document.body.appendChild(x);
+
+      var y = document.createElement("TR");
+      y.setAttribute("id", "myTr");
+      document.getElementById("myTable").appendChild(y);
+
+      var z = document.createElement("TD");
+      var t = document.createTextNode(output);
+      z.appendChild(t);
+      document.getElementById("myTr").appendChild(z);
+
+
       });
-
-      return(
-        <a href="#" >
-              <h4 >
-                  <span >{ output.job.JobTitle }</span>
-                  <small >{ output.job.CompanyName }</small>
-              </h4>
-
-          </a>
-      );
-
-
       });
 
       req.on('error', function(err){
