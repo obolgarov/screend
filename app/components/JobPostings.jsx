@@ -39,7 +39,7 @@ var JobPostings = React.createClass({
         console.log("{output: " + output + "}");
 
       //var ObjOutput = JSON.parse('{ output:[{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa","__v":0}][{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa"]}');
-      var  ObjOutput = JSON.parse("{output:" + output + "}");
+      var  ObjOutput = "{output:" + output + "}";
 
       var x = document.createElement("TABLE");
       x.setAttribute("id", "myTable");
