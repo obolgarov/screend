@@ -2,7 +2,7 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
-
+var i = 0;
 
 
 
@@ -45,18 +45,25 @@ var JobPostings = React.createClass({
       x.setAttribute("id", "myTable");
       document.body.appendChild(x);
 
-      var y = document.createElement("TR");
-      y.setAttribute("id", "myTr");
-      document.getElementById("myTable").appendChild(y);
 
-      var z = document.createElement("TD");
-      var t = document.createTextNode(output);
-      z.appendChild(t);
-      document.getElementById("myTr").appendChild(z);
+      for(var x = 0; x < ObjOutput.length; x++){
 
+          var y = document.createElement("TR");
+          var index = "" + x + "";
 
-      });
-      });
+          y.setAttribute("id", index);
+
+          document.getElementById("myTable").appendChild(y);
+
+          var z = document.createElement("TD");
+          var t = document.createTextNode(ObjOutput.CompanyName);
+
+          z.appendChild(t);
+
+          document.getElementById(index).appendChild(z);
+        }
+    });
+  });
 
       req.on('error', function(err){
         res.send('error: ' + err.message);
@@ -76,6 +83,7 @@ return(
           <form ref='metric_results' onSubmit={this.onSubmit}>
             <div id='Content-Length'>
               <button type="submit">Submit</button>
+
             </div>
 
         </form>
