@@ -30,38 +30,54 @@ var JobPostings = React.createClass({
 
       console.log('sent');
 
-    //  console.log(options.path + ':' + res.statusCode);
-    //  res.setEncoding('utf8');
-
       res.on('data', function (dataBlob){
         output += dataBlob;
 
-        console.log("{output: " + output + "}");
+      //  console.log("{output: " + output + "}");
 
       //var ObjOutput = JSON.parse('{ output:[{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa","__v":0}][{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa"]}');
-      var  ObjOutput = "{output:" + output + "}";
+
+      var parse = JSON.parse(output);
+
+      for (var i = 0; i < parse.length; i++){
 
       var x = document.createElement("TABLE");
       x.setAttribute("id", "myTable");
       document.body.appendChild(x);
 
+      var y = document.createElement("TR");
+      var index = "" + x + "";
+      y.setAttribute("id", index);
+      document.getElementById("myTable").appendChild(y);
 
-      for(var x = 0; x < ObjOutput.length; x++){
+      var z = document.createElement("TD");
 
-          var y = document.createElement("TR");
-          var index = "" + x + "";
+      var JobTitle =document.createTextNode(parse[i].JobTitle);
+      z.appendChild(JobTitle);
 
-          y.setAttribute("id", index);
+      var name = document.createTextNode(parse[i].CompanyName);
+      z.appendChild(name);
+      document.getElementById(index).appendChild(z);
 
-          document.getElementById("myTable").appendChild(y);
+      var location =document.createTextNode(parse[i].Location);
+      z.appendChild(location);
 
-          var z = document.createElement("TD");
-          var t = document.createTextNode(ObjOutput.CompanyName);
+      var certification =document.createTextNode(parse[i].Certification);
+      z.appendChild(certification);
 
-          z.appendChild(t);
+      var Requirededucation =document.createTextNode(parse[i].Requirededucation);
+      z.appendChild(Requirededucation);
 
-          document.getElementById(index).appendChild(z);
-        }
+      var Experience =document.createTextNode(parse[i].Experience);
+      z.appendChild(Experience);
+
+      var Salary =document.createTextNode(parse[i].Salary);
+      z.appendChild(Salary);
+
+      var Description =document.createTextNode(parse[i].Description);
+      z.appendChild(Description);
+
+}
     });
   });
 
