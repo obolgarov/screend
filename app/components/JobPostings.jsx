@@ -10,7 +10,7 @@ var JobPostings = React.createClass({
 
 
     onSubmit: function(e){
-
+      e.preventDefault();
       var httpOptions = {
         port: config.port,
         path: "/job",
