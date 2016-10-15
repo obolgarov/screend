@@ -39,45 +39,51 @@ var JobPostings = React.createClass({
 
       var parse = JSON.parse(output);
 
-      for (var i = 0; i < parse.length; i++){
 
       var x = document.createElement("TABLE");
       x.setAttribute("id", "myTable");
       document.body.appendChild(x);
 
+
+      for (var i = 0; i < parse.length; i++){
+
       var y = document.createElement("TR");
-      var index = "" + x + "";
+      var index = "" + i + "";
       y.setAttribute("id", index);
       document.getElementById("myTable").appendChild(y);
 
+
+
+      var b = document.createElement("TD");
+      var JobTitle = document.createTextNode(parse[i].JobTitle);
+      b.appendChild(JobTitle);
+      document.getElementById(index).appendChild(b);
+
+
       var z = document.createElement("TD");
-
-      var JobTitle =document.createTextNode(parse[i].JobTitle);
-      z.appendChild(JobTitle);
-
       var name = document.createTextNode(parse[i].CompanyName);
       z.appendChild(name);
       document.getElementById(index).appendChild(z);
 
-      var location =document.createTextNode(parse[i].Location);
-      z.appendChild(location);
+      // var location =document.createTextNode(parse[i].Location);
+      // z.appendChild(location);
 
-      var certification =document.createTextNode(parse[i].Certification);
-      z.appendChild(certification);
+      // var certification =document.createTextNode(parse[i].Certification);
+      // z.appendChild(certification);
+      //
+      // var Requirededucation =document.createTextNode(parse[i].Requirededucation);
+      // z.appendChild(Requirededucation);
+      //
+      // var Experience =document.createTextNode(parse[i].Experience);
+      // z.appendChild(Experience);
+      //
+      // var Salary =document.createTextNode(parse[i].Salary);
+      // z.appendChild(Salary);
+      //
+      // var Description =document.createTextNode(parse[i].Description);
+      // z.appendChild(Description);
 
-      var Requirededucation =document.createTextNode(parse[i].Requirededucation);
-      z.appendChild(Requirededucation);
-
-      var Experience =document.createTextNode(parse[i].Experience);
-      z.appendChild(Experience);
-
-      var Salary =document.createTextNode(parse[i].Salary);
-      z.appendChild(Salary);
-
-      var Description =document.createTextNode(parse[i].Description);
-      z.appendChild(Description);
-
-}
+  }
     });
   });
 
