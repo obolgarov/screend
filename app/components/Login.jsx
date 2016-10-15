@@ -52,15 +52,22 @@ var Login = React.createClass({
         output += dataBlob;
         console.log("output: " + output);
 
-          if(output == "{\"verified\":\"true\"}")
-          {
-            hashHistory.push('Main');
+        var jsonData = JSON.parse(dataBlob);
 
-        }  else
-          {
-            hashHistory.push('Login');
+        //if(output == "{\"verified\":\"true\"}")
+        //{
+        if (jsonData.verified) {
 
-          }
+          // this is a token, save it somewhere (possibly cookies?) until
+          // logged out and pass it if available through every request as
+          // {token: thisTokenVar}. This is what's used for validation.
+          var token = jsonData.token;
+
+          hashHistory.push('Main');
+
+        } else {
+          hashHistory.push('Login');
+        }
 
       });
 
