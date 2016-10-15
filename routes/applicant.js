@@ -4,6 +4,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var applicant = require('../models/applicant.js');
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
+
+var userValidator = require('./userValidator.js');
 
 module.exports = router;
 
@@ -20,9 +23,24 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.route('/')
 .get(function(req, res, callback) {
-
-  // TODO: validate user here, res.send error page if user doesn't have access
   // to view users
+
+
+
+  //TODO: read token and send to login page if no token
+
+  //var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  //if (token) {
+  //  userValidator.validateToken(token, function(err, decoded) {
+
+  //    if (err) {
+  //      console.error(err);
+  //    } else {
+
+
+
+  // TODO: only show all users if adminstrator
+
 
 
   // get all
@@ -53,6 +71,15 @@ router.route('/')
       });
     }
   });
+
+
+
+  //    }
+
+  //  });
+  //}
+
+
 
   // end of get
 })
@@ -100,9 +127,9 @@ router.route('/')
   // end of post
 });
 
+// named 'verify', but more of 'login', to be used once when logging in.
+// Verification for every call is instead done via JWT in userValidator
 router.route('/verify').post(function(req, res, callback) {
-  var username = req.body.username;
-  var password = req.body.password;
 
   // get specific uservar username = req.body.username;
   if (req.body.username != null && req.body.password != null){
@@ -111,7 +138,7 @@ router.route('/verify').post(function(req, res, callback) {
 
     mongoose.model('applicant').findOne({
       username : username,
-      password :password
+      password : password
     }, function (err, applicant){
 
       if (err) {
@@ -119,14 +146,34 @@ router.route('/verify').post(function(req, res, callback) {
       } else {
         if (applicant != null ){
 
-          res.format({
+          // create token and send to connected user
 
-            // json response
-            json: function() {
-              res.json({ verified: "true"});
+          // payload is the data send with the token, must be unique per user,
+          // which both assumes a users unique identity and allows the API to
+          // know which user is connected
+          var payload = {
+            username: username // better to store a random unique id from database to obfuscate the identity, or an encrypted string that can be decrypted...
+          }
+
+          userValidator.generateToken(payload, function(err, token){
+
+            if (err) {
+              return console.error(err);
+            } else {
+
+              // everything succeeded, return json with success and token
+              res.format({
+                json: function() {
+                  res.json({
+                    verified: "true",
+                    token: token
+                  });
+                }
+              });
+
             }
-
           });
+
         } else {
           console.log("false");
           res.format({
@@ -138,7 +185,6 @@ router.route('/verify').post(function(req, res, callback) {
             }
           });
         }
-
 
       }
     });
