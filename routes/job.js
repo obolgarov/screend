@@ -77,8 +77,9 @@ router.route('/')
     Experience:Experience,
     Salary:Salary,
     Description :Description
+  },
 
-  }, function (err, applicant) {
+  function (err, applicant) {
     if (err) {
       return console.error(err)
     } else {

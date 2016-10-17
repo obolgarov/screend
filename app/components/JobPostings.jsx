@@ -33,7 +33,7 @@ var JobPostings = React.createClass({
       res.on('data', function (dataBlob){
         output += dataBlob;
 
-      //  console.log("{output: " + output + "}");
+       console.log("{output: " + output + "}");
 
       //var ObjOutput = JSON.parse('{ output:[{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa","__v":0}][{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa"]}');
 
@@ -53,7 +53,7 @@ var JobPostings = React.createClass({
       document.getElementById("myTable").appendChild(y);
 
 
-
+      <a href="./jobDescription.jsx">
       var b = document.createElement("TD");
       var JobTitle = document.createTextNode(parse[i].JobTitle);
       b.appendChild(JobTitle);
@@ -64,6 +64,14 @@ var JobPostings = React.createClass({
       var name = document.createTextNode(parse[i].CompanyName);
       z.appendChild(name);
       document.getElementById(index).appendChild(z);
+
+      var c = document.createElement("TD");
+      var id = document.createTextNode(parse[i]._id);
+      c.appendChild(id);
+      document.getElementById(index).appendChild(c);
+    </a>
+
+
 
       // var location =document.createTextNode(parse[i].Location);
       // z.appendChild(location);
