@@ -13,7 +13,7 @@
         //e.preventDefault();
         var httpOptions = {
           port: config.port,
-          path: "/job&id=",
+          path: "/job/view&id=",
           method: "GET", // insert data
           headers: {
             'Content-Type' : 'application/x-www-form-urlencoded',
