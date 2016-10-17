@@ -13,7 +13,7 @@ var JobPostings = React.createClass({
       e.preventDefault();
       var httpOptions = {
         port: config.port,
-        path: "/job/?id=" + ,
+        path: "/job/?id=",
         method: "GET", // insert data
         headers: {
           'Content-Type' : 'application/x-www-form-urlencoded',
@@ -56,11 +56,11 @@ var JobPostings = React.createClass({
 //<a href="./jobDescription.jsx">
       var b = document.createElement("TD");
       var link = document.createElement("a");
-      link.setAttribute('href','http://localhost:3000/#/JobDescription?_k=kr8augid='+ parse[i]._id);
+      link.setAttribute('href','http://localhost:3000/#/JobDescription?id='+ parse[i]._id);
       var JobTitle = document.createTextNode(parse[i].JobTitle);
-    //  b.appendChild(JobTitle);
-      link.appendChild(JobTitle)
-      document.getElementById(index).appendChild(link);
+      link.appendChild(JobTitle);
+      b.appendChild(link);
+      document.getElementById(index).appendChild(b);
 
 
       var z = document.createElement("TD");
@@ -74,32 +74,7 @@ var JobPostings = React.createClass({
       document.getElementById(index).appendChild(c);
 
 
-    // var JobTitle = document.createTextNode(parse[index].JobTitle);
-    // document.getElementById("companyname").appendChild(JobTitle);
-    //
-    // var certification = document.createTextNode(parse[index].Certification);
-    // document.getElementById("certification").appendChild(certification);
-    //
-    // var experience = document.createTextNode(parse[index].requiredexperience);
-    // document.getElementById("requiredexperience").appendChild(experience);
-    //
-    // var location = document.createTextNode(parse[index].location);
-    // document.getElementById("location").appendChild(location);
-    //
-    // var requirededucation = document.createTextNode(parse[index].Requirededucation);
-    // document.getElementById("requirededucation").appendChild(requirededucation);
-    //
-    // var experience = document.createTextNode(parse[index].Experience);
-    // document.getElementById("Experience").appendChild(Experience);
-    //
-    // var Description = document.createTextNode(parse[index].Description);
-    // document.getElementById("description").appendChild(Description);
-    //
-    // var salary = document.createTextNode(parse[index].salary);
-    // document.getElementById("salary").appendChild(salary);
-    //
-    // var salary = document.createTextNode(parse[index].salary);
-    // document.getElementById("salary").appendChild(salary);
+
   }
     });
   });
