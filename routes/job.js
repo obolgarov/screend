@@ -134,3 +134,43 @@ res.format({
     });
 
 });
+router.route('/rank').post(function(req, res, callback) {
+	mongoose.model('job').find({}, function (err, jobs){
+		console.log('Jobs.js');
+    //if (err) {
+      return console.error(err);
+    //} else {
+	
+      //res.json(applicants);
+	  
+	  for (job in jobs){
+		
+	  }
+	  
+	  //Stuff is the organized array that I will be sending through to the UploadResume.jsx
+	  var stuff= 'aa';	
+		console.log('Jobs.js');
+      // respond to call with information
+      res.format({
+        // json response
+        json: function() {
+          res.json({
+			  stuff: stuff
+			});
+        }
+
+      });
+    //}
+  });
+});
+router.route('/rank').get(function(req, res, callback) {
+
+      res.format({
+        // json response
+        json: function() {
+          res.json({
+			  yes: "yes"
+			});
+        }
+	  });
+});
