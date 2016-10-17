@@ -1,5 +1,7 @@
 var React = require('react');
-
+var http = require('http'); // to send request
+var config = require('../../config')(); // to get the port
+var querystring = require('querystring'); // to send data inside the request
 
 var UploadResume = React.createClass({
     onSubmit: function(e) {
@@ -50,7 +52,7 @@ var UploadResume = React.createClass({
             res.on('data', function(dataBlob) {
                 output += dataBlob;
                 console.log("output: " + output);
-               
+
                 var divForm = this.refs.uploadForm;
                 var divRank = this.refs.rankOutput;
                 var rankTable = this.refs.rankTable;
@@ -79,46 +81,6 @@ var UploadResume = React.createClass({
         req.write(dataQuerystring);
 
         req.end();
-
-        var httpThanks = {
-            port: config.port,
-            path: "/mail",
-            method: "POST", // insert data
-            headers: {
-                'Content-Type' : 'application/x-www-form-urlencoded',
-                'Content-Length' : Buffer.byteLength(dataQuerystring),
-                'Accept' : 'application/json'
-            }
-        }
-
-        console.log("sending");
-
-        var req = http.request(httpThanks, function(res){
-
-            console.log("sent");
-            var output = '';
-
-            res.on('data', function (dataBlob){
-                output += dataBlob;
-                console.log("output: " + output);
-
-            });
-            res.on('end', function() {
-                var obj = JSON.parse(output);
-            });
-
-
-        });
-
-        req.on('error', function(err){
-            res.send('error: ' + err.message);
-        })
-
-        req.write(dataQuerystring);
-
-        req.end();
-
-
 
 
     },
