@@ -72,25 +72,32 @@ var JobPostings = React.createClass({
     </a>
 
 
-
-      // var location =document.createTextNode(parse[i].Location);
-      // z.appendChild(location);
-
-      // var certification =document.createTextNode(parse[i].Certification);
-      // z.appendChild(certification);
-      //
-      // var Requirededucation =document.createTextNode(parse[i].Requirededucation);
-      // z.appendChild(Requirededucation);
-      //
-      // var Experience =document.createTextNode(parse[i].Experience);
-      // z.appendChild(Experience);
-      //
-      // var Salary =document.createTextNode(parse[i].Salary);
-      // z.appendChild(Salary);
-      //
-      // var Description =document.createTextNode(parse[i].Description);
-      // z.appendChild(Description);
-
+    // var JobTitle = document.createTextNode(parse[index].JobTitle);
+    // document.getElementById("companyname").appendChild(JobTitle);
+    //
+    // var certification = document.createTextNode(parse[index].Certification);
+    // document.getElementById("certification").appendChild(certification);
+    //
+    // var experience = document.createTextNode(parse[index].requiredexperience);
+    // document.getElementById("requiredexperience").appendChild(experience);
+    //
+    // var location = document.createTextNode(parse[index].location);
+    // document.getElementById("location").appendChild(location);
+    //
+    // var requirededucation = document.createTextNode(parse[index].Requirededucation);
+    // document.getElementById("requirededucation").appendChild(requirededucation);
+    //
+    // var experience = document.createTextNode(parse[index].Experience);
+    // document.getElementById("Experience").appendChild(Experience);
+    //
+    // var Description = document.createTextNode(parse[index].Description);
+    // document.getElementById("description").appendChild(Description);
+    //
+    // var salary = document.createTextNode(parse[index].salary);
+    // document.getElementById("salary").appendChild(salary);
+    //
+    // var salary = document.createTextNode(parse[index].salary);
+    // document.getElementById("salary").appendChild(salary);
   }
     });
   });
