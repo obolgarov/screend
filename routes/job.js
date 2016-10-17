@@ -106,3 +106,7 @@ router.route('/')
 
   // end of post
 });
+
+router.route('/view').post(function(req, res, callback) {
+
+});
