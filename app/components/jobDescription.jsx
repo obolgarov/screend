@@ -1,37 +1,36 @@
-  var React = require('react');
-  var http = require('http'); // to send request
-  var config = require('../../config')(); // to get the port
-  var querystring = require('querystring'); // to send data inside the request
-  var i = 0;
+var React = require('react');
+var http = require('http'); // to send request
+var config = require('../../config')(); // to get the port
+var querystring = require('querystring'); // to send data inside the request
 
 
 
-  var jobDescription = React.createClass({
+var jobDescription = React.createClass({
 
 
-      onSubmit: function(e){
-        e.preventDefault();
-        var httpOptions = {
-          port: config.port,
-          path: "/job&id=",
-          method: "GET", // insert data
-          headers: {
-            'Content-Type' : 'application/x-www-form-urlencoded',
-            'Accept' : 'application/json'
-          }
-        }
-        var output = '';
+  onSubmit: function(e){
+    e.preventDefault();
+    var httpOptions = {
+      port: config.port,
+      path: "/job/view&id=",
+      method: "GET", // insert data
+      headers: {
+        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Accept' : 'application/json'
+      }
+    }
+    var output = '';
 
-        //  console.log("body: " + JSON.stringify(data));
+    //  console.log("body: " + JSON.stringify(data));
 
-        console.log("sending");
+    console.log("sending");
 
-        var req = http.request(httpOptions, function(res){
+    var req = http.request(httpOptions, function(res){
 
-        console.log('sent');
+      console.log('sent');
 
-        res.on('data', function (dataBlob){
-          output += dataBlob;
+      res.on('data', function (dataBlob){
+        output += dataBlob;
 
          console.log("{output: " + output + "}");
 
@@ -70,64 +69,64 @@
 
       });
     });
-},
+  },
 
   render: function(){
     return(
-         <div>
+      <div>
 
-           <div>
-              <label>Company Name:</label>
-              <label id="companyname"></label>
-           </div>
-
-            <div>
-              <label>Certification:</label>
-              <label id="certification"></label>
-            </div>
-
-            <div>
-              <label>Required Experience:</label>
-              <label id="requiredexperience"></label>
-            </div>
-
-            <div>
-              <label>Location:</label>
-              <label id="location"></label>
-            </div>
-
-            <div>
-              <label>Required Education:</label>
-              <label id="requirededucation"></label>
-            </div>
-
-            <div>
-              <label>Salary:</label>
-              <label id="salary"></label>
-            </div>
-
-            <div>
-              <label>Description:</label>
-            </div>
-
-            <div>
-              <p id="description"></p>
-            </div>
-
-            <div>
-              <select>
-                  <option value="resume">Resume</option>
-              </select>
-            </div>
-
-
-          <form ref="jobDescription" method="post">
-            <div>
-
-              <button type="submit" value="Apply For Job">Submit Resume</button>
-            </div>
-          </form>
+        <div>
+          <label>Company Name:</label>
+          <label id="companyname"></label>
         </div>
+
+        <div>
+          <label>Certification:</label>
+          <label id="certification"></label>
+        </div>
+
+        <div>
+          <label>Required Experience:</label>
+          <label id="requiredexperience"></label>
+        </div>
+
+        <div>
+          <label>Location:</label>
+          <label id="location"></label>
+        </div>
+
+        <div>
+          <label>Required Education:</label>
+          <label id="requirededucation"></label>
+        </div>
+
+        <div>
+          <label>Salary:</label>
+          <label id="salary"></label>
+        </div>
+
+        <div>
+          <label>Description:</label>
+        </div>
+
+        <div>
+          <p id="description"></p>
+        </div>
+
+        <div>
+          <select>
+              <option value="resume">Resume</option>
+          </select>
+        </div>
+
+
+        <form ref="jobDescription" method="post">
+          <div>
+
+            <button type="submit" value="Apply For Job">Submit Resume</button>
+          </div>
+        </form>
+      </div>
     );
   }
 });

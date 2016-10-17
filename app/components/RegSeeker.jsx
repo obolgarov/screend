@@ -176,3 +176,18 @@ var RegSeeker = React.createClass({
 });
 
 module.exports = RegSeeker;
+
+
+
+{
+  array: [
+    {
+      job: { name: "job1", skills: [] },
+      rank: "50"
+    },
+    {
+      job: { name: "job1", skills: [] },
+      rank: "50"
+    }
+  ]
+}
