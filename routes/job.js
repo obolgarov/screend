@@ -20,8 +20,15 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.route('/')
 .get(function(req, res, callback) {
 
+
+var id = req.query.id
   // TODO: validate user here, res.send error page if user doesn't have access
   // to view users
+
+  // id = $_GET["id"]
+  // mongoose.model('job').findOne({id: id}, function {
+
+  //})
 
 
   // get all
@@ -107,9 +114,23 @@ router.route('/')
   // end of post
 });
 
-router.route('/view').post(function(req, res, callback) {
+router.route('/view/:id').get(function(req, res, callback) {
+var id = req.params.id
+
+mongoose.model('job').findOne({
+  _id : id
+}, function(err, job){
 
 
+res.format({
 
+        json: function(){
+
+          res.json(job);
+          
+        }
+      });
+
+    });
 
 });

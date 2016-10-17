@@ -13,7 +13,7 @@ var JobPostings = React.createClass({
       e.preventDefault();
       var httpOptions = {
         port: config.port,
-        path: "/job",
+        path: "/job/?id=" + ,
         method: "GET", // insert data
         headers: {
           'Content-Type' : 'application/x-www-form-urlencoded',
@@ -33,7 +33,7 @@ var JobPostings = React.createClass({
       res.on('data', function (dataBlob){
         output += dataBlob;
 
-      // console.log("{output: " + output + "}");
+      console.log("{output: " + output + "}");
 
       //var ObjOutput = JSON.parse('{ output:[{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa","__v":0}][{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa"]}');
 
@@ -56,7 +56,7 @@ var JobPostings = React.createClass({
 //<a href="./jobDescription.jsx">
       var b = document.createElement("TD");
       var link = document.createElement("a");
-      link.setAttribute('href','http://localhost:3000/#/JobDescription?_k=kr8aug');
+      link.setAttribute('href','http://localhost:3000/#/JobDescription?_k=kr8augid='+ parse[i]._id);
       var JobTitle = document.createTextNode(parse[i].JobTitle);
     //  b.appendChild(JobTitle);
       link.appendChild(JobTitle)
