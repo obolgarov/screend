@@ -140,66 +140,48 @@ router.route('/verify').post(function(req, res, callback) {
       username : username,
       password : password
     }, function (err, applicant){
-
       if (err) {
         return console.error(err);
       } else {
+
         if (applicant != null ){
 
-          // create token and send to connected user
+          res.format({
 
-          // payload is the data send with the token, must be unique per user,
-          // which both assumes a users unique identity and allows the API to
-          // know which user is connected
-          var payload = {
-            username: username // better to store a random unique id from database to obfuscate the identity, or an encrypted string that can be decrypted...
-          }
-
-          userValidator.generateToken(payload, function(err, token){
-
-            if (err) {
-              return console.error(err);
-            } else {
-
-              // everything succeeded, return json with success and token
-              res.format({
-                json: function() {
-                  res.json({
-                    verified: "true",
-                    token: token
-                  });
-                }
-              });
-
+            // json response
+            json: function() {
+              res.json({ verified: "true"});
+               console.log("true");
             }
-          });
 
+          });
         } else {
-          console.log("false");
           res.format({
 
             // json response
             json: function() {
               res.json({ verified: "false"});
+              console.log("false");
 
             }
+
           });
         }
 
+
       }
-    });
-  } else {
-    // user somehow sent empty fields, despite the form sending empty strings anyway
-    res.format({
+      });
+      } else {
+      res.format({
 
       // json response
       json: function() {
         res.json({ verified: "false"});
       }
 
-    });
-  }
-});
+      });
+      }
+      });
 
 router.route('/reset').post(function(req, res, callback) {
   if (req.body.username != null && req.body.password != null ){
