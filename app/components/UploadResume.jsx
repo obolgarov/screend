@@ -2,11 +2,7 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 777103d676666ee79fb4710b16daa3c55137925e
 
 var UploadResume = React.createClass({
     onSubmit: function(e) {
@@ -29,7 +25,7 @@ var UploadResume = React.createClass({
         var dataQuerystring = querystring.stringify(data);
 
         //use PDFParser, data should be path file to resume location.
-        
+
 
         // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
         var httpOptions = {
@@ -59,28 +55,18 @@ var UploadResume = React.createClass({
 
             res.on('data', function(dataBlob) {
                 output += dataBlob;
-<<<<<<< HEAD
-                console.log("output: " + output);
-
-                var divForm = this.refs.uploadForm;
-                var divRank = this.refs.rankOutput;
-                var rankTable = this.refs.rankTable;
-                divForm.styles.display = 'none';
-                divRank.styles.display = 'block';
-=======
                 console.log(output);
                 //Due to the keys being dynamically created based on job posting, had to do a quick work around
                 var ranks = output.replace("{\"ranks\":{\"", "");
                 ranks = ranks.replace(/["']/g, "");
                 ranks = ranks.replace(/[}]/g, "");
-                
+
                 var jobSplit = ranks.split(',');
-                
+
                 var divForm = document.getElementById("uploadFormId");
                 var divRank = document.getElementById("rankOutputId");
                 var rankTable = document.getElementById("rankTableId");
-                
->>>>>>> 777103d676666ee79fb4710b16daa3c55137925e
+
                 //Iterate through populate table, with an "APPLY" button
                 for(var i = 0; i < jobSplit.length; i++)
                 {
@@ -94,7 +80,7 @@ var UploadResume = React.createClass({
                     tdApply.innerHTML = "<a href='#'>Apply Now!</a>";
                     rankTable.appendChild(tr);
                 }
-              
+
                 divForm.style.display = 'none';
 
                 divRank.style.display = 'block';
@@ -118,13 +104,6 @@ var UploadResume = React.createClass({
         req.write(dataQuerystring);
 
         req.end();
-<<<<<<< HEAD
-=======
-       
-
-
->>>>>>> 777103d676666ee79fb4710b16daa3c55137925e
-
 
     },
   render: function(){
