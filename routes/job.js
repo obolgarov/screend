@@ -3,6 +3,10 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var job = require('../models/job.js');
 var bodyParser = require('body-parser');
+var fs = require('fs');
+var PDFParser = require('pdf2json');
+
+var pdfParser = new PDFParser(this, 1);
 
 module.exports = router;
 
@@ -140,6 +144,7 @@ router.route('/view').get(function(req, res, callback) {
 
 });
 router.route('/rank').post(function(req, res, callback) {
+<<<<<<< HEAD
     mongoose.model('job').find({}, function(err, jobs) {
         console.log('Jobs.js');
         //if (err) {
@@ -167,6 +172,73 @@ router.route('/rank').post(function(req, res, callback) {
         });
         //}
     });
+=======
+	
+		
+	
+
+        pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError));
+
+        pdfParser.on("pdfParser_dataReady", pdfData => {
+            fs.writeFile('./pdf/resume.txt', pdfParser.getRawTextContent());
+        });
+
+        pdfParser.loadPDF('./pdf/Resume.pdf');
+		var txtArray = fs.readFileSync('./pdf/resume.txt').toString().split(/[ ,]+/);
+	mongoose.model('job').find({}, function (err, jobs){
+	
+		
+    if (err) {
+      return console.error(err);
+    } else {
+	
+     var skillsArray = {};
+	 var jobPostingRank = {}; 
+	 var userPoints = {};
+	  for (job in jobs){
+		skillsArray[jobs[job].JobTitle] = jobs[job].Description;
+	  }
+	  for (skill in skillsArray){
+	  
+		var tmpArray = skillsArray[skill].split(',');
+
+		jobPostingRank[skill] = tmpArray.length;
+		userPoints[skill] = 0;
+	  }
+	  
+		for (skill in skillsArray){
+			var tmpArray = skillsArray[skill].split(',');
+			for ( s in tmpArray ){
+				for (i in txtArray){
+					if	(tmpArray[s].toUpperCase() == txtArray[i].toUpperCase())
+					{
+						userPoints[skill] = userPoints[skill] + 1;
+					}
+				}
+			}
+		}
+		for (skill in jobPostingRank){
+			
+			userPoints[skill] = (userPoints[skill] / jobPostingRank[skill]) * 100;
+		
+		}
+
+	  //send userPoints array through.
+	  
+      // respond to call with information
+	  
+      res.format({
+        // json response
+        json: function() {
+          res.json({
+			  ranks: userPoints
+			});
+        }
+
+      });
+    }
+  });
+>>>>>>> 777103d676666ee79fb4710b16daa3c55137925e
 });
 router.route('/rank').get(function(req, res, callback) {
 
