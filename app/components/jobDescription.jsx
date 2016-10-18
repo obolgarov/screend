@@ -10,17 +10,26 @@ var jobDescription = React.createClass({
 
   componentDidMount: function(){
 
-    console.log("test");
+    console.log("testpoop");
+    console.log(this.props.location.query.id);
+
+    var queryStringData = querystring.stringify({
+      id : this.props.location.query.id
+    });
+
+    console.log(queryStringData);
 
     //e.preventDefault();
     var httpOptions = {
       port: config.port,
       path: "/job/view",
-      method: "GET", // insert data
+      method: "POST", // insert data
       headers: {
         'Content-Type' : 'application/x-www-form-urlencoded',
-        'Accept' : 'application/json'
-      }
+        'Accept' : 'application/json',
+        'Content-Length' : Buffer.byteLength(queryStringData),
+      },
+      body: queryStringData
     }
     var output = '';
 
@@ -33,39 +42,37 @@ var jobDescription = React.createClass({
       res.on('data', function (dataBlob){
         output += dataBlob;
 
-         console.log("{output: " + output + "}");
+        console.log(output)
 
 
-        var parse = JSON.parse(output);
+        var job = JSON.parse(output);
 
 
-        var index = 0;
+        var JobTitle = document.createTextNode(job.JobTitle);
+        document.getElementById("jobtitle").appendChild(JobTitle);
 
-        var JobTitle = document.createTextNode(parse[index].JobTitle);
-        document.getElementById("companyname").appendChild(JobTitle);
+        var CompanyName = document.createTextNode(job.CompanyName);
+        document.getElementById("companyname").appendChild(CompanyName);
 
-        var certification = document.createTextNode(parse[index].Certification);
+        var certification = document.createTextNode(job.Certification);
         document.getElementById("certification").appendChild(certification);
 
-        var experience = document.createTextNode(parse[index].requiredexperience);
+        var experience = document.createTextNode(job.Experience);
         document.getElementById("requiredexperience").appendChild(experience);
 
-        var location = document.createTextNode(parse[index].location);
+        var location = document.createTextNode(job.Location);
         document.getElementById("location").appendChild(location);
 
-        var requirededucation = document.createTextNode(parse[index].Requirededucation);
+        var requirededucation = document.createTextNode(job.Requirededucation);
         document.getElementById("requirededucation").appendChild(requirededucation);
 
-        var experience = document.createTextNode(parse[index].Experience);
+        var experience = document.createTextNode(job.Experience);
         document.getElementById("Experience").appendChild(Experience);
 
-        var Description = document.createTextNode(parse[index].Description);
+        var Description = document.createTextNode(job.Description);
         document.getElementById("description").appendChild(Description);
 
-        var salary = document.createTextNode(parse[index].salary);
-        document.getElementById("salary").appendChild(salary);
-
-        var salary = document.createTextNode(parse[index].salary);
+        var salary = document.createTextNode(job.Salary);
         document.getElementById("salary").appendChild(salary);
 
       });
@@ -76,6 +83,10 @@ var jobDescription = React.createClass({
     });
 
 
+    req.write(queryStringData);
+
+    console.log(req.body);
+
 
     console.log("sending");
     req.end();
@@ -85,6 +96,11 @@ var jobDescription = React.createClass({
   render: function(){
     return(
       <div>
+
+        <div>
+          <label>Job Title:</label>
+          <label id="jobtitle"></label>
+        </div>
 
         <div>
           <label>Company Name:</label>
@@ -118,9 +134,6 @@ var jobDescription = React.createClass({
 
         <div>
           <label>Description:</label>
-        </div>
-
-        <div>
           <p id="description"></p>
         </div>
 

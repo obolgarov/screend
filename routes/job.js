@@ -27,9 +27,8 @@ router.route('/')
     .get(function(req, res, callback) {
 
 
-        var id = req.query.id
-            // TODO: validate user here, res.send error page if user doesn't have access
-            // to view users
+        // TODO: validate user here, res.send error page if user doesn't have access
+        // to view users
 
         // id = $_GET["id"]
         // mongoose.model('job').findOne({id: id}, function {
@@ -120,15 +119,13 @@ router.route('/')
         // end of post
     });
 
-router.route('/view').get(function(req, res, callback) {
-    var id = req.query.id
+router.route('/view').post(function(req, res, callback) {
 
-    console.log(id);
+    var id = req.body.id;
 
     mongoose.model('job').findOne({
         _id: id
     }, function(err, job) {
-
 
 
         res.format({
@@ -148,67 +145,69 @@ router.route('/rank').post(function(req, res, callback) {
 
 
 
-        pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError));
+    pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError));
 
-        pdfParser.on("pdfParser_dataReady", pdfData => {
-            fs.writeFile('./pdf/resume.txt', pdfParser.getRawTextContent());
-        });
+    pdfParser.on("pdfParser_dataReady", pdfData => {
+        fs.writeFile('./pdf/resume.txt', pdfParser.getRawTextContent());
+    });
 
-        pdfParser.loadPDF('./pdf/Resume.pdf');
-		var txtArray = fs.readFileSync('./pdf/resume.txt').toString().split(/[ ,]+/);
-	mongoose.model('job').find({}, function (err, jobs){
+    pdfParser.loadPDF('./pdf/Resume.pdf');
+    var txtArray = fs.readFileSync('./pdf/resume.txt').toString().split(/[ ,]+/);
+    mongoose.model('job').find({}, function(err, jobs) {
 
 
-    if (err) {
-      return console.error(err);
-    } else {
+        if (err) {
+            return console.error(err);
+        } else {
 
-     var skillsArray = {};
-	 var jobPostingRank = {};
-	 var userPoints = {};
-	  for (job in jobs){
-		skillsArray[jobs[job].JobTitle] = jobs[job].Description;
-	  }
-	  for (skill in skillsArray){
 
-		var tmpArray = skillsArray[skill].split(',');
+            var skillsArray = {};
+            var jobPostingRank = {};
+            var userPoints = {};
+            for (job in jobs) {
+                skillsArray[jobs[job].JobTitle] = jobs[job].Description;
+            }
+            for (skill in skillsArray) {
 
-		jobPostingRank[skill] = tmpArray.length;
-		userPoints[skill] = 0;
-	  }
+                var tmpArray = skillsArray[skill].split(',');
 
-		for (skill in skillsArray){
-			var tmpArray = skillsArray[skill].split(',');
-			for ( s in tmpArray ){
-				for (i in txtArray){
-					if	(tmpArray[s].toUpperCase() == txtArray[i].toUpperCase())
-					{
-						userPoints[skill] = userPoints[skill] + 1;
-					}
-				}
-			}
-		}
-		for (skill in jobPostingRank){
+                jobPostingRank[skill] = tmpArray.length;
+                userPoints[skill] = 0;
+            }
 
-			userPoints[skill] = (userPoints[skill] / jobPostingRank[skill]) * 100;
+            for (skill in skillsArray) {
+                var tmpArray = skillsArray[skill].split(',');
+                for (s in tmpArray) {
+                    for (i in txtArray) {
+                        if (tmpArray[s].toUpperCase() == txtArray[i].toUpperCase()) {
+                            userPoints[skill] = userPoints[skill] + 1;
+                        }
+                    }
+                }
+            }
+            for (skill in jobPostingRank) {
 
-		}
+                userPoints[skill] = (userPoints[skill] / jobPostingRank[skill]) * 100;
 
-	  //send userPoints array through.
+            }
 
-      // respond to call with information
+            //send userPoints array through.
 
-      res.format({
-        // json response
-        json: function() {
-          res.json({
-			  ranks: userPoints
-			});
+            // respond to call with information
+
+            res.format({
+                // json response
+                json: function() {
+                    res.json({
+                        ranks: userPoints
+                    });
+                }
+
+            });
+
+            console.log("test");
         }
-
-      });
-    }
-  });
+    });
 });
 router.route('/rank').get(function(req, res, callback) {
 
