@@ -8,7 +8,7 @@ var querystring = require('querystring'); // to send data inside the request
 var jobDescription = React.createClass({
 
 
-  onSubmit: function(e){
+  componentDidMount: function(e){
     e.preventDefault();
     var httpOptions = {
       port: config.port,
