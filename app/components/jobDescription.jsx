@@ -8,11 +8,14 @@ var querystring = require('querystring'); // to send data inside the request
 var jobDescription = React.createClass({
 
 
-  componentDidMount: function(e){
-    e.preventDefault();
+  componentDidMount: function(){
+
+    console.log("test");
+
+    //e.preventDefault();
     var httpOptions = {
       port: config.port,
-      path: "/job/view&id=",
+      path: "/job/view",
       method: "GET", // insert data
       headers: {
         'Content-Type' : 'application/x-www-form-urlencoded',
@@ -23,11 +26,9 @@ var jobDescription = React.createClass({
 
     //  console.log("body: " + JSON.stringify(data));
 
-    console.log("sending");
-
     var req = http.request(httpOptions, function(res){
 
-      console.log('sent');
+      console.log('response recieved');
 
       res.on('data', function (dataBlob){
         output += dataBlob;
@@ -69,6 +70,16 @@ var jobDescription = React.createClass({
 
       });
     });
+
+    req.on('error', function(err){
+      res.send('error: ' + err.message);
+    });
+
+
+
+    console.log("sending");
+    req.end();
+    console.log("sent, waiting for response");
   },
 
   render: function(){
