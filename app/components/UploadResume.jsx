@@ -3,29 +3,26 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 
-
 var UploadResume = React.createClass({
     onSubmit: function(e) {
-
         var data = {
             file: this.refs.resumeupload.value
         }
 
-        /*
-    // unused now, kept in case it might help somewhere
-    var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
-      'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
-      'output_format' : 'json',
-      'output_info' : 'compiled_code',
-      'warning_level' : 'QUIET',
-      'js_code' : data // this is how the user's data is sent, including password through http. Safe.
-    }
-*/
+
+        // unused now, kept in case it might help somewhere
+        var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
+          'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
+          'output_format' : 'json',
+          'output_info' : 'compiled_code',
+          'warning_level' : 'QUIET',
+          'js_code' : data // this is how the user's data is sent, including password through http. Safe.
+        }
+
 
         var dataQuerystring = querystring.stringify(data);
 
         //use PDFParser, data should be path file to resume location.
-
 
         // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
         var httpOptions = {
@@ -68,8 +65,7 @@ var UploadResume = React.createClass({
                 var rankTable = document.getElementById("rankTableId");
 
                 //Iterate through populate table, with an "APPLY" button
-                for(var i = 0; i < jobSplit.length; i++)
-                {
+                for (var i = 0; i < jobSplit.length; i++) {
                     var rankSplit = jobSplit[i].split(':');
                     var tr = document.createElement('tr');
                     var tdJob = tr.appendChild(document.createElement('td'));
@@ -85,6 +81,7 @@ var UploadResume = React.createClass({
 
                 divRank.style.display = 'block';
 
+                console.log("test");
 
             });
 
@@ -106,24 +103,22 @@ var UploadResume = React.createClass({
         req.end();
 
     },
-  render: function(){
-    return(
-      <div>
-          <div ref="uploadForm" id="uploadFormId">
-            <form ref="resume" method="post" encType="multipart/form-data" onSubmit={this.onSubmit}>
-          <input type="file" name="resume" ref="resumeupload"></input>
-          <input type="submit" value="UploadResume" ref="resumesubmit" name="submit"></input>
-            </form>
-          </div>
-          <div ref="rankOutput" id="rankOutputId">
-              <table ref="rankTable" id="rankTableId">
+    render: function() {
+        return (
+            <div>
+                <div ref="uploadForm" id="uploadFormId">
+                    <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
+                        <input type="file" name="resume" ref="resumeupload"></input>
+                        <input type="submit" value="UploadResume" ref="resumesubmit" name="submit"></input>
+                    </form>
+                </div>
+                <div ref="rankOutput" id="rankOutputId">
+                    <table ref="rankTable" id="rankTableId"></table>
+                </div>
+            </div>
 
-              </table>
-          </div>
-      </div>
-
-    );
-  }
+        );
+    }
 });
 
 module.exports = UploadResume;
