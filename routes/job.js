@@ -144,38 +144,9 @@ router.route('/view').get(function(req, res, callback) {
 
 });
 router.route('/rank').post(function(req, res, callback) {
-<<<<<<< HEAD
-    mongoose.model('job').find({}, function(err, jobs) {
-        console.log('Jobs.js');
-        //if (err) {
-        return console.error(err);
-        //} else {
 
-        //res.json(applicants);
 
-        for (job in jobs) {
 
-        }
-
-        //Stuff is the organized array that I will be sending through to the UploadResume.jsx
-        var stuff = 'aa';
-        console.log('Jobs.js');
-        // respond to call with information
-        res.format({
-            // json response
-            json: function() {
-                res.json({
-                    stuff: stuff
-                });
-            }
-
-        });
-        //}
-    });
-=======
-	
-		
-	
 
         pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError));
 
@@ -186,26 +157,26 @@ router.route('/rank').post(function(req, res, callback) {
         pdfParser.loadPDF('./pdf/Resume.pdf');
 		var txtArray = fs.readFileSync('./pdf/resume.txt').toString().split(/[ ,]+/);
 	mongoose.model('job').find({}, function (err, jobs){
-	
-		
+
+
     if (err) {
       return console.error(err);
     } else {
-	
+
      var skillsArray = {};
-	 var jobPostingRank = {}; 
+	 var jobPostingRank = {};
 	 var userPoints = {};
 	  for (job in jobs){
 		skillsArray[jobs[job].JobTitle] = jobs[job].Description;
 	  }
 	  for (skill in skillsArray){
-	  
+
 		var tmpArray = skillsArray[skill].split(',');
 
 		jobPostingRank[skill] = tmpArray.length;
 		userPoints[skill] = 0;
 	  }
-	  
+
 		for (skill in skillsArray){
 			var tmpArray = skillsArray[skill].split(',');
 			for ( s in tmpArray ){
@@ -218,15 +189,15 @@ router.route('/rank').post(function(req, res, callback) {
 			}
 		}
 		for (skill in jobPostingRank){
-			
+
 			userPoints[skill] = (userPoints[skill] / jobPostingRank[skill]) * 100;
-		
+
 		}
 
 	  //send userPoints array through.
-	  
+
       // respond to call with information
-	  
+
       res.format({
         // json response
         json: function() {
@@ -238,7 +209,6 @@ router.route('/rank').post(function(req, res, callback) {
       });
     }
   });
->>>>>>> 777103d676666ee79fb4710b16daa3c55137925e
 });
 router.route('/rank').get(function(req, res, callback) {
 
