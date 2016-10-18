@@ -4,19 +4,22 @@ var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 
 var UploadResume = React.createClass({
-    onSubmit: function(e) {
+    onSubmit: function (e) {
+
+        e.preventDefault();
+
         var data = {
             file: this.refs.resumeupload.value
         }
-
+        
 
         // unused now, kept in case it might help somewhere
         var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
-          'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
-          'output_format' : 'json',
-          'output_info' : 'compiled_code',
-          'warning_level' : 'QUIET',
-          'js_code' : data // this is how the user's data is sent, including password through http. Safe.
+            'compilation_level': 'ADVANCED_OPTIMIZATIONS',
+            'output_format': 'json',
+            'output_info': 'compiled_code',
+            'warning_level': 'QUIET',
+            'js_code': data // this is how the user's data is sent, including password through http. Safe.
         }
 
 
@@ -41,7 +44,7 @@ var UploadResume = React.createClass({
 
         console.log("sending");
 
-        var req = http.request(httpOptions, function(res) {
+        var req = http.request(httpOptions, function (res) {
 
             console.log("sent");
 
@@ -50,7 +53,7 @@ var UploadResume = React.createClass({
             //console.log(options.path + ':' + res.satusCode);
             //res.setEncoding('utf8');
 
-            res.on('data', function(dataBlob) {
+            res.on('data', function (dataBlob) {
                 output += dataBlob;
                 console.log(output);
                 //Due to the keys being dynamically created based on job posting, had to do a quick work around
@@ -63,7 +66,7 @@ var UploadResume = React.createClass({
                 var divForm = document.getElementById("uploadFormId");
                 var divRank = document.getElementById("rankOutputId");
                 var rankTable = document.getElementById("rankTableId");
-
+                rankTable.innerHTML = "";
                 //Iterate through populate table, with an "APPLY" button
                 for (var i = 0; i < jobSplit.length; i++) {
                     var rankSplit = jobSplit[i].split(':');
@@ -73,20 +76,18 @@ var UploadResume = React.createClass({
                     var tdApply = tr.appendChild(document.createElement('td'));
                     tdJob.innerHTML = rankSplit[0];
                     tdRank.innerHTML = rankSplit[1];
-                    tdApply.innerHTML = "<a href='#'>Apply Now!</a>";
+                    tdApply.innerHTML = "<button type='button'>Apply Now!</button>";
+                    tdApply.style.color = 'blue';
+                    tdApply.addEventListener("click", function () { alert("Thank You For Applying!") });
                     rankTable.appendChild(tr);
+                    
                 }
 
-                divForm.style.display = 'none';
+                //divForm.style.display = 'none';
 
-                divRank.style.display = 'block';
+                //divRank.style.display = 'block';
 
                 console.log("test");
-
-            });
-
-            res.on('end', function() {
-                //FINAL statement
 
             });
 
@@ -94,7 +95,7 @@ var UploadResume = React.createClass({
 
         });
 
-        req.on('error', function(err) {
+        req.on('error', function (err) {
             res.send('error: ' + err.message);
         })
 
@@ -103,7 +104,7 @@ var UploadResume = React.createClass({
         req.end();
 
     },
-    render: function() {
+    render: function () {
         return (
             <div>
                 <div ref="uploadForm" id="uploadFormId">

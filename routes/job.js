@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var PDFParser = require('pdf2json');
 
-var pdfParser = new PDFParser(this, 1);
+
 
 module.exports = router;
 
@@ -143,16 +143,15 @@ router.route('/view').post(function(req, res, callback) {
 router.route('/rank').post(function(req, res, callback) {
 
 
-
+var pdfParser = new PDFParser(this, 1);
 
     pdfParser.on("pdfParser_dataError", errData => console.error(errData.parserError));
 
     pdfParser.on("pdfParser_dataReady", pdfData => {
-        fs.writeFile('./pdf/resume.txt', pdfParser.getRawTextContent());
-    });
-
-    pdfParser.loadPDF('./pdf/Resume.pdf');
-    var txtArray = fs.readFileSync('./pdf/resume.txt').toString().split(/[ ,]+/);
+		fs.truncate('./pdf/resume.txt', 0, function() {
+			fs.writeFile('./pdf/resume.txt', pdfParser.getRawTextContent());
+		});
+        var txtArray = fs.readFileSync('./pdf/resume.txt').toString().split(/[ ,]+/);
     mongoose.model('job').find({}, function(err, jobs) {
 
 
@@ -190,7 +189,9 @@ router.route('/rank').post(function(req, res, callback) {
                 userPoints[skill] = (userPoints[skill] / jobPostingRank[skill]) * 100;
 
             }
-
+			for (skill in userPoints){
+				console.log(userPoints[skill]);
+			}
             //send userPoints array through.
 
             // respond to call with information
@@ -204,10 +205,13 @@ router.route('/rank').post(function(req, res, callback) {
                 }
 
             });
-
             console.log("test");
         }
     });
+    });
+
+    pdfParser.loadPDF('./pdf/Resume.pdf');
+    
 });
 router.route('/rank').get(function(req, res, callback) {
 
