@@ -1,4 +1,8 @@
 var React = require('react');
+var http = require('http'); // to send request
+var config = require('../../config')(); // to get the port
+var querystring = require('querystring'); // to send data inside the request
+
 
 
 var UploadResume = React.createClass({
@@ -20,6 +24,9 @@ var UploadResume = React.createClass({
 */
 
         var dataQuerystring = querystring.stringify(data);
+
+        //use PDFParser, data should be path file to resume location.
+        
 
         // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
         var httpOptions = {
@@ -49,16 +56,35 @@ var UploadResume = React.createClass({
 
             res.on('data', function(dataBlob) {
                 output += dataBlob;
-                console.log("output: " + output);
-               
-                var divForm = this.refs.uploadForm;
-                var divRank = this.refs.rankOutput;
-                var rankTable = this.refs.rankTable;
-                divForm.styles.display = 'none';
-                divRank.styles.display = 'block';
+                console.log(output);
+                //Due to the keys being dynamically created based on job posting, had to do a quick work around
+                var ranks = output.replace("{\"ranks\":{\"", "");
+                ranks = ranks.replace(/["']/g, "");
+                ranks = ranks.replace(/[}]/g, "");
+                
+                var jobSplit = ranks.split(',');
+                
+                var divForm = document.getElementById("uploadFormId");
+                var divRank = document.getElementById("rankOutputId");
+                var rankTable = document.getElementById("rankTableId");
+                
                 //Iterate through populate table, with an "APPLY" button
+                for(var i = 0; i < jobSplit.length; i++)
+                {
+                    var rankSplit = jobSplit[i].split(':');
+                    var tr = document.createElement('tr');
+                    var tdJob = tr.appendChild(document.createElement('td'));
+                    var tdRank = tr.appendChild(document.createElement('td'));
+                    var tdApply = tr.appendChild(document.createElement('td'));
+                    tdJob.innerHTML = rankSplit[0];
+                    tdRank.innerHTML = rankSplit[1];
+                    tdApply.innerHTML = "<a href='#'>Apply Now!</a>";
+                    rankTable.appendChild(tr);
+                }
+              
+                divForm.style.display = 'none';
 
-
+                divRank.style.display = 'block';
 
 
             });
@@ -79,44 +105,7 @@ var UploadResume = React.createClass({
         req.write(dataQuerystring);
 
         req.end();
-
-        var httpThanks = {
-            port: config.port,
-            path: "/mail",
-            method: "POST", // insert data
-            headers: {
-                'Content-Type' : 'application/x-www-form-urlencoded',
-                'Content-Length' : Buffer.byteLength(dataQuerystring),
-                'Accept' : 'application/json'
-            }
-        }
-
-        console.log("sending");
-
-        var req = http.request(httpThanks, function(res){
-
-            console.log("sent");
-            var output = '';
-
-            res.on('data', function (dataBlob){
-                output += dataBlob;
-                console.log("output: " + output);
-
-            });
-            res.on('end', function() {
-                var obj = JSON.parse(output);
-            });
-
-
-        });
-
-        req.on('error', function(err){
-            res.send('error: ' + err.message);
-        })
-
-        req.write(dataQuerystring);
-
-        req.end();
+       
 
 
 
@@ -125,14 +114,14 @@ var UploadResume = React.createClass({
   render: function(){
     return(
       <div>
-          <div ref="uploadForm">
+          <div ref="uploadForm" id="uploadFormId">
             <form ref="resume" method="post" encType="multipart/form-data" onSubmit={this.onSubmit}>
           <input type="file" name="resume" ref="resumeupload"></input>
           <input type="submit" value="UploadResume" ref="resumesubmit" name="submit"></input>
             </form>
           </div>
-          <div ref="rankOutput">
-              <table ref="rankTable">
+          <div ref="rankOutput" id="rankOutputId">
+              <table ref="rankTable" id="rankTableId">
 
               </table>
           </div>
