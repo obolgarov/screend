@@ -50,17 +50,20 @@ var Login = React.createClass({
 
       res.on('data', function (dataBlob){
         output += dataBlob;
-        console.log("output: " + output);
+      //  console.log("output: " + output);
+        var parse = JSON.parse(output);
 
         var jsonData = JSON.parse(dataBlob);
+        //console.log(parse.token);
 
-        if(output == "{\"verified\":\"true\"}")
+
+        if(parse.success == true )
         {
           hashHistory.push('Main');
 
       }  else
         {
-          hashHistory.push('LoginEmployer');
+          hashHistory.push('Login');
 
         }
 

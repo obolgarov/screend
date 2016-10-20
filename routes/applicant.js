@@ -5,6 +5,8 @@ var mongoose = require('mongoose');
 var applicant = require('../models/applicant.js');
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
+var app = express();
+var superSecret = 'screend';
 
 var userValidator = require('./userValidator.js');
 
@@ -146,13 +148,25 @@ router.route('/verify').post(function(req, res, callback) {
 
         if (applicant != null ){
 
+
+          var token = jwt.sign({username}, superSecret,
+        {expiresIn: '10h'});
+
+
+
           res.format({
 
             // json response
             json: function() {
-              res.json({ verified: "true"});
-               console.log("true");
+              res.json({
+                      success: true,
+                      message: 'Enjoy your token!',
+                      token: token
+                    });               console.log(token);
             }
+
+
+
 
           });
         } else {
@@ -160,8 +174,11 @@ router.route('/verify').post(function(req, res, callback) {
 
             // json response
             json: function() {
-              res.json({ verified: "false"});
-              console.log("false");
+              res.json({
+              success: true,
+              message: 'Enjoy your token!',
+              token: token
+            });
 
             }
 
