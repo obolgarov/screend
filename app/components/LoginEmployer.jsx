@@ -52,8 +52,11 @@ var LoginEmployer = React.createClass({
         output += dataBlob;
         console.log("output: " + output);
 
-        if(output == "{\"verified\":\"true\"}")
-        {
+        var parse = JSON.parse(output);
+
+
+
+        if(parse.success == true )        {
           hashHistory.push('Main');
 
       }  else
