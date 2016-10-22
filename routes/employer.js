@@ -4,6 +4,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var employer = require('../models/employer.js');
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
+var app = express();
+var superSecret = 'screend';
 
 module.exports = router;
 
@@ -129,13 +132,22 @@ router.route('/verify').post(function(req, res, callback) {
 
         if (employer != null ){
 
+          var token = jwt.sign({username}, superSecret,
+        {expiresIn: '10h'});
+
+
+
           res.format({
 
             // json response
             json: function() {
-              res.json({ verified: "true"});
-               console.log("true");
+              res.json({
+                      success: true,
+                      message: 'Enjoy your token!',
+                      token: token
+                    });               console.log(token);
             }
+
 
           });
         } else {
