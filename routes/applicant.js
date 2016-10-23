@@ -252,10 +252,62 @@ router.route('/reset').post(function(req, res, callback) {
     });
   }
 
-
-
-
 });
+
+router.route('/exists').post(function(req, res, callback) {
+  // get specific uservar username = req.body.username;
+  if (req.body.username != null){
+    var username = req.body.username;
+
+    mongoose.model('applicant').findOne({
+      username : username
+    }, function (err, applicant){
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (applicant != null ){
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({
+                      found: "true"
+                    });
+            }
+          });
+        } else {
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({
+              found : "false"
+            });
+
+            }
+
+          });
+        }
+
+
+      }
+      });
+      } else {
+      res.format({
+
+      // json response
+      json: function() {
+        res.json({ verified: "false"});
+      }
+
+      });
+      }
+});
+
+
+
+
 
 /*
 router.get('/new', function(req, res) {
