@@ -16,10 +16,20 @@ var RegEmployer = React.createClass({
         comName : this.refs.companyName.value,
         comAddress : this.refs.companyAddress.value,
         comIndustry : this.refs.industry.value,
-        comAttributes : this.refs.attributes.value
+        comAttributes : this.refs.attributes.value,
+        confirmPassword : this.refs.confirmPassword.value
       }
 
       var dataQuerystring = querystring.stringify(data);
+
+      if(data.userPass != data.confirmPassword)
+      {
+          console.log("Do not match");
+          alert("Error : Passwords do not match")
+
+      }
+      else {
+
 
       // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
       var httpOptions = {
@@ -109,7 +119,7 @@ var RegEmployer = React.createClass({
 
       req.end();
 
-
+    }
 
 
 

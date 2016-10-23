@@ -13,21 +13,19 @@ var RegSeeker = React.createClass({
             lastname: this.refs.last.value,
             email: this.refs.email.value,
             username: this.refs.user.value,
-            password: this.refs.password.value
+            password: this.refs.password.value,
+            confirmPassword : this.refs.confirmPassword.value
         }
 
-        /*
-    // unused now, kept in case it might help somewhere
-    var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
-      'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
-      'output_format' : 'json',
-      'output_info' : 'compiled_code',
-      'warning_level' : 'QUIET',
-      'js_code' : data // this is how the user's data is sent, including password through http. Safe.
-    }
-*/
 
         var dataQuerystring = querystring.stringify(data);
+        if(data.password != data.confirmPassword)
+        {
+            console.log("Do not match");
+
+        }
+        else {
+
 
         // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
         var httpOptions = {
@@ -113,6 +111,7 @@ var RegSeeker = React.createClass({
         req.write(dataQuerystring);
 
         req.end();
+      }
 
 
 
