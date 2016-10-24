@@ -58,6 +58,7 @@ var Login = React.createClass({
         //console.log(parse.token);
 
         console.log(parse.token);
+        cookie.save('userToken', parse.token, { path: '/' });
 
         if(parse.success == true )
         {
