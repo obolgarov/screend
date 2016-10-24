@@ -11,10 +11,15 @@ var jobSchema = new mongoose.Schema( {
   Location: String,
   Certification: String,
   Requirededucation: String,
-  Experience: String,
   Salary: String,
-  Description: String
+  Description: String,
+  Skills: [{
+    skillName: String,
+    experience: String
+  }]
 })
+
+var skillSchema = new mongoose.Schema
 
 module.exports = mongoose.model('job', jobSchema);
 
