@@ -4,6 +4,7 @@ var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var {Link} = require('react-router');
 import { hashHistory } from 'react-router';
+import cookie from 'react-cookie';
 
 
 
@@ -56,6 +57,7 @@ var Login = React.createClass({
         var jsonData = JSON.parse(dataBlob);
         //console.log(parse.token);
 
+        console.log(parse.token);
 
         if(parse.success == true )
         {
