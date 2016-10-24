@@ -139,7 +139,7 @@ router.route('/exists/:skill').get( function(req, res) {
       res.format({
         json: function() {
           res.json({
-            exists: true;
+            exists: true
           });
         }
       });
