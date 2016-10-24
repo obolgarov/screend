@@ -298,7 +298,7 @@ router.route('/exists').post(function(req, res, callback) {
 
       // json response
       json: function() {
-        res.json({ verified: "false"});
+        res.json({ found: "false"});
       }
 
       });
