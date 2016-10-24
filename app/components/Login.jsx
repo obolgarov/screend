@@ -5,7 +5,7 @@ var querystring = require('querystring'); // to send data inside the request
 var {Link} = require('react-router');
 import { hashHistory } from 'react-router';
 import cookie from 'react-cookie';
-
+var Cookies = require('js-cookie')
 
 
 var Login = React.createClass({
@@ -58,7 +58,7 @@ var Login = React.createClass({
         //console.log(parse.token);
 
         console.log(parse.token);
-        cookie.save('userToken', parse.token, { path: '/' });
+        Cookies.set('userToken', parse.token,{ expires: 1 });
 
         if(parse.success == true )
         {
