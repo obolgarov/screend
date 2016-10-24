@@ -30,38 +30,55 @@ var {Link} = require('react-router');
 
 
 
-var Nav = () => {
-    return(
-      <div className="top-bar" activeStyle={{padding: "10px", margin: "100px", border: "1px solid ", width : "100%"}}>
-        <div className="top-bar-left" >
-          <ul className="menu">
-            <li className="menu-text">
-              Screen-d
-            </li>
-            <li>
-                <Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
-            </li>
-            <li>
-              <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >JobPosting</Link>
-            </li>
-            <li>
-              <Link to="/messages" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Messages</Link>
-            </li>
-            <li>
-              <Link to="/UploadResume" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Upload Resume</Link>
-            </li>
-            <li>
-              <Link to="/ContactUs" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact Us</Link>
-            </li>
-            <li>
-              <Link to="/PostJobForm" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Post Job</Link>
-            </li>
-          </ul>
-        </div>
+var Nav = React.createClass({
 
-      </div>
-    );
-  };
+    onLogin: function(e){
+      e.preventDefault();
+      alert('notworking');
+    },
+
+
+
+
+    render: function(){
+      return(
+        <div className="top-bar" activeStyle={{padding: "10px", margin: "50px", border: "1px solid ", width : "100%"}}>
+          <div className="top-bar-left" >
+            <ul className="menu">
+              <li className="menu-text" activeStyle={{fontWeight: 'bold'}}>
+                Screen-d
+              </li>
+              <li>
+                  <Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
+              </li>
+              <li>
+                <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >JobPosting</Link>
+              </li>
+              <li>
+                <Link to="/messages" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Messages</Link>
+              </li>
+              <li>
+                <Link to="/UploadResume" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Upload Resume</Link>
+              </li>
+              <li>
+                <Link to="/ContactUs" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact Us</Link>
+              </li>
+              <li>
+                <Link to="/PostJobForm" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Post Job</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="top-bar-right">
+              <form onSubmit={this.onLogin}>
+                <input value="Sign Out" type="submit" className="button"></input>
+              </form>
+          </div>
+
+        </div>
+        );
+      }
+
+    });
 
 
 module.exports = Nav;
