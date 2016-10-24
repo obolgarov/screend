@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 
 module.exports = {
+  cache : true,
   entry: [
   'script!jquery/dist/jquery.min.js',
   'script!foundation-sites/dist/foundation.min.js',
