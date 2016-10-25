@@ -70,7 +70,7 @@ var EmployerEmail = React.createClass({
     render: function() {
         return (
       <div>
-        <h3>Enter your email account to recieve a password reset link: </h3>
+        <h3>Enter your username to recieve a password reset link: </h3>
 
           <form ref='EmployerEmail'  onSubmit={this.onSubmit}>
             <div>
