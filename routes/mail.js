@@ -42,6 +42,10 @@ router.route('/')
 
 router.route('/empreset').post(function(req, res, callback) {
 
+
+    var username = req.body.username;
+    console.log(username);
+
     var nodemailer = require('nodemailer');
 
     // create reusable transporter object using the default SMTP transport
@@ -52,8 +56,8 @@ router.route('/empreset').post(function(req, res, callback) {
         from: '"Test123  👥" <nodemailer.test123@gmail.com>', // sender address
         to: 'nodemail.test234@gmail.com', // list of receivers
         subject: 'Password Reset Link ', // Subject line
-        text: 'Click here to reset your password : http://localhost:3000/#/PasswordResetEmployer?_k=b01wv3', // plaintext body
-        html: '<b>Click here to reset your password : http://localhost:3000/#/PasswordResetEmployer?_k=b01wv3</b>' // html body
+        text: 'Click here to reset your password : http://localhost:3000/#/PasswordResetEmployer?'+username, // plaintext body
+        html: '<b>Click here to reset your password :  http://localhost:3000/#/PasswordResetEmployer?' + username + '</b>' // html body
     };
 
     // send mail with defined transport object
@@ -67,6 +71,10 @@ router.route('/empreset').post(function(req, res, callback) {
 
 
 router.route('/appreset').post(function(req, res, callback) {
+
+    var username = req.body.username;
+    console.log(username);
+
 
     var nodemailer = require('nodemailer');
 
