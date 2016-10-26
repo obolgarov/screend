@@ -5,107 +5,116 @@ var querystring = require('querystring'); // to send data inside the request
 var i = 0;
 
 
-
 var JobPostings = React.createClass({
 
+  componentDidMount: function() {
 
-    onSubmit: function(e){
-      e.preventDefault();
-      var httpOptions = {
-        port: config.port,
-        path: "/job/?id=",
-        method: "GET", // insert data
-        headers: {
-          'Content-Type' : 'application/x-www-form-urlencoded',
-          'Accept' : 'application/json'
-        }
+
+    var httpOptions = {
+      port: config.port,
+      path: "/job",
+      method: "GET", // insert data
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
       }
-      var output = '';
+    }
+    var output = '';
 
-      //  console.log("body: " + JSON.stringify(data));
+    //  console.log("body: " + JSON.stringify(data));
 
-      console.log("sending");
+    //console.log("creating request");
 
-      var req = http.request(httpOptions, function(res){
+    var jobsTable = this.refs.jobsTable;
 
-      console.log('sent');
+    var req = http.request(httpOptions, function(res) {
 
-      res.on('data', function (dataBlob){
+      //console.log('response obtained');
+
+      res.on('data', function(dataBlob) {
         output += dataBlob;
 
-      console.log("{output: " + output + "}");
+        //console.log("output: \n" + output);
 
-      //var ObjOutput = JSON.parse('{ output:[{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa","__v":0}][{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa"]}');
+        //var ObjOutput = JSON.parse('{ output:[{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa","__v":0}][{"_id":"57fd722abe68932791009aba","CompanyName":"Screend","Location":"Tor","Certification":"Nothing","Requirededucation":"College","Experience":"None","Salary":"None","Description":"Work","__v":0},{"_id":"57fda3d96f8df629ef1e8af8","JobTitle":"software developer","CompanyName":"Microsoft","Location":"mississauga","Certification":"C=++","Requirededucation":"prog","Experience":"2","Salary":"30000","Description":"kdfjlasfjalksdfjldsa"]}');
 
-      var parse = JSON.parse(output);
+        var parsedOutput = JSON.parse(output);
 
-
-      var x = document.createElement("TABLE");
-      x.setAttribute("id", "myTable");
-      document.body.appendChild(x);
+        //console.log(parsedOutput);
 
 
-      for (var i = 0; i < parse.length; i++){
+        // I don't know if this works but I have to push
+        var jobList = [];
+        for ( var job in parsedOutput ){
+          var jobItem = (
+            <tr>
+              <td>{this.props.jobName}</td>
+              <td>{this.props.companyName}</td>
+              <td>{this.props.jobID}</td>
+            </tr>
+          );
 
-      var y = document.createElement("TR");
-      var index = "" + i + "";
-      y.setAttribute("id", index);
-      document.getElementById("myTable").appendChild(y);
+          jobList.push(jobItem);
+        }
+        console.log(jobList);
+/////////////////////////////////////////////////////////////////////
+        /*
+        var x = document.createElement("TABLE");
+        x.setAttribute("ref", "myTable");
+        document.body.appendChild(x);
 
+        for (var i = 0; i < parse.length; i++) {
 
-//<a href="./jobDescription.jsx">
-      var b = document.createElement("TD");
-      var link = document.createElement("a");
-      link.setAttribute('href','http://localhost:3000/#/JobDescription?id='+ parse[i]._id);
-      var JobTitle = document.createTextNode(parse[i].JobTitle);
-      link.appendChild(JobTitle);
-      b.appendChild(link);
-      document.getElementById(index).appendChild(b);
+          var y = document.createElement("TR");
+          var index = "" + i + "";
+          y.setAttribute("ref", index + "row");
+          document.getElementById("myTable").appendChild(y);
 
+          //<a href="./jobDescription.jsx">
+          var b = document.createElement("TD");
+          var link = document.createElement("a");
+          link.setAttribute('href', 'http://localhost:3000/#/JobDescription?id=' + parse[i]._id);
+          var JobTitle = document.createTextNode(parse[i].JobTitle);
+          link.appendChild(JobTitle);
+          b.appendChild(link);
+          document.getElementById(index).appendChild(b);
 
-      var z = document.createElement("TD");
-      var name = document.createTextNode(parse[i].CompanyName);
-      z.appendChild(name);
-      document.getElementById(index).appendChild(z);
+          var z = document.createElement("TD");
+          var name = document.createTextNode(parse[i].CompanyName);
+          z.appendChild(name);
+          document.getElementById(index).appendChild(z);
 
-      var c = document.createElement("TD");
-      var id = document.createTextNode(parse[i]._id);
-      c.appendChild(id);
-      document.getElementById(index).appendChild(c);
+          var c = document.createElement("TD");
+          var id = document.createTextNode(parse[i]._id);
+          c.appendChild(id);
+          document.getElementById(index).appendChild(c);
 
+        }
+        */
 
-
-  }
+      });
     });
-  });
 
-      req.on('error', function(err){
-        res.send('error: ' + err.message);
-      })
+    req.on('error', function(err) {
+      res.send('error: ' + err.message);
+    })
 
-      req.end();
+    req.end();
 
+  },
 
+  render: function() {
 
-
-    },
-
-render: function(){
-
-return(
+    return (
       <div>
-          <form ref='metric_results' onSubmit={this.onSubmit}>
-            <div id='Content-Length'>
-              <button type="submit">Submit</button>
-
-            </div>
-
+        <form ref='metric_results' onSubmit={this.onSubmit}>
+          <div id='Content-Length'></div>
+          <table ref="jobsTable"></table>
         </form>
       </div>
     );
   }
 });
-
 // var Job = React.createClass({
 //   render: function(){
 //     <div>
@@ -128,9 +137,7 @@ return(
 //   }
 // });
 
-
 module.exports = JobPostings;
-
 
 // var JobPostings = React.createClass({
 //
@@ -221,11 +228,6 @@ module.exports = JobPostings;
 //
 // module.exports = JobPostings;
 
-
-
-
-
-
 //
 //     render: function render() {
 //         var _self = this;
@@ -262,8 +264,6 @@ module.exports = JobPostings;
 // React.render(JobPostings(tableModel), container);
 //
 // module.exports = JobPostings;
-
-
 
 /*
 var TABLE_CONFIG = {
