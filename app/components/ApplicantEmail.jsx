@@ -2,7 +2,7 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
-
+var Nav = require('Nav');
 var ApplicantEmail = React.createClass({
 
   onSubmit: function (e) {
@@ -69,6 +69,7 @@ var ApplicantEmail = React.createClass({
     render: function() {
         return (
       <div>
+       <Nav/>
         <h3>Enter your email account to recieve a password reset link: </h3>
 
           <form ref='ApplicantEmail' onSubmit={this.onSubmit}>

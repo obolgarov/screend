@@ -179,6 +179,7 @@ var RegEmployer = React.createClass({
     return (
 
         <div>
+
             <h2>Register Account - Employer</h2>
 
             <form ref='employer_form' onSubmit={this.onSubmit}>

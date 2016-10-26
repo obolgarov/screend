@@ -3,7 +3,7 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var {Link} = require('react-router');
-
+var Nav = require('Nav');
 var PasswordResetEmployer = React.createClass({
 
   onSubmit: function (e) {

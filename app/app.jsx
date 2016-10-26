@@ -36,6 +36,7 @@ ReactDOM.render(
   <Route path="RegSeeker" components={RegSeeker}/>
   <Route path="PasswordReset" components={PasswordReset}/>
   <Route path="Welcome" components={Welcome}/>
+  <Route path="Home" components={Home}/>
   <Route path="LoginEmployer" components={LoginEmployer}/>
   <Route path="PasswordResetEmployer" components={PasswordResetEmployer}/>
   <Route path="ApplicantEmail" components={ApplicantEmail}/>

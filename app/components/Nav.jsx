@@ -49,7 +49,7 @@ var Nav = React.createClass({
                 Screen-d
               </li>
               <li>
-                  <Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
+                  <Link to="/Home" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
               </li>
               <li>
                 <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >JobPosting</Link>
