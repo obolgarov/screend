@@ -111,7 +111,7 @@ var Login = React.createClass({
       </div>
 
     <div>
-      <button type="submit">Submit</button>
+      <button type="submit" className="button hollow" >Submit</button>
     </div>
 
   </form>
