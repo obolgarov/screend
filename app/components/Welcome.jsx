@@ -5,6 +5,9 @@ var {Link} = require('react-router');
 var Welcome = React.createClass({
     render: function() {
         return (
+  <div className="row">
+
+    <div className="columns medium-4 large-6 small-centered">
       <div>
         <h2>Welcome</h2>
 
@@ -18,6 +21,9 @@ var Welcome = React.createClass({
             <Link to="/LoginEmployer">Employer</Link>
         </div>
       </div>
+    </div>
+
+  </div >
     );
   }
 });

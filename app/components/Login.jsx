@@ -96,6 +96,7 @@ var Login = React.createClass({
     return(
 
 <div>
+
   <h2>Login - Job Seeker</h2>
     <form ref='LogIn' onSubmit={this.onSubmit}>
 

@@ -2,6 +2,8 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
+var Nav = require('Nav');
+
 
 var ContactUs = React.createClass({
 
@@ -67,6 +69,7 @@ var ContactUs = React.createClass({
     return(
 
       <div>
+        <Nav/>
       <h2>Contact Us</h2>
 
 <form ref='ContactUs' onSubmit={this.onSubmit}>
@@ -89,7 +92,8 @@ var ContactUs = React.createClass({
        </div>
 
      </form>
-     </div>
+
+    </div>
     );
   }
 });
