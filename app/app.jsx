@@ -36,12 +36,12 @@ ReactDOM.render(
   <Route path="RegSeeker" components={RegSeeker}/>
   <Route path="PasswordReset" components={PasswordReset}/>
   <Route path="Welcome" components={Welcome}/>
-  <Route path="Home" components={Home}/>
   <Route path="LoginEmployer" components={LoginEmployer}/>
   <Route path="PasswordResetEmployer" components={PasswordResetEmployer}/>
   <Route path="ApplicantEmail" components={ApplicantEmail}/>
   <Route path="EmployerEmail" components={EmployerEmail}/>
-  <Route path="Main"  components={Main}/>
+  <Route path="Home" components={Home}/>
+  <Route path="Main" components={Main}/>
   <IndexRoute component={Welcome}/>
   </Route>
 </Router>,
