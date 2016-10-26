@@ -5,8 +5,9 @@ var mongoose = require('mongoose')
 
 var skillSchema = new mongoose.Schema( {
   skillName : String,
-  skillType : String,
-  years : String
+  skillTypes : [{
+    skillName: String
+  }]
 })
 
 module.exports = mongoose.model('skill', skillSchema);

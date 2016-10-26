@@ -5,9 +5,15 @@ var Main = React.createClass({
     render: function() {
         return (
       <div>
-        <h2>Main Component</h2> 
+
         <Nav/>
-        {this.props.children}
+
+              <div className="row">
+                <div className="columns medium-4 large-6 small-centered">
+                    {this.props.children}
+                </div>
+              </div>
+
       </div>
     );
   }

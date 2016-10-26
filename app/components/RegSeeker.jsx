@@ -13,106 +13,164 @@ var RegSeeker = React.createClass({
             lastname: this.refs.last.value,
             email: this.refs.email.value,
             username: this.refs.user.value,
-            password: this.refs.password.value
+            password: this.refs.password.value,
+            confirmPassword : this.refs.confirmPassword.value
         }
 
-        /*
-    // unused now, kept in case it might help somewhere
-    var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
-      'compilation_level' : 'ADVANCED_OPTIMIZATIONS',
-      'output_format' : 'json',
-      'output_info' : 'compiled_code',
-      'warning_level' : 'QUIET',
-      'js_code' : data // this is how the user's data is sent, including password through http. Safe.
-    }
-*/
 
         var dataQuerystring = querystring.stringify(data);
+        if(data.password != data.confirmPassword)
+        {
+            console.log("Do not match");
 
-        // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
-        var httpOptions = {
-            port: config.port,
-            path: "/applicants",
-            method: "POST", // insert data
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Content-Length': Buffer.byteLength(dataQuerystring),
-                'Accept': 'application/json'
-            },
-            body: dataQuerystring
         }
+        else {
 
-        console.log("body: " + JSON.stringify(data));
-
-        console.log("sending");
-
-        var req = http.request(httpOptions, function(res) {
-
-            console.log("sent");
-
-            // res now contains new applicant data already inserted
-            var output = '';
-           //console.log(options.path + ':' + res.satusCode);
-          //res.setEncoding('utf8');
-
-            res.on('data', function(dataBlob) {
-                output += dataBlob;
-                console.log("output: " + output);
-            });
-
-            res.on('end', function() {
-                var obj = JSON.parse(output);
-            });
-
-            // TODO: do something with the data for the applicant just inserted
-
-        });
-
-        req.on('error', function(err) {
-            res.send('error: ' + err.message);
-        })
-
-        req.write(dataQuerystring);
-
-        req.end();
-
-        var httpThanks = {
-          port: config.port,
-          path: "/mail",
-          method: "POST", // insert data
-          headers: {
-            'Content-Type' : 'application/x-www-form-urlencoded',
-            'Content-Length' : Buffer.byteLength(dataQuerystring),
-            'Accept' : 'application/json'
+          var exists = {
+              port: config.port,
+              path: "/applicants/exists",
+              method: "POST", // insert data
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  'Content-Length': Buffer.byteLength(dataQuerystring),
+                  'Accept': 'application/json'
+              },
+              body: dataQuerystring
           }
+
+          console.log("body: " + JSON.stringify(data));
+
+          console.log("sending");
+
+          var req = http.request(exists, function(res) {
+
+              console.log("sent");
+
+              // res now contains new applicant data already inserted
+              var output = '';
+
+
+              res.on('data', function(dataBlob) {
+                  output += dataBlob;
+                  console.log("output: " + output);
+
+                  var parse = JSON.parse(output);
+
+                    if(parse.found == "true"){
+                      alert("Error: Account Exists");
+                    }
+
+                    else {
+
+                      var httpOptions = {
+                          port: config.port,
+                          path: "/applicants",
+                          method: "POST", // insert data
+                          headers: {
+                              'Content-Type': 'application/x-www-form-urlencoded',
+                              'Content-Length': Buffer.byteLength(dataQuerystring),
+                              'Accept': 'application/json'
+                          },
+                          body: dataQuerystring
+                      }
+
+                      console.log("body: " + JSON.stringify(data));
+
+                      console.log("sending");
+
+                      var req = http.request(httpOptions, function(res) {
+
+                          console.log("sent");
+
+                          // res now contains new applicant data already inserted
+                          var output = '';
+                         //console.log(options.path + ':' + res.satusCode);
+                        //res.setEncoding('utf8');
+
+                          res.on('data', function(dataBlob) {
+                              output += dataBlob;
+                              console.log("output: " + output);
+                          });
+
+                          res.on('end', function() {
+                              var obj = JSON.parse(output);
+                          });
+
+                          // TODO: do something with the data for the applicant just inserted
+
+                      });
+
+                      req.on('error', function(err) {
+                          res.send('error: ' + err.message);
+                      })
+
+                      req.write(dataQuerystring);
+
+                      req.end();
+
+                      var httpThanks = {
+                        port: config.port,
+                        path: "/mail",
+                        method: "POST", // insert data
+                        headers: {
+                          'Content-Type' : 'application/x-www-form-urlencoded',
+                          'Content-Length' : Buffer.byteLength(dataQuerystring),
+                          'Accept' : 'application/json'
+                        }
+                      }
+
+                      console.log("sending");
+
+                      var req = http.request(httpThanks, function(res){
+
+                        console.log("sent");
+                        var output = '';
+
+                        res.on('data', function (dataBlob){
+                          output += dataBlob;
+                          console.log("output: " + output);
+
+                        });
+                        res.on('end', function() {
+                          var obj = JSON.parse(output);
+                        });
+
+
+                      });
+
+                      req.on('error', function(err){
+                        res.send('error: ' + err.message);
+                      })
+
+                      req.write(dataQuerystring);
+
+                      req.end();
+
+                    }
+
+
+              });
+
+              res.on('end', function() {
+                  var obj = JSON.parse(output);
+              });
+
+              // TODO: do something with the data for the applicant just inserted
+
+          });
+
+          req.on('error', function(err) {
+              res.send('error: ' + err.message);
+          })
+
+          req.write(dataQuerystring);
+
+          req.end();
+
         }
 
-        console.log("sending");
-
-        var req = http.request(httpThanks, function(res){
-
-          console.log("sent");
-          var output = '';
-
-          res.on('data', function (dataBlob){
-            output += dataBlob;
-            console.log("output: " + output);
-
-          });
-          res.on('end', function() {
-            var obj = JSON.parse(output);
-          });
 
 
-        });
-
-        req.on('error', function(err){
-          res.send('error: ' + err.message);
-        })
-
-        req.write(dataQuerystring);
-
-        req.end();
 
 
 

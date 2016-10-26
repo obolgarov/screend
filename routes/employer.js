@@ -231,10 +231,66 @@ router.route('/reset').post(function(req, res, callback) {
     });
   }
 
-
-
-
 });
+
+
+router.route('/exists').post(function(req, res, callback) {
+  // get specific uservar username = req.body.username;
+  if (req.body.userName != null){
+    var username = req.body.userName;
+
+    console.log(req.body.userName);
+
+    mongoose.model('employer').findOne({
+      username : username
+    }, function (err, employer){
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (employer != null ){
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({
+                      found: "true"
+                    });
+            }
+          });
+        } else {
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({
+              found : "false"
+            });
+
+            }
+
+          });
+        }
+
+
+      }
+      });
+      } else {
+      res.format({
+
+      // json response
+      json: function() {
+        res.json({ found: "false"});
+      }
+
+      });
+      }
+});
+
+
+
+
+
 
 
 /*

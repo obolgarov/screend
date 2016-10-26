@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var applicant = require('../models/skill.js');
+var Skill = require('../models/skill.js');
 var bodyParser = require('body-parser');
 
 module.exports = router;
@@ -26,7 +26,7 @@ router.route('/')
 
 
   // get all
-  mongoose.model('skill').find({}, function (err, skill){
+  Skill.find({}, function (err, skill){
 
     if (err) {
       return console.error(err);
@@ -65,7 +65,7 @@ router.route('/')
   var skillType = req.body.skillType;
   var Years = req.body.years;
 
-  mongoose.model('skill').create({
+  Skill.create({
     skillName : skillName,
     skillType : skillType,
     years : years
@@ -96,4 +96,54 @@ router.route('/')
   });
 
   // end of post
+});
+
+// return single skill
+router.route('/find/:skill').get( function(req, res) {
+  var skillName = req.query.skill;
+
+  Skill.findOne({
+    skillName: skillName
+  }, function (err, skill) {
+    if (err) {
+      console.error(err);
+    } else {
+
+      res.format({
+        json: function() {
+          res.json(skill);
+        }
+      });
+
+    }
+  });
+});
+
+// check if skill is in database
+router.route('/exists/:skill').get( function(req, res) {
+  var skillName = req.query.skill;
+
+  Skill.count({
+    skillName: skillName
+  }, function (err, count) {
+    if (err) {
+      console.error(err);
+    } else {
+
+      var exists = false;
+
+      if (count > 0){
+        exists = true
+      }
+
+      res.format({
+        json: function() {
+          res.json({
+            exists: true
+          });
+        }
+      });
+
+    }
+  });
 });

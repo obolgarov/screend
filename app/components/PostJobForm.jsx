@@ -118,6 +118,10 @@ var postJobForm = React.createClass({
                         <textarea ref="description"></textarea>
                     </div>
 
+                    <div ref="skills">
+                      <input type="button" ref="btnSkill1"/><label>Skills</label>
+                    </div>
+
                     <div>
                         <input type="submit"></input>
                     </div>

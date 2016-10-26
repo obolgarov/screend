@@ -4,6 +4,7 @@ var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var {Link} = require('react-router');
 import { hashHistory } from 'react-router';
+var Cookies = require('js-cookie')
 
 
 var LoginEmployer = React.createClass({
@@ -54,6 +55,7 @@ var LoginEmployer = React.createClass({
 
         var parse = JSON.parse(output);
 
+        Cookies.set('userToken', parse.token,{ expires: 1 });
 
 
         if(parse.success == true )        {
