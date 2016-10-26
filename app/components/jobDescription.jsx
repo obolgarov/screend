@@ -2,7 +2,6 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
-var Nav = require('Nav');
 
 
 
@@ -97,7 +96,7 @@ var jobDescription = React.createClass({
   render: function(){
     return(
       <div>
-        <Nav/>
+
         <div>
           <label>Job Title:</label>
           <label id="jobtitle"></label>

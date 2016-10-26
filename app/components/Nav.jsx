@@ -49,7 +49,7 @@ var Nav = React.createClass({
                 Screen-d
               </li>
               <li>
-                  <Link to="/Home" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
+                  <Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
               </li>
               <li>
                 <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >JobPosting</Link>
@@ -70,7 +70,7 @@ var Nav = React.createClass({
           </div>
           <div className="top-bar-right">
               <form onSubmit={this.onLogin}>
-                <input value="Sign Out" type="submit" className="button"></input>
+                <input value="Sign Out" type="submit" className="button</input>">
               </form>
           </div>
 

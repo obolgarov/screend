@@ -2,7 +2,6 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
-var Nav = require('Nav');
 var i = 0;
 
 
@@ -95,7 +94,6 @@ render: function(){
 
 return(
       <div>
-        <Nav/>
           <form ref='metric_results' onSubmit={this.onSubmit}>
             <div id='Content-Length'>
               <button type="submit">Submit</button>

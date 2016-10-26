@@ -110,7 +110,7 @@ var Login = React.createClass({
       </div>
 
     <div>
-      <button className="button expanded hollow" type="submit">Submit</button>
+      <button type="submit">Submit</button>
     </div>
 
   </form>
