@@ -8,25 +8,8 @@ var PasswordResetEmployer = React.createClass({
 
   onSubmit: function (e) {
 
-
-    function getParameterByName(name, url) {
-      if (!url) {
-        url = window.location.href;
-      }
-      name = name.replace(/[\[\]]/g, "\\$&");
-      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-          results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
-
-  var user = getParameterByName('user');
-
-
-
     var data = {
-      username : user,
+      username : this.refs.user.value,
       password : this.refs.pass1.value,
       newPassword : this.refs.pass2.value
     }
@@ -89,6 +72,11 @@ render: function(){
   <h2>Password Reset - Employer</h2>
 
     <form ref='reset' onSubmit={this.onSubmit}>
+
+      <div>
+        <label>Username:</label>
+        <input type="username" ref="user"/>
+      </div>
 
         <div>
           <label>New Password: </label>

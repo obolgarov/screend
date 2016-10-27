@@ -177,7 +177,6 @@ var RegEmployer = React.createClass({
 
  render : function() {
     return (
-
         <div>
             <h2>Register Account - Employer</h2>
 

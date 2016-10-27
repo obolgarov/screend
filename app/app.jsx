@@ -40,7 +40,8 @@ ReactDOM.render(
   <Route path="PasswordResetEmployer" components={PasswordResetEmployer}/>
   <Route path="ApplicantEmail" components={ApplicantEmail}/>
   <Route path="EmployerEmail" components={EmployerEmail}/>
-  <Route path="Main"  components={Main}/>
+  <Route path="Home" components={Home}/>
+  <Route path="Main" components={Main}/>
   <IndexRoute component={Welcome}/>
   </Route>
 </Router>,

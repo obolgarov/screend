@@ -8,7 +8,7 @@ var ApplicantEmail = React.createClass({
   onSubmit: function (e) {
 
     var data = {
-      username : this.refs.user.value
+      email : this.refs.email
     }
     var dataQuerystring = querystring.stringify(data);
 
@@ -69,16 +69,15 @@ var ApplicantEmail = React.createClass({
     render: function() {
         return (
       <div>
-        <h3>Enter your username to recieve a password reset link: </h3>
+        <h3>Enter your email account to recieve a password reset link: </h3>
 
-          <form ref='ApplicantEmail'  onSubmit={this.onSubmit}>
+          <form ref='ApplicantEmail' onSubmit={this.onSubmit}>
             <div>
-                <label>Username: </label>
-                <input type="text" ref="user"/>
+                <label>Email: </label>
+                <input type="email" ref="email"/>
             </div>
-
             <div>
-              <input type="submit" />
+              <button type="submit">Submit</button>
             </div>
 
           </form>

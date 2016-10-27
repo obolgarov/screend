@@ -2,7 +2,7 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
-
+var Nav = require ('Nav');
 var UploadResume = React.createClass({
     onSubmit: function (e) {
 
@@ -11,7 +11,7 @@ var UploadResume = React.createClass({
         var data = {
             file: this.refs.resumeupload.value
         }
-        
+
 
         // unused now, kept in case it might help somewhere
         var postData = { // data specific to HTTP POST requests, no idea what these options do but at least they don't hurt
@@ -80,7 +80,7 @@ var UploadResume = React.createClass({
                     tdApply.style.color = 'blue';
                     tdApply.addEventListener("click", function () { alert("Thank You For Applying!") });
                     rankTable.appendChild(tr);
-                    
+
                 }
 
                 //divForm.style.display = 'none';
@@ -107,6 +107,7 @@ var UploadResume = React.createClass({
     render: function () {
         return (
             <div>
+              <Nav/>
                 <div ref="uploadForm" id="uploadFormId">
                     <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
                         <input type="file" name="resume" ref="resumeupload"></input>
