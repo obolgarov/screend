@@ -28,6 +28,9 @@
 
 var React = require('react');
 var {Link} = require('react-router');
+import { hashHistory } from 'react-router';
+import cookie from 'react-cookie';
+var Cookies = require('js-cookie')
 
 
 
@@ -35,7 +38,9 @@ var Nav = React.createClass({
 
     onLogin: function(e){
       e.preventDefault();
-      alert('notworking');
+
+      Cookies.remove('userToken');
+      hashHistory.push('/');
     },
 
 
