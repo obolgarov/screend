@@ -32,6 +32,15 @@ var PasswordResetEmployer = React.createClass({
     }
     var dataQuerystring = querystring.stringify(data);
 
+    if(data.password != data.newPassword)
+    {
+        console.log("Do not match");
+
+    }
+    else {
+
+
+
     // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
     var httpOptions = {
       port: config.port,
@@ -80,6 +89,7 @@ var PasswordResetEmployer = React.createClass({
     req.write(dataQuerystring);
 
     req.end();
+  }
 
   },
 
