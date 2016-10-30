@@ -9,10 +9,12 @@ var ContactUs = React.createClass({
 
   onSubmit: function (e) {
 
+    //username will be grabbed from the cookie
     var data = {
-      username : this.refs.user.value,
+      userFrom : this.refs.user.value,
       subject : this.refs.subject.value,
-      message : this.refs.message.value
+      message : this.refs.message.value,
+      recipient : "admin"
     }
     var dataQuerystring = querystring.stringify(data);
 
@@ -83,10 +85,6 @@ var ContactUs = React.createClass({
            <textarea ref="message"></textarea>
        </div>
 
-       <div>
-         <label>Username: </label>
-         <input type="text" ref="user"/>
-      </div>
        <div>
          <button type="submit">Submit</button>
        </div>

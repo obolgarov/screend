@@ -6,7 +6,8 @@ var mongoose = require('mongoose')
 var messageSchema = new mongoose.Schema( {
   subject:String,
   message:String,
-  username : String
+  userFrom : String, 
+  recipient: String
 })
 
 module.exports = mongoose.model('message', messageSchema);

@@ -61,14 +61,16 @@ router.route('/')
   console.log(req.body);
 
   // insert one
-  var username = req.body.username;
+  var userFrom = req.body.userFrom;
   var subject = req.body.subject;
   var message = req.body.message;
+  var recipient = req.body.recipient;
 
   mongoose.model('message').create({
-    username : username,
+    username : userFrom,
     subject : subject,
     message : message,
+    recipient : userFrom
   }, function (err, message) {
     if (err) {
       return console.error(err)
