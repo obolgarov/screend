@@ -41,7 +41,8 @@ plugins:[
       LoginEmployer: 'app/components/LoginEmployer.jsx',
       PasswordResetEmployer:'app/components/PasswordResetEmployer.jsx',
       ApplicantEmail: 'app/components/ApplicantEmail.jsx',
-      EmployerEmail: 'app/components/EmployerEmail.jsx'
+      EmployerEmail: 'app/components/EmployerEmail.jsx',
+      AdminLogin:'app/components/AdminLogin.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

@@ -18,6 +18,7 @@ var LoginEmployer = require('LoginEmployer');
 var PasswordResetEmployer = require('PasswordResetEmployer');
 var ApplicantEmail = require('ApplicantEmail');
 var EmployerEmail = require('EmployerEmail');
+var AdminLogin = require('AdminLogin');
 
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
@@ -40,6 +41,7 @@ ReactDOM.render(
   <Route path="PasswordResetEmployer" components={PasswordResetEmployer}/>
   <Route path="ApplicantEmail" components={ApplicantEmail}/>
   <Route path="EmployerEmail" components={EmployerEmail}/>
+  <Route path="AdminLogin" components={AdminLogin}/>
   <Route path="Home" components={Home}/>
   <Route path="Main" components={Main}/>
   <IndexRoute component={Welcome}/>

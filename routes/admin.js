@@ -47,23 +47,75 @@ router.route('/')
 
 .post(function(req, res){
 
-  console.log(req.body);
+  if (req.body.username != null && req.body.password != null){
+    var username = req.body.username;
+    var password = req.body.password;
 
-  // insert one
-  var username = req.body.username;
-  var password = req.body.password;
+    mongoose.model('admin').findOne({
+      username : username,
+      password : password
+    }, function (err, admin){
+      if (err) {
+        return console.error(err);
+      } else {
 
-  mongoose.model('admin').create({
-    username : username,
-    password : password
-  }, function (err, admin) {
-    if (err) {
-      return console.error(err)
-    } else {
-      console.log('POST inserting new admin: ' + admin);
+        if (applicant != null ){
 
 
-    }
-  });
+          var token = jwt.sign({username}, superSecret,
+        {expiresIn: '10h'});
+
+
+
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({
+                      success: true,
+                      message: 'Enjoy your token!',
+                      token: token
+                    });               console.log(token);
+            }
+
+
+
+
+          });
+        } else {
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({
+              success: true,
+              message: 'Enjoy your token!',
+              token: token
+            });
+
+            }
+
+          });
+        }
+
+
+      }
+      });
+      } else {
+      res.format({
+
+      // json response
+      json: function() {
+        res.json({ verified: "false"});
+      }
+
+      });
+      }
+
+
+
+
+
+
 
 });
