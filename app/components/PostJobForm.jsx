@@ -101,7 +101,7 @@ var postJobForm = React.createClass({
     });
     this.setState(currentState);
 
-  }
+  },
 
   renderSkillList: function() {
     if (this.state.data){
