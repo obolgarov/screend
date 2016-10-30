@@ -4,6 +4,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var message = require('../models/message.js');
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
+var superSecret = 'screend';
+
 
 module.exports = router;
 
@@ -67,10 +70,10 @@ router.route('/')
   var recipient = req.body.recipient;
 
   mongoose.model('message').create({
-    username : userFrom,
+    userFrom : userFrom,
     subject : subject,
     message : message,
-    recipient : userFrom
+    recipient : recipient
   }, function (err, message) {
     if (err) {
       return console.error(err)
@@ -99,139 +102,11 @@ router.route('/')
   // end of post
 });
 
+router.route('/decode').post(function(req, res, callback) {
 
+  var token = req.body.token;
+  var decoded = jwt.decode(token);
 
-/*
-router.get('/new', function(req, res) {
-  res.render('applicants/new', { title: 'create applicant' });
+  res.send(decoded.username);
+
 });
-*/
-
-/*
-router.param('id', function(req, res, callback, id) {
-  mongoose.model('applicant').findById(id, function (err, applicant) {
-    if (err) { // it is not found
-      console.log(id + ' was not found');
-      res.status(404);
-      var err = new Error('Not Found');
-      err.status = 404;
-      res.format({
-        html: function() {
-          next(err);
-        },
-        json: function() {
-          res.json({message : err.status + ' ' + err});
-        }
-      });
-    } else { // it is found
-      req.id = id;
-      callback();
-    }
-  })
-})
-
-router.route('/:id')
-.get( function(req, res) {
-  mongoose.model('applicant').findById(req.id, function (err, applicant){
-    if (err) {
-      console.log('GET Error: There was a problem retrieveing: ' + err)
-    } else {
-      console.log('GET Retrieving ID: ' + applicant._id);
-      res.format({
-        html: function() {
-          res.render('applicants/show', {
-            "applicant" : applicant
-          });
-        },
-        json: function(){
-          res.json(applicant);
-        }
-      });
-    }
-  });
-});
-
-router.get('/:id/edit', function(req, res) {
-  mongoose.model('applicant').findById(req.id, function (err, applicant) {
-    if (err) {
-      console.log('GET Error: There was a problem retrieving: ' + err);
-    } else {
-      console.log('GET Retrieving ID: ' + applicant._id);
-      res.format( {
-        html: function() {
-          res.render('applicants/edit', {
-            title: 'Applicant' + applicant._id,
-            "applicant" : applicant
-          });
-        },
-        json: function() {
-          res.json(applicant);
-        }
-      });
-    }
-  });
-});
-
-router.put('/:id/edit', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-  var email = req.body.email;
-  var firstname = req.body.firstname;
-  var lastname = req.body.lastName;
-
-  mongoose.model('applicant').findById(req.id, function (err, applicant) {
-
-    applicant.update( {
-      username : username,
-      password : password,
-      email : email,
-      firstname : firstname,
-      lastname : lastname
-    }, function(err, applicant){
-      if (err) {
-        res.send("There was a problem updating the information to the database: " + err);
-      } else {
-        res.format( {
-          html: function() {
-            res.redirect("/applicants/" + applicant._id);
-          },
-          json: function() {
-            res.json(applicant);
-          }
-        });
-      }
-
-    });
-  });
-});
-
-router.delete('/:id/edit', function(req, res) {
-
-  mongoose.model('applicant').findById(req.id, function (err, applicant) {
-    if (err) {
-      return console.error(err);
-    } else {
-      applicant.remove(function(err, applicant){
-        if (err) {
-          return console.error(err);
-        } else {
-          console.log('DELETE removing ID: ' + applicant._id)
-          res.format( {
-            html: function() {
-              res.redirect("/applicants");
-            },
-            json: function() {
-              res.json({
-                message : 'deleted',
-                item : applicant
-              });
-            }
-          });
-        }
-      });
-    }
-  });
-});
-*/
-
-// --------- controller functions -----------
