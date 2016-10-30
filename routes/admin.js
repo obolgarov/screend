@@ -59,7 +59,7 @@ router.route('/')
         return console.error(err);
       } else {
 
-        if (applicant != null ){
+        if (admin != null ){
 
 
           var token = jwt.sign({username}, superSecret,

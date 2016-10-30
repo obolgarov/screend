@@ -110,3 +110,52 @@ router.route('/decode').post(function(req, res, callback) {
   res.send(decoded.username);
 
 });
+
+router.route('/getMessage').post(function(req, res, callback) {
+
+  var token = req.body.token;
+  var decoded = jwt.decode(token);
+
+  var username = decoded.username;
+
+  if (decoded.username != null){
+
+    mongoose.model('message').findOne({
+      recipient : username
+    }, function (err, message){
+      if (err) {
+        return console.error(err);
+      } else {
+
+
+
+          res.format({
+
+            // json response
+            json: function() {
+              res.json({
+                      found: "true"
+                    });
+            }
+          });
+
+      }
+      });
+      } else {
+      res.format({
+
+      // json response
+      json: function() {
+        res.json({ found: "false"});
+      }
+
+      });
+      }
+
+
+
+
+
+
+
+});
