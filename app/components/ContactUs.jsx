@@ -3,25 +3,25 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var Nav = require('Nav');
+import cookie from 'react-cookie';
+var Cookies = require('js-cookie')
 
 
 var ContactUs = React.createClass({
 
   onSubmit: function (e) {
 
-    //username will be grabbed from the cookie
+  //  var token = cookie.load('userToken');
+
     var data = {
-      userFrom : this.refs.user.value,
-      subject : this.refs.subject.value,
-      message : this.refs.message.value,
-      recipient : "admin"
+      token : cookie.load('userToken')
     }
+
     var dataQuerystring = querystring.stringify(data);
 
-    // seemingly there are multiple ways a the HTTP options can show json, this seems to not be the best way but I'm too lazy to change it
     var httpOptions = {
       port: config.port,
-      path: "/messages",
+      path: "/messages/decode",
       method: "POST", // insert data
       headers: {
         'Content-Type' : 'application/x-www-form-urlencoded',
@@ -32,66 +32,117 @@ var ContactUs = React.createClass({
 
     }
 
-    console.log("body: " + JSON.stringify(data));
+        console.log("body: " + JSON.stringify(data));
 
-    console.log("sending");
+        console.log("sending");
 
-    var req = http.request(httpOptions, function(res){
+        var req = http.request(httpOptions, function(res){
 
-      console.log("sent");
+          console.log("sent");
 
-      // res now contains new applicant data already inserted
-      var output = '';
-      //  console.log(options.path + ':' + res.satusCode);
-      //res.setEncoding('utf8');
+          // res now contains new applicant data already inserted
+          var output = '';
 
-      res.on('data', function (dataBlob){
-        output += dataBlob;
-        console.log("output: " + output);
-      });
+          res.on('data', function (dataBlob){
+            output += dataBlob;
+            console.log("output: " + output);
 
-      res.on('end', function() {
-        var obj = JSON.parse(output);
-      });
+            //console.log(this.refs);
 
-      // TODO: do something with the data for the applicant just inserted
+            var mess = {
+                userFrom : output,
+                subject : this.refs.subject.value,
+                message : this.refs.message.value,
+                recipient : "admin"
+              }
 
-    });
 
-    req.on('error', function(err){
-      res.send('error: ' + err.message);
-    })
+              var queryString = querystring.stringify(mess);
 
-    req.write(dataQuerystring);
+              var httpOptions = {
+                port: config.port,
+                path: "/messages",
+                method: "POST", // insert data
+                headers: {
+                    'Content-Type' : 'application/x-www-form-urlencoded',
+                    'Content-Length' : Buffer.byteLength(dataQuerystring),
+                    'Accept' : 'application/json'
+                  },
+                  body: queryString
+                }
 
-    req.end();
+                    console.log("sending");
+
+                    var req = http.request(httpOptions, function(res){
+
+                      console.log("sent");
+
+                      // res now contains new applicant data already inserted
+                      var output = '';
+
+                      res.on('data', function (dataBlob){
+                        output += dataBlob;
+                        console.log("output: " + output);
+                      });
+
+                      res.on('end', function() {
+                        var obj = JSON.parse(output);
+                      });
+
+
+                    });
+
+                    req.on('error', function(err){
+                      res.send('error: ' + err.message);
+                    })
+
+                    req.write(queryString);
+
+                    req.end();
+
+
+
+          }.bind(this));
+
+          res.on('end', function() {
+            var obj = JSON.parse(output);
+          });
+
+        }.bind(this));
+
+        req.on('error', function(err){
+          res.send('error: ' + err.message);
+        })
+
+        req.write(dataQuerystring);
+
+        req.end();
+
   },
 
   render: function(){
     return(
 
+<div>
+  <h2>Contact Us</h2>
+    <form ref='ContactUs' onSubmit={this.onSubmit}>
+
       <div>
-        <Nav/>
-      <h2>Contact Us</h2>
+       <label>Subject:</label>
+       <input type="text" ref="subject"/>
+      </div>
 
-<form ref='ContactUs' onSubmit={this.onSubmit}>
-       <div>
-        <label>Subject:</label>
-        <input type="text" ref="subject"/>
-       </div>
-
-       <div>
-         <label>Message: </label>
-           <textarea ref="message"></textarea>
-       </div>
-
-       <div>
-         <button type="submit">Submit</button>
-       </div>
+      <div>
+        <label>Message: </label>
+          <textarea ref="message"></textarea>
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
 
      </form>
 
-    </div>
+</div>
     );
   }
 });

@@ -6,7 +6,7 @@ var mongoose = require('mongoose')
 var messageSchema = new mongoose.Schema( {
   subject:String,
   message:String,
-  userFrom : String, 
+  userFrom : String,
   recipient: String
 })
 
