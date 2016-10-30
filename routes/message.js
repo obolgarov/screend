@@ -133,9 +133,7 @@ router.route('/getMessage').post(function(req, res, callback) {
 
             // json response
             json: function() {
-              res.json({
-                      found: "true"
-                    });
+              res.json(message);
             }
           });
 
