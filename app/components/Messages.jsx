@@ -8,13 +8,19 @@ var querystring = require('querystring'); // to send data inside the request
 
 var Messages = React.createClass({
 
+  getInitialState: function() {
+    return {
+      data: null
+    };
+  },
+
   componentDidMount: function() {
 
-    var data = {
+    var tokenData = {
       token : cookie.load('userToken')
     }
 
-    var dataQuerystring = querystring.stringify(data);
+    var dataQuerystring = querystring.stringify(tokenData);
 
     var httpOptions = {
       port: config.port,
@@ -29,26 +35,29 @@ var Messages = React.createClass({
 
     }
 
-        console.log("body: " + JSON.stringify(data));
+    var req = http.request(httpOptions, (res) => {
 
-        console.log("sending");
+          res.on('data', (dataBlob) => {
 
-        var req = http.request(httpOptions, function(res){
+            var jsonData = JSON.parse(dataBlob);
 
-          console.log("sent");
+            var messageData = [];
 
-          // res now contains new applicant data already inserted
-          var output = '';
+            for ( var message of jsonData ) {
+              messageData.push({
+                subject : message.subject,
+                message : message.message,
+                userFrom : message.userFrom
+              });
 
-          res.on('data', function (dataBlob){
-            output += dataBlob;
-            console.log("output: " + output);
+            }
+
+           this.setState({
+              data: messageData
+            });
+
           });
-
-          res.on('end', function() {
-          var obj = JSON.parse(output);
-          });
-          });
+        });
 
           req.on('error', function(err){
           res.send('error: ' + err.message);
@@ -58,22 +67,52 @@ var Messages = React.createClass({
 
           req.end();
 
-
-
-
-
-
   },
 
 
-  render: function(){
-    return(
-      <div>
-        <Nav/>
-      <h2>Messages Component</h2>
-      </div>
-    );
-  }
+    render: function() {
+
+      if (this.state.data) {
+
+        return (
+          <div>
+              <Nav/>
+              <h2>Messages</h2>
+
+            <form ref='metric_results' onSubmit={this.onSubmit}>
+              <div id='Content-Length'>
+                <table ref="messageTable">
+                  <tbody>
+                    {
+                      this.state.data.map(function (data) {
+
+
+                        return (
+                          <tr>
+                            <td>{data.userFrom}</td>
+                            <td>{data.subject}</td>
+                            <td>{data.message}</td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <p>Loading...</p>
+          </div>
+        )
+      }
+
+
+    }
+
 });
 
 module.exports = Messages;
