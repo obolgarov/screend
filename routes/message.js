@@ -120,7 +120,7 @@ router.route('/getMessage').post(function(req, res, callback) {
 
   if (decoded.username != null){
 
-    mongoose.model('message').findOne({
+    mongoose.model('message').find({
       recipient : username
     }, function (err, message){
       if (err) {
