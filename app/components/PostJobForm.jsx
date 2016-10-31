@@ -40,8 +40,11 @@ var PostJobForm = React.createClass({
       Requirededucation: this.refs.requirededucation.value,
       Experience: this.refs.experience.value,
       Salary: this.refs.salary.value,
-      Description: this.refs.description.value
+      Description: this.refs.description.value,
+      Skills:this.state.data
     }
+
+
 
     var dataQuerystring = querystring.stringify(data);
 

@@ -79,8 +79,9 @@ router.route('/')
     var Experience = req.body.Experience;
     var Salary = req.body.Salary;
     var Description = req.body.Description;
+    var Skills = req.body.Skills;
 
-    mongoose.model('job').create({
+    /*mongoose.model('job').create({
         JobTitle: JobTitle,
         CompanyName: CompanyName,
         Location: Location,
@@ -97,26 +98,13 @@ router.route('/')
         } else {
           // insertion/creation complete
           console.log('POST inserting new Job: ' + job);
-          /*res.format({
 
-            //html response
-            html: function() {
-              res.location("applicants");
-              res.redirect("/applicants");
-            },
-
-            //json response
-            json: function() {
-              res.json(applicant);
-            }
-
-          });*/
 
           res.send("Done");
         }
       });
 
-    // end of post
+    // end of post*/
   });
 
 router.route('/view').post(function(req, res, callback) {
