@@ -88,11 +88,13 @@ var Messages = React.createClass({
 
 
                         return (
+
                           <tr>
                             <td>{data.userFrom}</td>
                             <td>{data.subject}</td>
                             <td>{data.message}</td>
-                          </tr>
+                          <td><button type="submit">Delete</button></td>
+                        </tr>
                         )
                       })
                     }
