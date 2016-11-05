@@ -3,7 +3,11 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var Nav = require ('Nav');
+
+
+
 var CreateProfile = React.createClass({
+
 
     render: function () {
         return (
@@ -17,11 +21,16 @@ var CreateProfile = React.createClass({
 
 
                         <h3>Employment History</h3>
-                        
 
+                        <h3>Professional Skills</h3>
 
+                        <h3>Technical Skills</h3>
 
+                        <h3>Education</h3>
 
+                        <h3>Certification<h3>
+
+                        <h3>Achievements</h3>
                       </form>
                 </div>
             </div>
