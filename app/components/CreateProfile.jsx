@@ -28,7 +28,7 @@ var CreateProfile = React.createClass({
 
                         <h3>Education</h3>
 
-                        <h3>Certification<h3>
+                        <h3>Certification</h3>
 
                         <h3>Achievements</h3>
                       </form>

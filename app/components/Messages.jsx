@@ -47,7 +47,8 @@ var Messages = React.createClass({
               messageData.push({
                 subject : message.subject,
                 message : message.message,
-                userFrom : message.userFrom
+                userFrom : message.userFrom,
+                messageId: message._id
               });
 
             }
@@ -86,15 +87,17 @@ var Messages = React.createClass({
                     {
                       this.state.data.map(function (data) {
 
+                        var link = "/#/ViewMessage?id=" + data.messageId;
+
 
                         return (
 
                           <tr>
                             <td>{data.userFrom}</td>
                             <td>{data.subject}</td>
-                            <td>{data.message}</td>
-                          <td><button type="submit">Delete</button></td>
-                          <td><button type="subnit">Reply</button></td>
+                            <td><a href={link}>View Message</a></td>
+
+
                         </tr>
                         )
                       })
