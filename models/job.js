@@ -5,7 +5,7 @@ var mongoose = require('mongoose')
 
 
 var jobSchema = new mongoose.Schema( {
-
+  EmployerID: String,
   JobTitle: String,
   CompanyName: String,
   Location: String,
@@ -14,8 +14,9 @@ var jobSchema = new mongoose.Schema( {
   Salary: String,
   Description: String,
   Skills: [{
-    skillName: String,
-    experience: String
+    SkillName: String,
+    Experience: String,
+    Importance: String
   }]
 })
 

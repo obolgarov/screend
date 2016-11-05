@@ -1,7 +1,7 @@
 var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
-var querystring = require('querystring'); // to send data inside the request
+var querystring = require('qs'); // to send data inside the request ('qs' replaces 'querystring' module)
 var {Link} = require('react-router');
 var Nav = require('Nav');
 
@@ -21,6 +21,8 @@ var PostJobForm = React.createClass({
     initialData.push({
       id: generateRandomID(),
       skill: "",
+      exp: 0,
+      importance: "Good to have",
       locked: false,
     });
     return {
@@ -31,22 +33,22 @@ var PostJobForm = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
-    console.log("Been here")
+
     var data = {
       JobTitle: this.refs.jobtitle.value,
       CompanyName: this.refs.companyform.value,
       Location: this.refs.location.value,
       Certification: this.refs.certification.value,
       Requirededucation: this.refs.requirededucation.value,
-      Experience: this.refs.experience.value,
       Salary: this.refs.salary.value,
       Description: this.refs.description.value,
       Skills:this.state.data
     }
 
-
+    //console.log(data.Skills);
 
     var dataQuerystring = querystring.stringify(data);
+    console.log(dataQuerystring);
 
     var httpOptions = {
       port: config.port,
@@ -56,17 +58,14 @@ var PostJobForm = React.createClass({
         'Content-Type': 'application/x-www-form-urlencoded',
         'Content-Length': Buffer.byteLength(dataQuerystring),
         'Accept': 'application/json'
-      },
-      body: dataQuerystring
+      }
     };
 
-    console.log("body: " + JSON.stringify(data));
-
-    console.log("sending");
+    //console.log("sending");
 
     var req = http.request(httpOptions, function(res) {
 
-      console.log("sent");
+      //console.log("received response");
 
       // res now contains new applicant data already inserted
       var output = '';
@@ -131,8 +130,6 @@ var PostJobForm = React.createClass({
     for ( var skill of currentState.data ) {
       if(skill.id == fieldID){
 
-        console.log("test");
-
         //TODO: check if skill valid
 
 
@@ -170,6 +167,40 @@ var PostJobForm = React.createClass({
 
   },
 
+  updateExperience: function(fieldID, event){
+    var exp = event.target.value;
+    var currentState = this.state;
+
+    for (var skill of currentState.data) {
+      if (skill.id == fieldID){
+
+        var skillIndex = currentState.data.indexOf(skill);
+        currentState.data[skillIndex].exp = exp;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  updateImportance: function(fieldID, event){
+    var importance = event.target.value;
+    var currentState = this.state;
+
+    for (var skill of currentState.data) {
+      if (skill.id == fieldID){
+
+        var skillIndex = currentState.data.indexOf(skill);
+        currentState.data[skillIndex].importance = importance;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
   renderSkillList: function() {
     if (this.state.data){
       var skillList = this.state.data.map((skillData) => {
@@ -180,13 +211,17 @@ var PostJobForm = React.createClass({
 
         var lockedStyle = {
           background: "white",
-          display: "inline-block"
+          display: "inline-block",
+          width: "auto",
+          margin: "0 10px"
         };
         var deleteButton = null;
         if (skillData.locked){
           lockedStyle = {
             background: "grey",
-            display: "inline-block"
+            display: "inline-block",
+            width: "auto",
+            margin: "0 10px"
           };
           deleteButton = (
             <input type="button" ref="button" onClick={this.deleteSkill.bind(this, skillData.id)} value="x"/>
@@ -196,9 +231,15 @@ var PostJobForm = React.createClass({
         //console.log(deleteButton)
 
         return (
-          <div className="skillEntry" key={key} style={{display: "block"}}>
+          <div className="skillEntry" key={key} style={{display: "block", width: "100%"}}>
             {deleteButton}
             <input type="text" value={skillData.skill} style={lockedStyle} onBlur={this.updateSkillState.bind(this, skillData.id)} onChange={this.updateSkillText.bind(this, skillData.id)}/>
+            <input type="range" value={skillData.exp} style={{display: "inline-block", width: "auto", margin: "0 10px"}} onChange={this.updateExperience.bind(this, skillData.id)} />
+            <select value={skillData.importance} style={{display: "inline-block", width: "auto", margin: "0 10px"}} onChange={this.updateImportance.bind(this, skillData.id)}>
+              <option value="Mandatory">Manditory</option>
+              <option value="Important">Important</option>
+              <option value="Good to have">Good to have</option>
+            </select>
           </div>
         );
       });
@@ -212,6 +253,8 @@ var PostJobForm = React.createClass({
     currentState.data.push({
       id: generateRandomID(),
       skill: "",
+      exp: 0,
+      importance: "Good to have",
       locked: false,
     });
 

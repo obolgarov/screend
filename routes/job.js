@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var job = require('../models/job.js');
+var Job = require('../models/job.js');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var PDFParser = require('pdf2json');
+var querystring = require('qs');
 
 
 
@@ -69,27 +70,61 @@ router.route('/')
   })
   .post(function(req, res) {
 
-    console.log(req.body);
+    //console.log(req.body);
+    //console.log(querystring.parse(req.body));
 
+    var EmployerID = "testEmp"; // TODO: get from auth token
     var JobTitle = req.body.JobTitle;
     var CompanyName = req.body.CompanyName;
     var Location = req.body.Location;
     var Certification = req.body.Certification;
     var Requirededucation = req.body.Requirededucation;
-    var Experience = req.body.Experience;
     var Salary = req.body.Salary;
     var Description = req.body.Description;
-    var Skills = req.body.Skills;
+    var SkillsList = req.body.Skills;
+
+    //console.log(SkillsList);
+
+    var newJob = new Job({
+      EmployerID: EmployerID,
+      JobTitle: JobTitle,
+      CompanyName: CompanyName,
+      Location: Location,
+      Certification: Certification,
+      Requirededucation: Requirededucation,
+      Salary: Salary,
+      Description: Description,
+      Skills: [] //initialized empty
+    });
+
+    for (var skill of SkillsList){
+      newJob.Skills.push({
+        SkillName: skill.skill,
+        Experience: skill.exp,
+        Importance: skill.imp
+      });
+    }
+
+    newJob.save( (err, job) =>  {
+      if (err) {
+        return console.error(err)
+      } else {
+        // insertion/creation complete
+        console.log('POST inserting new Job: ' + job);
+
+        res.send("Done");
+      }
+    });
 
     /*mongoose.model('job').create({
+        EmployerID: EmployerID,
         JobTitle: JobTitle,
         CompanyName: CompanyName,
         Location: Location,
         Certification: Certification,
         Requirededucation: Requirededucation,
-        Experience: Experience,
         Salary: Salary,
-        Description: Description
+        Description: Description,
       },
 
       function(err, applicant) {
@@ -102,7 +137,7 @@ router.route('/')
 
           res.send("Done");
         }
-      });
+      });*/
 
     // end of post*/
   });
