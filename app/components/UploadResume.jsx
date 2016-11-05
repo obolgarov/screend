@@ -112,7 +112,7 @@ var UploadResume = React.createClass({
                     <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
                         <input type="file" name="resume" ref="resumeupload"></input>
                         <input type="submit" value="UploadResume" ref="resumesubmit" name="submit"></input>
-                    </form>
+                </form>
                 </div>
                 <div ref="rankOutput" id="rankOutputId">
                     <table ref="rankTable" id="rankTableId"></table>

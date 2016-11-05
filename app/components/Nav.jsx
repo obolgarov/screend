@@ -64,7 +64,7 @@ var Nav = React.createClass({
                 <Link to="/messages" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Messages</Link>
               </li>
               <li>
-                <Link to="/UploadResume" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Create Profile</Link>
+                <Link to="/CreateProfile" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Create Profile</Link>
               </li>
               <li>
                 <Link to="/ContactUs" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact Us</Link>

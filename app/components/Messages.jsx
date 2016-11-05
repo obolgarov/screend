@@ -94,6 +94,7 @@ var Messages = React.createClass({
                             <td>{data.subject}</td>
                             <td>{data.message}</td>
                           <td><button type="submit">Delete</button></td>
+                          <td><button type="subnit">Reply</button></td>
                         </tr>
                         )
                       })
