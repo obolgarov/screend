@@ -44,7 +44,8 @@ plugins:[
       EmployerEmail: 'app/components/EmployerEmail.jsx',
       AdminLogin:'app/components/AdminLogin.jsx',
       CreateProfile: 'app/components/CreateProfile.jsx',
-      ViewMessage:'app/components/ViewMessage.jsx'
+      ViewMessage:'app/components/ViewMessage.jsx',
+      ReplyMessage : 'app/components/ReplyMessage.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

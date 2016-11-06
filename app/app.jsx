@@ -21,6 +21,7 @@ var EmployerEmail = require('EmployerEmail');
 var AdminLogin = require('AdminLogin');
 var CreateProfile = require('CreateProfile');
 var ViewMessage = require('ViewMessage');
+var ReplyMessage = require('ReplyMessage');
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
 
@@ -45,6 +46,7 @@ ReactDOM.render(
   <Route path="AdminLogin" components={AdminLogin}/>
   <Route path="CreateProfile" components={CreateProfile}/>
   <Route path="ViewMessage" components={ViewMessage}/>
+  <Route path="ReplyMessage" components={ReplyMessage}/>
   <Route path="Home" components={Home}/>
   <Route path="Main" components={Main}/>
   <IndexRoute component={Welcome}/>

@@ -241,3 +241,26 @@ router.route('/getMessageId').post(function(req, res, callback)
         });
     }
 });
+
+
+
+router.route('/delete').post(function(req, res, callback)
+{
+    var id = req.body.id;
+
+
+  mongoose.model('message').remove({ _id: id }, function(err) {
+    if (!err) {
+      res.json(
+      {
+          found: "true"
+      });
+    }
+    else {
+      res.json(
+      {
+          found: "false"
+      });
+    }
+  });
+});

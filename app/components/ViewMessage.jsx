@@ -5,6 +5,7 @@ var Cookies = require('js-cookie')
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the reques
+import { hashHistory } from 'react-router';
 
 var ViewMessage = React.createClass({
 
@@ -88,12 +89,75 @@ var ViewMessage = React.createClass({
 
 
       delete: function (e) {
-          console.log('taco');
+        function getParameterByName(name, url) {
+
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+
+        var messageId = getParameterByName('id');
+
+        var data =  {
+          id : messageId
+        }
+
+        var dataQuerystring = querystring.stringify(data);
+
+        var httpOptions = {
+          port: config.port,
+          path: "/messages/delete",
+          method: "POST", // insert data
+          headers: {
+            'Content-Type' : 'application/x-www-form-urlencoded',
+            'Content-Length' : Buffer.byteLength(dataQuerystring),
+            'Accept' : 'application/json'
+          },
+          body: dataQuerystring
+
+        }
+
+            var req = http.request(httpOptions, (res) => {
+
+                  res.on('data', (dataBlob) => {
+
+                    var jsonData = JSON.parse(dataBlob);
+
+
+                      hashHistory.push('Messages');
+
+
+
+
+                  });
+                });
+
+                  req.on('error', function(err){
+                  res.send('error: ' + err.message);
+                  });
+
+                  req.write(dataQuerystring);
+
+                  req.end();
+
+
+
       },
 
 
       reply: function (e) {
-        console.log('taco');
+
+        this.state.data.map(function (data) {
+
+        hashHistory.push('ReplyMessage?id=' + data.messageId + '?userFrom='+data.userFrom);
+        });
+
 
       },
 
