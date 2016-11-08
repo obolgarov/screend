@@ -49,9 +49,11 @@ var initialData = {
   }
 };
 
+
 var CreateProfile = React.createClass({
 
   getInitialState: function() {
+
 
     // when first loaded, initial data is a single-populated array per category with initial data
     var initialEducation = [];
@@ -143,7 +145,7 @@ var CreateProfile = React.createClass({
             <h3>Professional Skills</h3>
             {this.state.professionalSkills.map((result, key) => {
               return <ProfessionalSkillEntry  key={key} id={result.id} update={this.updateProfessionalSkill}/>
-              })}
+            })}
 
             <h3>Technical Skills</h3>
             {this.state.technicalSkills.map((result, key) => {
