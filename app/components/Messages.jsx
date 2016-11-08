@@ -16,6 +16,13 @@ var Messages = React.createClass({
 
   componentDidMount: function() {
 
+var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
+
     var tokenData = {
       token : cookie.load('userToken')
     }

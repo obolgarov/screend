@@ -6,6 +6,10 @@ var Nav = require('Nav');
 
 var CreateProfileFields = require('./CreateProfileFields.jsx');
 
+import cookie from 'react-cookie';
+var Cookies = require('js-cookie')
+import { hashHistory } from 'react-router';
+
 // field components are stored in here to keep this file smaller
 var EducationEntry = CreateProfileFields.EducationEntry;
 var CertificationEntry = CreateProfileFields.CertificationEntry;
@@ -51,6 +55,17 @@ var initialData = {
 
 
 var CreateProfile = React.createClass({
+ componentDidMount: function() {
+
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
+  },
+
+
 
   getInitialState: function() {
 

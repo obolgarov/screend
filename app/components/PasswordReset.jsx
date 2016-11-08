@@ -2,8 +2,22 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
+import cookie from 'react-cookie';
+var Cookies = require('js-cookie')
+import { hashHistory } from 'react-router';
+
 
 var PasswordReset = React.createClass({
+
+ componentDidMount: function() {
+
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
+  },
 
   onSubmit: function (e) {
 
