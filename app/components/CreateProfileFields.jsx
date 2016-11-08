@@ -34,10 +34,10 @@ var EmploymentHistoryEntry = React.createClass({
   }
 });
 
-var ProfesionalSkillEntry = React.createClass({
+var ProfessionalSkillEntry = React.createClass({
   render: function() {
     return (
-      <p>[ProfesionalSkillEntry] myID={this.props.id}</p>
+      <p>[ProfessionalSkillEntry] myID={this.props.id}</p>
     )
   }
 });
@@ -55,6 +55,6 @@ module.exports = {
   CertificationEntry: CertificationEntry,
   AchievementEntry: AchievementEntry,
   EmploymentHistoryEntry: EmploymentHistoryEntry,
-  ProfesionalSkillEntry: ProfesionalSkillEntry,
+  ProfessionalSkillEntry: ProfessionalSkillEntry,
   TechnicalSkillEntry: TechnicalSkillEntry
 }

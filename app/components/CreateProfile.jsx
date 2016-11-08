@@ -13,11 +13,10 @@ var EducationEntry = CreateProfileFields.EducationEntry;
 var CertificationEntry = CreateProfileFields.CertificationEntry;
 var AchievementEntry = CreateProfileFields.AchievementEntry;
 var EmploymentHistoryEntry = CreateProfileFields.EmploymentHistoryEntry;
-var ProfessionalSkillsEntry = CreateProfileFields.ProfessionalSkillsEntry;
-var TechnicalSkillsEntry = CreateProfileFields.TechnicalSkillsEntry;
+var ProfessionalSkillEntry = CreateProfileFields.ProfessionalSkillEntry;
+var TechnicalSkillEntry = CreateProfileFields.TechnicalSkillEntry;
 
 console.log(EducationEntry);
-
 
 
 var randomNum = 0;
@@ -55,9 +54,11 @@ var initialData = {
   }
 };
 
+
 var CreateProfile = React.createClass({
 
   getInitialState: function() {
+
 
     // when first loaded, initial data is a single-populated array per category with initial data
     var initialEducation = [];
@@ -128,7 +129,6 @@ var CreateProfile = React.createClass({
 
             <h3>Education</h3>
             {this.state.education.map((result) => {
-              console.log("called");
               <EducationEntry id={result.id} update={this.updateEducation}/>
             })}
 
@@ -149,12 +149,13 @@ var CreateProfile = React.createClass({
 
             <h3>Professional Skills</h3>
             {this.state.professionalSkills.map((result) => {
-              <ProfessionalSkillsEntry id={result.id} update={this.updateProfessionalSkill}/>
+              
+              <ProfessionalSkillEntry id={result.id} update={this.updateProfessionalSkill}/>
             })}
 
             <h3>Technical Skills</h3>
             {this.state.technicalSkills.map((result) => {
-              <TechnicalSkillsEntry id={result.id} update={this.updateTechnicalSkill}/>
+              <TechnicalSkillEntry id={result.id} update={this.updateTechnicalSkill}/>
             })}
 
           </form>
