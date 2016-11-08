@@ -6,19 +6,13 @@ var Nav = require('Nav');
 
 var CreateProfileFields = require('./CreateProfileFields.jsx');
 
-
-
 // field components are stored in here to keep this file smaller
 var EducationEntry = CreateProfileFields.EducationEntry;
 var CertificationEntry = CreateProfileFields.CertificationEntry;
 var AchievementEntry = CreateProfileFields.AchievementEntry;
 var EmploymentHistoryEntry = CreateProfileFields.EmploymentHistoryEntry;
-var ProfessionalSkillsEntry = CreateProfileFields.ProfessionalSkillsEntry;
-var TechnicalSkillsEntry = CreateProfileFields.TechnicalSkillsEntry;
-
-console.log(EducationEntry);
-
-
+var ProfessionalSkillEntry = CreateProfileFields.ProfessionalSkillEntry;
+var TechnicalSkillEntry = CreateProfileFields.TechnicalSkillEntry;
 
 var randomNum = 0;
 var generateRandomID = function(){
@@ -115,8 +109,6 @@ var CreateProfile = React.createClass({
 
   render: function() {
 
-    console.log(this.state);
-
     return (
       <div>
         <Nav/>
@@ -127,34 +119,35 @@ var CreateProfile = React.createClass({
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit"></input>
 
             <h3>Education</h3>
-            {this.state.education.map((result) => {
-              console.log("called");
-              <EducationEntry id={result.id} update={this.updateEducation}/>
+            {
+              // map passes individual elements into the first param, and their index into the second, which is used as the React key
+              this.state.education.map((result, key) => {
+              return <EducationEntry key={key} id={result.id} update={this.updateEducation}></EducationEntry>
             })}
 
             <h3>Certification</h3>
-            {this.state.certifications.map((result) => {
-              <CertificationEntry id={result.id} update={this.updateCertification}/>
+            {this.state.certifications.map((result, key) => {
+              return <CertificationEntry key={key} id={result.id} update={this.updateCertification}/>
             })}
 
             <h3>Achievements</h3>
-            {this.state.achievements.map((result) => {
-              <AchievementEntry id={result.id} update={this.updateAchievement}/>
+            {this.state.achievements.map((result, key) => {
+              return <AchievementEntry key={key} id={result.id} update={this.updateAchievement}/>
             })}
 
             <h3>Employment History</h3>
-            {this.state.employmentHistory.map((result) => {
-              <EmploymentHistoryEntry id={result.id} update={this.updateEmploymentHistory}/>
+            {this.state.employmentHistory.map((result, key) => {
+              return <EmploymentHistoryEntry key={key} id={result.id} update={this.updateEmploymentHistory}/>
             })}
 
             <h3>Professional Skills</h3>
-            {this.state.professionalSkills.map((result) => {
-              <ProfessionalSkillsEntry id={result.id} update={this.updateProfessionalSkill}/>
-            })}
+            {this.state.professionalSkills.map((result, key) => {
+              return <ProfessionalSkillEntry  key={key} id={result.id} update={this.updateProfessionalSkill}/>
+              })}
 
             <h3>Technical Skills</h3>
-            {this.state.technicalSkills.map((result) => {
-              <TechnicalSkillsEntry id={result.id} update={this.updateTechnicalSkill}/>
+            {this.state.technicalSkills.map((result, key) => {
+              return <TechnicalSkillEntry key={key} id={result.id} update={this.updateTechnicalSkill}/>
             })}
 
           </form>
