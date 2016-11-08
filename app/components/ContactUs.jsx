@@ -5,9 +5,20 @@ var querystring = require('querystring'); // to send data inside the request
 var Nav = require('Nav');
 import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
+import { hashHistory } from 'react-router';
 
 
 var ContactUs = React.createClass({
+  
+  componentDidMount: function() {
+
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
+  },
 
   onSubmit: function (e) {
 

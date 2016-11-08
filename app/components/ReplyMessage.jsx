@@ -6,7 +6,18 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 
+
 var ReplyMessage = React.createClass({
+
+ componentDidMount: function() {
+
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
+  },
 
     onSubmit: function() {
 

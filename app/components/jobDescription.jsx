@@ -4,12 +4,22 @@ var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var Nav = require('Nav');
 
-
+import cookie from 'react-cookie';
+var Cookies = require('js-cookie')
+import { hashHistory } from 'react-router';
 
 var jobDescription = React.createClass({
 
 
   componentDidMount: function(){
+
+
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
 
     console.log("testpoop");
     console.log(this.props.location.query.id);

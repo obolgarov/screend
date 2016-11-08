@@ -18,6 +18,13 @@ var ViewMessage = React.createClass({
 
   componentDidMount: function() {
 
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
+  
   function getParameterByName(name, url) {
 
     if (!url) {

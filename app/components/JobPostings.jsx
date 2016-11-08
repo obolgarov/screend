@@ -3,6 +3,9 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var i = 0;
+import cookie from 'react-cookie';
+var Cookies = require('js-cookie')
+import { hashHistory } from 'react-router';
 
 var JobPostings = React.createClass({
 
@@ -15,6 +18,16 @@ var JobPostings = React.createClass({
 
   // run after page loads, and performs an async request which will change state when finished
   componentDidMount: function() {
+
+    
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
+
+
     var httpOptions = {
       port: config.port,
       path: "/job",

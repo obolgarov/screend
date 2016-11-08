@@ -4,6 +4,9 @@ var config = require('../../config')(); // to get the port
 var querystring = require('qs'); // to send data inside the request ('qs' replaces 'querystring' module)
 var {Link} = require('react-router');
 var Nav = require('Nav');
+import cookie from 'react-cookie';
+var Cookies = require('js-cookie')
+import { hashHistory } from 'react-router';
 
 
 // "That's the thing with random numbers, you can never be sure."
@@ -15,6 +18,16 @@ var generateRandomID = function(){
 }
 
 var PostJobForm = React.createClass({
+
+ componentDidMount: function() {
+
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+    if (myCookie == null) 
+    {
+      hashHistory.push('Welcome');
+    }
+  },
 
   getInitialState: function() {
     var initialData = [];
