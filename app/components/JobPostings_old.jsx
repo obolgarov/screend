@@ -168,6 +168,11 @@ var JobPostings = React.createClass({
             {jobList.map(function(results) {
               return (
                 <tr>
+                  <td> Job Name </td>
+                  <td> Company Name</td>
+                  <td> Job ID </td>
+                </tr>
+                <tr>
                   <td>{results.jobName}</td>
                   <td>{results.companyName}</td>
                   <td>{results.jobID}</td>
