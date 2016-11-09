@@ -6,6 +6,7 @@ var i = 0;
 import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
 import { hashHistory } from 'react-router';
+var Nav = require('Nav');
 
 var JobPostings = React.createClass({
 
@@ -80,6 +81,7 @@ var JobPostings = React.createClass({
 
       return (
         <div>
+         <Nav/>
           <form ref='metric_results' onSubmit={this.onSubmit}>
             <div id='Content-Length'>
               <table ref="jobsTable">

@@ -312,11 +312,6 @@ var PostJobForm = React.createClass({
             <input type="text" ref="requirededucation"/>
           </div>
 
-          <div>
-            <label>Experience:
-            </label>
-            <input type="text" ref="experience"/>
-          </div>
 
           <div>
             <label>Salary:

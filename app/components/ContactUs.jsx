@@ -6,6 +6,7 @@ var Nav = require('Nav');
 import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
 import { hashHistory } from 'react-router';
+var Nav = require('Nav');
 
 
 var ContactUs = React.createClass({
@@ -135,6 +136,7 @@ var ContactUs = React.createClass({
     return(
 
 <div>
+<Nav/>
   <h2>Contact Us</h2>
     <form ref='ContactUs' onSubmit={this.onSubmit}>
 
