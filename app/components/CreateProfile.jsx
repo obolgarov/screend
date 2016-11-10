@@ -129,13 +129,17 @@ var CreateProfile = React.createClass({
     var button = {
       margin : "30px 00px 30px 00px"
     };
+    var font = {
+      fontFamily: "Quicksand, sans-serif"
+    };
+
     return (
       <div>
         <Nav/>
 
         <div ref="uploadForm" id="uploadFormId" className="columns medium-4 large-6 small-centered">
-          <h2>Create Profile</h2>
-          
+          <h2 style={font}>Create Profile</h2>
+
           <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
             <input type="file" name="resume" ref="resumeupload"></input>
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button}></input>

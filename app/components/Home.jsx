@@ -2,12 +2,17 @@ var React = require('react');
 var Nav = require('Nav')
 var Home = React.createClass({
     render: function() {
+
+      var font = {
+        fontFamily: "Quicksand, sans-serif"
+      };
         return (
+
             <div>
                 <Nav/>
                 <div className="row">
                     <div className="columns medium-9 large-9 small-centered">
-                        <h2>Home Component</h2>
+                        <h2 style={font}>Home Component</h2>
                     </div>
                 </div>
             </div>

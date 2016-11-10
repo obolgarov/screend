@@ -10,11 +10,19 @@ import { hashHistory } from 'react-router';
 
 var Search = React.createClass({
     render: function () {
+      var font = {
+        fontFamily: "Quicksand, sans-serif"
+      };
+
+      var button = {
+        margin : "30px 00px 30px 00px"
+      };
+
         return (
             <div>
                 <Nav />
 
-                <form ref='search' onSubmit={this.onSubmit}>
+                <form ref='search' onSubmit={this.onSubmit} className="columns medium-9 large-9 small-centered">
 
                     <div>
                         <label>Search:
@@ -53,12 +61,12 @@ var Search = React.createClass({
                     </div>
 
                 <div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" className="button hollow" style={button}>Submit</button>
                 </div>
-                </form> 
+                </form>
             </div>
 
-   
+
         );
     }
 });

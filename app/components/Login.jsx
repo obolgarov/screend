@@ -98,6 +98,11 @@ var Login = React.createClass({
       margin : "30px 00px 30px 00px"
     };
 
+
+      var font = {
+        fontFamily: "Quicksand, sans-serif"
+      };
+
     return(
 
       <div className="columns medium-4 large-6 small-centered">

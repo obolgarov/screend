@@ -138,13 +138,16 @@ var ContactUs = React.createClass({
     margin : "30px 00px 30px 00px"
   };
 
+  var font = {
+    fontFamily: "Quicksand, sans-serif"
+  };
     return(
 
 <div >
 <Nav/>
     <div className="columns medium-4 large-6 small-centered">
 
-      <h2>Contact Us</h2>
+      <h2 style={font}>Contact Us</h2>
         <form ref='ContactUs' onSubmit={this.onSubmit}>
 
           <div>

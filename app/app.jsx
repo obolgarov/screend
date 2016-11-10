@@ -54,7 +54,7 @@ ReactDOM.render(
   <Route path="Main" components={Main}/>
   <Route path="SearchResults" components={SearchResults}/>
   <IndexRoute component={Welcome}/>
-  </Route> 
+  </Route>
 </Router>,
 
     document.getElementById('app')

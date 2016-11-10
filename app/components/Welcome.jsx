@@ -4,14 +4,26 @@ var {Link} = require('react-router');
 
 var Welcome = React.createClass({
     render: function() {
+
+        var font = {
+          fontFamily: "Quicksand, sans-serif"
+        };
+
+        var grey = {
+           "margin-top" : "300px",
+           "background-color" : "#e6e6e6"
+
+        };
+
+
         return (
-  <div className="row">
+  // <div  className="row">
+  //
+  //   <div className="columns medium-4 large-6 small-centered">
+      <div style={grey} className="columns medium-4 large-6 small-centered">
+        <h2 style={font}>Welcome</h2>
 
-    <div className="columns medium-4 large-6 small-centered">
-      <div>
-        <h2>Welcome</h2>
-
-      <h3>Are you an Employer or a Job Seeker?</h3>
+      <h3 style={font}>Are you an Employer or a Job Seeker?</h3>
 
         <div>
             <Link to="/Login">Job Seeker</Link>
@@ -21,9 +33,9 @@ var Welcome = React.createClass({
             <Link to="/LoginEmployer">Employer</Link>
         </div>
       </div>
-    </div>
-
-  </div >
+  //   </div>
+  //
+  // </div >
     );
   }
 });
