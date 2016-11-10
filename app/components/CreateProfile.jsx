@@ -25,50 +25,59 @@ var generateRandomID = function(){
   return randomNum;
 };
 
-// fields start with initial data, this makes sure the default data is alwyas the same
-var initialData = {
-  education: {
-    id: generateRandomID(),
-    data: 0
-  },
-  certifications: {
-    id: generateRandomID(),
-    data: 0
-  },
-  achievements: {
-    id: generateRandomID(),
-    data: 0
-  },
-  employmentHistory: {
-    id: generateRandomID(),
-    data: 0
-  },
-  professionalSkills: {
-    id: generateRandomID(),
-    data: 0
-  },
-  TechnicalSkills: {
-    id: generateRandomID(),
-    data: 0
-  }
-};
-
 
 var CreateProfile = React.createClass({
- componentDidMount: function() {
+  componentDidMount: function() {
 
- var myCookie = cookie.load('userToken');
- console.log(myCookie);
-    if (myCookie == null) 
+    var myCookie = cookie.load('userToken');
+    //console.log(myCookie);
+
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
   },
 
 
-
   getInitialState: function() {
-
+    var initialData = {
+      education: {
+        id: generateRandomID(),
+        text: "",
+        locked: false,
+        data: 0
+      },
+      certifications: {
+        id: generateRandomID(),
+        text: "",
+        locked: false,
+        data: 0
+      },
+      achievements: {
+        id: generateRandomID(),
+        text: "",
+        locked: false,
+        data: 0
+      },
+      employmentHistory: {
+        id: generateRandomID(),
+        text: "",
+        locked: false,
+        data: 0
+      },
+      professionalSkills: {
+        id: generateRandomID(),
+        text: "",
+        locked: false,
+        data: 0
+      },
+      TechnicalSkills: {
+        id: generateRandomID(),
+        text: "",
+        locked: false,
+        data: 0
+      }
+    };
 
     // when first loaded, initial data is a single-populated array per category with initial data
     var initialEducation = [];
@@ -100,34 +109,394 @@ var CreateProfile = React.createClass({
     };
   },
 
+    //-------------------------------------------------------------------------------------
+    //--------------------------------------- state updates -------------------------------------
+    //-------------------------------------------------------------------------------------
+
   updateEducation: function(fieldID) {
-    console.log("updating education with id: " + fieldID);
+    var currentState = this.state;
+
+    for ( var education of currentState.education ) {
+      if(education.id == fieldID){
+
+        var educationIndex = currentState.education.indexOf(education);
+        currentState.education[educationIndex].locked = true;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
   },
 
   updateCertification: function(fieldID) {
-    console.log("updating certifiaction with id: " + fieldID);
+    var currentState = this.state;
+
+    for ( var certification of currentState.certifications ) {
+      if(certification.id == fieldID){
+
+        var certificationIndex = currentState.certifications.indexOf(certification);
+        currentState.certifications[certificationIndex].locked = true;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
   },
 
   updateAchievement: function(fieldID) {
-    console.log("updating achievement with id: " + fieldID);
+    var currentState = this.state;
+
+    for ( var achievement of currentState.achievements ) {
+      if(achievement.id == fieldID){
+
+        var achievementIndex = currentState.achievements.indexOf(achievement);
+        currentState.achievements[achievementIndex].locked = true;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
   },
 
   updateEmploymentHistory: function(fieldID) {
-    console.log("updating employment history with id: " + fieldID);
+    var currentState = this.state;
+
+    for ( var employmentHistory of currentState.employmentHistory ) {
+      if(employmentHistory.id == fieldID){
+
+        var employmentHistoryIndex = currentState.employmentHistory.indexOf(employmentHistory);
+        currentState.employmentHistory[employmentHistoryIndex].locked = true;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
   },
 
   updateProfessionalSkill: function(fieldID) {
-    console.log("updating professonal skill with id: " + fieldID);
+    var currentState = this.state;
+
+    for ( var professionalSkill of currentState.professionalSkills ) {
+      if(professionalSkill.id == fieldID){
+
+        var professionalSkillIndex = currentState.professionalSkills.indexOf(professionalSkill);
+        currentState.professionalSkills[professionalSkillIndex].locked = true;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
   },
 
   updateTechnicalSkill: function(fieldID) {
-    console.log("updating technical skill with id: " + fieldID);
+    var currentState = this.state;
+
+    for ( var technicalSkill of currentState.technicalSkills ) {
+      if(technicalSkill.id == fieldID){
+
+        var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
+        currentState.technicalSkills[technicalSkillIndex].locked = true;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
   },
+
+  //-------------------------------------------------------------------------------------
+  //---------------------------------------- text updates ---------------------------------------
+  //-------------------------------------------------------------------------------------
+
+  updateEducationText: function(fieldID, event) {
+    var currentState = this.state;
+
+    for ( var education of currentState.education ) {
+      if(education.id == fieldID){
+
+        var educationIndex = currentState.education.indexOf(education);
+        currentState.education[educationIndex].text = event.target.value;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  updateCertificationText: function(fieldID, event) {
+    var currentState = this.state;
+
+    for ( var certification of currentState.certifications ) {
+      if(certification.id == fieldID){
+
+        var certificationIndex = currentState.certifications.indexOf(certification);
+        currentState.certifications[certificationIndex].text = event.target.value;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  updateAchievementText: function(fieldID, event) {
+    var currentState = this.state;
+
+    for ( var achievement of currentState.achievements ) {
+      if(achievement.id == fieldID){
+
+        var achievementIndex = currentState.achievements.indexOf(achievement);
+        currentState.achievements[achievementIndex].text = event.target.value;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  updateEmploymentHistoryText: function(fieldID, event) {
+    var currentState = this.state;
+
+    for ( var employmentHistory of currentState.employmentHistory ) {
+      if(employmentHistory.id == fieldID){
+
+        var employmentHistoryIndex = currentState.employmentHistory.indexOf(employmentHistory);
+        currentState.employmentHistory[employmentHistoryIndex].text = event.target.value;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  updateProfessionalSkillText: function(fieldID, event) {
+    var currentState = this.state;
+
+    for ( var professionalSkill of currentState.professionalSkills ) {
+      if(professionalSkill.id == fieldID){
+
+        var professionalSkillIndex = currentState.professionalSkills.indexOf(professionalSkill);
+        currentState.professionalSkills[professionalSkillIndex].text = event.target.value;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  updateTechnicalSkillText: function(fieldID, event) {
+    var currentState = this.state;
+
+    for ( var technicalSkill of currentState.technicalSkills ) {
+      if(technicalSkill.id == fieldID){
+
+        var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
+        currentState.technicalSkills[technicalSkillIndex].text = event.target.value;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  //-------------------------------------------------------------------------------------
+  //---------------------------------------- adds ---------------------------------------
+  //-------------------------------------------------------------------------------------
+
+  addEducation: function(fieldID) {
+    var currentState = this.state;
+
+    currentState.education.push({
+      id: generateRandomID(),
+      text: "",
+      locked: false,
+      data: 0
+    });
+
+    this.setState(currentState);
+  },
+
+  addCertification: function(fieldID) {
+    var currentState = this.state;
+
+    currentState.certifications.push({
+      id: generateRandomID(),
+      text: "",
+      locked: false,
+      data: 0
+    });
+
+    this.setState(currentState);
+  },
+
+  addAchievement: function(fieldID) {
+    var currentState = this.state;
+
+    currentState.achievements.push({
+      id: generateRandomID(),
+      text: "",
+      locked: false,
+      data: 0
+    });
+
+    this.setState(currentState);
+  },
+
+  addEmploymentHistory: function(fieldID) {
+    var currentState = this.state;
+
+    currentState.employmentHistory.push({
+      id: generateRandomID(),
+      text: "",
+      locked: false,
+      data: 0
+    });
+
+    this.setState(currentState);
+  },
+
+  addProfessionalSkill: function(fieldID) {
+    var currentState = this.state;
+
+    currentState.professionalSkills.push({
+      id: generateRandomID(),
+      text: "",
+      locked: false,
+      data: 0
+    });
+
+    this.setState(currentState);
+  },
+
+  addTechnicalSkill: function(fieldID) {
+    var currentState = this.state;
+
+    currentState.technicalSkills.push({
+      id: generateRandomID(),
+      text: "",
+      locked: false,
+      data: 0
+    });
+
+    this.setState(currentState);
+  },
+
+  //-------------------------------------------------------------------------------------
+  //--------------------------------------- deletes -------------------------------------
+  //-------------------------------------------------------------------------------------
+
+  deleteEducationField: function(fieldID) {
+    var currentState = this.state;
+
+    for ( var education of currentState.education ) {
+      if(education.id == fieldID){
+
+        var educationIndex = currentState.education.indexOf(education);
+        currentState.education.splice(educationIndex, 1);
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  deleteCertificationField: function(fieldID) {
+    var currentState = this.state;
+
+    for ( var certification of currentState.certifications ) {
+      if(certification.id == fieldID){
+
+        var certificationIndex = currentState.certifications.indexOf(certification);
+        currentState.certifications.splice(certificationIndex, 1);
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  deleteAchievementField: function(fieldID) {
+    var currentState = this.state;
+
+    for ( var achievement of currentState.achievements ) {
+      if(achievement.id == fieldID){
+
+        var achievementIndex = currentState.achievements.indexOf(achievement);
+        currentState.achievements.splice(achievementIndex, 1);
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  deleteEmploymentHistoryField: function(fieldID) {
+    var currentState = this.state;
+
+    for ( var employmentHistory of currentState.employmentHistory ) {
+      if(employmentHistory.id == fieldID){
+
+        var employmentHistoryIndex = currentState.employmentHistory.indexOf(employmentHistory);
+        currentState.employmentHistory.splice(employmentHistoryIndex, 1);
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  deleteProfessionalSkillField: function(fieldID) {
+    var currentState = this.state;
+
+    for ( var professionalSkill of currentState.professionalSkills ) {
+      if(professionalSkill.id == fieldID){
+
+        var professionalSkillIndex = currentState.professionalSkills.indexOf(professionalSkill);
+        currentState.professionalSkills.splice(professionalSkillIndex, 1);
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+  deleteTechnicalSkillField: function(fieldID) {
+    var currentState = this.state;
+
+    for ( var technicalSkill of currentState.technicalSkills ) {
+      if(technicalSkill.id == fieldID){
+
+        var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
+        currentState.technicalSkills.splice(technicalSkillIndex, 1);
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+
+
 
   render: function() {
 
     return (
-      <div>
+      <div>a
         <Nav/>
         <h2>Create Profile</h2>
         <div ref="uploadForm" id="uploadFormId">
@@ -139,33 +508,39 @@ var CreateProfile = React.createClass({
             {
               // map passes individual elements into the first param, and their index into the second, which is used as the React key
               this.state.education.map((result, key) => {
-              return <EducationEntry key={key} id={result.id} update={this.updateEducation}></EducationEntry>
+                return <EducationEntry key={key} entry={result} updateState={this.updateEducation} updateText={this.updateEducationText} deleteField={this.deleteEducationField}/>
             })}
+            <input type="button" ref="button" onClick={this.addEducation} value="+"/>
 
             <h3>Certification</h3>
             {this.state.certifications.map((result, key) => {
-              return <CertificationEntry key={key} id={result.id} update={this.updateCertification}/>
+              return <CertificationEntry key={key} entry={result} updateState={this.updateCertification} updateText={this.updateCertificationText} deleteField={this.deleteCertificationField}/>
             })}
+            <input type="button" ref="button" onClick={this.addCertification} value="+"/>
 
             <h3>Achievements</h3>
             {this.state.achievements.map((result, key) => {
-              return <AchievementEntry key={key} id={result.id} update={this.updateAchievement}/>
+              return <AchievementEntry key={key} entry={result} updateState={this.updateAchievement} updateText={this.updateAchievementText} deleteField={this.deleteAchievementField}/>
             })}
+            <input type="button" ref="button" onClick={this.addAchievement} value="+"/>
 
             <h3>Employment History</h3>
             {this.state.employmentHistory.map((result, key) => {
-              return <EmploymentHistoryEntry key={key} id={result.id} update={this.updateEmploymentHistory}/>
+              return <EmploymentHistoryEntry key={key} entry={result} updateState={this.updateEmploymentHistory} updateText={this.updateEmploymentHistoryText} deleteField={this.deleteEmploymentHistoryField}/>
             })}
+            <input type="button" ref="button" onClick={this.addEmploymentHistory} value="+"/>
 
             <h3>Professional Skills</h3>
             {this.state.professionalSkills.map((result, key) => {
-              return <ProfessionalSkillEntry  key={key} id={result.id} update={this.updateProfessionalSkill}/>
+              return <ProfessionalSkillEntry  key={key} entry={result} updateState={this.updateProfessionalSkill} updateText={this.updateProfessionalSkillText} deleteField={this.deleteProfessionalSkillField}/>
             })}
+            <input type="button" ref="button" onClick={this.addProfessionalSkill} value="+"/>
 
             <h3>Technical Skills</h3>
             {this.state.technicalSkills.map((result, key) => {
-              return <TechnicalSkillEntry key={key} id={result.id} update={this.updateTechnicalSkill}/>
+              return <TechnicalSkillEntry key={key} entry={result} updateState={this.updateTechnicalSkill} updateText={this.updateTechnicalSkillText} deleteField={this.deleteTechnicalSkillField}/>
             })}
+            <input type="button" ref="button" onClick={this.addTechnicalSkill} value="+"/>
 
           </form>
         </div>

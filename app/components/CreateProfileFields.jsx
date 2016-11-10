@@ -1,34 +1,47 @@
-
 var React = require('react');
+
+const styles = {
+  lockedInput: {
+    background: "grey",
+      display: "inline-block",
+      width: "auto",
+      margin: "0 10px"
+  },
+  unlockedInput: {
+    background: "white",
+      display: "inline-block",
+      width: "auto",
+      margin: "0 10px"
+  },
+  inputContainer: {
+    display: "block",
+    width: "100%"
+  }
+};
+
 
 
 var EducationEntry = React.createClass({
 
   render: function() {
-
-    if (this.props.isLocked) {
-
-      var lockedStyle = {
-        background: "grey",
-        display: "inline-block",
-        width: "auto",
-        margin: "0 10px"
-      };
-
+    if (this.props.entry.locked) {
       return (
-        <div className="skillEntry" key={this.props.key} style={{display: "block", width: "100%"}}>
-          <input type="text" value={skillData.skill} style={lockedStyle} onBlur={this.updateSkillState.bind(this, skillData.id)} onChange={this.updateSkillText.bind(this, skillData.id)}/>
-          <input type="range" value={skillData.exp} style={{display: "inline-block", width: "auto", margin: "0 10px"}} onChange={this.updateExperience.bind(this, skillData.id)} />
-          <select value={skillData.importance} style={{display: "inline-block", width: "auto", margin: "0 10px"}} onChange={this.updateImportance.bind(this, skillData.id)}>
-            <option value="Mandatory">Manditory</option>
-            <option value="Important">Important</option>
-            <option value="Good to have">Good to have</option>
-          </select>
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
+          <input type="text" value={this.props.entry.text}
+            style={styles.lockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
         </div>
       );
     } else {
       return (
-        <p>[filler]</p>
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="text" value={this.props.entry.skill}
+            style={styles.unlockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
       );
     }
   }
@@ -36,41 +49,126 @@ var EducationEntry = React.createClass({
 
 var CertificationEntry = React.createClass({
   render: function() {
-    return (
-      <p>[CertificationEntry] myID={this.props.id}</p>
-    );
+    if (this.props.entry.locked) {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
+          <input type="text" value={this.props.entry.text}
+            style={styles.lockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    } else {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="text" value={this.props.entry.skill}
+            style={styles.unlockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    }
   }
 });
 
 var AchievementEntry = React.createClass({
   render: function() {
-    return (
-      <p>[AchievementEntry] myID={this.props.id}</p>
-    );
+    if (this.props.entry.locked) {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
+          <input type="text" value={this.props.entry.text}
+            style={styles.lockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    } else {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="text" value={this.props.entry.skill}
+            style={styles.unlockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    }
   }
 });
 
 var EmploymentHistoryEntry = React.createClass({
   render: function() {
-    return (
-      <p>[EmploymentHistoryEntry] myID={this.props.id}</p>
-    );
+    if (this.props.entry.locked) {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
+          <input type="text" value={this.props.entry.text}
+            style={styles.lockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    } else {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="text" value={this.props.entry.skill}
+            style={styles.unlockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    }
   }
 });
 
 var ProfessionalSkillEntry = React.createClass({
   render: function() {
-    return (
-      <p>[ProfessionalSkillEntry] myID={this.props.id}</p>
-    );
+    if (this.props.entry.locked) {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
+          <input type="text" value={this.props.entry.text}
+            style={styles.lockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    } else {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="text" value={this.props.entry.skill}
+            style={styles.unlockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    }
   }
 });
 
 var TechnicalSkillEntry = React.createClass({
   render: function() {
-    return (
-      <p>[TechnicalSkillEntry] myID={this.props.id}</p>
-    );
+    if (this.props.entry.locked) {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
+          <input type="text" value={this.props.entry.text}
+            style={styles.lockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    } else {
+      return (
+        <div key={this.props.key} style={styles.inputContainer}>
+          <input type="text" value={this.props.entry.skill}
+            style={styles.unlockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+        </div>
+      );
+    }
   }
 });
 
@@ -83,4 +181,4 @@ module.exports = {
   EmploymentHistoryEntry: EmploymentHistoryEntry,
   ProfessionalSkillEntry: ProfessionalSkillEntry,
   TechnicalSkillEntry: TechnicalSkillEntry
-}
+};
