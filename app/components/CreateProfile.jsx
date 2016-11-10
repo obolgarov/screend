@@ -59,7 +59,7 @@ var CreateProfile = React.createClass({
 
  var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
@@ -126,14 +126,19 @@ var CreateProfile = React.createClass({
 
   render: function() {
 
+    var button = {
+      margin : "30px 00px 30px 00px"
+    };
     return (
       <div>
         <Nav/>
-        <h2>Create Profile</h2>
-        <div ref="uploadForm" id="uploadFormId">
+
+        <div ref="uploadForm" id="uploadFormId" className="columns medium-4 large-6 small-centered">
+          <h2>Create Profile</h2>
+          
           <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
             <input type="file" name="resume" ref="resumeupload"></input>
-            <input type="submit" value="UploadResume" ref="resumesubmit" name="submit"></input>
+            <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button}></input>
 
             <h3>Education</h3>
             {

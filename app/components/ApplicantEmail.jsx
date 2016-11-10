@@ -67,6 +67,9 @@ var ApplicantEmail = React.createClass({
 
 
     render: function() {
+      var button = {
+        margin : "30px 00px 30px 00px"
+      };
         return (
       <div>
         <h3>Enter your username to recieve a password reset link: </h3>
@@ -78,7 +81,7 @@ var ApplicantEmail = React.createClass({
             </div>
 
             <div>
-              <input type="submit" />
+              <input type="submit" className="button hollow" style={button}/>
             </div>
 
           </form>

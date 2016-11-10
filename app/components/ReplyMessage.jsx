@@ -13,7 +13,7 @@ var ReplyMessage = React.createClass({
 
  var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
@@ -91,7 +91,12 @@ var ReplyMessage = React.createClass({
     },
 
     render: function() {
+    var  button = {
+        margin : "30px 00px 30px 00px"
+    };
+
         return (
+
             <div>
                 <Nav/>
 
@@ -110,7 +115,7 @@ var ReplyMessage = React.createClass({
                             <textarea ref="message"></textarea>
                         </div>
                         <div>
-                            <button type="submit">Submit</button>
+                            <button type="submit" className="button hollow">Submit</button>
                         </div>
 
                     </form>

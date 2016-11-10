@@ -20,11 +20,11 @@ var ViewMessage = React.createClass({
 
  var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
-  
+
   function getParameterByName(name, url) {
 
     if (!url) {
@@ -174,6 +174,8 @@ var ViewMessage = React.createClass({
 
           if (this.state.data) {
 
+          
+
             return (
               <div>
                   <Nav/>
@@ -193,8 +195,8 @@ var ViewMessage = React.createClass({
                                   <p>Subject : {data.subject}</p>
                                   <p>Message : {data.message}</p>
 
-                                     <input type="button" onClick={this.delete} value="Delete" />
-                                      <input type="button" onClick={this.reply} value="Reply" />
+                                     <input type="button" onClick={this.delete} className="button hollow" value="Delete" />
+                                      <input type="button" onClick={this.reply}  className="button hollow" value="Reply" />
 
 
                                 </div>

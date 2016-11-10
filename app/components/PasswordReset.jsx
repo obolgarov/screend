@@ -13,7 +13,7 @@ var PasswordReset = React.createClass({
 
  var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
@@ -109,7 +109,12 @@ var PasswordReset = React.createClass({
   },
 
 render: function(){
+  var button = {
+    margin : "30px 00px 30px 00px"
+  };
+
   return(
+
 <div>
   <h2>Password Reset - Job Seeker</h2>
 
@@ -127,7 +132,7 @@ render: function(){
       </div>
 
       <div>
-        <button type="submit">Submit</button>
+        <button type="submit" className="button hollow">Submit</button>
       </div>
 
     </form>
