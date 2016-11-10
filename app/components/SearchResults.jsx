@@ -64,80 +64,80 @@ var SearchResults = React.createClass({
             res.on('data', (dataBlob) => {
 
                 var jsonData = JSON.parse(dataBlob);
-             
+
                 var jobData = [];
-                
-      
-                   for(var item of jsonData){
-         
-                   jobData.push({
-                       jobTitle: item.JobTitle,
-                        companyName: item.CompanyName,
-                        jobID: item._id
-                    });
-       }
                
-             
-                
-                this.setState({
-                    data: jobData
-                });
+
+                if(jsonData.toString() == "[object Object]") {
+                    jsonData = [jsonData];
+                }
+                jsonData.forEach((index, item) => {
+                    jobData.push({
+                        jobTitle: index.JobTitle,
+                        companyName: index.CompanyName,
+                        jobID: index._id
+                    });
+
+                    this.setState({
+                        data: jobData
+                    });
+                })
+
             });
+    });
 
-        });
+req.on('error', function (err) {
+    res.send('error: ' + err.message);
+})
 
-        req.on('error', function (err) {
-            res.send('error: ' + err.message);
-        })
+req.write(dataQuerystring);
 
-        req.write(dataQuerystring);
-
-        req.end();
+req.end();
 
     },
 
 
-    render: function () {
+render: function () {
 
-        if (this.state.data) {
+    if (this.state.data) {
 
-            return (
-                <div>
-                    <Nav />
-                    <form ref='metric_results' onSubmit={this.onSubmit}>
-                        <div id='Content-Length'>
-                            <table ref="jobsTable">
-                                <tbody>
-                                    {
-                                        this.state.data.map(function (data) {
+        return (
+            <div>
+                <Nav />
+                <form ref='metric_results' onSubmit={this.onSubmit}>
+                    <div id='Content-Length'>
+                        <table ref="jobsTable">
+                            <tbody>
+                                {
+                                    this.state.data.map(function (data) {
 
-                                            var link = "/#/JobDescription?id=" + data.jobID;
-                                            console.log(link);
+                                        var link = "/#/JobDescription?id=" + data.jobID;
+                                        console.log(link);
 
-                                            return (
-                                                <tr>
-                                                    <td><a href={link}>{data.jobTitle}</a></td>
-                                                    <td>{data.companyName}</td>
-                                                    <td>{data.jobID}</td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <p>Loading...</p>
-                </div>
-            )
-        }
-
+                                        return (
+                                            <tr>
+                                                <td><a href={link}>{data.jobTitle}</a></td>
+                                                <td>{data.companyName}</td>
+                                                <td>{data.jobID}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <p>Loading...</p>
+            </div>
+        )
     }
+
+}
 });
 
 module.exports = SearchResults;
