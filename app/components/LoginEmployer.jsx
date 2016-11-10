@@ -59,7 +59,7 @@ var LoginEmployer = React.createClass({
 
 
         if(parse.success == true )        {
-          hashHistory.push('Main');
+          hashHistory.push('Home');
 
       }  else
         {
@@ -89,8 +89,14 @@ var LoginEmployer = React.createClass({
   },
 
     render: function() {
+
+      var button = {
+         margin : "30px 00px 30px 00px"
+      };
+
         return (
-      <div>
+
+      <div className="columns medium-4 large-6 small-centered">
         <h2>Login - Employer</h2>
 
         <form ref='LogIn' onSubmit={this.onSubmit}>
@@ -106,7 +112,7 @@ var LoginEmployer = React.createClass({
             </div>
 
           <div>
-            <button type="submit">Submit</button>
+            <button type="submit" className="button hollow" style={button}>Submit</button>
           </div>
 
         </form>

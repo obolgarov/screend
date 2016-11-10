@@ -8,6 +8,8 @@ var UploadResume = React.createClass({
 
         e.preventDefault();
 
+
+
         var data = {
             file: this.refs.resumeupload.value
         }
@@ -105,13 +107,18 @@ var UploadResume = React.createClass({
 
     },
     render: function () {
+
+      var button = {
+        margin : "30px 00px 30px 00px"
+      };
+
         return (
             <div>
               <Nav/>
-                <div ref="uploadForm" id="uploadFormId">
+                <div ref="uploadForm" id="uploadFormId" className="columns medium-4 large-6 small-centered">
                     <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
                         <input type="file" name="resume" ref="resumeupload"></input>
-                        <input type="submit" value="UploadResume" ref="resumesubmit" name="submit"></input>
+                        <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button}></input>
                 </form>
                 </div>
                 <div ref="rankOutput" id="rankOutputId">

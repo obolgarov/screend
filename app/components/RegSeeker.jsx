@@ -178,6 +178,11 @@ var RegSeeker = React.createClass({
     },
 
     render: function() {
+
+      var button = {
+        margin : "30px 00px 30px 00px"
+      };
+
         return (
             <div>
                 <h2>Register Account - Job Seeker</h2>
@@ -220,7 +225,7 @@ var RegSeeker = React.createClass({
                     </div>
 
                     <div>
-                        <button type="submit">Submit</button>
+                        <button type="submit" className="button hollow" style={button} >Submit</button>
                     </div>
                 </form>
 

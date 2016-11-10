@@ -29,9 +29,14 @@ var generateRandomID = function(){
 var CreateProfile = React.createClass({
   componentDidMount: function() {
 
+<<<<<<< HEAD
     var myCookie = cookie.load('userToken');
     //console.log(myCookie);
 
+=======
+ var myCookie = cookie.load('userToken');
+ console.log(myCookie);
+>>>>>>> 0a9b5f069d1b1559e981cbe3a02c44c7e0fc36c9
     if (myCookie == null)
     {
       hashHistory.push('Welcome');
@@ -495,14 +500,19 @@ var CreateProfile = React.createClass({
 
   render: function() {
 
+    var button = {
+      margin : "30px 00px 30px 00px"
+    };
     return (
       <div>a
         <Nav/>
-        <h2>Create Profile</h2>
-        <div ref="uploadForm" id="uploadFormId">
+
+        <div ref="uploadForm" id="uploadFormId" className="columns medium-4 large-6 small-centered">
+          <h2>Create Profile</h2>
+          
           <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
             <input type="file" name="resume" ref="resumeupload"></input>
-            <input type="submit" value="UploadResume" ref="resumesubmit" name="submit"></input>
+            <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button}></input>
 
             <h3>Education</h3>
             {

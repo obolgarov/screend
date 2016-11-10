@@ -22,7 +22,6 @@ const styles = {
 
 
 var EducationEntry = React.createClass({
-
   render: function() {
     if (this.props.entry.locked) {
       return (

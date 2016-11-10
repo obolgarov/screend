@@ -90,9 +90,13 @@ var AdminLogin = React.createClass({
 
   },
   render: function(){
+    var button = {
+      margin : "30px 00px 30px 00px"
+    };
     return(
 
-<div>
+
+<div className="columns medium-4 large-6 small-centered">
 
   <h2>Login - Admin</h2>
     <form ref='LogIn' onSubmit={this.onSubmit}>
@@ -108,7 +112,7 @@ var AdminLogin = React.createClass({
       </div>
 
     <div>
-      <button type="submit" className="button hollow" >Submit</button>
+      <button type="submit" className="button hollow" style={button} >Submit</button>
     </div>
 
   </form>

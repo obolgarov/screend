@@ -142,6 +142,91 @@ router.route('/')
     // end of post*/
   });
 
+
+
+router.route('/searchJob').post(function(req, res, callback) {
+  var selected = req.body.selected;
+  var search = req.body.search;
+
+
+    if(selected == "CompanyName")
+    {
+       mongoose.model('job').find({
+      CompanyName : search
+    }, function (err, job){
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (job != null ){
+          res.format({
+            // json response
+            json: function() {
+              res.json(
+                      job
+                  );
+            }
+          });
+        }  
+      }
+    });
+    }
+
+else if(selected == "Location")
+    {
+       mongoose.model('job').find({
+      Location : search
+    }, function (err, job){
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (job != null ){
+          res.format({
+
+            // json response
+            json: function() {
+              res.json(
+                      job
+                  );
+            }
+          });
+        }  
+      }
+    });
+    } 
+else if(selected == "JobTitle")
+    {
+
+       mongoose.model('job').find({
+      JobTitle : search
+    }, function (err, job){
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (job != null ){
+          res.format({
+
+            // json response
+            json: function() {
+              res.json(
+                      job
+                  );
+            }
+          });
+        }  
+      }
+    });
+    } 
+
+
+
+
+
+});
+
+
 router.route('/view').post(function(req, res, callback) {
 
   var id = req.body.id;
@@ -248,3 +333,4 @@ router.route('/rank').get(function(req, res, callback) {
     }
   });
 });
+

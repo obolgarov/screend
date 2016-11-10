@@ -6,15 +6,16 @@ var Nav = require('Nav');
 import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
 import { hashHistory } from 'react-router';
+var Nav = require('Nav');
 
 
 var ContactUs = React.createClass({
-  
+
   componentDidMount: function() {
 
  var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
@@ -132,27 +133,35 @@ var ContactUs = React.createClass({
   },
 
   render: function(){
+
+  var button = {
+    margin : "30px 00px 30px 00px"
+  };
+
     return(
 
-<div>
-  <h2>Contact Us</h2>
-    <form ref='ContactUs' onSubmit={this.onSubmit}>
+<div >
+<Nav/>
+    <div className="columns medium-4 large-6 small-centered">
 
-      <div>
-       <label>Subject:</label>
-       <input type="text" ref="subject"/>
-      </div>
+      <h2>Contact Us</h2>
+        <form ref='ContactUs' onSubmit={this.onSubmit}>
 
-      <div>
-        <label>Message: </label>
-          <textarea ref="message"></textarea>
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
+          <div>
+           <label>Subject:</label>
+           <input type="text" ref="subject"/>
+          </div>
 
-     </form>
+          <div>
+            <label>Message: </label>
+              <textarea ref="message"></textarea>
+          </div>
+          <div>
+            <button type="submit" className="button hollow" style={button} >Submit</button>
+          </div>
 
+         </form>
+    </div>
 </div>
     );
   }

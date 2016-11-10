@@ -6,6 +6,7 @@ var i = 0;
 import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
 import { hashHistory } from 'react-router';
+var Nav = require('Nav');
 
 var JobPostings = React.createClass({
 
@@ -19,10 +20,10 @@ var JobPostings = React.createClass({
   // run after page loads, and performs an async request which will change state when finished
   componentDidMount: function() {
 
-    
+
  var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
@@ -37,7 +38,7 @@ var JobPostings = React.createClass({
         'Accept': 'application/json'
       }
     }
-
+  
     // might start using '=>' exclusively, otherwise everything inside the function
     // isn't part of the scope of where it's called from unless the function is
     // appended with '.bind(this)'. This is required to call this current object's
@@ -78,11 +79,22 @@ var JobPostings = React.createClass({
 
     if (this.state.data) {
 
+      var Table = {
+        margin : "30px"
+      };
+
+
       return (
         <div>
+         <Nav/>
           <form ref='metric_results' onSubmit={this.onSubmit}>
             <div id='Content-Length'>
-              <table ref="jobsTable">
+              <table ref="jobsTable" style={Table} className="columns medium-4 large-6 small-centered" >
+                <tr>
+                  <td> Job Name </td>
+                  <td> Company Name</td>
+                  <td> Job ID </td>
+                </tr>
                 <tbody>
                   {
                     this.state.data.map(function (data) {
@@ -96,7 +108,7 @@ var JobPostings = React.createClass({
                           <td>{data.companyName}</td>
                           <td>{data.jobID}</td>
                         </tr>
-                      )
+                      );
                     })
                   }
                 </tbody>

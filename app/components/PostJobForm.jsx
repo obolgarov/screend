@@ -23,7 +23,7 @@ var PostJobForm = React.createClass({
 
  var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
@@ -277,11 +277,14 @@ var PostJobForm = React.createClass({
 
   render: function() {
 
+  var button = {
+    margin : "30px 00px 30px 00px"
+  };
     return (
 
       <div>
         <Nav/>
-        <form ref='Job_form' method="Post" onSubmit={this.handleSubmit}>
+        <form ref='Job_form' method="Post" onSubmit={this.handleSubmit} className="columns medium-4 large-6 small-centered">
 
           <div>
             <label>Job Title:</label>
@@ -312,11 +315,6 @@ var PostJobForm = React.createClass({
             <input type="text" ref="requirededucation"/>
           </div>
 
-          <div>
-            <label>Experience:
-            </label>
-            <input type="text" ref="experience"/>
-          </div>
 
           <div>
             <label>Salary:
@@ -339,7 +337,7 @@ var PostJobForm = React.createClass({
           </div>
 
           <div>
-            <input type="submit"></input>
+            <input type="submit" className="button hollow"></input>
           </div>
         </form>
       </div>

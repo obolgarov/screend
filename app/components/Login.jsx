@@ -62,7 +62,7 @@ var Login = React.createClass({
 
         if(parse.success == true )
         {
-          hashHistory.push('Main');
+          hashHistory.push('Home');
 
       }  else
         {
@@ -93,41 +93,46 @@ var Login = React.createClass({
 
   },
   render: function(){
+
+    var button = {
+      margin : "30px 00px 30px 00px"
+    };
+
     return(
 
-<div>
+      <div className="columns medium-4 large-6 small-centered">
 
-  <h2>Login - Job Seeker</h2>
-    <form ref='LogIn' onSubmit={this.onSubmit}>
+        <h2>Login - Job Seeker</h2>
+          <form ref='LogIn' onSubmit={this.onSubmit}>
 
-      <div>
-          <label>Username: </label>
-          <input type="text" ref="user"/>
+          <div>
+                <label>Username: </label>
+                <input type="text" ref="user"/>
+          </div>
+
+          <div>
+                <label>Password: </label>
+                <input type="password" ref="password"/>
+          </div>
+
+          <div>
+            <button type="submit" className="button hollow" style={button}>Submit</button>
+          </div>
+
+          </form>
+
+          <div>
+              <Link to="/RegSeeker">Register Account</Link>
+          </div>
+
+
+          <div>
+            <Link to="/ApplicantEmail">Forget Password</Link>
+          </div>
       </div>
 
-      <div>
-          <label>Password: </label>
-          <input type="password" ref="password"/>
-      </div>
-
-    <div>
-      <button type="submit" className="button hollow" >Submit</button>
-    </div>
-
-  </form>
-
-  <div>
-      <Link to="/RegSeeker">Register Account</Link>
-  </div>
-
-
-<div>
-  <Link to="/ApplicantEmail">Forget Password</Link>
-</div>
-</div>
-
-    );
-  }
-});
+          );
+        }
+      });
 
 module.exports = Login;

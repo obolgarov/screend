@@ -22,6 +22,8 @@ var AdminLogin = require('AdminLogin');
 var CreateProfile = require('CreateProfile');
 var ViewMessage = require('ViewMessage');
 var ReplyMessage = require('ReplyMessage');
+var Search = require('Search');
+var SearchResults = require('SearchResults');
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
 
@@ -47,10 +49,12 @@ ReactDOM.render(
   <Route path="CreateProfile" components={CreateProfile}/>
   <Route path="ViewMessage" components={ViewMessage}/>
   <Route path="ReplyMessage" components={ReplyMessage}/>
+  <Route path="Search" components = {Search}/>
   <Route path="Home" components={Home}/>
   <Route path="Main" components={Main}/>
+  <Route path="SearchResults" components={SearchResults}/>
   <IndexRoute component={Welcome}/>
-  </Route>
+  </Route> 
 </Router>,
 
     document.getElementById('app')

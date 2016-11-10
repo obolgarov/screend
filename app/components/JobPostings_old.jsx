@@ -165,8 +165,10 @@ var JobPostings = React.createClass({
         <form ref='metric_results' onSubmit={this.onSubmit}>
           <div id='Content-Length'></div>
           <table ref="jobsTable">
+      
             {jobList.map(function(results) {
               return (
+
                 <tr>
                   <td>{results.jobName}</td>
                   <td>{results.companyName}</td>
