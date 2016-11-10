@@ -38,7 +38,7 @@ var JobPostings = React.createClass({
         'Accept': 'application/json'
       }
     }
-
+  
     // might start using '=>' exclusively, otherwise everything inside the function
     // isn't part of the scope of where it's called from unless the function is
     // appended with '.bind(this)'. This is required to call this current object's

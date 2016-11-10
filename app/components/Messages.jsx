@@ -49,7 +49,7 @@ var myCookie = cookie.load('userToken');
             var jsonData = JSON.parse(dataBlob);
 
             var messageData = [];
-
+            debugger;
             for ( var message of jsonData ) {
               messageData.push({
                 subject : message.subject,
