@@ -15,8 +15,10 @@ var EducationEntry = React.createClass({
         margin: "0 10px"
       };
 
+
+
       return (
-        <div className="skillEntry" key={this.props.key} style={{display: "block", width: "100%"}}>
+        <div className="skillEntry" key={this.props.key} style={{display: "block", width: "100%"}} className="columns medium-4 large-6 small-centered">
           <input type="text" value={skillData.skill} style={lockedStyle} onBlur={this.updateSkillState.bind(this, skillData.id)} onChange={this.updateSkillText.bind(this, skillData.id)}/>
           <input type="range" value={skillData.exp} style={{display: "inline-block", width: "auto", margin: "0 10px"}} onChange={this.updateExperience.bind(this, skillData.id)} />
           <select value={skillData.importance} style={{display: "inline-block", width: "auto", margin: "0 10px"}} onChange={this.updateImportance.bind(this, skillData.id)}>

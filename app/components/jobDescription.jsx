@@ -16,7 +16,7 @@ var jobDescription = React.createClass({
 
  var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
@@ -80,7 +80,7 @@ var jobDescription = React.createClass({
         var salary = document.createTextNode(job.Salary);
         document.getElementById("salary").appendChild(salary);
 
-     
+
      });
     });
 
@@ -100,6 +100,10 @@ var jobDescription = React.createClass({
   },
 
   render: function(){
+    var button = {
+      margin : "30px 00px 30px 00px"
+    };
+
     return(
       <div>
         <Nav/>
@@ -148,7 +152,7 @@ var jobDescription = React.createClass({
         <form ref="jobDescription" method="post">
           <div>
 
-            <button type="submit" value="Apply For Job">Submit Resume</button>
+            <button type="submit" value="Apply For Job" className="button hollow" style={button} >Submit Resume</button>
           </div>
         </form>
       </div>
