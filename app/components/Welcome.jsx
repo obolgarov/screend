@@ -12,7 +12,6 @@ var Welcome = React.createClass({
         var grey = {
            "margin-top" : "300px",
            "background-color" : "#e6e6e6"
-
         };
 
 
