@@ -45,7 +45,9 @@ plugins:[
       AdminLogin:'app/components/AdminLogin.jsx',
       CreateProfile: 'app/components/CreateProfile.jsx',
       ViewMessage:'app/components/ViewMessage.jsx',
-      ReplyMessage : 'app/components/ReplyMessage.jsx'
+      ReplyMessage : 'app/components/ReplyMessage.jsx',
+      Search : 'app/components/Search.jsx',
+      SearchResults : 'app/components/SearchResults.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },
