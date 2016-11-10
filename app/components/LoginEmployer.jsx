@@ -59,7 +59,7 @@ var LoginEmployer = React.createClass({
 
 
         if(parse.success == true )        {
-          hashHistory.push('Main');
+          hashHistory.push('Home');
 
       }  else
         {
