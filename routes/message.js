@@ -264,3 +264,22 @@ router.route('/delete').post(function(req, res, callback)
     }
   });
 });
+
+router.route('/getAccountType').post(function(req,res,callback)
+{
+    var token = req.body.token;
+    var decoded = jwt.decode(token);
+
+    var accountType = decoded.accountType;
+
+    if(accountType == "applicant")
+    {
+        res.json({account :"applicant"});
+    }
+    
+    else if(accountType == "employer")
+    {
+        res.json({account:"employer"});
+    }
+
+});

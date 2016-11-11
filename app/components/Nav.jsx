@@ -27,6 +27,9 @@
 // module.exports = Nav;
 
 var React = require('react');
+var http = require('http'); // to send request
+var config = require('../../config')(); // to get the port
+var querystring = require('querystring'); // to send data inside the request
 var {Link} = require('react-router');
 import { hashHistory } from 'react-router';
 import cookie from 'react-cookie';
@@ -35,6 +38,57 @@ var Cookies = require('js-cookie')
 
 
 var Nav = React.createClass({
+
+   getInitialState: function() {
+    return {
+      data: null
+    };
+  },
+
+    componentDidMount: function () {
+     
+       var myCookie = cookie.load('userToken');
+       var tokenData = {
+      token : cookie.load('userToken')
+    }
+
+    var dataQuerystring = querystring.stringify(tokenData);
+
+    var httpOptions = {
+      port: config.port,
+      path: "/messages/getAccountType",
+      method: "POST", // insert data
+      headers: {
+        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Content-Length' : Buffer.byteLength(dataQuerystring),
+        'Accept' : 'application/json'
+      },
+      body: dataQuerystring
+
+    }
+
+    var req = http.request(httpOptions, (res) => {
+
+          res.on('data', (dataBlob) => {
+
+            var jsonData = JSON.parse(dataBlob);
+
+           this.setState({
+              data: jsonData.account
+            });
+
+          });
+        });
+
+          req.on('error', function(err){
+          res.send('error: ' + err.message);
+          });
+
+          req.write(dataQuerystring);
+
+          req.end();
+
+    },
 
     onLogin: function(e){
       e.preventDefault();
@@ -47,8 +101,50 @@ var Nav = React.createClass({
 
 
     render: function(){
+      if(this.state.data == "applicant")
+      {
       return(
         <div className="top-bar" activeStyle={{padding: "10px", margin: "50px", border: "1px solid ", width : "100%"}}>
+          <div className="top-bar-left" >
+            <ul className="menu">
+              <li className="menu-text" activeStyle={{fontWeight: 'bold'}}>
+                Screen-d
+              </li>
+              <li>
+                  <Link to="/Home" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
+              </li>
+              <li>
+                <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >JobPosting</Link>
+              </li>
+              <li>
+                <Link to="/messages" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Messages</Link>
+              </li>
+              <li>
+                <Link to="/CreateProfile" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Create Profile</Link>
+              </li>
+              <li>
+                <Link to="/ContactUs" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact Us</Link>
+              </li>
+           <li>
+                <Link to="/Search" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Search Jobs</Link>
+              </li>
+          
+            </ul>
+          </div>
+          <div className="top-bar-right">
+              <form onSubmit={this.onLogin}>
+                <input value="Sign Out" type="submit" className="button"></input>
+              </form>
+          </div>
+
+        </div>
+        );
+      }
+     else if (this.state.data == "employer")
+     {
+       return(
+
+<div className="top-bar" activeStyle={{padding: "10px", margin: "50px", border: "1px solid ", width : "100%"}}>
           <div className="top-bar-left" >
             <ul className="menu">
               <li className="menu-text" activeStyle={{fontWeight: 'bold'}}>
@@ -72,9 +168,6 @@ var Nav = React.createClass({
               <li>
                 <Link to="/PostJobForm" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Post Job</Link>
               </li>
-           <li>
-                <Link to="/Search" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Search</Link>
-              </li>
           
             </ul>
           </div>
@@ -85,8 +178,18 @@ var Nav = React.createClass({
           </div>
 
         </div>
-        );
-      }
+       );
+     }
+     else
+     {
+         return (
+          <div>
+            <p>Loading...</p>
+          </div>
+        )
+     }
+    
+   }
 
     });
 

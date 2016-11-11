@@ -132,7 +132,7 @@ router.route('/verify').post(function(req, res, callback) {
 
         if (employer != null ){
 
-          var token = jwt.sign({username}, superSecret,
+          var token = jwt.sign({username,accountType:"employer"}, superSecret,
         {expiresIn: '10h'});
 
 
