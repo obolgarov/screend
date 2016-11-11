@@ -82,9 +82,9 @@ router.route('/')
     var Salary = req.body.Salary;
     var Description = req.body.Description;
     var SkillsList = req.body.Skills;
-
+    var PostedBy = req.body.PostedBy;
     //console.log(SkillsList);
-
+    console.log("POst" + PostedBy);
     var newJob = new Job({
       EmployerID: EmployerID,
       JobTitle: JobTitle,
@@ -94,6 +94,7 @@ router.route('/')
       Requirededucation: Requirededucation,
       Salary: Salary,
       Description: Description,
+      PostedBy : PostedBy,
       Skills: [] //initialized empty
     });
 
@@ -112,7 +113,6 @@ router.route('/')
         // insertion/creation complete
         console.log('POST inserting new Job: ' + job);
 
-        res.send("Done");
       }
     });
 

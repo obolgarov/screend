@@ -13,6 +13,7 @@ var jobSchema = new mongoose.Schema( {
   Requirededucation: String,
   Salary: String,
   Description: String,
+  PostedBy:String,
   Skills: [{
     SkillName: String,
     Experience: String,

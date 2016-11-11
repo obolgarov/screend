@@ -47,7 +47,8 @@ plugins:[
       ViewMessage:'app/components/ViewMessage.jsx',
       ReplyMessage : 'app/components/ReplyMessage.jsx',
       Search : 'app/components/Search.jsx',
-      SearchResults : 'app/components/SearchResults.jsx'
+      SearchResults : 'app/components/SearchResults.jsx',
+      DeleteJob: 'app/components/DeleteJob.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

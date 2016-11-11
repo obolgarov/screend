@@ -62,7 +62,7 @@ router.route('/')
         if (admin != null ){
 
 
-          var token = jwt.sign({username}, superSecret,
+          var token = jwt.sign({username, accountType: "admin"}, superSecret,
         {expiresIn: '10h'});
 
 

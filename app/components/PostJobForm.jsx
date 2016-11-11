@@ -22,12 +22,12 @@ var PostJobForm = React.createClass({
  componentDidMount: function() {
 
  var myCookie = cookie.load('userToken');
- console.log(myCookie);
     if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
-  },
+
+ },
 
   getInitialState: function() {
     var initialData = [];
@@ -37,6 +37,7 @@ var PostJobForm = React.createClass({
       exp: 0,
       importance: "Good to have",
       locked: false,
+      username : ""
     });
     return {
       data: initialData,
@@ -47,6 +48,31 @@ var PostJobForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
 
+
+  var data = {     token : cookie.load('userToken') }
+ 
+   var dataQuerystring = querystring.stringify(data);
+
+   var username = "";
+
+    var httpOptions = {
+      port: config.port,
+      path: "/messages/decode",
+      method: "POST", // insert data
+      headers: {
+        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Content-Length' : Buffer.byteLength(dataQuerystring),
+        'Accept' : 'application/json'
+      },
+      body: dataQuerystring
+
+    }
+
+    var req = http.request(httpOptions, (res) => {
+          res.on('data', (dataBlob) => {
+
+            console.log(dataBlob);
+
     var data = {
       JobTitle: this.refs.jobtitle.value,
       CompanyName: this.refs.companyform.value,
@@ -55,10 +81,11 @@ var PostJobForm = React.createClass({
       Requirededucation: this.refs.requirededucation.value,
       Salary: this.refs.salary.value,
       Description: this.refs.description.value,
-      Skills:this.state.data
+      Skills:this.state.data,
+      PostedBy:dataBlob
     }
+    console.log(data.PostedBy);
 
-    //console.log(data.Skills);
 
     var dataQuerystring = querystring.stringify(data);
     console.log(dataQuerystring);
@@ -76,27 +103,10 @@ var PostJobForm = React.createClass({
 
     //console.log("sending");
 
-    var req = http.request(httpOptions, function(res) {
-
-      //console.log("received response");
-
-      // res now contains new applicant data already inserted
-      var output = '';
-      //  console.log(options.path + ':' + res.statusCode);
-      //  res.setEncoding('utf8');
-
-      res.on('data', function(dataBlob) {
-        output += dataBlob;
-        console.log("output: " + output);
-
-      });
-
-      res.on('end', function() {
+    var req = http.request(httpOptions, (res) => {
+          res.on('data', (dataBlob) => {
         var obj = JSON.parse(output);
       });
-
-      // TODO: do something with the data for the applicant just inserted
-
     });
 
     req.on('error', function(err) {
@@ -106,6 +116,20 @@ var PostJobForm = React.createClass({
     req.write(dataQuerystring);
 
     req.end();
+
+
+          });
+         });
+
+        req.on('error', function(err){
+          res.send('error: ' + err.message);
+        })
+
+        req.write(dataQuerystring);
+
+        req.end();
+        
+
   },
 
   // deletes selected skill if it's recorded, adds new skill if it's a new field

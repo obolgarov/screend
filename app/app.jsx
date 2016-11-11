@@ -24,6 +24,8 @@ var ViewMessage = require('ViewMessage');
 var ReplyMessage = require('ReplyMessage');
 var Search = require('Search');
 var SearchResults = require('SearchResults');
+var DeleteJob = require('DeleteJob');
+
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
 
@@ -53,6 +55,7 @@ ReactDOM.render(
   <Route path="Home" components={Home}/>
   <Route path="Main" components={Main}/>
   <Route path="SearchResults" components={SearchResults}/>
+  <Route path="DeleteJob" components={DeleteJob}/>
   <IndexRoute component={Welcome}/>
   </Route>
 </Router>,

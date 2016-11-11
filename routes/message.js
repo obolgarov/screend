@@ -282,4 +282,9 @@ router.route('/getAccountType').post(function(req,res,callback)
         res.json({account:"employer"});
     }
 
+    else if(accountType == "admin")
+    {
+        res.json({account:"admin"});
+    }
+
 });
