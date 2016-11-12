@@ -134,7 +134,7 @@ var CreateProfile = React.createClass({
         // do something with jsonData if needed
       },
       onError: (error) => {
-        res.send('error: ' + err.message);
+        console.err(error.message);
       }
     })
 
