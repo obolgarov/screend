@@ -6,9 +6,9 @@ import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
 import { hashHistory } from 'react-router';
 var Nav = require('Nav');
+var httpGen = require('./httpGen.js');
 
 var DeleteJob = React.createClass({
-
     getInitialState: function () {
         return {
             data: null
@@ -22,6 +22,7 @@ var DeleteJob = React.createClass({
         if (myCookie == null) {
             hashHistory.push('Welcome');
         }
+
 
         var data = { token: cookie.load('userToken') }
         var dataQuerystring = querystring.stringify(data);
@@ -41,33 +42,38 @@ var DeleteJob = React.createClass({
         var req = http.request(httpOptions, (res) => {
             res.on('data', (dataBlob) => {
 
-                var userData = {
-                    PostedBy: dataBlob
-                }
+        var userData = {
+            PostedBy: dataBlob
+        }
+            
+        var dataQuerystring = querystring.stringify(userData);
 
-                var dataQuerystring = querystring.stringify(userData);
+            var httpOptions = {
+              port: config.port,
+              path: "/job/findMyJobs",
+              method: "POST", // insert data
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': Buffer.byteLength(dataQuerystring),
+                'Accept': 'application/json'
+              },
+              body: dataQuerystring
+            }
+
+            console.log("body: " + JSON.stringify(userData));
 
 
-                var httpOptions = {
-                    port: config.port,
-                    path: "/job/findMyJobs",
-                    method: "POST", // insert data
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Content-Length': Buffer.byteLength(dataQuerystring),
-                         'Accept': 'application/json'
-                     },
-                    body: dataQuerystring
-                }
+            var req = http.request(httpOptions, (res) => {
 
+              var output = '';
+      
+              res.on('data', (dataBlob) => {
+                output += dataBlob;
 
-                    //The body is not being sent with the request (WTF)
-                var req = http.request(httpOptions, (res) => {
-                    res.on('data', (dataBlob) => {
-                        var jsonData = JSON.parse(dataBlob);
-
-                        var jobData = [];
-
+                var jsonData = JSON.parse(output);
+                console.log(jsonData);
+                     var jobData = [];
+    
                         for (var job of jsonData) {
                             jobData.push({
                                 jobTitle: job.JobTitle,
@@ -79,17 +85,25 @@ var DeleteJob = React.createClass({
                         this.setState({
                             data: jobData
                         });
-                    });
-                });
 
-                req.on('error', function (err) {
-                    res.send('error: ' + err.message);
-                });
+              });
 
-                req.end();
+              res.on('end', function() {
+                var obj = JSON.parse(output);
+              });
 
 
             });
+
+            req.on('error', function(err) {
+              res.send('error: ' + err.message);
+            })
+
+            req.write(dataQuerystring);
+
+            req.end();
+
+         });
         });
 
         req.on('error', function (err) {
@@ -99,10 +113,6 @@ var DeleteJob = React.createClass({
         req.write(dataQuerystring);
 
         req.end();
-
-
-
-
     },
 
     render: function () {
@@ -124,15 +134,15 @@ var DeleteJob = React.createClass({
                         <div id='Content-Length'>
                             <h2 style={font}>Delete Job</h2>
                             <table ref="jobsTable" style={Table} className="columns medium-4 large-6 small-centered" >
-                             
+
                                 <tbody>
-                                   <tr>
-                                    <td> Job Name </td>
-                                    <td> Company Name</td>
-                                    <td> Job ID </td>
-                                </tr>
+                                    <tr>
+                                        <td> Job Name </td>
+                                        <td> Company Name</td>
+                                        <td> Job ID </td>
+                                    </tr>
                                     {
-                                        
+
                                         this.state.data.map(function (data) {
 
                                             var link = "/#/JobDescription?id=" + data.jobID;

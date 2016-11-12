@@ -229,7 +229,6 @@ else if(selected == "JobTitle")
 
 router.route('/findMyJobs').post(function(req, res, callback) {
   var PostedBy = req.body.PostedBy;
-  console.log(PostedBy);
 
   mongoose.model('job').find({
     PostedBy: PostedBy
