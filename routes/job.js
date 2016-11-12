@@ -227,6 +227,27 @@ else if(selected == "JobTitle")
 });
 
 
+router.route('/findMyJobs').post(function(req, res, callback) {
+  var PostedBy = req.body.PostedBy;
+  console.log(PostedBy);
+
+  mongoose.model('job').find({
+    PostedBy: PostedBy
+  }, function(err, job) {
+
+    res.format({
+
+      json: function() {
+
+        res.json(job);
+      }
+    });
+  });
+});
+
+
+
+
 router.route('/view').post(function(req, res, callback) {
 
   var id = req.body.id;

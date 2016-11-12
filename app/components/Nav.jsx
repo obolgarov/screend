@@ -140,7 +140,7 @@ var Nav = React.createClass({
         </div>
         );
       }
-     else if (this.state.data == "employer")
+     else if (this.state.data == "employer" || this.state.data == "admin")
      {
        return(
 
@@ -168,7 +168,11 @@ var Nav = React.createClass({
               <li>
                 <Link to="/PostJobForm" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Post Job</Link>
               </li>
-          
+
+              <li>
+                <Link to="/DeleteJob" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>View My Postings</Link>
+              </li>
+
             </ul>
           </div>
           <div className="top-bar-right">
