@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var profile = require('../models/profile.js');
+var Profile = require('../models/profile.js');
 var bodyParser = require('body-parser');
 
 module.exports = router;
@@ -59,48 +59,90 @@ router.route('/')
 
   console.log(req.body);
 
+  var educationList = req.body.data.education;
+  var certificationsList = req.body.data.certifications;
+  var achievementsList = req.body.data.achievements;
+  var employmentHistoryList = req.body.data.employmentHistory;
+  var professionalSkillsList = req.body.data.professionalSkills;
+  var technicalSkillsList = req.body.data.technicalSkills;
 
-var history = req.body.history;
-var jobTitle = req.body.jobTitle;
-var years = req.body.years;
-var education = req.body.education;
-var certification = req.body.certification;
-var achievements = req.body.achievements;
-var privacy = req.body.privacy;
+  var userToken = req.body.token;
 
-  mongoose.model('profile').create({
-  history : history,
-  jobTitle : jobTitle,
-  years : years,
-  education: education,
-  certification: certification,
-  achievements : achievements,
-  privacy : privacy
+  // validate token
 
-  }, function (err, profile) {
+  var owner = "testOwner" // TODO: get owner from token
+
+  var newProfile = new Profile({
+    owner: owner,
+    education: [],
+    certifications: [],
+    achievements: [],
+    employmentHistory: [],
+    professionalSkills: [],
+    technicalSkills: []
+  });
+
+
+  for (var education of educationList){
+    newProfile.education.push({
+      name: education.name,
+    });
+  }
+  for (var certification of certificationsList){
+    newProfile.certifications.push({
+      name: certification.name,
+    });
+  }
+  for (var achievement of achievementsList){
+    newProfile.achievements.push({
+      name: achievement.name,
+    });
+  }
+  for (var employmentHistory of employmentHistoryList){
+    newProfile.employmentHistory.push({
+      name: employmentHistory.name,
+    });
+  }
+  for (var professionalSkill of professionalSkillsList){
+    newProfile.professionalSkills.push({
+      name: professionalSkill.name,
+    });
+  }
+  for (var technicalSkill of technicalSkillsList){
+    newProfile.technicalSkills.push({
+      name: technicalSkill.name,
+    });
+  }
+
+  newProfile.save( (err, profile) => {
     if (err) {
       return console.error(err)
     } else {
       // insertion/creation complete
       console.log('POST inserting new profile: ' + profile);
-      /*res.format({
-
-        //html response
-        html: function() {
-          res.location("applicants");
-          res.redirect("/applicants");
-        },
-
-        //json response
-        json: function() {
-          res.json(applicant);
-        }
-
-      });*/
 
       res.send("Done");
     }
-  });
+  })
+
+  /*mongoose.model('profile').create({
+    history : history,
+    jobTitle : jobTitle,
+    years : years,
+    education: education,
+    certification: certification,
+    achievements : achievements,
+    privacy : privacy
+  }, function (err, profile) {
+    if (err) {
+      return console.error(err)
+    } else {
+
+      console.log('POST inserting new profile: ' + profile);
+
+      res.send("Done");
+    }
+  });*/
 
   // end of post
 });

@@ -4,15 +4,26 @@ var mongoCollection = "profile";
 var mongoose = require('mongoose')
 
 var profileSchema = new mongoose.Schema( {
-  history : String,
-  jobTitle : String,
-  years : String,
-  education: String,
-  certification: String,
-  achievements : String,
-  privacy : String
-
-})
+  owner: String,
+  education: [{
+    name: String
+  }],
+  certifications: [{
+    name: String
+  }],
+  achievements: [{
+    name: String
+  }],
+  employmentHistory: [{
+    name: String
+  }],
+  professionalSkills: [{
+    name: String
+  }],
+  technicalSkills: [{
+    name: String
+  }],
+});
 
 module.exports = mongoose.model('profile', profileSchema);
 

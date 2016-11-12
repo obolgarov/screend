@@ -21,8 +21,9 @@ var JobPostings = React.createClass({
   componentDidMount: function() {
 
 
- var myCookie = cookie.load('userToken');
- console.log(myCookie);
+    var myCookie = cookie.load('userToken');
+    console.log(myCookie);
+    
     if (myCookie == null)
     {
       hashHistory.push('Welcome');
@@ -38,7 +39,7 @@ var JobPostings = React.createClass({
         'Accept': 'application/json'
       }
     }
-  
+
     // might start using '=>' exclusively, otherwise everything inside the function
     // isn't part of the scope of where it's called from unless the function is
     // appended with '.bind(this)'. This is required to call this current object's

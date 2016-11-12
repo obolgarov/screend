@@ -27,7 +27,7 @@ var EducationEntry = React.createClass({
       return (
         <div key={this.props.key} style={styles.inputContainer}>
           <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
-          <input type="text" value={this.props.entry.text}
+          <input type="text" value={this.props.entry.name}
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -36,7 +36,7 @@ var EducationEntry = React.createClass({
     } else {
       return (
         <div key={this.props.key} style={styles.inputContainer}>
-          <input type="text" value={this.props.entry.skill}
+          <input type="text" value={this.props.entry.name}
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -52,7 +52,7 @@ var CertificationEntry = React.createClass({
       return (
         <div key={this.props.key} style={styles.inputContainer}>
           <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
-          <input type="text" value={this.props.entry.text}
+          <input type="text" value={this.props.entry.name}
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -61,7 +61,7 @@ var CertificationEntry = React.createClass({
     } else {
       return (
         <div key={this.props.key} style={styles.inputContainer}>
-          <input type="text" value={this.props.entry.skill}
+          <input type="text" value={this.props.entry.name}
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -77,7 +77,7 @@ var AchievementEntry = React.createClass({
       return (
         <div key={this.props.key} style={styles.inputContainer}>
           <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
-          <input type="text" value={this.props.entry.text}
+          <input type="text" value={this.props.entry.name}
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -86,7 +86,7 @@ var AchievementEntry = React.createClass({
     } else {
       return (
         <div key={this.props.key} style={styles.inputContainer}>
-          <input type="text" value={this.props.entry.skill}
+          <input type="text" value={this.props.entry.name}
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -102,7 +102,7 @@ var EmploymentHistoryEntry = React.createClass({
       return (
         <div key={this.props.key} style={styles.inputContainer}>
           <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
-          <input type="text" value={this.props.entry.text}
+          <input type="text" value={this.props.entry.name}
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -111,7 +111,7 @@ var EmploymentHistoryEntry = React.createClass({
     } else {
       return (
         <div key={this.props.key} style={styles.inputContainer}>
-          <input type="text" value={this.props.entry.skill}
+          <input type="text" value={this.props.entry.name}
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -127,7 +127,7 @@ var ProfessionalSkillEntry = React.createClass({
       return (
         <div key={this.props.key} style={styles.inputContainer}>
           <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
-          <input type="text" value={this.props.entry.text}
+          <input type="text" value={this.props.entry.name}
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -136,7 +136,7 @@ var ProfessionalSkillEntry = React.createClass({
     } else {
       return (
         <div key={this.props.key} style={styles.inputContainer}>
-          <input type="text" value={this.props.entry.skill}
+          <input type="text" value={this.props.entry.name}
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -152,7 +152,7 @@ var TechnicalSkillEntry = React.createClass({
       return (
         <div key={this.props.key} style={styles.inputContainer}>
           <input type="button" onClick={this.props.deleteField.bind(null, this.props.entry.id)} value="x"/>
-          <input type="text" value={this.props.entry.text}
+          <input type="text" value={this.props.entry.name}
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
@@ -161,7 +161,7 @@ var TechnicalSkillEntry = React.createClass({
     } else {
       return (
         <div key={this.props.key} style={styles.inputContainer}>
-          <input type="text" value={this.props.entry.skill}
+          <input type="text" value={this.props.entry.name}
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
