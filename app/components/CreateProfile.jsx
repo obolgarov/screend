@@ -4,6 +4,8 @@ var config = require('../../config')(); // to get the port
 var qs = require('qs'); // to send data inside the request
 var Nav = require('Nav');
 
+var httpGen = require('./httpGen.js');
+
 var CreateProfileFields = require('./CreateProfileFields.jsx');
 
 import cookie from 'react-cookie';
@@ -113,52 +115,28 @@ var CreateProfile = React.createClass({
 
     event.preventDefault(); // stop submit button from redirecting to default form action
 
-    var userToken = cookie.load('userToken');
-
     var profileData = {
-      data: {
-        education: this.state.education,
-        certifications: this.state.certifications,
-        achievements: this.state.achievements,
-        employmentHistory: this.state.employmentHistory,
-        professionalSkills: this.state.professionalSkills,
-        technicalSkills: this.state.technicalSkills,
-      },
-      token: userToken
+      education: this.state.education,
+      certifications: this.state.certifications,
+      achievements: this.state.achievements,
+      employmentHistory: this.state.employmentHistory,
+      professionalSkills: this.state.professionalSkills,
+      technicalSkills: this.state.technicalSkills,
     }
 
-    var dataQuerystring = qs.stringify(profileData);
-
-    var httpOptions = {
-      port: config.port,
+    httpGen.generate({
+      data: profileData,
       path: "/profile",
-      method: "POST", // insert data
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        //'Content-Length': Buffer.byteLength(dataQuerystring),
-        'Accept': 'application/json'
-      }
-    }
-
-    var req = http.request(httpOptions, (res) => {
-
-      res.on('data', (dataBlob) => {
-
-        //var jsonData = JSON.parse(dataBlob);
+      method: "POST",
+      onData: (data) => {
+        //var jsonData = JSON.parse(data);
 
         // do something with jsonData if needed
-
-      });
-
-    });
-
-    req.on('error', function(err) {
-      res.send('error: ' + err.message);
-    });
-
-    req.write(dataQuerystring);
-
-    req.end();
+      },
+      onError: (error) => {
+        res.send('error: ' + err.message);
+      }
+    })
 
   },
 
