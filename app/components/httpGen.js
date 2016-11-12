@@ -34,7 +34,7 @@ var httpGen = {
     var httpOptions = {
       port: config.port,
       path: "/profile",
-      method: optinos.method, // insert data
+      method: options.method, // insert data
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Content-Length': Buffer.byteLength(dataQuerystring),
