@@ -6,14 +6,15 @@ import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
 import { hashHistory } from 'react-router';
 var Nav = require('Nav');
-var httpGen = require('./httpGen.js');
 
-var DeleteJob = React.createClass({
+var EmployerPostings = React.createClass({
     getInitialState: function () {
         return {
             data: null
         };
     },
+
+
 
     componentDidMount: function () {
 
@@ -132,7 +133,7 @@ var DeleteJob = React.createClass({
                     <Nav />
                     <form ref='metric_results' onSubmit={this.onSubmit}>
                         <div id='Content-Length'>
-                            <h2 style={font}>Delete Job</h2>
+                            <h2 style={font}>My Postings</h2>
                             <table ref="jobsTable" style={Table} className="columns medium-4 large-6 small-centered" >
 
                                 <tbody>
@@ -140,19 +141,20 @@ var DeleteJob = React.createClass({
                                         <td> Job Name </td>
                                         <td> Company Name</td>
                                         <td> Job ID </td>
+                                        <td> Delete </td>
                                     </tr>
                                     {
 
                                         this.state.data.map(function (data) {
 
                                             var link = "/#/JobDescription?id=" + data.jobID;
-                                            console.log(link);
-
+                                            var deleteLink = "/#/HandleDelete?id=" + data.jobID;
                                             return (
                                                 <tr>
                                                     <td><a href={link}>{data.jobTitle}</a></td>
                                                     <td>{data.companyName}</td>
                                                     <td>{data.jobID}</td>
+                                                    <td><a href={deleteLink}>Delete Job </a> </td>
                                                 </tr>
                                             );
                                         })
@@ -174,4 +176,4 @@ var DeleteJob = React.createClass({
     }
 });
 
-module.exports = DeleteJob;
+module.exports = EmployerPostings;

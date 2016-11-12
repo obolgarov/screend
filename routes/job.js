@@ -244,6 +244,27 @@ router.route('/findMyJobs').post(function(req, res, callback) {
   });
 });
 
+router.route('/deleteJob').post(function(req, res, callback) {
+
+    var id = req.body.id;
+
+    console.log(id);
+  mongoose.model('job').remove({ _id: id }, function(err) {
+    if (!err) {
+      res.json(
+      {
+          found: "true"
+      });
+    }
+    else {
+      res.json(
+      {
+          found: "false"
+      });
+    }
+  });
+
+});
 
 
 

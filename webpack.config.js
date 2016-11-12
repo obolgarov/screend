@@ -48,7 +48,8 @@ plugins:[
       ReplyMessage : 'app/components/ReplyMessage.jsx',
       Search : 'app/components/Search.jsx',
       SearchResults : 'app/components/SearchResults.jsx',
-      DeleteJob: 'app/components/DeleteJob.jsx'
+      EmployerPostings: 'app/components/EmployerPostings.jsx',
+      HandleDelete : 'app/components/HandleDelete.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },
