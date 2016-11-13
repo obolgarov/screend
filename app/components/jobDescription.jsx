@@ -15,19 +15,16 @@ var jobDescription = React.createClass({
 
 
  var myCookie = cookie.load('userToken');
- console.log(myCookie);
     if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
 
-    console.log(this.props.location.query.id);
 
     var queryStringData = querystring.stringify({
       id : this.props.location.query.id
     });
 
-    console.log(queryStringData);
 
     //e.preventDefault();
     var httpOptions = {
@@ -75,10 +72,21 @@ var jobDescription = React.createClass({
 
         var Description = document.createTextNode(job.Description);
         document.getElementById("description").appendChild(Description);
-        console.log(Description);
 
         var salary = document.createTextNode(job.Salary);
         document.getElementById("salary").appendChild(salary);
+
+
+      for (var i = 0; i < job.Skills.length; i++) {
+           var Skills = document.createTextNode(job.Skills[i].SkillName);
+           document.getElementById("skills").appendChild(Skills);
+           document.getElementById("skills").appendChild(document.createElement("br"));
+
+         var Experience = document.createTextNode(job.Skills[i].Experience);
+           document.getElementById("skills").appendChild(Experience);
+           document.getElementById("skills").appendChild(document.createElement("br"));
+         }
+          
 
 
      });
@@ -91,12 +99,9 @@ var jobDescription = React.createClass({
 
     req.write(queryStringData);
 
-    console.log(req.body);
 
 
-    console.log("sending");
     req.end();
-    console.log("sent, waiting for response");
   },
 
   render: function(){
@@ -108,38 +113,42 @@ var jobDescription = React.createClass({
       <div>
         <Nav/>
         <div>
-          <label>Job Title:</label>
+          <h2>Job Title:</h2>
           <label id="jobtitle"></label>
         </div>
 
         <div>
-          <label>Company Name:</label>
+          <h2>Company Name:</h2>
           <label id="companyname"></label>
         </div>
 
         <div>
-          <label>Certification:</label>
+          <h2>Certification:</h2>
           <label id="certification"></label>
         </div>
 
         <div>
-          <label>Location:</label>
+          <h2>Location:</h2>
           <label id="location"></label>
         </div>
 
         <div>
-          <label>Required Education:</label>
+          <h2>Required Education:</h2>
           <label id="requirededucation"></label>
         </div>
 
         <div>
-          <label>Salary:</label>
+          <h2>Salary:</h2>
           <label id="salary"></label>
         </div>
 
         <div>
-          <label>Description:</label>
+          <h2>Description:</h2>
           <p id="description"></p>
+        </div>
+      <div>
+          <h2>Skills (Name and Experience):</h2>
+          <p id="skills"></p>
         </div>
 
         <div>
