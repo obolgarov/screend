@@ -15,7 +15,7 @@ var httpGen = {
     if (!options.method || options.method == null){
       return console.err("httpGen requires method");
     }
-    if (optinos.method == "GET" && (!options.data || options.data == null)){
+    if (options.method == "GET" && (!options.data || options.data == null)){
       return console.err("httpGen requires data if method isn't GET");
     }
     if (!options.path || options.path == null){
