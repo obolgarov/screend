@@ -65,6 +65,7 @@ router.route('/')
   var employmentHistoryList = req.body.data.employmentHistory;
   var professionalSkillsList = req.body.data.professionalSkills;
   var technicalSkillsList = req.body.data.technicalSkills;
+  var vis = req.body.data.vis;
   var userToken = req.body.token;
 
   // validate token
@@ -78,7 +79,8 @@ router.route('/')
     achievements: [],
     employmentHistory: [],
     professionalSkills: [],
-    technicalSkills: []
+    technicalSkills: [],
+    vis: vis
   });
 
 
