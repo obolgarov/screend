@@ -175,3 +175,24 @@ router.route('/getProfile').post(function(req, res, callback)
             }
         });
     });
+
+router.route('/delete').post(function(req, res, callback){
+
+ var id = req.body.data.id; 
+
+
+  mongoose.model('profile').remove({ _id: id }, function(err) {
+    if (!err) {
+      res.json(
+      {
+          found: "true"
+      });
+    }
+    else {
+      res.json(
+      {
+          found: "false"
+      });
+    }
+  });
+});
