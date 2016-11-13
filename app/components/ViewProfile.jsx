@@ -35,49 +35,49 @@ var ViewProfile = React.createClass({
             path: "/profile/findProfile",
             method: "POST",
             onData: (data) => {
-                
+
                 var profile = JSON.parse(data);
 
-                  
+
 
          for(var item of profile){
-        
-        for (var i = 0; i < item.employmentHistory.length; i++) { 
+
+        for (var i = 0; i < item.employmentHistory.length; i++) {
          var EmploymentHistory = document.createTextNode(item.employmentHistory[i].name);
           document.getElementById("history").appendChild(EmploymentHistory);
           document.getElementById("history").appendChild(document.createElement("br"));
          }
-    
-        for (var i = 0; i < item.education.length; i++) { 
+
+        for (var i = 0; i < item.education.length; i++) {
          var Education = document.createTextNode(item.education[i].name);
           document.getElementById("education").appendChild(Education);
           document.getElementById("education").appendChild(document.createElement("br"));
          }
-    
-      for (var i = 0; i < item.certifications.length; i++) { 
+
+      for (var i = 0; i < item.certifications.length; i++) {
          var Certification = document.createTextNode(item.certifications[i].name);
           document.getElementById("certification").appendChild(Certification);
           document.getElementById("certification").appendChild(document.createElement("br"));
          }
-    
-        for (var i = 0; i < item.achievements.length; i++) { 
+
+        for (var i = 0; i < item.achievements.length; i++) {
          var Achievements = document.createTextNode(item.achievements[i].name);
           document.getElementById("achievements").appendChild(Achievements);
           document.getElementById("achievements").appendChild(document.createElement("br"));
-         } 
-        
+         }
 
-     for (var i = 0; i < item.professionalSkills.length; i++) { 
+
+     for (var i = 0; i < item.professionalSkills.length; i++) {
          var pSkills = document.createTextNode(item.professionalSkills[i].name);
           document.getElementById("pSkills").appendChild(pSkills);
           document.getElementById("pSkills").appendChild(document.createElement("br"));
-         } 
+         }
 
-     for (var i = 0; i < item.technicalSkills.length; i++) { 
+     for (var i = 0; i < item.technicalSkills.length; i++) {
          var tSkills = document.createTextNode(item.technicalSkills[i].name);
           document.getElementById("tSkills").appendChild(tSkills);
           document.getElementById("tSkills").appendChild(document.createElement("br"));
-         } 
+         }
 
     }
 
@@ -90,7 +90,7 @@ var ViewProfile = React.createClass({
 
 
     },
-    
+
     delete: function (e) {
         function getParameterByName(name, url) {
 
@@ -117,7 +117,7 @@ var ViewProfile = React.createClass({
             path: "/profile/delete",
             method: "POST",
             onData: (data) => {
-         
+
             hashHistory.push('MyProfiles');
 
 
@@ -137,6 +137,11 @@ var ViewProfile = React.createClass({
         var font = {
             fontFamily: "Quicksand, sans-serif"
         };
+        var mleft = {
+           marginLeft: "30px"
+        };
+
+
         return (
 
             <div>
@@ -177,7 +182,7 @@ var ViewProfile = React.createClass({
 
 
                         <input type="button" onClick={this.delete} className="button hollow" value="Delete" />
-                        <input type="button" onClick={this.edit} className="button hollow" value="Edit" />
+                        <input type="button" onClick={this.edit} className="button hollow"  style={mleft} value="Edit" />
 
                     </div>
                 </div>

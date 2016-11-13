@@ -18,7 +18,7 @@ var Messages = React.createClass({
 
 var myCookie = cookie.load('userToken');
  console.log(myCookie);
-    if (myCookie == null) 
+    if (myCookie == null)
     {
       hashHistory.push('Welcome');
     }
@@ -79,13 +79,15 @@ var myCookie = cookie.load('userToken');
 
 
     render: function() {
-
+      var font = {
+        fontFamily : "Quicksand, sans-serif"
+      };
       if (this.state.data) {
 
         return (
           <div>
               <Nav/>
-              <h2>Messages</h2>
+              <h2 style={font}>Messages</h2>
 
             <form ref='metric_results' onSubmit={this.onSubmit}>
               <div id='Content-Length'>
