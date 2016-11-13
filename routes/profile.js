@@ -65,13 +65,12 @@ router.route('/')
   var employmentHistoryList = req.body.data.employmentHistory;
   var professionalSkillsList = req.body.data.professionalSkills;
   var technicalSkillsList = req.body.data.technicalSkills;
-
   var userToken = req.body.token;
 
   // validate token
 
-  var owner = "testOwner" // TODO: get owner from token
-
+  var owner = req.body.data.username; // TODO: get owner from token
+  console.log(owner);
   var newProfile = new Profile({
     owner: owner,
     education: [],

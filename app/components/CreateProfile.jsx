@@ -115,20 +115,30 @@ var CreateProfile = React.createClass({
 
     event.preventDefault(); // stop submit button from redirecting to default form action
 
-    var profileData = {
-      education: this.state.education,
-      certifications: this.state.certifications,
-      achievements: this.state.achievements,
-      employmentHistory: this.state.employmentHistory,
-      professionalSkills: this.state.professionalSkills,
-      technicalSkills: this.state.technicalSkills,
-    }
 
-    httpGen.generate({
-      data: profileData,
-      path: "/profile",
+      var data = { token : cookie.load('userToken') }
+  
+      httpGen.generate({
+      data: data,
+      path: "/messages/decode",
       method: "POST",
       onData: (data) => {
+
+      var profileData = {
+        username : data,
+         education: this.state.education,
+         certifications: this.state.certifications,
+         achievements: this.state.achievements,
+         employmentHistory: this.state.employmentHistory,
+         professionalSkills: this.state.professionalSkills,
+         technicalSkills: this.state.technicalSkills,
+    }
+
+      httpGen.generate({
+       data: profileData,
+       path: "/profile",
+       method: "POST",
+       onData: (data) => {
         //var jsonData = JSON.parse(data);
 
         // do something with jsonData if needed
@@ -137,6 +147,31 @@ var CreateProfile = React.createClass({
         console.err(error.message);
       }
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          },
+      onError: (error) => {
+        console.err(error.message);
+      }
+    })
+
+
+
+
+
+    
 
   },
 
