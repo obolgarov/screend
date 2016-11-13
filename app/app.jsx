@@ -26,7 +26,7 @@ var Search = require('Search');
 var SearchResults = require('SearchResults');
 var EmployerPostings = require('EmployerPostings');
 var HandleDelete= require('HandleDelete');
-
+var MyProfiles = require('MyProfiles');
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
 
@@ -58,6 +58,7 @@ ReactDOM.render(
   <Route path="SearchResults" components={SearchResults}/>
   <Route path="EmployerPostings" components={EmployerPostings}/>
   <Route path="HandleDelete" components={HandleDelete}/>
+  <Route path="MyProfiles" components={MyProfiles}/>
   <IndexRoute component={Welcome}/>
   </Route>
 </Router>,

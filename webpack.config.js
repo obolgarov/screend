@@ -49,7 +49,8 @@ plugins:[
       Search : 'app/components/Search.jsx',
       SearchResults : 'app/components/SearchResults.jsx',
       EmployerPostings: 'app/components/EmployerPostings.jsx',
-      HandleDelete : 'app/components/HandleDelete.jsx'
+      HandleDelete : 'app/components/HandleDelete.jsx',
+      MyProfiles : 'app/components/MyProfiles.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },
