@@ -78,7 +78,8 @@ var CreateProfile = React.createClass({
         name: "",
         locked: false,
         data: 0
-      }
+      },
+       vis: ""
     };
 
     // when first loaded, initial data is a single-populated array per category with initial data
@@ -107,17 +108,23 @@ var CreateProfile = React.createClass({
       achievements: initialAchievements,
       employmentHistory: initialEmploymentHistory,
       professionalSkills: initialProfessionalSkills,
-      technicalSkills: initialTechnicalSkills
+      technicalSkills: initialTechnicalSkills,
+      vis : ""
     };
   },
+
+  onChanged: function (e) {
+        this.setState({
+            vis: e.currentTarget.value
+        });
+    },
 
   handleSubmit: function(event) {
 
     event.preventDefault(); // stop submit button from redirecting to default form action
 
-
       var data = { token : cookie.load('userToken') }
-  
+
       httpGen.generate({
       data: data,
       path: "/messages/decode",
@@ -125,13 +132,14 @@ var CreateProfile = React.createClass({
       onData: (data) => {
 
       var profileData = {
-        username : data,
+          username : data,
          education: this.state.education,
          certifications: this.state.certifications,
          achievements: this.state.achievements,
          employmentHistory: this.state.employmentHistory,
          professionalSkills: this.state.professionalSkills,
          technicalSkills: this.state.technicalSkills,
+         vis : this.state.vis
     }
 
       httpGen.generate({
@@ -147,31 +155,11 @@ var CreateProfile = React.createClass({
         console.err(error.message);
       }
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           },
       onError: (error) => {
         console.err(error.message);
       }
     })
-
-
-
-
-
-    
 
   },
 
@@ -574,7 +562,7 @@ var CreateProfile = React.createClass({
 
         <div ref="uploadForm" id="uploadFormId" className="columns medium-4 large-6 small-centered">
 
-          <h2>Create Profile</h2>
+          <h2 style={font}>Create Profile</h2>
 
 
           <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
@@ -617,8 +605,28 @@ var CreateProfile = React.createClass({
             {this.state.technicalSkills.map((result, key) => {
               return <TechnicalSkillEntry key={key} entry={result} updateState={this.updateTechnicalSkill} updateText={this.updateTechnicalSkillText} deleteField={this.deleteTechnicalSkillField}/>
             })}
-            <input type="button" onClick={this.addTechnicalSkill} value="+"/>
+              <input type="button" onClick={this.addTechnicalSkill} value="+"/>
             <br />
+
+            <h3>Profile Settings </h3>
+            <table>
+                        <tr>
+                            <td><input type="radio" name="Public"
+                                value={"Public"}
+                                checked={this.state.CompanyName}
+                                onChange={this.onChanged} />Public</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="Private"
+                                value={"Private"}
+                                checked={this.state.Location}
+                                onChange={this.onChanged} />Private</td>
+                        </tr>
+            </table>
+
+
+
+          
             <input type="submit" value="SubmitProfile" ref="submitProfileButton" name="submitProfileButton" className="button hollow" style={button} onClick={this.handleSubmit}></input>
           </form>
         </div>

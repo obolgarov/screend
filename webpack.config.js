@@ -50,7 +50,8 @@ plugins:[
       SearchResults : 'app/components/SearchResults.jsx',
       EmployerPostings: 'app/components/EmployerPostings.jsx',
       HandleDelete : 'app/components/HandleDelete.jsx',
-      MyProfiles : 'app/components/MyProfiles.jsx'
+      MyProfiles : 'app/components/MyProfiles.jsx',
+      ViewProfile : 'app/components/ViewProfile.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

@@ -23,6 +23,7 @@ var profileSchema = new mongoose.Schema( {
   technicalSkills: [{
     name: String
   }],
+  vis : String
 });
 
 module.exports = mongoose.model('profile', profileSchema);

@@ -13,7 +13,9 @@ exports.list = function(req, res) {
 }
 
 // replace the confusing event calling scheme for data to use a more imperative style
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // -------------- public-facing routes ---------------
 
@@ -25,7 +27,7 @@ router.route('/')
 
 
   // get all
-  mongoose.model('profile').find({}, function (err, profile){
+  mongoose.model('profile').find({}, function(err, profile) {
 
     if (err) {
       return console.error(err);
@@ -55,7 +57,7 @@ router.route('/')
 
   // end of get
 })
-.post(function(req, res){
+.post(function(req, res) {
 
   console.log(req.body);
 
@@ -65,6 +67,7 @@ router.route('/')
   var employmentHistoryList = req.body.data.employmentHistory;
   var professionalSkillsList = req.body.data.professionalSkills;
   var technicalSkillsList = req.body.data.technicalSkills;
+  var vis = req.body.data.vis;
   var userToken = req.body.token;
 
   // validate token
@@ -78,42 +81,43 @@ router.route('/')
     achievements: [],
     employmentHistory: [],
     professionalSkills: [],
-    technicalSkills: []
+    technicalSkills: [],
+    vis: vis
   });
 
 
-  for (var education of educationList){
+  for (var education of educationList) {
     newProfile.education.push({
       name: education.name,
     });
   }
-  for (var certification of certificationsList){
+  for (var certification of certificationsList) {
     newProfile.certifications.push({
       name: certification.name,
     });
   }
-  for (var achievement of achievementsList){
+  for (var achievement of achievementsList) {
     newProfile.achievements.push({
       name: achievement.name,
     });
   }
-  for (var employmentHistory of employmentHistoryList){
+  for (var employmentHistory of employmentHistoryList) {
     newProfile.employmentHistory.push({
       name: employmentHistory.name,
     });
   }
-  for (var professionalSkill of professionalSkillsList){
+  for (var professionalSkill of professionalSkillsList) {
     newProfile.professionalSkills.push({
       name: professionalSkill.name,
     });
   }
-  for (var technicalSkill of technicalSkillsList){
+  for (var technicalSkill of technicalSkillsList) {
     newProfile.technicalSkills.push({
       name: technicalSkill.name,
     });
   }
 
-  newProfile.save( (err, profile) => {
+  newProfile.save((err, profile) => {
     if (err) {
       return console.error(err)
     } else {
@@ -122,7 +126,7 @@ router.route('/')
 
       res.send("Done");
     }
-  })
+  });
 
   /*mongoose.model('profile').create({
     history : history,
@@ -146,10 +150,70 @@ router.route('/')
   // end of post
 });
 
-router.route('/resume').post( (req, res) => {
+router.route('/uploadResume').post((req, res) => {
   var resume = req.body.data.resume;
   var userToken = req.body.token;
 
-  
 
+
+});
+
+router.route('/getProfile').post(function(req, res, callback) {
+  var username = req.body.data.username;
+
+  mongoose.model('profile').find({
+    owner: username
+  }, function(err, profile) {
+    if (err) {
+      return console.error(err);
+    } else {
+      res.format({
+        // json response
+        json: function() {
+          res.json(profile);
+        }
+      });
+
+    }
+  });
+});
+
+router.route('/delete').post(function(req, res, callback) {
+
+  var id = req.body.data.id;
+
+
+  mongoose.model('profile').remove({
+    _id: id
+  }, function(err) {
+    if (!err) {
+      res.json({
+        found: "true"
+      });
+    } else {
+      res.json({
+        found: "false"
+      });
+    }
+  });
+});
+
+router.route('/findProfile').post(function(req, res, callback) {
+
+  var id = req.body.data.id;
+
+  mongoose.model('profile').find({
+    _id: id
+  }, function(err, profile) {
+    if (err) {
+      return console.error(err);
+    } else {
+      res.format({
+        json: function() {
+          res.json(profile);
+        }
+      });
+
+    }
+  });
 });
