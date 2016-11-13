@@ -5,7 +5,7 @@ var config = require('../../config')(); // to get the port
 var qs = require('qs'); // to send data inside the request
 
 var httpGen = {
-
+  //
   // options is json, will include 'data', 'path', and 'method'
   // 'data' must be a JSON object, non-stringified, can be empty but not null, for now I'm forcing data to enter until I know what can require data or not
   // 'path' and 'method' must be strings
