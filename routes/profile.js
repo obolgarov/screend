@@ -145,3 +145,11 @@ router.route('/')
 
   // end of post
 });
+
+router.route('/resume').post( (req, res) => {
+  var resume = req.body.data.resume;
+  var userToken = req.body.token;
+
+  
+
+});
