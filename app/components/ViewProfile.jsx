@@ -10,6 +10,87 @@ import { hashHistory } from 'react-router';
 
 var ViewProfile = React.createClass({
 
+
+    componentDidMount: function(){
+
+        function getParameterByName(name, url) {
+
+            if (!url) {
+                url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var profileId = getParameterByName('id');
+
+        var profileData = { id : profileId}
+
+         httpGen.generate({
+            data: profileData,
+            path: "/profile/findProfile",
+            method: "POST",
+            onData: (data) => {
+                
+                var profile = JSON.parse(data);
+
+                  
+
+         for(var item of profile){
+        
+        for (var i = 0; i < item.employmentHistory.length; i++) { 
+         var EmploymentHistory = document.createTextNode(item.employmentHistory[i].name);
+          document.getElementById("history").appendChild(EmploymentHistory);
+          document.getElementById("history").appendChild(document.createElement("br"));
+         }
+    
+        for (var i = 0; i < item.education.length; i++) { 
+         var Education = document.createTextNode(item.education[i].name);
+          document.getElementById("education").appendChild(Education);
+          document.getElementById("education").appendChild(document.createElement("br"));
+         }
+    
+      for (var i = 0; i < item.certifications.length; i++) { 
+         var Certification = document.createTextNode(item.certifications[i].name);
+          document.getElementById("certification").appendChild(Certification);
+          document.getElementById("certification").appendChild(document.createElement("br"));
+         }
+    
+        for (var i = 0; i < item.achievements.length; i++) { 
+         var Achievements = document.createTextNode(item.achievements[i].name);
+          document.getElementById("achievements").appendChild(Achievements);
+          document.getElementById("achievements").appendChild(document.createElement("br"));
+         } 
+        
+
+     for (var i = 0; i < item.professionalSkills.length; i++) { 
+         var pSkills = document.createTextNode(item.professionalSkills[i].name);
+          document.getElementById("pSkills").appendChild(pSkills);
+          document.getElementById("pSkills").appendChild(document.createElement("br"));
+         } 
+
+     for (var i = 0; i < item.technicalSkills.length; i++) { 
+         var tSkills = document.createTextNode(item.technicalSkills[i].name);
+          document.getElementById("tSkills").appendChild(tSkills);
+          document.getElementById("tSkills").appendChild(document.createElement("br"));
+         } 
+
+    }
+
+
+            },
+            onError: (error) => {
+                console.err(error.message);
+            }
+        })
+
+
+    },
+    
     delete: function (e) {
         function getParameterByName(name, url) {
 
@@ -65,32 +146,32 @@ var ViewProfile = React.createClass({
                         <h2 style={font}>Profile</h2>
 
                         <div>
-                            <label>Employment History:</label>
+                            <h2> Employment History</h2>
                             <label id="history"></label>
                         </div>
 
                         <div>
-                            <label>Education:</label>
+                            <h2>Education</h2>
                             <label id="education"></label>
                         </div>
 
                         <div>
-                            <label>Certification:</label>
+                            <h2>Certification</h2>
                             <label id="certification"></label>
                         </div>
 
                         <div>
-                            <label>Achievements:</label>
+                            <h2>Achievements</h2>
                             <label id="achievements"></label>
                         </div>
 
                         <div>
-                            <label>Professtional Skils:</label>
+                            <h2>Professtional Skils</h2>
                             <label id="pSkills"></label>
                         </div>
 
                         <div>
-                            <label>Technical Skils:</label>
+                            <h2>Technical Skils</h2>
                             <label id="tSkills"></label>
                         </div>
 

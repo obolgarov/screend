@@ -196,3 +196,31 @@ router.route('/delete').post(function(req, res, callback){
     }
   });
 });
+
+router.route('/findProfile').post(function(req, res, callback){
+
+  var id = req.body.data.id;
+
+        mongoose.model('profile').find(
+        {
+            _id: id
+        }, function(err, profile)
+        {
+            if (err)
+            {
+                return console.error(err);
+            }
+            else
+            {
+                res.format(
+                {
+                    json: function()
+                    {
+                        res.json(profile);
+                    }
+                });
+
+            }
+        });
+    });
+    
