@@ -33,7 +33,7 @@ var httpGen = {
 
     var httpOptions = {
       port: config.port,
-      path: "/profile",
+      path: options.method,
       method: options.method, // insert data
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
