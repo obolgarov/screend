@@ -125,7 +125,7 @@ var CreateProfile = React.createClass({
       onData: (data) => {
 
       var profileData = {
-        username : data,
+          username : data,
          education: this.state.education,
          certifications: this.state.certifications,
          achievements: this.state.achievements,
@@ -147,31 +147,11 @@ var CreateProfile = React.createClass({
         console.err(error.message);
       }
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           },
       onError: (error) => {
         console.err(error.message);
       }
     })
-
-
-
-
-
-    
 
   },
 

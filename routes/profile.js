@@ -145,3 +145,33 @@ router.route('/')
 
   // end of post
 });
+
+
+
+router.route('/getProfile').post(function(req, res, callback)
+{
+    var username =  req.body.data.username; 
+
+        mongoose.model('profile').find(
+        {
+            owner: username
+        }, function(err, profile)
+        {
+            if (err)
+            {
+                return console.error(err);
+            }
+            else
+            {
+                res.format(
+                {
+                    // json response
+                    json: function()
+                    {
+                        res.json(profile);
+                    }
+                });
+
+            }
+        });
+    });
