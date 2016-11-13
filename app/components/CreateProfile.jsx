@@ -117,7 +117,7 @@ var CreateProfile = React.createClass({
 
 
       var data = { token : cookie.load('userToken') }
-  
+
       httpGen.generate({
       data: data,
       path: "/messages/decode",
@@ -554,7 +554,7 @@ var CreateProfile = React.createClass({
 
         <div ref="uploadForm" id="uploadFormId" className="columns medium-4 large-6 small-centered">
 
-          <h2>Create Profile</h2>
+          <h2 style={font}>Create Profile</h2>
 
 
           <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>

@@ -36,13 +36,16 @@ var Search = React.createClass({
     },
 
     render: function () {
+      var font = {
+        fontFamily : "Quicksand, sans-serif"
+      };
         return (
             <div>
                 <Nav />
+                <div className="columns medium-4 large-6 small-centered">
+                <h2 style={font}>Search Jobs</h2>
 
-                <h2>Search Jobs</h2>
-
-                <form ref='search' onSubmit={this.onSubmit}>
+                <form ref='search' onSubmit={this.onSubmit} >
 
                     <div>
                         <label>Search:
@@ -74,9 +77,10 @@ var Search = React.createClass({
                     </table>
 
                     <div>
-                        <button type="submit">Submit</button>
+                        <button type="submit" className="button hollow">Submit</button>
                     </div>
                 </form>
+              </div>
             </div>
 
 

@@ -38,7 +38,7 @@ var MyProfiles = React.createClass({
             var jsonData = JSON.parse(data);
 
             var profileData = [];
-           
+
         for ( var profile of jsonData ) {
               profileData.push({
                 id :  profile._id,
@@ -71,12 +71,18 @@ var MyProfiles = React.createClass({
 
 
   render: function () {
+    var font = {
+      fontFamily : "Quicksand, sans-serif"
+    };
+
+
     if (this.state.data) {
 
         return (
           <div>
               <Nav/>
-              <h2>My Profiles</h2>
+              <div className="columns medium-9 large-9 small-centered">
+              <h2 style={font}>My Profiles</h2>
 
             <form ref='metric_results' onSubmit={this.onSubmit}>
               <div id='Content-Length'>
@@ -104,6 +110,7 @@ var MyProfiles = React.createClass({
                 </table>
               </div>
             </form>
+          </div>
           </div>
         )
       } else {
