@@ -34,7 +34,7 @@ var httpGen = {
     var httpOptions = {
       port: config.port,
       path: options.path,
-      method: options.method, // insert data
+      method: options.method,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Content-Length': Buffer.byteLength(dataQuerystring),
