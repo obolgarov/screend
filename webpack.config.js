@@ -52,7 +52,8 @@ plugins:[
       EmployerPostings: 'app/components/EmployerPostings.jsx',
       HandleDelete : 'app/components/HandleDelete.jsx',
       MyProfiles : 'app/components/MyProfiles.jsx',
-      ViewProfile : 'app/components/ViewProfile.jsx'
+      ViewProfile : 'app/components/ViewProfile.jsx',
+      EditProfile : 'app/components/EditProfile.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

@@ -91,6 +91,25 @@ var ViewProfile = React.createClass({
 
     },
 
+    edit:function(e){
+       function getParameterByName(name, url) {
+
+            if (!url) {
+                url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var id = getParameterByName('id');
+
+        hashHistory.push('EditProfile?id=' +id);
+    },
+
     delete: function (e) {
         function getParameterByName(name, url) {
 
@@ -150,35 +169,63 @@ var ViewProfile = React.createClass({
                     <div className="columns medium-9 large-9 small-centered">
                         <h2 style={font}>Profile</h2>
 
+<<<<<<< HEAD
                         <div>
                             <h4> Employment History</h4>
+=======
+                                <div>
+                            <h3> Employment History</h3>
+
+>>>>>>> f431c5b4fc9edc16c92c0ef884afba170f056698
                             <label id="history"></label>
+
                         </div>
 
                         <div>
+<<<<<<< HEAD
                             <h4>Education</h4>
+=======
+                            <h3>Education</h3>
+>>>>>>> f431c5b4fc9edc16c92c0ef884afba170f056698
                             <label id="education"></label>
                         </div>
 
                         <div>
+<<<<<<< HEAD
                             <h4>Certification</h4>
+=======
+                            <h3>Certification</h3>
+>>>>>>> f431c5b4fc9edc16c92c0ef884afba170f056698
                             <label id="certification"></label>
                         </div>
 
                         <div>
+<<<<<<< HEAD
                             <h4>Achievements</h4>
+=======
+                            <h3>Achievements</h3>
+>>>>>>> f431c5b4fc9edc16c92c0ef884afba170f056698
                             <label id="achievements"></label>
                         </div>
 
                         <div>
+<<<<<<< HEAD
                             <h4>Professtional Skills</h4>
+=======
+                            <h3>Professtional Skils</h3>
+>>>>>>> f431c5b4fc9edc16c92c0ef884afba170f056698
                             <label id="pSkills"></label>
                         </div>
 
                         <div>
+<<<<<<< HEAD
                             <h4>Technical Skills</h4>
+=======
+                            <h3>Technical Skils</h3>
+>>>>>>> f431c5b4fc9edc16c92c0ef884afba170f056698
                             <label id="tSkills"></label>
                         </div>
+
 
 
                         <input type="button" onClick={this.delete} className="button hollow" value="Delete" />
