@@ -96,7 +96,8 @@ var LoginEmployer = React.createClass({
 
 
         var font = {
-          fontFamily: "Quicksand, sans-serif"
+          fontFamily: "Quicksand, sans-serif",
+          marginTop: "200px"
         };
         return (
 

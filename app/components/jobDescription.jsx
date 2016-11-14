@@ -86,7 +86,7 @@ var jobDescription = React.createClass({
            document.getElementById("skills").appendChild(Experience);
            document.getElementById("skills").appendChild(document.createElement("br"));
          }
-          
+
 
 
      });
@@ -109,45 +109,48 @@ var jobDescription = React.createClass({
       margin : "30px 00px 30px 00px"
     };
 
+
+
     return(
       <div>
         <Nav/>
+        <div className="columns medium-4 large-6 small-centered" >
         <div>
-          <h2>Job Title:</h2>
+          <h4>Job Title:</h4>
           <label id="jobtitle"></label>
         </div>
 
         <div>
-          <h2>Company Name:</h2>
+          <h4>Company Name:</h4>
           <label id="companyname"></label>
         </div>
 
         <div>
-          <h2>Certification:</h2>
+          <h4>Certification:</h4>
           <label id="certification"></label>
         </div>
 
         <div>
-          <h2>Location:</h2>
+          <h4>Location:</h4>
           <label id="location"></label>
         </div>
 
         <div>
-          <h2>Required Education:</h2>
+          <h4>Required Education:</h4>
           <label id="requirededucation"></label>
         </div>
 
         <div>
-          <h2>Salary:</h2>
+          <h4>Salary:</h4>
           <label id="salary"></label>
         </div>
 
         <div>
-          <h2>Description:</h2>
+          <h4>Description:</h4>
           <p id="description"></p>
         </div>
       <div>
-          <h2>Skills (Name and Experience):</h2>
+          <h4>Skills (Name and Experience):</h4>
           <p id="skills"></p>
         </div>
 
@@ -160,10 +163,11 @@ var jobDescription = React.createClass({
 
         <form ref="jobDescription" method="post">
           <div>
-
             <button type="submit" value="Apply For Job" className="button hollow" style={button} >Submit Resume</button>
           </div>
+
         </form>
+        </div>
       </div>
     );
   }

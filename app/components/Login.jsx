@@ -100,14 +100,15 @@ var Login = React.createClass({
 
 
       var font = {
-        fontFamily: "Quicksand, sans-serif"
+        fontFamily: "Quicksand, sans-serif",
+        marginTop: "200px"
       };
 
     return(
 
       <div className="columns medium-4 large-6 small-centered">
 
-        <h2>Login - Job Seeker</h2>
+        <h2 style={font}>Login - Job Seeker</h2>
           <form ref='LogIn' onSubmit={this.onSubmit}>
 
           <div>

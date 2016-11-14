@@ -151,32 +151,32 @@ var ViewProfile = React.createClass({
                         <h2 style={font}>Profile</h2>
 
                         <div>
-                            <h2> Employment History</h2>
+                            <h4> Employment History</h4>
                             <label id="history"></label>
                         </div>
 
                         <div>
-                            <h2>Education</h2>
+                            <h4>Education</h4>
                             <label id="education"></label>
                         </div>
 
                         <div>
-                            <h2>Certification</h2>
+                            <h4>Certification</h4>
                             <label id="certification"></label>
                         </div>
 
                         <div>
-                            <h2>Achievements</h2>
+                            <h4>Achievements</h4>
                             <label id="achievements"></label>
                         </div>
 
                         <div>
-                            <h2>Professtional Skils</h2>
+                            <h4>Professtional Skills</h4>
                             <label id="pSkills"></label>
                         </div>
 
                         <div>
-                            <h2>Technical Skils</h2>
+                            <h4>Technical Skills</h4>
                             <label id="tSkills"></label>
                         </div>
 

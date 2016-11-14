@@ -28,6 +28,7 @@ var EmployerPostings = require('EmployerPostings');
 var HandleDelete= require('HandleDelete');
 var MyProfiles = require('MyProfiles');
 var ViewProfile = require('ViewProfile');
+var termsandconditions = require('termsandconditions');
 
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
@@ -62,6 +63,7 @@ ReactDOM.render(
   <Route path="HandleDelete" components={HandleDelete}/>
   <Route path="MyProfiles" components={MyProfiles}/>
   <Route path="ViewProfile" components={ViewProfile}/>
+  <Route path="termsandconditions" components={termsandconditions}/>
   <IndexRoute component={Welcome}/>
   </Route>
 </Router>,

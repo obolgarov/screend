@@ -24,6 +24,7 @@ plugins:[
   resolve: {
     root: __dirname,
     alias: {
+      termsandconditions: 'app/components/termsandconditions.jsx',
       Main: 'app/components/Main.jsx',
       Nav: 'app/components/Nav.jsx',
       ContactUs: 'app/components/ContactUs.jsx',
