@@ -271,7 +271,8 @@ router.route('/editProfile').post(function(req, res, callback) {
 
 
   mongoose.model('profile').findOneAndUpdate({ "_id": id }, { "$set": { "education": educationList,
-"certifications" : certificationsList
+"certifications" : certificationsList, "achievements" : achievementsList, "employmentHistory" : employmentHistoryList,
+"professionalSkills" : professionalSkillsList, "technicalSkills" : technicalSkillsList
 }}).exec(function(err, profile){
 
     if(err) {
