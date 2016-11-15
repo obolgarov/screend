@@ -1,5 +1,7 @@
 var React = require('react');
-var Nav = require('Nav')
+var Nav = require('Nav');
+var httpGen = require('./httpGen.js');
+
 var ProfileSearchResults = React.createClass({
 
     getInitialState: function () {
@@ -27,6 +29,52 @@ var ProfileSearchResults = React.createClass({
         var search = getParameterByName('search');
         var selected = getParameterByName('selected');
 
+        var searchData =
+        {
+            SearchData : search,
+            SelectedData : selected
+        }
+        
+        
+        httpGen.generate({
+            data: searchData,
+            path: "/profile/searchProfile",
+            method: "POST",
+            onData: (data) => {
+
+            var jsonParse = JSON.parse(data);
+
+                  var profileData = [];
+                      
+                   for(var item of jsonParse){
+         
+                   profileData.push({
+                       owner: item.owner,
+                        profileID: item._id
+                    });
+                console.log(item.owner);
+                console.log(item.profileID);    
+                }
+               
+             
+                
+                this.setState({
+                    data: profileData
+                });
+
+
+
+
+
+
+
+            },
+            onError: (error) => {
+                console.err(error.message);
+            }
+        })
+        
+
 
     },
 
@@ -34,20 +82,41 @@ var ProfileSearchResults = React.createClass({
 
     render: function () {
 
-        var font = {
-            fontFamily: "Quicksand, sans-serif"
-        };
-        return (
+     if (this.state.data) {
 
-            <div>
-                <Nav />
-                <div className="row">
-                    <div className="columns medium-9 large-9 small-centered">
-                        <h2 style={font}>Search Results</h2>
-                    </div>
+            return (
+                <div>
+                    <Nav />
+                    <form ref='metric_results' onSubmit={this.onSubmit}>
+                        <div id='Content-Length'>
+                            <h2>Profile Results</h2>
+                            <table ref="jobsTable">
+                                <tbody>
+                                    {
+                                        this.state.data.map(function (data) {
+                                            var link = "/#/JobDescription?id=" + data.profileID;
+                                            return (
+                                                <tr>
+                                                    <td><a href={link}>{data.owner}</a></td>
+                                                    <td>{data.profileID}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        );
+            )
+        } else {
+            return (
+                <div>
+                    <p>Loading...</p>
+                </div>
+            )
+        }
+
     }
 });
 

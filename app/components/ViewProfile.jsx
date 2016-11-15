@@ -173,8 +173,6 @@ var ViewProfile = React.createClass({
                             <h4> Employment History</h4>
 
                                 <div>
-                            <h3> Employment History</h3>
-
 
                             <label id="history"></label>
 

@@ -537,3 +537,34 @@ router.route('/editProfile').post(function(req, res, callback) {
 
   });
 });
+
+router.route('/searchProfile').post(function(req, res, callback) {
+
+    var SearchData = req.body.data.SearchData;
+    var SelectedData = req.body.data.SelectedData;
+
+   if(SelectedData == "certifications")
+    {
+       mongoose.model('profile').find({
+    'certifications.name':SearchData
+    }, function (err, profile){
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (profile != null ){
+            console.log(profile);
+          res.format({
+            json: function() {
+              res.json(
+                      profile
+                  );
+            }
+          });
+        }  
+      }
+    });
+    }
+
+});
+
