@@ -558,7 +558,7 @@ var CreateProfile = React.createClass({
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
           </form>
           <form ref="profile">
-            <h3>Education</h3
+            <h3>Education</h3>
             {
               // map passes individual elements into the first param, and their index into the second, which is used as the React key
               this.state.education.map((result, key) => {
