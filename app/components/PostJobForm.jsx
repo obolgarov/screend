@@ -82,7 +82,8 @@ var PostJobForm = React.createClass({
       Salary: this.refs.salary.value,
       Description: this.refs.description.value,
       Skills:this.state.data,
-      PostedBy:dataBlob
+      PostedBy:dataBlob,
+      Instructions : this.refs.instructions.value
     }
     console.log(data.PostedBy);
 
@@ -358,6 +359,11 @@ var PostJobForm = React.createClass({
               this.renderSkillList()
             }
             <input type="button" ref="button" onClick={this.addSkillField} value="+"/>
+          </div>
+
+          <div>
+          <label>How to apply: </label>
+          <input type="text" ref="instructions"/>
           </div>
 
           <div>

@@ -14,6 +14,7 @@ var jobSchema = new mongoose.Schema( {
   Salary: String,
   Description: String,
   PostedBy:String,
+  Instructions : String,
   Skills: [{
     SkillName: String,
     Experience: String,
