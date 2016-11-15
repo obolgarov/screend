@@ -24,6 +24,7 @@ plugins:[
   resolve: {
     root: __dirname,
     alias: {
+      termsandconditions: 'app/components/termsandconditions.jsx',
       Main: 'app/components/Main.jsx',
       Nav: 'app/components/Nav.jsx',
       ContactUs: 'app/components/ContactUs.jsx',
@@ -51,7 +52,8 @@ plugins:[
       EmployerPostings: 'app/components/EmployerPostings.jsx',
       HandleDelete : 'app/components/HandleDelete.jsx',
       MyProfiles : 'app/components/MyProfiles.jsx',
-      ViewProfile : 'app/components/ViewProfile.jsx'
+      ViewProfile : 'app/components/ViewProfile.jsx',
+      EditProfile : 'app/components/EditProfile.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

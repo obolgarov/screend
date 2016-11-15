@@ -70,11 +70,18 @@ var ApplicantEmail = React.createClass({
       var button = {
         margin : "30px 00px 30px 00px"
       };
-        return (
-      <div>
-        <h3>Enter your username to recieve a password reset link: </h3>
 
-          <form ref='ApplicantEmail'  onSubmit={this.onSubmit}>
+
+        var font = {
+          fontFamily: "Quicksand, sans-serif",
+          marginTop: "250px"
+        };
+
+        return (
+      <div className="columns medium-4 large-6 small-centered" >
+        <h3 style={font} >Enter your username to recieve a password reset link: </h3>
+
+          <form ref='ApplicantEmail'  onSubmit={this.onSubmit} >
             <div>
                 <label>Username: </label>
                 <input type="text" ref="user"/>

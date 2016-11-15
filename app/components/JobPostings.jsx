@@ -23,7 +23,7 @@ var JobPostings = React.createClass({
 
     var myCookie = cookie.load('userToken');
     console.log(myCookie);
-    
+
     if (myCookie == null)
     {
       hashHistory.push('Welcome');
@@ -88,9 +88,9 @@ var JobPostings = React.createClass({
       return (
         <div>
          <Nav/>
-          <form ref='metric_results' onSubmit={this.onSubmit}>
-            <div id='Content-Length'>
-              <table ref="jobsTable" style={Table} className="columns medium-4 large-6 small-centered" >
+          <form ref='metric_results' onSubmit={this.onSubmit} className="columns medium-4 large-6 small-centered" >
+            <div id='Content-Length' >
+              <table ref="jobsTable" style={Table} >
                 <tr>
                   <td> Job Name </td>
                   <td> Company Name</td>

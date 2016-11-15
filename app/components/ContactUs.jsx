@@ -139,7 +139,8 @@ var ContactUs = React.createClass({
   };
 
   var font = {
-    fontFamily: "Quicksand, sans-serif"
+    fontFamily: "Quicksand, sans-serif",
+    marginTop: "150px"
   };
     return(
 

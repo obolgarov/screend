@@ -354,3 +354,71 @@ router.route('/findProfile').post(function(req, res, callback) {
     }
   });
 });
+
+router.route('/editProfile').post(function(req, res, callback) {
+
+  var educationList = req.body.data.education;
+  var certificationsList = req.body.data.certifications;
+  var achievementsList = req.body.data.achievements;
+  var employmentHistoryList = req.body.data.employmentHistory;
+  var professionalSkillsList = req.body.data.professionalSkills;
+  var technicalSkillsList = req.body.data.technicalSkills;
+  var id = req.body.data.id;
+ 
+   var newProfile = new Profile({
+    education: [],
+    certifications: [],
+    achievements: [],
+    employmentHistory: [],
+    professionalSkills: [],
+    technicalSkills: [],
+  });
+
+
+  for (var education of educationList) {
+    newProfile.education.push({
+      name: education.name,
+    });
+  }
+  for (var certification of certificationsList) {
+    newProfile.certifications.push({
+      name: certification.name,
+    });
+  }
+  for (var achievement of achievementsList) {
+    newProfile.achievements.push({
+      name: achievement.name,
+    });
+  }
+  for (var employmentHistory of employmentHistoryList) {
+    newProfile.employmentHistory.push({
+      name: employmentHistory.name,
+    });
+  }
+  for (var professionalSkill of professionalSkillsList) {
+    newProfile.professionalSkills.push({
+      name: professionalSkill.name,
+    });
+  }
+  for (var technicalSkill of technicalSkillsList) {
+    newProfile.technicalSkills.push({
+      name: technicalSkill.name,
+    });
+  }
+
+
+  mongoose.model('profile').findOneAndUpdate({ "_id": id }, { "$set": { "education": educationList,
+"certifications" : certificationsList, "achievements" : achievementsList, "employmentHistory" : employmentHistoryList,
+"professionalSkills" : professionalSkillsList, "technicalSkills" : technicalSkillsList
+}}).exec(function(err, profile){
+
+    if(err) {
+       console.log(err);
+   } else {
+           res.json("updated");
+   }
+
+
+
+  });
+});

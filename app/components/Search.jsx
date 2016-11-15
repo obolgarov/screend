@@ -37,7 +37,8 @@ var Search = React.createClass({
 
     render: function () {
       var font = {
-        fontFamily : "Quicksand, sans-serif"
+        fontFamily : "Quicksand, sans-serif",
+        marginTop : "150px"
       };
         return (
             <div>

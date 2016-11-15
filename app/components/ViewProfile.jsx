@@ -91,6 +91,25 @@ var ViewProfile = React.createClass({
 
     },
 
+    edit:function(e){
+       function getParameterByName(name, url) {
+
+            if (!url) {
+                url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var id = getParameterByName('id');
+
+        hashHistory.push('EditProfile?id=' +id);
+    },
+
     delete: function (e) {
         function getParameterByName(name, url) {
 
@@ -151,34 +170,53 @@ var ViewProfile = React.createClass({
                         <h2 style={font}>Profile</h2>
 
                         <div>
-                            <h2> Employment History</h2>
+                            <h4> Employment History</h4>
+
+                                <div>
+                            <h3> Employment History</h3>
+
+
                             <label id="history"></label>
+
                         </div>
 
                         <div>
-                            <h2>Education</h2>
+
+                            <h4>Education</h4>
+
                             <label id="education"></label>
                         </div>
 
                         <div>
-                            <h2>Certification</h2>
+                            <h4>Certification</h4>
+
+
                             <label id="certification"></label>
                         </div>
 
                         <div>
-                            <h2>Achievements</h2>
+
+                            <h4>Achievements</h4>
+
                             <label id="achievements"></label>
                         </div>
 
                         <div>
-                            <h2>Professtional Skils</h2>
+
+                            <h4>Professtional Skills</h4>
+
+
                             <label id="pSkills"></label>
                         </div>
 
                         <div>
-                            <h2>Technical Skils</h2>
+
+                            <h4>Technical Skills</h4>
+
+
                             <label id="tSkills"></label>
                         </div>
+
 
 
                         <input type="button" onClick={this.delete} className="button hollow" value="Delete" />
@@ -187,6 +225,7 @@ var ViewProfile = React.createClass({
                     </div>
                 </div>
             </div>
+          </div>
         );
     }
 });

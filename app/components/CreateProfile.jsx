@@ -542,6 +542,9 @@ var CreateProfile = React.createClass({
       fontFamily: "Quicksand, sans-serif"
     };
 
+    var width = {
+      width : "100%"
+    };
     return (
       <div>
         <Nav/>
@@ -555,10 +558,11 @@ var CreateProfile = React.createClass({
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
           </form>
           <form ref="profile">
-            <h3>Education</h3>
-            {// map passes individual elements into the first param, and their index into the second, which is used as the React key
-            this.state.education.map((result, key) => {
-              return <EducationEntry key={key} entry={result} updateState={this.updateEducation} updateText={this.updateEducationText} deleteField={this.deleteEducationField}/>
+            <h3>Education</h3
+            {
+              // map passes individual elements into the first param, and their index into the second, which is used as the React key
+              this.state.education.map((result, key) => {
+                return <EducationEntry style={width} key={key} entry={result} updateState={this.updateEducation} updateText={this.updateEducationText} deleteField={this.deleteEducationField}/>
             })}
             <input type="button" onClick={this.addEducation} value="+"/>
 

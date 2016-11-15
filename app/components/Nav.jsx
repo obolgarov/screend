@@ -114,7 +114,7 @@ var Nav = React.createClass({
                   <Link to="/Home" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
               </li>
               <li>
-                <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >JobPosting</Link>
+                <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Job Postings</Link>
               </li>
               <li>
                 <Link to="/messages" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Messages</Link>
@@ -157,7 +157,7 @@ var Nav = React.createClass({
                   <Link to="/Home" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Home</Link>
               </li>
               <li>
-                <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >JobPosting</Link>
+                <Link to="/JobPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}} >Job Postings</Link>
               </li>
               <li>
                 <Link to="/messages" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Messages</Link>
