@@ -492,8 +492,28 @@ router.route('/searchProfile').post(function(req, res, callback) {
     var SearchData = req.body.data.SearchData;
     var SelectedData = req.body.data.SelectedData;
 
-    console.log(SearchData);
+   if(SelectedData == "certifications")
+    {
+       mongoose.model('profile').find({
+    'certifications.name':SearchData
+    }, function (err, profile){
+      if (err) {
+        return console.error(err);
+      } else {
 
-    console.log(SelectedData);
+        if (profile != null ){
+            console.log(profile);
+          res.format({
+            json: function() {
+              res.json(
+                      profile
+                  );
+            }
+          });
+        }  
+      }
+    });
+    }
+
 });
 
