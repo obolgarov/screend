@@ -175,7 +175,7 @@ router.route('/uploadResume').post((req, res) => {
 
       var wpList = jsonData['w:document']['w:body'][0]['w:p'];
 
-      var lowerLookupTable = {
+      var initialLookupTable = {
         categories: [
           {
             type: "education",
@@ -184,7 +184,6 @@ router.route('/uploadResume').post((req, res) => {
               "Academic Experience",
               "Programs",
               "Courses",
-              "Related Courses",
               "Education",
               "Educational Background",
               "Educational Qualifications",
@@ -197,66 +196,61 @@ router.route('/uploadResume').post((req, res) => {
           {
             type: "achievments",
             strings: [
+              "Course Project Experience",
+              "Related Course Projects",
             ]
-          }
+          },
           {
             type: "certifications",
             strings: [
+              "Qualifications",
+              "Training",
+              "Related Courses",
             ]
-          }
+          },
           {
             type: "employmentHistory",
             strings: [
+              "Experience",
+              "Work History",
+              "Freelance",
+              "Freelance Experience",
+              "Internship Experience",
+              "Internships",
             ]
-          }
+          },
           {
             type: "professionalSkills",
             strings: [
+              "COMPETENCIES/SKILLS",
+              "COMPETENCIES",
+              "SKILLS",
             ]
-          }
+          },
           {
             type: "technicalSkills",
             strings: [
+              "Programming Languages",
+              "Programming Knowledge",
+              "Programming"
             ]
           }
-        ],
-        achievements: [
-          "Course Project Experience",
-          "Related Course Projects",
-        ],
-        certifications: [
-          "Qualifications",
-          "Training",
-        ],
-        employmentHistory: [
-          "Experience",
-          "Work History",
-          "Freelance",
-          "Freelance Experience",
-          "Internship Experience",
-          "Internships",
-        ],
-        professionalSkills: [
-          "COMPETENCIES/SKILLS",
-          "COMPETENCIES",
-          "SKILLS",
-        ],
-        technicalSkills: [
-          "Programming Languages",
-          "Programming Knowledge",
-          "Programming"
         ]
       };
 
-      var lookupTable = lowerLookupTable.map((lowerComponent) => {
-        console.log(lowerComponent);
-        console.log("------------")
-        /*return result.map((lowerStrings) => {
-          return lowerString.toUpperCase();
-        });*/
-      });
+      // I could have used for..of loops but I wanted to have fun with maps
+      var lookupTable = {
+        categories: initialLookupTable.categories.map((category) => {
+          return {
+            type: category.type,
+            strings: category.strings.map((string) => {
+              return string.toUpperCase();
+            })
+          };
+        })
+      };
 
-      console.log(lookupTable);
+      //console.log(lookupTable);
 
       var sortedItems = {
         education: [],
@@ -285,8 +279,10 @@ router.route('/uploadResume').post((req, res) => {
 
         //console.log(styles.bold);
         //console.log(wrList);
-        //console.log(text);
-        //console.log('--------------');
+        console.log(text);
+        console.log('--------------');
+
+        //var
 
       }
     });
@@ -364,7 +360,7 @@ router.route('/editProfile').post(function(req, res, callback) {
   var professionalSkillsList = req.body.data.professionalSkills;
   var technicalSkillsList = req.body.data.technicalSkills;
   var id = req.body.data.id;
- 
+
    var newProfile = new Profile({
     education: [],
     certifications: [],
