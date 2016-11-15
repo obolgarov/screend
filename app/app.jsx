@@ -30,7 +30,8 @@ var MyProfiles = require('MyProfiles');
 var ViewProfile = require('ViewProfile');
 var termsandconditions = require('termsandconditions');
 var EditProfile = require('EditProfile');
-
+var ProfileSearch = require('ProfileSearch');
+var ProfileSearchResults = require('ProfileSearchResults');
 
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
@@ -65,9 +66,9 @@ ReactDOM.render(
   <Route path="HandleDelete" components={HandleDelete}/>
   <Route path="MyProfiles" components={MyProfiles}/>
   <Route path="ViewProfile" components={ViewProfile}/>
-
+  <Route path="ProfileSearch" components={ProfileSearch}/>
   <Route path="termsandconditions" components={termsandconditions}/>
-
+  <Route path="ProfileSearchResults" components={ProfileSearchResults}/>
   <Route path="EditProfile" components={EditProfile}/>
 
   <IndexRoute component={Welcome}/>

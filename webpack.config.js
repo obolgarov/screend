@@ -53,7 +53,9 @@ plugins:[
       HandleDelete : 'app/components/HandleDelete.jsx',
       MyProfiles : 'app/components/MyProfiles.jsx',
       ViewProfile : 'app/components/ViewProfile.jsx',
-      EditProfile : 'app/components/EditProfile.jsx'
+      EditProfile : 'app/components/EditProfile.jsx',
+      ProfileSearch : 'app/components/ProfileSearch.jsx',
+      ProfileSearchResults : 'app/components/ProfileSearchResults.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

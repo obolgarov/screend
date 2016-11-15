@@ -87,7 +87,8 @@ var jobDescription = React.createClass({
            document.getElementById("skills").appendChild(document.createElement("br"));
          }
 
-
+        var instructions  = document.createTextNode(job.Instructions);
+        document.getElementById("instructions").appendChild(instructions);
 
      });
     });
@@ -152,6 +153,11 @@ var jobDescription = React.createClass({
       <div>
           <h4>Skills (Name and Experience):</h4>
           <p id="skills"></p>
+        </div>
+
+        <div>
+          <h4>How to apply:</h4>
+          <p id="instructions"></p>
         </div>
 
         <div>

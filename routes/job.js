@@ -83,6 +83,9 @@ router.route('/')
     var Description = req.body.Description;
     var SkillsList = req.body.Skills;
     var PostedBy = req.body.PostedBy;
+    var Instructions = req.body.Instructions;
+
+
     //console.log(SkillsList);
     console.log("POst" + PostedBy);
     var newJob = new Job({
@@ -95,6 +98,7 @@ router.route('/')
       Salary: Salary,
       Description: Description,
       PostedBy : PostedBy,
+      Instructions : Instructions,
       Skills: [] //initialized empty
     });
 

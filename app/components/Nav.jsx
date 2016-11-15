@@ -172,7 +172,9 @@ var Nav = React.createClass({
               <li>
                 <Link to="/EmployerPostings" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>View My Postings</Link>
               </li>
-
+              <li>
+                <Link to="/ProfileSearch" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Search for Job Seekers</Link>
+              </li>
             </ul>
           </div>
           <div className="top-bar-right">
