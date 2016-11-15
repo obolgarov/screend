@@ -349,10 +349,61 @@ router.route('/uploadResume').post((req, res) => {
 
         // store the previous elements to compare with
         POIHistory.push(currentPOI);
-
-        console.log(currentPOI);
-        console.log('--------------');
       }
+
+      // parse final
+      sortedItems.education = POIHistory.map( (result) => {
+        if (!result.possibleTitle && !result.isEmpty) {
+          return
+        }
+      });
+
+      for (var POI of POIHistory) {
+        if (!POI.isEmpty && !POI.possibleTitle) {
+          if (POI.category =="education"){
+            sortedItems.education.push(POI.text);
+          }
+          if (POI.category == "achievements"){
+            sortedItems.achievements.push(POI.text);
+          }
+          if (POI.category == "certifications"){
+            sortedItems.certifications.push(POI.text);
+          }
+          if (POI.category == "employmentHistory"){
+            sortedItems.employmentHistory.push(POI.text);
+          }
+          if (POI.category == "professionalSkills"){
+            sortedItems.professionalSkills.push(POI.text);
+          }
+          if (POI.category == "technicalSkills"){
+            var text = POI.text;
+            var years = "";
+            if (text.indexOf("years") != -1){ // only works properly if nothing is after years
+              text = text.substr(0, text.indexOf("years") - 1);
+            }
+            if (text.indexOf("year") != -1){
+              text = text.substr(0, text.indexOf("year") - 1);
+            }
+            if (text.indexOf(",") != -1) {
+              var fullText = text;
+              text = fullText.substring(0, fullText.indexOf(",")).trim();
+              years = fullText.substring(fullText.indexOf(",") + 1, fullText.length).trim();
+            }
+            sortedItems.technicalSkills.push({
+              skill: text,
+              years: years
+            });
+          }
+        }
+      }
+
+      console.log(sortedItems);
+
+      res.format({
+        json: function () {
+          res.json(sortedItems);
+        }
+      });
     });
   });
 
