@@ -173,8 +173,6 @@ router.route('/uploadResume').post((req, res) => {
 
       //console.log(jsonData['w:document']['w:body'][0]['w:p']);
 
-      var wpList = jsonData['w:document']['w:body'][0]['w:p'];
-
       var initialLookupTable = {
         categories: [
           {
@@ -194,8 +192,9 @@ router.route('/uploadResume').post((req, res) => {
             ]
           },
           {
-            type: "achievments",
+            type: "achievements",
             strings: [
+              "Achievements",
               "Course Project Experience",
               "Related Course Projects",
             ]
@@ -203,6 +202,7 @@ router.route('/uploadResume').post((req, res) => {
           {
             type: "certifications",
             strings: [
+              "Certifications",
               "Qualifications",
               "Training",
               "Related Courses",
@@ -211,6 +211,7 @@ router.route('/uploadResume').post((req, res) => {
           {
             type: "employmentHistory",
             strings: [
+              "Employment History",
               "Experience",
               "Work History",
               "Freelance",
@@ -222,6 +223,7 @@ router.route('/uploadResume').post((req, res) => {
           {
             type: "professionalSkills",
             strings: [
+              "Professional Skills",
               "COMPETENCIES/SKILLS",
               "COMPETENCIES",
               "SKILLS",
@@ -230,9 +232,11 @@ router.route('/uploadResume').post((req, res) => {
           {
             type: "technicalSkills",
             strings: [
+              "Technical Skills",
               "Programming Languages",
               "Programming Knowledge",
-              "Programming"
+              "Programming",
+              "Technical Skills (Including Years)"
             ]
           }
         ]
@@ -244,7 +248,7 @@ router.route('/uploadResume').post((req, res) => {
           return {
             type: category.type,
             strings: category.strings.map((string) => {
-              return string.toUpperCase();
+              return string.toUpperCase().trim();
             })
           };
         })
@@ -261,29 +265,93 @@ router.route('/uploadResume').post((req, res) => {
         technicalSkills: []
       };
 
-      var memoryList = [];
+      var POIHistory = [];
 
+      var wpList = jsonData['w:document']['w:body'][0]['w:p'];
+
+      // loop through each w:p
       for ( var wp of wpList){
+
+        //POI = points of interest
+        var currentPOI = {
+          category: null, // String
+          text: null, // String
+          bold: false, // boolean
+          italics: false, // boolean
+          underline: false, // boolean
+          size: null, // String, whatever value OOXML uses
+          color: null, // String, whatever value OOXML uses
+          isEmpty: false, // boolean
+          possibleTitle: false, //boolean
+          depth: 0, // int, can be as deep as possible, but only max 3 depth calculated in case of 3 different fields in one category
+          isListElement: false, //boolean, TODO
+        };
+
+        // merge all seperate w:t texts into one within this w:p
         var text = "";
         var wrList = wp['w:r'];
         for (var wr of wrList){
           text = text + "" + (wr['w:t'] ? wr['w:t'][0]._ : "");
         }
+        currentPOI.text = text;
 
-        var styles = {
-          bold: (wp['w:r'][0]['w:rPr'][0]['w:b'] ? (wp['w:r'][0]['w:rPr'][0]['w:b'][0]['$']['w:val'] == '1' ? true : false) : false),
-          italics: (wp['w:r'][0]['w:rPr'][0]['w:i'] ? (wp['w:r'][0]['w:rPr'][0]['w:i'][0]['$']['w:val'] == '1' ? true : false) : false),
-          underline: (wp['w:r'][0]['w:rPr'][0]['w:u'] ? (wp['w:r'][0]['w:rPr'][0]['w:u'][0]['$']['w:val'] == '1' ? true : false) : false),
-          color: (wp['w:r'][0]['w:rPr'][0]['w:i'] ? (wp['w:r'][0]['w:rPr'][0]['w:i'][0]['$']['w:val'] == '1' ? true : false) : false),
-        };
+        currentPOI.isEmpty = (text.trim() == "" ? true : false);
+
+        currentPOI.bold = (wp['w:r'][0]['w:rPr'][0]['w:b'] ? (wp['w:r'][0]['w:rPr'][0]['w:b'][0]['$']['w:val'] == '1' ? true : false) : false);
+        currentPOI.italics = (wp['w:r'][0]['w:rPr'][0]['w:i'] ? (wp['w:r'][0]['w:rPr'][0]['w:i'][0]['$']['w:val'] == '1' ? true : false) : false);
+        currentPOI.underline =(wp['w:r'][0]['w:rPr'][0]['w:u'] ? (wp['w:r'][0]['w:rPr'][0]['w:u'][0]['$']['w:val'] == '1' ? true : false) : false);
+
+        currentPOI.color = (wp['w:r'][0]['w:rPr'][0]['w:i'] ? (wp['w:r'][0]['w:rPr'][0]['w:i'][0]['$']['w:val'] == '1' ? true : false) : false);
+
+        // check if current string suggests a category
+        var categoryFound = false;
+        for (var lookupTableCategory of lookupTable.categories) {
+          for (var string of lookupTableCategory.strings) {
+            if (text.toUpperCase().trim() == string) {
+              currentPOI.category = lookupTableCategory.type;
+              currentPOI.possibleTitle = true;
+              categoryFound = true;
+            }
+            if (categoryFound) {
+              break;
+            }
+          }
+          if (categoryFound) {
+            break;
+          }
+        }
+
+        // if no category found, assume previous category, if exists
+        if ( !categoryFound
+        && POIHistory.length > 0
+        && POIHistory[POIHistory.length - 1].category != null) {
+          currentPOI.category = POIHistory[POIHistory.length - 1].category;
+        }
+
+        // possibleTitle was obtained earlier, if it's not then let it be a string
+        if(!currentPOI.possibleTitle) {
+          if (currentPOI.size = POIHistory[POIHistory.length - 1].size){
+            // if current is same size as previous, must be similar elements and depth is the same
+            currentPOI.depth = POIHistory[POIHistory.length - 1].depth;
+          } else if (currentPOI.size < POIHistory[POIHistory.length - 1].size) {
+            // if current is smaller than previous (finer print), depth increases
+            currentPOI.depth = POIHistory[POIHistory.length - 1].depth + 1;
+          } else {
+            // TODO: something if current size is larger than previous (implies reset of depth for another block)
+            // for now, reset depth to 0 so there will be no infinite depths
+            currentPOI.depth = 0;
+          }
+        }
 
         //console.log(styles.bold);
         //console.log(wrList);
-        console.log(text);
+        //console.log(text);
+
+        // store the previous elements to compare with
+        POIHistory.push(currentPOI);
+
+        console.log(currentPOI);
         console.log('--------------');
-
-        //var
-
       }
     });
   });
