@@ -3,6 +3,7 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var qs = require('qs'); // to send data inside the request
 var Nav = require('Nav');
+var FileInput = require('react-file-input');
 
 var httpGen = require('./httpGen.js');
 
@@ -10,7 +11,7 @@ var CreateProfileFields = require('./CreateProfileFields.jsx');
 
 import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
-import { hashHistory } from 'react-router';
+import {hashHistory} from 'react-router';
 
 // field components are stored in here to keep this file smaller
 var EducationEntry = CreateProfileFields.EducationEntry;
@@ -21,12 +22,11 @@ var ProfessionalSkillEntry = CreateProfileFields.ProfessionalSkillEntry;
 var TechnicalSkillEntry = CreateProfileFields.TechnicalSkillEntry;
 
 var randomNum = 0;
-var generateRandomID = function(){
+var generateRandomID = function() {
   var nextRandomNum = randomNum + 1;
   randomNum = nextRandomNum;
   return randomNum;
 };
-
 
 var CreateProfile = React.createClass({
   componentDidMount: function() {
@@ -34,12 +34,10 @@ var CreateProfile = React.createClass({
     var myCookie = cookie.load('userToken');
     //console.log(myCookie);
 
-    if (myCookie == null)
-    {
+    if (myCookie == null) {
       hashHistory.push('Welcome');
     }
   },
-
 
   getInitialState: function() {
     var initialData = {
@@ -79,7 +77,7 @@ var CreateProfile = React.createClass({
         locked: false,
         data: 0
       },
-       vis: ""
+      vis: ""
     };
 
     // when first loaded, initial data is a single-populated array per category with initial data
@@ -101,7 +99,6 @@ var CreateProfile = React.createClass({
     var initialTechnicalSkills = [];
     initialTechnicalSkills.push(Object.assign({}, initialData.technicalSkills));
 
-
     return {
       education: initialEducation,
       certifications: initialCertification,
@@ -109,44 +106,71 @@ var CreateProfile = React.createClass({
       employmentHistory: initialEmploymentHistory,
       professionalSkills: initialProfessionalSkills,
       technicalSkills: initialTechnicalSkills,
-      vis : ""
+      vis: ""
     };
   },
 
-  onChanged: function (e) {
-        this.setState({
-            vis: e.currentTarget.value
-        });
-    },
+  onChanged: function(e) {
+    this.setState({vis: e.currentTarget.value});
+  },
 
   handleSubmit: function(event) {
 
     event.preventDefault(); // stop submit button from redirecting to default form action
 
-      var data = { token : cookie.load('userToken') }
+    var data = {
+      token: cookie.load('userToken')
+    }
 
-      httpGen.generate({
+    httpGen.generate({
       data: data,
       path: "/messages/decode",
       method: "POST",
       onData: (data) => {
 
-      var profileData = {
-          username : data,
-         education: this.state.education,
-         certifications: this.state.certifications,
-         achievements: this.state.achievements,
-         employmentHistory: this.state.employmentHistory,
-         professionalSkills: this.state.professionalSkills,
-         technicalSkills: this.state.technicalSkills,
-         vis : this.state.vis
-    }
+        var profileData = {
+          username: data,
+          education: this.state.education,
+          certifications: this.state.certifications,
+          achievements: this.state.achievements,
+          employmentHistory: this.state.employmentHistory,
+          professionalSkills: this.state.professionalSkills,
+          technicalSkills: this.state.technicalSkills,
+          vis: this.state.vis
+        }
 
-      httpGen.generate({
-       data: profileData,
-       path: "/profile",
-       method: "POST",
-       onData: (data) => {
+        httpGen.generate({
+          data: profileData,
+          path: "/profile",
+          method: "POST",
+          onData: (data) => {
+            //var jsonData = JSON.parse(data);
+
+            // do something with jsonData if needed
+          },
+          onError: (error) => {
+            console.err(error.message);
+          }
+        });
+      }
+    });
+  },
+
+  uploadResume: function(event) {
+
+    event.preventDefault();
+
+    console.log(event.target.files);
+
+    //console.log(resumeData);
+
+    httpGen.generate({
+      data: {
+        resume: ""
+      },
+      path: "/profile/uploadResume",
+      method: "POST",
+      onData: (data) => {
         //var jsonData = JSON.parse(data);
 
         // do something with jsonData if needed
@@ -154,13 +178,7 @@ var CreateProfile = React.createClass({
       onError: (error) => {
         console.err(error.message);
       }
-    })
-          },
-      onError: (error) => {
-        console.err(error.message);
-      }
-    })
-
+    });
   },
 
   //-------------------------------------------------------------------------------------
@@ -170,8 +188,8 @@ var CreateProfile = React.createClass({
   updateEducation: function(fieldID) {
     var currentState = this.state;
 
-    for ( var education of currentState.education ) {
-      if(education.id == fieldID){
+    for (var education of currentState.education) {
+      if (education.id == fieldID) {
 
         var educationIndex = currentState.education.indexOf(education);
         currentState.education[educationIndex].locked = true;
@@ -186,8 +204,8 @@ var CreateProfile = React.createClass({
   updateCertification: function(fieldID) {
     var currentState = this.state;
 
-    for ( var certification of currentState.certifications ) {
-      if(certification.id == fieldID){
+    for (var certification of currentState.certifications) {
+      if (certification.id == fieldID) {
 
         var certificationIndex = currentState.certifications.indexOf(certification);
         currentState.certifications[certificationIndex].locked = true;
@@ -202,8 +220,8 @@ var CreateProfile = React.createClass({
   updateAchievement: function(fieldID) {
     var currentState = this.state;
 
-    for ( var achievement of currentState.achievements ) {
-      if(achievement.id == fieldID){
+    for (var achievement of currentState.achievements) {
+      if (achievement.id == fieldID) {
 
         var achievementIndex = currentState.achievements.indexOf(achievement);
         currentState.achievements[achievementIndex].locked = true;
@@ -218,8 +236,8 @@ var CreateProfile = React.createClass({
   updateEmploymentHistory: function(fieldID) {
     var currentState = this.state;
 
-    for ( var employmentHistory of currentState.employmentHistory ) {
-      if(employmentHistory.id == fieldID){
+    for (var employmentHistory of currentState.employmentHistory) {
+      if (employmentHistory.id == fieldID) {
 
         var employmentHistoryIndex = currentState.employmentHistory.indexOf(employmentHistory);
         currentState.employmentHistory[employmentHistoryIndex].locked = true;
@@ -234,8 +252,8 @@ var CreateProfile = React.createClass({
   updateProfessionalSkill: function(fieldID) {
     var currentState = this.state;
 
-    for ( var professionalSkill of currentState.professionalSkills ) {
-      if(professionalSkill.id == fieldID){
+    for (var professionalSkill of currentState.professionalSkills) {
+      if (professionalSkill.id == fieldID) {
 
         var professionalSkillIndex = currentState.professionalSkills.indexOf(professionalSkill);
         currentState.professionalSkills[professionalSkillIndex].locked = true;
@@ -250,8 +268,8 @@ var CreateProfile = React.createClass({
   updateTechnicalSkill: function(fieldID) {
     var currentState = this.state;
 
-    for ( var technicalSkill of currentState.technicalSkills ) {
-      if(technicalSkill.id == fieldID){
+    for (var technicalSkill of currentState.technicalSkills) {
+      if (technicalSkill.id == fieldID) {
 
         var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
         currentState.technicalSkills[technicalSkillIndex].locked = true;
@@ -270,8 +288,8 @@ var CreateProfile = React.createClass({
   updateEducationText: function(fieldID, event) {
     var currentState = this.state;
 
-    for ( var education of currentState.education ) {
-      if(education.id == fieldID){
+    for (var education of currentState.education) {
+      if (education.id == fieldID) {
 
         var educationIndex = currentState.education.indexOf(education);
         currentState.education[educationIndex].name = event.target.value;
@@ -286,8 +304,8 @@ var CreateProfile = React.createClass({
   updateCertificationText: function(fieldID, event) {
     var currentState = this.state;
 
-    for ( var certification of currentState.certifications ) {
-      if(certification.id == fieldID){
+    for (var certification of currentState.certifications) {
+      if (certification.id == fieldID) {
 
         var certificationIndex = currentState.certifications.indexOf(certification);
         currentState.certifications[certificationIndex].name = event.target.value;
@@ -302,8 +320,8 @@ var CreateProfile = React.createClass({
   updateAchievementText: function(fieldID, event) {
     var currentState = this.state;
 
-    for ( var achievement of currentState.achievements ) {
-      if(achievement.id == fieldID){
+    for (var achievement of currentState.achievements) {
+      if (achievement.id == fieldID) {
 
         var achievementIndex = currentState.achievements.indexOf(achievement);
         currentState.achievements[achievementIndex].name = event.target.value;
@@ -318,8 +336,8 @@ var CreateProfile = React.createClass({
   updateEmploymentHistoryText: function(fieldID, event) {
     var currentState = this.state;
 
-    for ( var employmentHistory of currentState.employmentHistory ) {
-      if(employmentHistory.id == fieldID){
+    for (var employmentHistory of currentState.employmentHistory) {
+      if (employmentHistory.id == fieldID) {
 
         var employmentHistoryIndex = currentState.employmentHistory.indexOf(employmentHistory);
         currentState.employmentHistory[employmentHistoryIndex].name = event.target.value;
@@ -334,8 +352,8 @@ var CreateProfile = React.createClass({
   updateProfessionalSkillText: function(fieldID, event) {
     var currentState = this.state;
 
-    for ( var professionalSkill of currentState.professionalSkills ) {
-      if(professionalSkill.id == fieldID){
+    for (var professionalSkill of currentState.professionalSkills) {
+      if (professionalSkill.id == fieldID) {
 
         var professionalSkillIndex = currentState.professionalSkills.indexOf(professionalSkill);
         currentState.professionalSkills[professionalSkillIndex].name = event.target.value;
@@ -350,8 +368,8 @@ var CreateProfile = React.createClass({
   updateTechnicalSkillText: function(fieldID, event) {
     var currentState = this.state;
 
-    for ( var technicalSkill of currentState.technicalSkills ) {
-      if(technicalSkill.id == fieldID){
+    for (var technicalSkill of currentState.technicalSkills) {
+      if (technicalSkill.id == fieldID) {
 
         var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
         currentState.technicalSkills[technicalSkillIndex].name = event.target.value;
@@ -370,12 +388,7 @@ var CreateProfile = React.createClass({
   addEducation: function(fieldID) {
     var currentState = this.state;
 
-    currentState.education.push({
-      id: generateRandomID(),
-      text: "",
-      locked: false,
-      data: 0
-    });
+    currentState.education.push({id: generateRandomID(), text: "", locked: false, data: 0});
 
     this.setState(currentState);
   },
@@ -383,12 +396,7 @@ var CreateProfile = React.createClass({
   addCertification: function(fieldID) {
     var currentState = this.state;
 
-    currentState.certifications.push({
-      id: generateRandomID(),
-      text: "",
-      locked: false,
-      data: 0
-    });
+    currentState.certifications.push({id: generateRandomID(), text: "", locked: false, data: 0});
 
     this.setState(currentState);
   },
@@ -396,12 +404,7 @@ var CreateProfile = React.createClass({
   addAchievement: function(fieldID) {
     var currentState = this.state;
 
-    currentState.achievements.push({
-      id: generateRandomID(),
-      text: "",
-      locked: false,
-      data: 0
-    });
+    currentState.achievements.push({id: generateRandomID(), text: "", locked: false, data: 0});
 
     this.setState(currentState);
   },
@@ -409,12 +412,7 @@ var CreateProfile = React.createClass({
   addEmploymentHistory: function(fieldID) {
     var currentState = this.state;
 
-    currentState.employmentHistory.push({
-      id: generateRandomID(),
-      text: "",
-      locked: false,
-      data: 0
-    });
+    currentState.employmentHistory.push({id: generateRandomID(), text: "", locked: false, data: 0});
 
     this.setState(currentState);
   },
@@ -422,12 +420,7 @@ var CreateProfile = React.createClass({
   addProfessionalSkill: function(fieldID) {
     var currentState = this.state;
 
-    currentState.professionalSkills.push({
-      id: generateRandomID(),
-      text: "",
-      locked: false,
-      data: 0
-    });
+    currentState.professionalSkills.push({id: generateRandomID(), text: "", locked: false, data: 0});
 
     this.setState(currentState);
   },
@@ -435,12 +428,7 @@ var CreateProfile = React.createClass({
   addTechnicalSkill: function(fieldID) {
     var currentState = this.state;
 
-    currentState.technicalSkills.push({
-      id: generateRandomID(),
-      text: "",
-      locked: false,
-      data: 0
-    });
+    currentState.technicalSkills.push({id: generateRandomID(), text: "", locked: false, data: 0});
 
     this.setState(currentState);
   },
@@ -452,8 +440,8 @@ var CreateProfile = React.createClass({
   deleteEducationField: function(fieldID) {
     var currentState = this.state;
 
-    for ( var education of currentState.education ) {
-      if(education.id == fieldID){
+    for (var education of currentState.education) {
+      if (education.id == fieldID) {
 
         var educationIndex = currentState.education.indexOf(education);
         currentState.education.splice(educationIndex, 1);
@@ -468,8 +456,8 @@ var CreateProfile = React.createClass({
   deleteCertificationField: function(fieldID) {
     var currentState = this.state;
 
-    for ( var certification of currentState.certifications ) {
-      if(certification.id == fieldID){
+    for (var certification of currentState.certifications) {
+      if (certification.id == fieldID) {
 
         var certificationIndex = currentState.certifications.indexOf(certification);
         currentState.certifications.splice(certificationIndex, 1);
@@ -484,8 +472,8 @@ var CreateProfile = React.createClass({
   deleteAchievementField: function(fieldID) {
     var currentState = this.state;
 
-    for ( var achievement of currentState.achievements ) {
-      if(achievement.id == fieldID){
+    for (var achievement of currentState.achievements) {
+      if (achievement.id == fieldID) {
 
         var achievementIndex = currentState.achievements.indexOf(achievement);
         currentState.achievements.splice(achievementIndex, 1);
@@ -500,8 +488,8 @@ var CreateProfile = React.createClass({
   deleteEmploymentHistoryField: function(fieldID) {
     var currentState = this.state;
 
-    for ( var employmentHistory of currentState.employmentHistory ) {
-      if(employmentHistory.id == fieldID){
+    for (var employmentHistory of currentState.employmentHistory) {
+      if (employmentHistory.id == fieldID) {
 
         var employmentHistoryIndex = currentState.employmentHistory.indexOf(employmentHistory);
         currentState.employmentHistory.splice(employmentHistoryIndex, 1);
@@ -516,8 +504,8 @@ var CreateProfile = React.createClass({
   deleteProfessionalSkillField: function(fieldID) {
     var currentState = this.state;
 
-    for ( var professionalSkill of currentState.professionalSkills ) {
-      if(professionalSkill.id == fieldID){
+    for (var professionalSkill of currentState.professionalSkills) {
+      if (professionalSkill.id == fieldID) {
 
         var professionalSkillIndex = currentState.professionalSkills.indexOf(professionalSkill);
         currentState.professionalSkills.splice(professionalSkillIndex, 1);
@@ -532,8 +520,8 @@ var CreateProfile = React.createClass({
   deleteTechnicalSkillField: function(fieldID) {
     var currentState = this.state;
 
-    for ( var technicalSkill of currentState.technicalSkills ) {
-      if(technicalSkill.id == fieldID){
+    for (var technicalSkill of currentState.technicalSkills) {
+      if (technicalSkill.id == fieldID) {
 
         var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
         currentState.technicalSkills.splice(technicalSkillIndex, 1);
@@ -545,12 +533,10 @@ var CreateProfile = React.createClass({
     this.setState(currentState);
   },
 
-
-
   render: function() {
 
     var button = {
-      margin : "30px 00px 30px 00px"
+      margin: "30px 00px 30px 00px"
     };
     var font = {
       fontFamily: "Quicksand, sans-serif"
@@ -564,16 +550,15 @@ var CreateProfile = React.createClass({
 
           <h2 style={font}>Create Profile</h2>
 
-
-          <form ref="resume" encType="multipart/form-data" onSubmit={this.onSubmit}>
+          <form ref="resume" encType="multipart/form-data" onSubmit={this.uploadResume} action="/profile/uploadResume" method="POST">
             <input type="file" name="resume" ref="resumeupload"></input>
-            <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button}></input>
-
+            <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
+          </form>
+          <form ref="profile">
             <h3>Education</h3>
-            {
-              // map passes individual elements into the first param, and their index into the second, which is used as the React key
-              this.state.education.map((result, key) => {
-                return <EducationEntry key={key} entry={result} updateState={this.updateEducation} updateText={this.updateEducationText} deleteField={this.deleteEducationField}/>
+            {// map passes individual elements into the first param, and their index into the second, which is used as the React key
+            this.state.education.map((result, key) => {
+              return <EducationEntry key={key} entry={result} updateState={this.updateEducation} updateText={this.updateEducationText} deleteField={this.deleteEducationField}/>
             })}
             <input type="button" onClick={this.addEducation} value="+"/>
 
@@ -597,7 +582,7 @@ var CreateProfile = React.createClass({
 
             <h3>Professional Skills</h3>
             {this.state.professionalSkills.map((result, key) => {
-              return <ProfessionalSkillEntry  key={key} entry={result} updateState={this.updateProfessionalSkill} updateText={this.updateProfessionalSkillText} deleteField={this.deleteProfessionalSkillField}/>
+              return <ProfessionalSkillEntry key={key} entry={result} updateState={this.updateProfessionalSkill} updateText={this.updateProfessionalSkillText} deleteField={this.deleteProfessionalSkillField}/>
             })}
             <input type="button" onClick={this.addProfessionalSkill} value="+"/>
 
@@ -605,28 +590,20 @@ var CreateProfile = React.createClass({
             {this.state.technicalSkills.map((result, key) => {
               return <TechnicalSkillEntry key={key} entry={result} updateState={this.updateTechnicalSkill} updateText={this.updateTechnicalSkillText} deleteField={this.deleteTechnicalSkillField}/>
             })}
-              <input type="button" onClick={this.addTechnicalSkill} value="+"/>
-            <br />
+            <input type="button" onClick={this.addTechnicalSkill} value="+"/>
+            <br/>
 
-            <h3>Profile Settings </h3>
+            <h3>Profile Settings
+            </h3>
             <table>
-                        <tr>
-                            <td><input type="radio" name="Public"
-                                value={"Public"}
-                                checked={this.state.CompanyName}
-                                onChange={this.onChanged} />Public</td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="Private"
-                                value={"Private"}
-                                checked={this.state.Location}
-                                onChange={this.onChanged} />Private</td>
-                        </tr>
+              <tr>
+                <td><input type="radio" name="Public" value={"Public"} checked={this.state.CompanyName} onChange={this.onChanged}/>Public</td>
+              </tr>
+              <tr>
+                <td><input type="radio" name="Private" value={"Private"} checked={this.state.Location} onChange={this.onChanged}/>Private</td>
+              </tr>
             </table>
 
-
-
-          
             <input type="submit" value="SubmitProfile" ref="submitProfileButton" name="submitProfileButton" className="button hollow" style={button} onClick={this.handleSubmit}></input>
           </form>
         </div>

@@ -3,6 +3,7 @@ import cookie from 'react-cookie';
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var qs = require('qs'); // to send data inside the request
+var FileInput = require('react-file-input');
 
 var httpGen = {
   //
