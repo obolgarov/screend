@@ -486,3 +486,14 @@ router.route('/editProfile').post(function(req, res, callback) {
 
   });
 });
+
+router.route('/searchProfile').post(function(req, res, callback) {
+
+    var SearchData = req.body.data.SearchData;
+    var SelectedData = req.body.data.SelectedData;
+
+    console.log(SearchData);
+
+    console.log(SelectedData);
+});
+

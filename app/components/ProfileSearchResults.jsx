@@ -1,5 +1,7 @@
 var React = require('react');
-var Nav = require('Nav')
+var Nav = require('Nav');
+var httpGen = require('./httpGen.js');
+
 var ProfileSearchResults = React.createClass({
 
     getInitialState: function () {
@@ -26,6 +28,29 @@ var ProfileSearchResults = React.createClass({
 
         var search = getParameterByName('search');
         var selected = getParameterByName('selected');
+
+        var searchData =
+        {
+            SearchData : search,
+            SelectedData : selected
+        }
+        
+        
+        httpGen.generate({
+            data: searchData,
+            path: "/profile/searchProfile",
+            method: "POST",
+            onData: (data) => {
+
+            hashHistory.push('MyProfiles');
+
+
+            },
+            onError: (error) => {
+                console.err(error.message);
+            }
+        })
+        
 
 
     },
