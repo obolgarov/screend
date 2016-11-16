@@ -53,6 +53,10 @@ var jobDescription = React.createClass({
 
         var job = JSON.parse(output);
 
+        var JobId = document.createTextNode(job._id);
+        document.getElementById("jobId").setAttribute("name", "id");
+        document.getElementById("jobId").setAttribute("value", job._id);
+        document.getElementById("jobId").appendChild(JobId);
 
         var JobTitle = document.createTextNode(job.JobTitle);
         document.getElementById("jobtitle").appendChild(JobTitle);
@@ -122,7 +126,9 @@ var jobDescription = React.createClass({
 
         for (var i = 0; i < idList.length; i++) {
           var opt = document.createElement('option');
+          
           opt.value = idList[i];
+          opt.setAttribute("name", "resume");
           opt.innerHTML = idList[i];
           select.appendChild(opt);
 
@@ -135,7 +141,14 @@ var jobDescription = React.createClass({
       }
     })
 
+  },
 
+  applyJob: function (event) {
+    var jobId = document.getElementsByName("id");
+    console.log(jobId[0].innerHTML);
+
+    var profileId = document.getElementsByName("resume");
+    console.log(profile[0].innerHTML);
   },
 
   render: function () {
@@ -149,6 +162,13 @@ var jobDescription = React.createClass({
       <div>
         <Nav />
         <div className="columns medium-4 large-6 small-centered" >
+
+
+          <div>
+            <h4>Job Id:</h4>
+            <label id="jobId"></label>
+          </div>
+
           <div>
             <h4>Job Title:</h4>
             <label id="jobtitle"></label>
@@ -199,9 +219,9 @@ var jobDescription = React.createClass({
           </div>
 
 
-          <form ref="jobDescription" method="post">
+          <form ref="jobDescription">
             <div>
-              <button type="submit" value="Apply For Job" className="button hollow" style={button} >Submit Resume</button>
+              <button type="submit" value="Apply For Job" className="button hollow" style={button} onClick={this.applyJob}>Submit Resume</button>
             </div>
 
           </form>
