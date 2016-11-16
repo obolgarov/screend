@@ -94,7 +94,7 @@ var ProfileSearchResults = React.createClass({
                                 <tbody>
                                     {
                                         this.state.data.map(function (data) {
-                                            var link = "/#/JobDescription?id=" + data.profileID;
+                                            var link = "/#/EmployerViewProfile?id=" + data.profileID;
                                             return (
                                                 <tr>
                                                     <td><a href={link}>{data.owner}</a></td>
