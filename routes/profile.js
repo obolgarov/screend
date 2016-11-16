@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var extract = require('extract-zip')
 var fs = require('fs');
 var xml2js = require('xml2js');
+var jwt = require('jsonwebtoken');
 
 module.exports = router;
 
@@ -610,9 +611,36 @@ router.route('/searchProfile').post(function(req, res, callback) {
     });
     }
 
-
-
-    
-
 });
 
+
+router.route('/loadUserProfiles').post(function(req, res, callback) {
+
+    var usernameToken = req.body.token;
+    var decoded = jwt.decode(usernameToken);
+    var username = decoded.username;
+
+    mongoose.model('profile').find({
+      owner : username
+    }, function (err, profile){
+      if (err) {
+        return console.error(err);
+      } else {
+        if (profile != null ){
+         res.format({
+           json: function() {
+              res.json(
+                      profile
+                  );
+           }
+         });
+        }  
+      }
+    
+  
+});
+
+
+
+
+});
