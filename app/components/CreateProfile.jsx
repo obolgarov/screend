@@ -619,7 +619,7 @@ var CreateProfile = React.createClass({
 
             <h3>Technical Skills</h3>
             {this.state.technicalSkills.map((result, key) => {
-              return <TechnicalSkillEntry key={key} entry={result} updateState={this.updateTechnicalSkill} updateNameText={this.updateTechnicalSkillText} updateYearText={this.updateTechnicalSkillText} deleteField={this.deleteTechnicalSkillField}/>
+              return <TechnicalSkillEntry key={key} entry={result} updateState={this.updateTechnicalSkill} updateNameText={this.updateTechnicalSkillNameText} updateYearText={this.updateTechnicalSkillYearText} deleteField={this.deleteTechnicalSkillField}/>
             })}
             <input type="button" onClick={this.addTechnicalSkill} value="+"/>
             <br/>
