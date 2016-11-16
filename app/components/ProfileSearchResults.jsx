@@ -43,7 +43,7 @@ var ProfileSearchResults = React.createClass({
             onData: (data) => {
 
             var jsonParse = JSON.parse(data);
-
+                console.log(jsonParse);
                   var profileData = [];
                       
                    for(var item of jsonParse){

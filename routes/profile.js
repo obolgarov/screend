@@ -553,7 +553,6 @@ router.route('/searchProfile').post(function(req, res, callback) {
       } else {
 
         if (profile != null ){
-            console.log(profile);
           res.format({
             json: function() {
               res.json(
@@ -565,6 +564,55 @@ router.route('/searchProfile').post(function(req, res, callback) {
       }
     });
     }
+
+  
+   if(SelectedData == "technicalSkills")
+    {
+       mongoose.model('profile').find({
+    'technicalSkills.name':SearchData
+    }, function (err, profile){
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (profile != null ){
+          res.format({
+            json: function() {
+              res.json(
+                      profile
+                  );
+            }
+          });
+        }  
+      }
+    });
+    }
+
+ if(SelectedData == "employmentHistory")
+    {
+       mongoose.model('profile').find({
+    'employmentHistory.name':SearchData
+    }, function (err, profile){
+      if (err) {
+        return console.error(err);
+      } else {
+
+        if (profile != null ){
+          res.format({
+            json: function() {
+              res.json(
+                      profile
+                  );
+            }
+          });
+        }  
+      }
+    });
+    }
+
+
+
+    
 
 });
 
