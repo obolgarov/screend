@@ -179,13 +179,14 @@ var CreateProfile = React.createClass({
         var JSONData = JSON.parse(data);
         console.log(JSONData);
         for (var skill of JSONData.technicalSkills)
-        this.state.education.push({
+        this.state.technicalSkills.push({
           id: generateRandomID(),
           name: skill.skill,
           years: skill.years,
           locked: false,
           data: 0
         })
+
       },
       onError: (error) => {
         console.err(error.message);
