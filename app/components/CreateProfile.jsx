@@ -187,6 +187,52 @@ var CreateProfile = React.createClass({
           data: 0
         })
 
+        for(var emp of JSONData.employmentHistory)
+          this.state.employmentHistory.push({
+            id: generateRandomID(),
+            name : emp,
+            location:false,
+            data:0
+          })
+
+     for(var edu of JSONData.education)
+     {
+        if(edu != null){
+              this.state.education.push({
+            id: generateRandomID(),
+            name : edu,
+            location:false,
+            data:0
+          })
+          }
+     }
+
+   for(var cert of JSONData.certifications)
+          this.state.certifications.push({
+            id: generateRandomID(),
+            name : cert,
+            location:false,
+            data:0
+          })
+
+          for(var achiev of JSONData.achievements)
+          this.state.achievements.push({
+            id: generateRandomID(),
+            name : achiev,
+            location:false,
+            data:0
+          })
+
+     for(var prof of JSONData.professionalSkills)
+          this.state.professionalSkills.push({
+            id: generateRandomID(),
+            name : prof,
+            location:false,
+            data:0
+          })
+
+
+
       },
       onError: (error) => {
         console.err(error.message);
