@@ -154,7 +154,8 @@ var ViewProfile = React.createClass({
 
     render: function () {
         var font = {
-            fontFamily: "Quicksand, sans-serif"
+            fontFamily: "Quicksand, sans-serif",
+            marginTop: "50px"
         };
         var mleft = {
            marginLeft: "30px"
