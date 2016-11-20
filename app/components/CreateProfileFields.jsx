@@ -155,7 +155,11 @@ var TechnicalSkillEntry = React.createClass({
           <input type="text" value={this.props.entry.name}
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
-            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+            onChange={this.props.updateNameText.bind(null, this.props.entry.id)}/>
+          <input type="text" value={this.props.entry.year}
+            style={styles.lockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateYearText.bind(null, this.props.entry.id)}/>
         </div>
       );
     } else {
@@ -164,7 +168,11 @@ var TechnicalSkillEntry = React.createClass({
           <input type="text" value={this.props.entry.name}
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
-            onChange={this.props.updateText.bind(null, this.props.entry.id)}/>
+            onChange={this.props.updateNameText.bind(null, this.props.entry.id)}/>
+          <input type="text" value={this.props.entry.year}
+            style={styles.lockedInput}
+            onBlur={this.props.updateState.bind(null, this.props.entry.id)}
+            onChange={this.props.updateYearText.bind(null, this.props.entry.id)}/>
         </div>
       );
     }

@@ -74,6 +74,7 @@ var CreateProfile = React.createClass({
       technicalSkills: {
         id: generateRandomID(),
         name: "",
+        years: "",
         locked: false,
         data: 0
       },
@@ -174,6 +175,64 @@ var CreateProfile = React.createClass({
         //var jsonData = JSON.parse(data);
 
         // do something with jsonData if needed
+        console.log("test");
+        var JSONData = JSON.parse(data);
+        console.log(JSONData);
+        for (var skill of JSONData.technicalSkills)
+        this.state.technicalSkills.push({
+          id: generateRandomID(),
+          name: skill.skill,
+          years: skill.years,
+          locked: false,
+          data: 0
+        })
+
+        for(var emp of JSONData.employmentHistory)
+          this.state.employmentHistory.push({
+            id: generateRandomID(),
+            name : emp,
+            location:false,
+            data:0
+          })
+
+     for(var edu of JSONData.education)
+     {
+        if(edu != null){
+              this.state.education.push({
+            id: generateRandomID(),
+            name : edu,
+            location:false,
+            data:0
+          })
+          }
+     }
+
+   for(var cert of JSONData.certifications)
+          this.state.certifications.push({
+            id: generateRandomID(),
+            name : cert,
+            location:false,
+            data:0
+          })
+
+          for(var achiev of JSONData.achievements)
+          this.state.achievements.push({
+            id: generateRandomID(),
+            name : achiev,
+            location:false,
+            data:0
+          })
+
+     for(var prof of JSONData.professionalSkills)
+          this.state.professionalSkills.push({
+            id: generateRandomID(),
+            name : prof,
+            location:false,
+            data:0
+          })
+
+
+
       },
       onError: (error) => {
         console.err(error.message);
@@ -365,7 +424,7 @@ var CreateProfile = React.createClass({
     this.setState(currentState);
   },
 
-  updateTechnicalSkillText: function(fieldID, event) {
+  updateTechnicalSkillNameText: function(fieldID, event) {
     var currentState = this.state;
 
     for (var technicalSkill of currentState.technicalSkills) {
@@ -373,6 +432,21 @@ var CreateProfile = React.createClass({
 
         var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
         currentState.technicalSkills[technicalSkillIndex].name = event.target.value;
+
+        break;
+      }
+    }
+
+    this.setState(currentState);
+  },
+  updateTechnicalSkillYearText: function(fieldID, event) {
+    var currentState = this.state;
+
+    for (var technicalSkill of currentState.technicalSkills) {
+      if (technicalSkill.id == fieldID) {
+
+        var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
+        currentState.technicalSkills[technicalSkillIndex].year = event.target.value;
 
         break;
       }
@@ -428,7 +502,7 @@ var CreateProfile = React.createClass({
   addTechnicalSkill: function(fieldID) {
     var currentState = this.state;
 
-    currentState.technicalSkills.push({id: generateRandomID(), text: "", locked: false, data: 0});
+    currentState.technicalSkills.push({id: generateRandomID(), text: "", years: "", locked: false, data: 0});
 
     this.setState(currentState);
   },
@@ -589,7 +663,7 @@ var CreateProfile = React.createClass({
 
             <h3>Technical Skills</h3>
             {this.state.technicalSkills.map((result, key) => {
-              return <TechnicalSkillEntry key={key} entry={result} updateState={this.updateTechnicalSkill} updateText={this.updateTechnicalSkillText} deleteField={this.deleteTechnicalSkillField}/>
+              return <TechnicalSkillEntry key={key} entry={result} updateState={this.updateTechnicalSkill} updateNameText={this.updateTechnicalSkillNameText} updateYearText={this.updateTechnicalSkillYearText} deleteField={this.deleteTechnicalSkillField}/>
             })}
             <input type="button" onClick={this.addTechnicalSkill} value="+"/>
             <br/>
