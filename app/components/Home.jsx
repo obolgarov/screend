@@ -5,6 +5,15 @@ var i = 0
 
 
 var Home = React.createClass({
+
+    getInitialState: function(){
+
+        var data = {count : 0,
+                    isCounted : false
+                  }
+        return data;
+    },
+
     render: function() {
 
         var font = {
@@ -25,14 +34,25 @@ var Home = React.createClass({
             backgroundColor: "Alert"
 
         };
-
+    if(!this.state.isCounted){
         httpGen.generate({
           path: "/job/count",
           method: "POST",
           onData: (data) => {
+          console.log(data);
+
+          var parse = JSON.parse(data);
+
+          var count = parse["count"];
+
+          this.setState({count : count,
+                         isCounted : true})
 
           }
+
+
         });
+      }
 
         return (
 
@@ -77,8 +97,8 @@ var Home = React.createClass({
                         <ul className="vertical medium-horizontal menu expanded text-center">
                             <li>
                                 <a href="#">
-                                    <div className="stat">28</div>
-                                    <span>Job Postings</span>
+                                    <div className="stat">{this.state.count}</div>
+                                    <span>Job Posting</span>
                                 </a>
                             </li>
 
