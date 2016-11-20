@@ -382,7 +382,14 @@ router.route('/rank').get(function(req, res, callback) {
 router.route('/count').post(function(req, res, callback) {
   mongoose.model('job').count({}, function(err, count){
   console.log( "Number of docs: ", count );
-
+  res.format({
+    // json response
+    json: function() {
+      res.json({
+         count
+      });
+    }
+  });
 
 });
 });
