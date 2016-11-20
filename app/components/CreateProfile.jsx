@@ -161,13 +161,18 @@ var CreateProfile = React.createClass({
 
     event.preventDefault();
 
-    console.log(event.target.files);
+    //console.log(event.target.files);
 
     //console.log(resumeData);
 
+        var pathComponents = this.refs.resumeupload.value.split('\\'), fileName = pathComponents[pathComponents.length - 1];
+
     httpGen.generate({
+
+
+
       data: {
-        resume: ""
+        resume: fileName
       },
       path: "/profile/uploadResume",
       method: "POST",

@@ -157,7 +157,9 @@ router.route('/')
 router.route('/uploadResume').post((req, res) => {
   //var resume = req.body.data.resume;
   var userToken = req.body.token;
+  var filename = req.body.data.resume;
 
+  console.log(filename);
   //console.log(resume);
   //console.log(req.body);
   //console.log("uploaded");
