@@ -188,7 +188,7 @@ var CreateProfile = React.createClass({
           id: generateRandomID(),
           name: skill.skill,
           years: skill.years,
-          locked: false,
+          locked: true,
           data: 0
         })
 
@@ -196,7 +196,7 @@ var CreateProfile = React.createClass({
           this.state.employmentHistory.push({
             id: generateRandomID(),
             name : emp,
-            location:false,
+          locked: true,
             data:0
           })
 
@@ -206,7 +206,7 @@ var CreateProfile = React.createClass({
               this.state.education.push({
             id: generateRandomID(),
             name : edu,
-            location:false,
+          locked: true,
             data:0
           })
           }
@@ -216,7 +216,7 @@ var CreateProfile = React.createClass({
           this.state.certifications.push({
             id: generateRandomID(),
             name : cert,
-            location:false,
+          locked: true,
             data:0
           })
 
@@ -224,7 +224,7 @@ var CreateProfile = React.createClass({
           this.state.achievements.push({
             id: generateRandomID(),
             name : achiev,
-            location:false,
+          locked: true,
             data:0
           })
 
@@ -232,7 +232,7 @@ var CreateProfile = React.createClass({
           this.state.professionalSkills.push({
             id: generateRandomID(),
             name : prof,
-            location:false,
+          locked: true,
             data:0
           })
 
