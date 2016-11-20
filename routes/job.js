@@ -69,7 +69,7 @@ router.route('/')
     // end of get
   })
   .post(function(req, res) {
-
+    console.log("FDHFJEH");
     //console.log(req.body);
     //console.log(querystring.parse(req.body));
 
