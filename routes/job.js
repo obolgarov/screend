@@ -171,7 +171,7 @@ router.route('/searchJob').post(function(req, res, callback) {
                   );
             }
           });
-        }  
+        }
       }
     });
     }
@@ -195,10 +195,10 @@ else if(selected == "Location")
                   );
             }
           });
-        }  
+        }
       }
     });
-    } 
+    }
 else if(selected == "JobTitle")
     {
 
@@ -219,10 +219,10 @@ else if(selected == "JobTitle")
                   );
             }
           });
-        }  
+        }
       }
     });
-    } 
+    }
 
 
 
@@ -379,3 +379,10 @@ router.route('/rank').get(function(req, res, callback) {
   });
 });
 
+router.route('/count').post(function(req, res, callback) {
+  mongoose.model('job').count({}, function(err, count){
+  console.log( "Number of docs: ", count );
+
+
+});
+});
