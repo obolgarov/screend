@@ -87,10 +87,11 @@ var MyProfiles = React.createClass({
 
             <form ref='metric_results' onSubmit={this.onSubmit}>
               <div id='Content-Length'>
-                <table ref="profileTabe">
-                <tr>
-                  <td> Profile </td>
-                </tr>
+
+
+                  <div className="blog-post">
+
+
                   <tbody>
                     {
                       this.state.data.map(function (data) {
@@ -99,16 +100,27 @@ var MyProfiles = React.createClass({
 
 
                         return (
+                        <div>
+                          <h3><a href={link}>View Profile</a><small>3/6/2016</small></h3>
+                          <p> faucibus vestibulum. Nulla at nulla justo, eget luctus.</p>
+                        <div className="callout">
+                          <ul className="menu simple">
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Delete</a></li>
+                          </ul>
+                        </div>
+                      </div>
 
-                          <tr>
-                            <td><a href={link}>View Profile</a></td>
-
-                        </tr>
+                        //   <tr>
+                        //     <td><a href={link}>View Profile</a></td>
+                        //
+                        // </tr>
                         )
                       })
                     }
                   </tbody>
-                </table>
+
+                </div>
               </div>
             </form>
           </div>

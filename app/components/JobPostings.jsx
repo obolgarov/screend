@@ -81,53 +81,72 @@ var JobPostings = React.createClass({
     if (this.state.data) {
 
       var Table = {
-        margin : "30px"
-      };
+    margin: "30px"
+};
 
+return (
 
-      return (
-        <div>
-         <Nav/>
-          <form ref='metric_results' onSubmit={this.onSubmit} className="columns medium-4 large-6 small-centered" >
-            <div id='Content-Length' >
-              <table ref="jobsTable" style={Table} >
-                <tr>
-                  <td> Job Name </td>
-                  <td> Company Name</td>
-                  <td> Job ID </td>
-                </tr>
-                <tbody>
-                  {
-                    this.state.data.map(function (data) {
+    <div>
+      <Nav/>
+    <div className = "callout large primary" >
+      <div className="row column text-center">
+        <h1>Jobs</h1>
+      </div>
 
-                      var link = "/#/JobDescription?id=" + data.jobID;
-                      console.log(link);
+    </div>
+        <div className="columns medium-4 large-6 small-centered">
+        <form ref='metric_results' onSubmit={this.onSubmit} >
+            <div id='Content-Length'>
+                <table ref="jobsTable" style={Table}>
+                    <tr>
+                        <td>Job Name</td >
+                        <td>Company Name</td>
+                        <td> Job ID </td>
+                    </tr >
+                              <tbody>
+                              {this.state.data.map(function(data) {
 
-                      return (
-                        <tr>
-                          <td><a href={link}>{data.jobTitle}</a></td>
-                          <td>{data.companyName}</td>
-                          <td>{data.jobID}</td>
-                        </tr>
-                      );
-                    })
-                  }
-                </tbody>
-              </table>
+                                  var link = "/#/JobDescription?id=" + data.jobID;
+                                  console.log(link);
+
+                                  return (
+                                      <tr>
+                                          <td>
+                                              <a href={link}>{data.jobTitle}</a>
+                                          </td>
+                                          <td>{data.companyName}</td>
+                                          <td>{data.jobID}</td>
+                                      </tr>
+                                  );
+                              })
+                          }
+                            </tbody>
+                </table>
+            </div >
+              </form>
+              <div className="columns medium-4 large-6 small-centered">
+              <ul className="pagination" role="navigation" aria-label="Pagination">
+                <li className="disabled">Previous <span className="show-for-sr">page</span></li>
+                <li className="current"><span className="show-for-sr">You're on page</span> 1</li>
+                <li><a href="#" aria-label="Page 2">2</a></li>
+                <li><a href="#" aria-label="Page 3">3</a></li>
+                <li><a href="#" aria-label="Page 4">4</a></li>
+              <li><a href="#" aria-label="Next page">Next <span className="show-for-sr">page</span></a></li>
+              </ul>
             </div>
-          </form>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <p>Loading...</p>
-        </div>
-      )
-    }
+        </div >
 
+      </div>
+    );
+} else {
+return (
+    <div>
+        <p>Loading...</p>
+    </div>
+)
+}
 
-  }
+}
 
 });
 
