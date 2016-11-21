@@ -45,6 +45,10 @@ var SearchResults = React.createClass({
             selected: selected
         }
 
+        console.log(search);
+                console.log(selected);
+
+
         var dataQuerystring = querystring.stringify(data);
 
         var httpOptions = {
@@ -65,7 +69,7 @@ var SearchResults = React.createClass({
             res.on('data', (dataBlob) => {
 
                 var jsonData = JSON.parse(dataBlob);
-             
+                console.log(jsonData);
                 var jobData = [];
                 
       
