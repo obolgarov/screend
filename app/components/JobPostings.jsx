@@ -60,19 +60,21 @@ var JobPostings = React.createClass({
 
         var jobData = [];
 
-        /*for ( var job of jsonData ) {
+        for ( var job of jsonData.jobRankings ) {
           jobData.push({
-            jobTitle : job.JobTitle,
-            companyName : job.CompanyName,
-            jobID : job._id
+            jobTitle : job.jobName,
+            companyName : job.companyName,
+            jobID : job.jobID,
+            ranking : job.percent
           });
-        }*/
+        }
 
         this.setState({
           jobData: jobData
         });
 
-        console.log(data);
+        console.log(this.state.jobData);
+
       },
       onError: (error) => {
         console.error(error.message);
@@ -117,16 +119,17 @@ var JobPostings = React.createClass({
                   <td> Qaulified </td>
                 </tr>
                 {
-                  this.state.jobData.map(function (data) {
+                  this.state.jobData.map(function (data, key) {
 
                     var link = "/#/JobDescription?id=" + data.jobID;
-                    console.log(link);
+                    //console.log(link);
 
                     return (
-                      <tr>
+                      <tr key={key}>
                         <td><a href={link}>{data.jobTitle}</a></td>
                         <td>{data.companyName}</td>
                         <td>{data.jobID}</td>
+                        <td>{data.ranking}</td>
                       </tr>
                     );
                   })

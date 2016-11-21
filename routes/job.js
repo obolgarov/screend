@@ -69,7 +69,7 @@ router.route('/')
     // end of get
   })
   .post(function(req, res) {
-
+    console.log("FDHFJEH");
     //console.log(req.body);
     //console.log(querystring.parse(req.body));
 
@@ -391,13 +391,21 @@ router.route('/rank').post(function(req, res, callback) {
             console.error(err.message);
           } else {
 
+            var jobRankings = [];
+
             for(var job of jobs) {
 
               //console.log(job.Skills);
 
-              var skillTable = {
-                skills: [],
-                totalPoints: 0
+              var rankInfo = {
+                jobSkills: [],  // storing skills here because it felt natural, don't know what to do eith them here actually
+                profileSkills: [],
+                jobName: job.JobTitle,
+                companyName: job.CompanyName,
+                jobID: job._id,
+                jobPoints: 0,
+                profilePoints: 0,
+                percent: 0
               };
 
               for (var skill of job.Skills){
@@ -407,27 +415,44 @@ router.route('/rank').post(function(req, res, callback) {
                   multiplier: 1
                 }
                 if (skill.Importance == "Mandatory"){
-                  jobSkill.mutliplier = 1;
+                  jobSkill.multiplier = 1;
                 }
                 else if (skill.Importance == "Important"){
-                  jobSkill.mutliplier = 0.8;
+                  jobSkill.multiplier = 0.6;
                 }
                 else if (skill.Importance == "Good to have"){
-                  jobSkill.multiplier = 0.5;
+                  jobSkill.multiplier = 0.3;
                 }
 
-                skillTable.totalPoints += jobSkill.multiplier;
+                rankInfo.jobPoints += jobSkill.multiplier;
 
-                skillTable.skills.push(jobSkill);
+                rankInfo.jobSkills.push(jobSkill);
 
                 // find skill in profile
                 for (var profileSkill of profile.technicalSkills) {
-                  console.log(jobSkill.skillName + " : " + profileSkill.name);
-                  if (profileSkill.name == jobSkill.skillName);
+                  //console.log(jobSkill.skillName + " : " + profileSkill.name);
+                  if (profileSkill.name == jobSkill.skillName){
+                    rankInfo.profilePoints += jobSkill.multiplier;
+                  }
                 }
               }
 
+              rankInfo.percent = (rankInfo.profilePoints / rankInfo.jobPoints) * 100;
+
+              console.log(rankInfo);
+
+              jobRankings.push(rankInfo);
+
             }
+
+            // data obtained, send back to client
+            res.format({
+              json:function() {
+                res.json({
+                  jobRankings: jobRankings
+                })
+              }
+            })
 
           }
         });
@@ -437,21 +462,19 @@ router.route('/rank').post(function(req, res, callback) {
       }
     }
   });
-
-  res.format({
-    // json response
-    json: function() {
-      res.json({
-        yes: "yes"
-      });
-    }
-  });
 });
 
 router.route('/count').post(function(req, res, callback) {
   mongoose.model('job').count({}, function(err, count){
   console.log( "Number of docs: ", count );
-
+  res.format({
+    // json response
+    json: function() {
+      res.json({
+         count
+      });
+    }
+  });
 
 });
 });

@@ -5,6 +5,7 @@ var Cookies = require('js-cookie')
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
+import { hashHistory } from 'react-router';
 
 
 var ReplyMessage = React.createClass({

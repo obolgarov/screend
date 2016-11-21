@@ -2,6 +2,8 @@ var React = require('react');
 var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
+import { hashHistory } from 'react-router';
+
 var {Link} = require('react-router');
 
 var RegSeeker = React.createClass({
@@ -160,7 +162,7 @@ var RegSeeker = React.createClass({
       req.write(dataQuerystring);
 
       req.end();
-
+        hashHistory.push("Login");
     }
 
   },
@@ -228,20 +230,3 @@ var RegSeeker = React.createClass({
 
 module.exports = RegSeeker;
 
-{
-  array : [
-    {
-      job: {
-        name: "job1",
-        skills: []
-      },
-      rank: "50"
-    }, {
-      job: {
-        name: "job1",
-        skills: []
-      },
-      rank: "50"
-    }
-  ]
-}

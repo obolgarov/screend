@@ -155,6 +155,8 @@ var CreateProfile = React.createClass({
         });
       }
     });
+
+    hashHistory.push('Home');
   },
 
   uploadResume: function(event) {
@@ -182,10 +184,6 @@ var CreateProfile = React.createClass({
         // do something with jsonData if needed
         //console.log("test");
         var JSONData = JSON.parse(data);
-        //console.log(JSONData);
-        //console.log(this.state.technicalSkills);
-
-        var currentState = this.state;
 
         if(!this.state.technicalSkills[0].locked){
           this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
@@ -197,19 +195,19 @@ var CreateProfile = React.createClass({
             years: skill.years,
             locked: true,
             data: 0
-          })
+          });
         }
 
         if(!this.state.employmentHistory[0].locked){
-          this.deleteEmploymentHistoryField(this.state.employmentHistory[0].id);
+          this.deleteTechnicalSkillField(this.state.employmentHistory[0].id);
         }
         for(var emp of JSONData.employmentHistory){
           this.state.employmentHistory.push({
             id: generateRandomID(),
             name : emp,
-            location:true,
+            locked: true,
             data:0
-          });
+          })
         }
 
         if(!this.state.education[0].locked){
@@ -234,7 +232,7 @@ var CreateProfile = React.createClass({
           this.state.certifications.push({
             id: generateRandomID(),
             name : cert,
-            location:true,
+            locked: true,
             data:0
           })
         }
@@ -246,7 +244,7 @@ var CreateProfile = React.createClass({
           this.state.achievements.push({
             id: generateRandomID(),
             name : achiev,
-            location:true,
+            locked: true,
             data:0
           })
         }
@@ -258,7 +256,7 @@ var CreateProfile = React.createClass({
           this.state.professionalSkills.push({
             id: generateRandomID(),
             name : prof,
-            location:true,
+            locked: true,
             data:0
           });
         }
@@ -270,6 +268,8 @@ var CreateProfile = React.createClass({
         console.err(error.message);
       }
     });
+
+
   },
 
   //-------------------------------------------------------------------------------------
