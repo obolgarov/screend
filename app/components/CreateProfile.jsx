@@ -644,8 +644,10 @@ var CreateProfile = React.createClass({
     var button = {
       margin: "30px 00px 30px 00px"
     };
+  
     var font = {
-      fontFamily: "Quicksand, sans-serif"
+      fontFamily: "Quicksand, sans-serif",
+      marginTop: "150px"
     };
 
     return (

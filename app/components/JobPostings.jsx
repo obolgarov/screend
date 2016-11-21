@@ -3,7 +3,7 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var i = 0;
-import { hashHistory } from 'react-router';
+import {hashHistory} from 'react-router';
 var Nav = require('Nav');
 
 var httpGen = require('./httpGen.js');
@@ -12,10 +12,7 @@ var JobPostings = React.createClass({
 
   // react function meant to act as a constructor, must return object for state
   getInitialState: function() {
-    return {
-      jobData: [],
-      profiles: []
-    };
+    return {jobData: [], profiles: []};
   },
 
   // run after page loads, and performs an async request which will change state when finished
@@ -35,9 +32,7 @@ var JobPostings = React.createClass({
           profiles.push(jsonData[i]._id);
         }
 
-        this.setState({
-          profiles: profiles
-        })
+        this.setState({profiles: profiles})
 
       },
       onError: (error) => {
@@ -51,7 +46,9 @@ var JobPostings = React.createClass({
     var profileID = event.target.value;
     //console.log(profileID);
     httpGen.generate({
-      data: {profileID: profileID},
+      data: {
+        profileID: profileID
+      },
       path: "/job/rank",
       method: "POST",
       onData: (data) => {
@@ -60,18 +57,11 @@ var JobPostings = React.createClass({
 
         var jobData = [];
 
-        for ( var job of jsonData.jobRankings ) {
-          jobData.push({
-            jobTitle : job.jobName,
-            companyName : job.companyName,
-            jobID : job.jobID,
-            ranking : job.percent
-          });
+        for (var job of jsonData.jobRankings) {
+          jobData.push({jobTitle: job.jobName, companyName: job.companyName, jobID: job.jobID, ranking: job.percent});
         }
 
-        this.setState({
-          jobData: jobData
-        });
+        this.setState({jobData: jobData});
 
         console.log(this.state.jobData);
 
@@ -91,55 +81,94 @@ var JobPostings = React.createClass({
   render: function() {
 
     var Table = {
-      margin : "30px"
+      margin: "30px"
     };
 
-
     return (
+
       <div>
-       <Nav/>
-        <form ref='metric_results' onSubmit={this.onSubmit} className="columns medium-4 large-6 small-centered" >
-          <div id='Content-Length' >
-            <div>
-              Profile:
-              <select ref="profileSelect" onChange={this.rankJobs}>
-                <option value="" disabled selected>...</option>
-                {this.state.profiles.map((result, key) => {
-                  //console.log(result);
-                  return <option key={key} value={result}>{result}</option>
-                })}
-              </select>
-            </div>
-            <table ref="jobsTable" style={Table} >
-              <tbody>
-                <tr>
-                  <td> Job Name </td>
-                  <td> Company Name</td>
-                  <td> Job ID </td>
-                  <td> Qaulified </td>
-                </tr>
-                {
-                  this.state.jobData.map(function (data, key) {
-
-                    var link = "/#/JobDescription?id=" + data.jobID;
-                    //console.log(link);
-
-                    return (
-                      <tr key={key}>
-                        <td><a href={link}>{data.jobTitle}</a></td>
-                        <td>{data.companyName}</td>
-                        <td>{data.jobID}</td>
-                        <td>{data.ranking}</td>
-                      </tr>
-                    );
-                  })
-                }
-              </tbody>
-            </table>
+        <Nav/>
+        <div className="callout large primary">
+          <div className="row column text-center">
+            <h1>Jobs</h1>
           </div>
-        </form>
+
+        </div>
+        <div className="columns medium-4 large-6 small-centered">
+          <form ref='metric_results' onSubmit={this.onSubmit}>
+            <div id='Content-Length'>
+              <div>
+                Profile:
+                <select ref="profileSelect" onChange={this.rankJobs}>
+                  <option value="" disabled selected>...</option>
+                  {this.state.profiles.map((result, key) => {
+                    //console.log(result);
+                    return <option key={key} value={result}>{result}</option>
+                  })}
+                </select>
+              </div>
+              <table ref="jobsTable" style={Table}>
+                <tbody>
+                  <tr>
+                    <td>Job Name</td >
+                    <td>Company Name</td>
+                    <td>
+                      Job ID
+                    </td>
+                    <td>
+                      Qaulified
+                    </td>
+                  </tr >
+                  {
+                    this.state.jobData.map(function(data) {
+
+                      var link = "/#/JobDescription?id=" + data.jobID;
+                      console.log(link);
+
+                      return (
+                        <tr>
+                          <td>
+                            <a href={link}>{data.jobTitle}</a>
+                          </td>
+                          <td>{data.companyName}</td>
+                          <td>{data.jobID}</td>
+                          <td>{data.ranking}</td>
+                        </tr>
+                      );
+                    })
+                  }
+                </tbody>
+              </table>
+            </div >
+          </form>
+          <div className="columns medium-4 large-6 small-centered">
+            <ul className="pagination" role="navigation" aria-label="Pagination">
+              <li className="disabled">Previous
+                <span className="show-for-sr">page</span>
+              </li>
+              <li className="current">
+                <span className="show-for-sr">You're on page</span>
+                1</li>
+              <li>
+                <a href="#" aria-label="Page 2">2</a>
+              </li>
+              <li>
+                <a href="#" aria-label="Page 3">3</a>
+              </li>
+              <li>
+                <a href="#" aria-label="Page 4">4</a>
+              </li>
+              <li>
+                <a href="#" aria-label="Next page">Next
+                  <span className="show-for-sr">page</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div >
+
       </div>
-    )
+    );
 
   }
 
