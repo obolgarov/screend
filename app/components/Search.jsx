@@ -23,12 +23,14 @@ var Search = React.createClass({
 
 
     onSubmit: function (e) {
+
         var data = {
             search: this.refs.searchBox.value,
             selected: this.state.data
         }
 
-              hashHistory.push('SearchResults?search=' + data.search + '&?selected='+ data.selected);
+
+hashHistory.push('SearchResults?search=' + data.search + '&?selected='+ data.selected);
 
 
 
@@ -56,20 +58,20 @@ var Search = React.createClass({
 
                     <table>
                         <tr>
-                            <td><input type="radio" name="search"
+                            <td><input type="radio" name="Search"
                                 value={"CompanyName"}
                                 checked={this.state.CompanyName}
                                 onChange={this.onChanged} />Company Name</td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="search"
+                            <td><input type="radio" name="Search"
                                 value={"Location"}
                                 checked={this.state.Location}
                                 onChange={this.onChanged} />Company Address</td>
                         </tr>
 
                         <tr>
-                            <td><input type="radio" name="search"
+                            <td><input type="radio" name="Search"
                                 value={"JobTitle"}
                                 checked={this.state.JobTitle}
                                 onChange={this.onChanged} />Job Title</td>
