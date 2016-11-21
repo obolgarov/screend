@@ -21,7 +21,8 @@ var profileSchema = new mongoose.Schema( {
     name: String
   }],
   technicalSkills: [{
-    name: String
+    name: String,
+    years: Number
   }],
   vis : String
 });

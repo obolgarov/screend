@@ -180,63 +180,90 @@ var CreateProfile = React.createClass({
         //var jsonData = JSON.parse(data);
 
         // do something with jsonData if needed
-        console.log("test");
+        //console.log("test");
         var JSONData = JSON.parse(data);
-        console.log(JSONData);
-        for (var skill of JSONData.technicalSkills)
-        this.state.technicalSkills.push({
-          id: generateRandomID(),
-          name: skill.skill,
-          years: skill.years,
-          locked: false,
-          data: 0
-        })
+        //console.log(JSONData);
+        //console.log(this.state.technicalSkills);
 
-        for(var emp of JSONData.employmentHistory)
+        var currentState = this.state;
+
+        if(!this.state.technicalSkills[0].locked){
+          this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
+        }
+        for (var skill of JSONData.technicalSkills){
+          this.state.technicalSkills.push({
+            id: generateRandomID(),
+            name: skill.skill,
+            years: skill.years,
+            locked: true,
+            data: 0
+          })
+        }
+
+        if(!this.state.employmentHistory[0].locked){
+          this.deleteEmploymentHistoryField(this.state.employmentHistory[0].id);
+        }
+        for(var emp of JSONData.employmentHistory){
           this.state.employmentHistory.push({
             id: generateRandomID(),
             name : emp,
-            location:false,
+            location:true,
             data:0
-          })
+          });
+        }
 
-     for(var edu of JSONData.education)
-     {
-        if(edu != null){
-              this.state.education.push({
-            id: generateRandomID(),
-            name : edu,
-            location:false,
-            data:0
-          })
+        if(!this.state.education[0].locked){
+          this.deleteEducationField(this.state.education[0].id);
+        }
+        for(var edu of JSONData.education)
+        {
+          if(edu != null){
+            this.state.education.push({
+              id: generateRandomID(),
+              name : edu,
+              location:true,
+              data:0
+            })
           }
-     }
+        }
 
-   for(var cert of JSONData.certifications)
+        if(!this.state.certifications[0].locked){
+          this.deleteCertificationField(this.state.certifications[0].id);
+        }
+        for(var cert of JSONData.certifications){
           this.state.certifications.push({
             id: generateRandomID(),
             name : cert,
-            location:false,
+            location:true,
             data:0
           })
+        }
 
-          for(var achiev of JSONData.achievements)
+        if(!this.state.achievements[0].locked){
+          this.deleteAchievementField(this.state.achievements[0].id);
+        }
+        for(var achiev of JSONData.achievements){
           this.state.achievements.push({
             id: generateRandomID(),
             name : achiev,
-            location:false,
+            location:true,
             data:0
           })
+        }
 
-     for(var prof of JSONData.professionalSkills)
+        if(!this.state.professionalSkills[0].locked){
+          this.deleteProfessionalSkillField(this.state.professionalSkills[0].id);
+        }
+        for(var prof of JSONData.professionalSkills){
           this.state.professionalSkills.push({
             id: generateRandomID(),
             name : prof,
-            location:false,
+            location:true,
             data:0
-          })
+          });
+        }
 
-
+        this.setState(this.state);
 
       },
       onError: (error) => {
@@ -677,10 +704,10 @@ var CreateProfile = React.createClass({
             </h3>
             <table>
               <tr>
-                <td><input type="radio" name="Public" value={"Public"} checked={this.state.CompanyName} onChange={this.onChanged}/>Public</td>
+                <td><input type="radio" name="Publicity" value={"Public"} onChange={this.onChanged}/>Public</td>
               </tr>
               <tr>
-                <td><input type="radio" name="Private" value={"Private"} checked={this.state.Location} onChange={this.onChanged}/>Private</td>
+                <td><input type="radio" name="Publicity" value={"Private"} onChange={this.onChanged}/>Private</td>
               </tr>
             </table>
 
