@@ -155,6 +155,8 @@ var CreateProfile = React.createClass({
         });
       }
     });
+
+    hashHistory.push('Home');
   },
 
   uploadResume: function(event) {
@@ -243,6 +245,8 @@ var CreateProfile = React.createClass({
         console.err(error.message);
       }
     });
+
+
   },
 
   //-------------------------------------------------------------------------------------

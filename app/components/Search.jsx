@@ -56,20 +56,20 @@ var Search = React.createClass({
 
                     <table>
                         <tr>
-                            <td><input type="radio" name="CompanyName"
+                            <td><input type="radio" name="search"
                                 value={"CompanyName"}
                                 checked={this.state.CompanyName}
                                 onChange={this.onChanged} />Company Name</td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="Location"
+                            <td><input type="radio" name="search"
                                 value={"Location"}
                                 checked={this.state.Location}
                                 onChange={this.onChanged} />Company Address</td>
                         </tr>
 
                         <tr>
-                            <td><input type="radio" name="JobTitle"
+                            <td><input type="radio" name="search"
                                 value={"JobTitle"}
                                 checked={this.state.JobTitle}
                                 onChange={this.onChanged} />Job Title</td>
