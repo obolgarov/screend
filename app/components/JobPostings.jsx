@@ -66,9 +66,9 @@ var JobPostings = React.createClass({
 
 
         jobData.sort((a, b)=> {
-          if (a.ranking < b.ranking){
+          if (a.ranking > b.ranking){
             return -1;
-          } else if (a.ranking > b.ranking){
+          } else if (a.ranking < b.ranking){
             return 1;
           } else {
             return 0;
