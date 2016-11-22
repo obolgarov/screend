@@ -32,9 +32,12 @@ var ProfileSearch = React.createClass({
       fontFamily: "Quicksand, sans-serif",
       marginTop: "150px"
     };
+
+
     return (
       <div>
         <Nav />
+        <div className="columns medium-4 large-6 small-centered">
         <h2 style={font}>Search for job seekers</h2>
 
         <form ref='search' onSubmit={this.onSubmit} >
@@ -72,7 +75,7 @@ var ProfileSearch = React.createClass({
             <button type="submit" className="button hollow">Submit</button>
           </div>
         </form>
-
+      </div>
 
 
 
