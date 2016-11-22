@@ -74,6 +74,7 @@ var ViewProfile = React.createClass({
          }
 
      for (var i = 0; i < item.technicalSkills.length; i++) {
+         console.log(item.technicalSkills);
          var tSkills = document.createTextNode(item.technicalSkills[i].name + " - " + item.technicalSkills[i].years + " years");
           document.getElementById("tSkills").appendChild(tSkills);
           document.getElementById("tSkills").appendChild(document.createElement("br"));

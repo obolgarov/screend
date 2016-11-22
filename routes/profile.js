@@ -522,6 +522,7 @@ router.route('/editProfile').post(function(req, res, callback) {
   for (var technicalSkill of technicalSkillsList) {
     newProfile.technicalSkills.push({
       name: technicalSkill.name,
+      years: technicalSkill.years
     });
   }
 

@@ -101,14 +101,9 @@ var MyProfiles = React.createClass({
 
                         return (
                         <div>
-                          <h3><a href={link}>View Profile</a><small>3/6/2016</small></h3>
+                          <h4><a href={link}>View Profile</a><small>3/6/2016</small></h4>
                           <p> faucibus vestibulum. Nulla at nulla justo, eget luctus.</p>
-                        <div className="callout">
-                          <ul className="menu simple">
-                            <li><a href="#">Edit</a></li>
-                            <li><a href="#">Delete</a></li>
-                          </ul>
-                        </div>
+                   
                       </div>
 
                         //   <tr>

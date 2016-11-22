@@ -171,7 +171,7 @@ var TechnicalSkillEntry = React.createClass({
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateNameText.bind(null, this.props.entry.id)}/>
           <input type="text" value={this.props.entry.years}
-            style={styles.lockedInput}
+            style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateYearText.bind(null, this.props.entry.id)}/>
         </div>
