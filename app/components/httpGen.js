@@ -14,13 +14,10 @@ var httpGen = {
   generate: function(options) {
 
     if (!options.method || options.method == null){
-      return console.err("httpGen requires method");
-    }
-    if (options.method == "GET" && (!options.data || options.data == null)){
-      return console.err("httpGen requires data if method isn't GET");
+      return console.error("httpGen requires method");
     }
     if (!options.path || options.path == null){
-      return console.err("httpGen requires path");
+      return console.error("httpGen requires path");
     }
 
     var userToken = cookie.load('userToken');

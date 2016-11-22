@@ -22,7 +22,6 @@ var EditProfile = React.createClass({
         }
 
         var profileId = getParameterByName('id');
-        console.log(profileId);
 
         var profileData = { id: profileId }
 
@@ -34,7 +33,6 @@ var EditProfile = React.createClass({
 
                 var profile = JSON.parse(data);
 
-                console.log(profile);
 
                 for (var item of profile) {
 
@@ -92,16 +90,19 @@ var EditProfile = React.createClass({
 
 
                     for (var i = 0; i < item.technicalSkills.length; i++) {
-
                         var tField = document.createElement("INPUT");
+                        var year = document.createElement("INPUT");
                         tField.setAttribute("type", "text");
                         tField.setAttribute("name", "tSkills[]");
+                        year.setAttribute("type", "text");
+                        year.setAttribute("name", "year[]");
                         tField.setAttribute("value", item.technicalSkills[i].name);
+                        year.setAttribute("value", item.technicalSkills[i].years);
+                        document.getElementById("year").appendChild(year);
                         document.getElementById("tSkills").appendChild(tField);
-                        document.getElementById("tSkills").appendChild(document.createElement("br"));
-
 
                     }
+
 
 
 
@@ -125,10 +126,10 @@ var EditProfile = React.createClass({
         var achievements = document.getElementsByName("myAchiev[]");
         var pSKills = document.getElementsByName("pSkills[]");
         var tSkills = document.getElementsByName("tSkills[]");
-
+        var years = document.getElementsByName("year[]");
         //  console.log(history[1].value );\
 
-         function getParameterByName(name, url) {
+        function getParameterByName(name, url) {
 
             if (!url) {
                 url = window.location.href;
@@ -145,7 +146,7 @@ var EditProfile = React.createClass({
 
         var data =
             {
-                id : myId,
+                id: myId,
                 education: [],
                 certifications: [],
                 achievements: [],
@@ -166,31 +167,32 @@ var EditProfile = React.createClass({
             });
         }
 
-          for (var x = 0; x < achievements.length; x++) {
+        for (var x = 0; x < achievements.length; x++) {
             data.achievements.push({
                 name: achievements[x].value
             });
         }
 
-  for (var x = 0; x < history.length; x++) {
+        for (var x = 0; x < history.length; x++) {
             data.employmentHistory.push({
                 name: history[x].value
             });
         }
 
 
-  for (var x = 0; x < pSKills.length; x++) {
+        for (var x = 0; x < pSKills.length; x++) {
             data.professionalSkills.push({
                 name: pSKills[x].value
             });
         }
 
-  for (var x = 0; x < tSkills.length; x++) {
+        for (var x = 0; x < tSkills.length; x++) {
             data.technicalSkills.push({
-                name: tSkills[x].value
+                name: tSkills[x].value,
+                years: years[x].value
             });
         }
-    
+
         httpGen.generate({
             data: data,
             path: "/profile/editProfile",
@@ -209,7 +211,7 @@ var EditProfile = React.createClass({
 
 
         console.log(data);
-},
+    },
 
     render: function () {
 
@@ -251,17 +253,23 @@ var EditProfile = React.createClass({
                             <label id="pSkills"></label>
                         </div>
 
-                        <div>
-                            <h3>Technical Skils</h3>
-                            <label id="tSkills"></label>
-                        </div>
 
-                        <input type="button" onClick={this.save} className="button hollow" value="Save" />
-
+                    <h3>Technical Skils</h3>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><label id="tSkills"></label></td>
+                                <td>  <label id="year"></label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                     </div>
-                </div>
-            </div>
+
+                <input type="button" onClick={this.save} className="button hollow" value="Save" />
+
+                </div >
         );
     }
 });

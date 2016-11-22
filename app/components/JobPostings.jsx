@@ -29,6 +29,7 @@ var JobPostings = React.createClass({
 
         var profiles = [];
 
+
         for (var i = 0; i < jsonData.length; i++) {
           profiles.push(jsonData[i]._id);
         }
@@ -59,12 +60,10 @@ var JobPostings = React.createClass({
         var jobData = [];
 
 
-
-
-
         for (var job of jsonData.jobRankings) {
           jobData.push({jobTitle: job.jobName, companyName: job.companyName, jobID: job.jobID, ranking: job.percent});
         }
+
 
         jobData.sort((a, b)=> {
           if (a.ranking < b.ranking){
@@ -86,6 +85,7 @@ var JobPostings = React.createClass({
         console.error(error.message);
       }
     });
+
 
     // might start using '=>' exclusively, otherwise everything inside the function
     // isn't part of the scope of where it's called from unless the function is
@@ -137,8 +137,12 @@ var JobPostings = React.createClass({
                   </tr >
                   {
                     this.state.jobData.map(function(data) {
+
+
                       var link = "/#/JobDescription?id=" + data.jobID;
                       console.log(link);
+
+
                       return (
                         <tr>
                           <td>
@@ -155,6 +159,7 @@ var JobPostings = React.createClass({
               </table>
             </div >
           </form>
+
 
 
         </div >

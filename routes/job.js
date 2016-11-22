@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var PDFParser = require('pdf2json');
 var querystring = require('qs');
-
+var jwt = require("jsonwebtoken");
 
 
 module.exports = router;
@@ -106,7 +106,7 @@ router.route('/')
       newJob.Skills.push({
         SkillName: skill.skill,
         Experience: skill.exp,
-        Importance: skill.imp
+        Importance: skill.importance
       });
     }
 
@@ -293,6 +293,8 @@ router.route('/view').post(function(req, res, callback) {
   });
 
 });
+
+/*
 router.route('/rank').post(function(req, res, callback) {
 
 
@@ -364,17 +366,100 @@ router.route('/rank').post(function(req, res, callback) {
 
   pdfParser.loadPDF('./pdf/Resume.pdf');
 
-});
-router.route('/rank').get(function(req, res, callback) {
+});*/
 
+router.route('/rank').post(function(req, res, callback) {
 
+  var tokenString = jwt.decode(req.body.token);
+  var username = tokenString.username;
+  var profileID = req.body.data.profileID;
 
-  res.format({
-    // json response
-    json: function() {
-      res.json({
-        yes: "yes"
-      });
+  mongoose.model("profile").findOne({
+    _id: profileID
+  }, (err, profile) => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      if (profile){
+
+        console.log(profile);
+
+        // second mongodb query for jobs
+
+        Job.find({}, (err, jobs) => {
+          if (err) {
+            console.error(err.message);
+          } else {
+
+            var jobRankings = [];
+
+            for(var job of jobs) {
+
+              //console.log(job.Skills);
+
+              var rankInfo = {
+                jobSkills: [],  // storing skills here because it felt natural, don't know what to do eith them here actually
+                profileSkills: [],
+                jobName: job.JobTitle,
+                companyName: job.CompanyName,
+                jobID: job._id,
+                jobPoints: 0,
+                profilePoints: 0,
+                percent: 0
+              };
+
+              for (var skill of job.Skills){
+
+                var jobSkill = {
+                  skillName: skill.SkillName,
+                  multiplier: 1
+                }
+                if (skill.Importance == "Mandatory"){
+                  jobSkill.multiplier = 1;
+                }
+                else if (skill.Importance == "Important"){
+                  jobSkill.multiplier = 0.6;
+                }
+                else if (skill.Importance == "Good to have"){
+                  jobSkill.multiplier = 0.3;
+                }
+
+                rankInfo.jobPoints += jobSkill.multiplier;
+
+                rankInfo.jobSkills.push(jobSkill);
+
+                // find skill in profile
+                for (var profileSkill of profile.technicalSkills) {
+                  //console.log(jobSkill.skillName + " : " + profileSkill.name);
+                  if (profileSkill.name == jobSkill.skillName){
+                    rankInfo.profilePoints += jobSkill.multiplier;
+                  }
+                }
+              }
+
+              rankInfo.percent = (rankInfo.profilePoints / rankInfo.jobPoints) * 100;
+
+              console.log(rankInfo);
+
+              jobRankings.push(rankInfo);
+
+            }
+
+            // data obtained, send back to client
+            res.format({
+              json:function() {
+                res.json({
+                  jobRankings: jobRankings
+                })
+              }
+            })
+
+          }
+        });
+
+      } else {
+        // profile not found
+      }
     }
   });
 });

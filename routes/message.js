@@ -276,7 +276,7 @@ router.route('/getAccountType').post(function(req,res,callback)
     {
         res.json({account :"applicant"});
     }
-    
+
     else if(accountType == "employer")
     {
         res.json({account:"employer"});

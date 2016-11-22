@@ -122,6 +122,8 @@ var CreateProfile = React.createClass({
     var data = {
       token: cookie.load('userToken')
     }
+      
+      var profileName = this.refs.profileName.value;
 
     httpGen.generate({
       data: data,
@@ -131,6 +133,7 @@ var CreateProfile = React.createClass({
 
         var profileData = {
           username: data,
+          name : profileName,
           education: this.state.education,
           certifications: this.state.certifications,
           achievements: this.state.achievements,
@@ -182,63 +185,86 @@ var CreateProfile = React.createClass({
         //var jsonData = JSON.parse(data);
 
         // do something with jsonData if needed
-        console.log("test");
+        //console.log("test");
         var JSONData = JSON.parse(data);
-        console.log(JSONData);
-        for (var skill of JSONData.technicalSkills)
-        this.state.technicalSkills.push({
-          id: generateRandomID(),
-          name: skill.skill,
-          years: skill.years,
-          locked: true,
-          data: 0
-        })
 
-        for(var emp of JSONData.employmentHistory)
+        if(!this.state.technicalSkills[0].locked){
+          this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
+        }
+        for (var skill of JSONData.technicalSkills){
+          this.state.technicalSkills.push({
+            id: generateRandomID(),
+            name: skill.skill,
+            years: skill.years,
+            locked: true,
+            data: 0
+          });
+        }
+
+        if(!this.state.employmentHistory[0].locked){
+          this.deleteTechnicalSkillField(this.state.employmentHistory[0].id);
+        }
+        for(var emp of JSONData.employmentHistory){
           this.state.employmentHistory.push({
             id: generateRandomID(),
             name : emp,
-          locked: true,
+            locked: true,
             data:0
           })
+        }
 
-     for(var edu of JSONData.education)
-     {
-        if(edu != null){
-              this.state.education.push({
-            id: generateRandomID(),
-            name : edu,
-          locked: true,
-            data:0
-          })
+        if(!this.state.education[0].locked){
+          this.deleteEducationField(this.state.education[0].id);
+        }
+        for(var edu of JSONData.education)
+        {
+          if(edu != null){
+            this.state.education.push({
+              id: generateRandomID(),
+              name : edu,
+              location:true,
+              data:0
+            })
           }
-     }
+        }
 
-   for(var cert of JSONData.certifications)
+        if(!this.state.certifications[0].locked){
+          this.deleteCertificationField(this.state.certifications[0].id);
+        }
+        for(var cert of JSONData.certifications){
           this.state.certifications.push({
             id: generateRandomID(),
             name : cert,
-          locked: true,
+            locked: true,
             data:0
           })
+        }
 
-          for(var achiev of JSONData.achievements)
+        if(!this.state.achievements[0].locked){
+          this.deleteAchievementField(this.state.achievements[0].id);
+        }
+        for(var achiev of JSONData.achievements){
           this.state.achievements.push({
             id: generateRandomID(),
             name : achiev,
-          locked: true,
+            locked: true,
             data:0
           })
+        }
 
-     for(var prof of JSONData.professionalSkills)
+        if(!this.state.professionalSkills[0].locked){
+          this.deleteProfessionalSkillField(this.state.professionalSkills[0].id);
+        }
+        for(var prof of JSONData.professionalSkills){
           this.state.professionalSkills.push({
             id: generateRandomID(),
             name : prof,
-          locked: true,
+            locked: true,
             data:0
-          })
+          });
+        }
 
-
+        this.setState(this.state);
 
       },
       onError: (error) => {
@@ -640,6 +666,12 @@ var CreateProfile = React.createClass({
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
           </form>
           <form ref="profile">
+         
+           <div>
+              <label> <h3> Name: </h3></label>
+                <input type="text" name="profileName" ref="profileName"/>
+          </div>
+
             <h3>Education</h3>
             {
               // map passes individual elements into the first param, and their index into the second, which is used as the React key
@@ -683,10 +715,10 @@ var CreateProfile = React.createClass({
             </h3>
             <table>
               <tr>
-                <td><input type="radio" name="Public" value={"Public"} checked={this.state.CompanyName} onChange={this.onChanged}/>Public</td>
+                <td><input type="radio" name="Publicity" value={"Public"} onChange={this.onChanged}/>Public</td>
               </tr>
               <tr>
-                <td><input type="radio" name="Private" value={"Private"} checked={this.state.Location} onChange={this.onChanged}/>Private</td>
+                <td><input type="radio" name="Publicity" value={"Private"} onChange={this.onChanged}/>Private</td>
               </tr>
             </table>
 

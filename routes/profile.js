@@ -73,13 +73,14 @@ router.route('/')
   var technicalSkillsList = req.body.data.technicalSkills;
   var vis = req.body.data.vis;
   var userToken = req.body.token;
-
+  var name = req.body.data.name;
   // validate token
 
   var owner = req.body.data.username; // TODO: get owner from token
   console.log(owner);
   var newProfile = new Profile({
     owner: owner,
+    name : name,
     education: [],
     certifications: [],
     achievements: [],
@@ -118,6 +119,7 @@ router.route('/')
   for (var technicalSkill of technicalSkillsList) {
     newProfile.technicalSkills.push({
       name: technicalSkill.name,
+      years: technicalSkill.years
     });
   }
 
@@ -521,6 +523,7 @@ router.route('/editProfile').post(function(req, res, callback) {
   for (var technicalSkill of technicalSkillsList) {
     newProfile.technicalSkills.push({
       name: technicalSkill.name,
+      years: technicalSkill.years
     });
   }
 
@@ -563,12 +566,12 @@ router.route('/searchProfile').post(function(req, res, callback) {
                   );
             }
           });
-        }  
+        }
       }
     });
     }
 
-  
+
    if(SelectedData == "technicalSkills")
     {
        mongoose.model('profile').find({
@@ -586,7 +589,7 @@ router.route('/searchProfile').post(function(req, res, callback) {
                   );
             }
           });
-        }  
+        }
       }
     });
     }
@@ -608,7 +611,7 @@ router.route('/searchProfile').post(function(req, res, callback) {
                   );
             }
           });
-        }  
+        }
       }
     });
     }
@@ -618,31 +621,26 @@ router.route('/searchProfile').post(function(req, res, callback) {
 
 router.route('/loadUserProfiles').post(function(req, res, callback) {
 
-    var usernameToken = req.body.token;
-    var decoded = jwt.decode(usernameToken);
-    var username = decoded.username;
+  var usernameToken = req.body.token;
+  var decoded = jwt.decode(usernameToken);
+  var username = decoded.username;
 
-    mongoose.model('profile').find({
-      owner : username
-    }, function (err, profile){
-      if (err) {
-        return console.error(err);
-      } else {
-        if (profile != null ){
-         res.format({
-           json: function() {
-              res.json(
-                      profile
-                  );
-           }
-         });
-        }  
+  mongoose.model('profile').find({
+    owner : username
+  }, function (err, profile){
+    if (err) {
+      return console.error(err);
+    } else {
+      if (profile != null ){
+        res.format({
+          json: function() {
+            res.json(
+                profile
+            );
+          }
+        });
       }
-    
-  
-});
-
-
-
+    }
+  });
 
 });
