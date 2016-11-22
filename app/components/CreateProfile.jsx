@@ -122,6 +122,8 @@ var CreateProfile = React.createClass({
     var data = {
       token: cookie.load('userToken')
     }
+      
+      var profileName = this.refs.profileName.value;
 
     httpGen.generate({
       data: data,
@@ -131,6 +133,7 @@ var CreateProfile = React.createClass({
 
         var profileData = {
           username: data,
+          name : profileName,
           education: this.state.education,
           certifications: this.state.certifications,
           achievements: this.state.achievements,
@@ -663,6 +666,12 @@ var CreateProfile = React.createClass({
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
           </form>
           <form ref="profile">
+         
+           <div>
+              <label> <h3> Name: </h3></label>
+                <input type="text" name="profileName" ref="profileName"/>
+          </div>
+
             <h3>Education</h3>
             {
               // map passes individual elements into the first param, and their index into the second, which is used as the React key

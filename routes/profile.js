@@ -73,13 +73,14 @@ router.route('/')
   var technicalSkillsList = req.body.data.technicalSkills;
   var vis = req.body.data.vis;
   var userToken = req.body.token;
-
+  var name = req.body.data.name;
   // validate token
 
   var owner = req.body.data.username; // TODO: get owner from token
   console.log(owner);
   var newProfile = new Profile({
     owner: owner,
+    name : name,
     education: [],
     certifications: [],
     achievements: [],
