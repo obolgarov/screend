@@ -116,20 +116,20 @@ var jobDescription = React.createClass({
 
         var jsonOutput = JSON.parse(data);
 
-        var idList = [];
+        var nameList = [];
 
         for (var item of jsonOutput) {
-          idList.push(item._id);
+          nameList.push(item.name);
         }
 
         var select = document.getElementById('profiles');
 
-        for (var i = 0; i < idList.length; i++) {
+        for (var i = 0; i < nameList.length; i++) {
           var opt = document.createElement('option');
           
-          opt.value = idList[i];
+          opt.value = nameList[i];
           opt.setAttribute("name", "resume");
-          opt.innerHTML = idList[i];
+          opt.innerHTML = nameList[i];
           select.appendChild(opt);
 
 
