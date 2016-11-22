@@ -29,6 +29,7 @@ var JobPostings = React.createClass({
 
         var profiles = [];
 
+
         for (var i = 0; i < jsonData.length; i++) {
           profiles.push(jsonData[i]._id);
         }
@@ -58,9 +59,22 @@ var JobPostings = React.createClass({
 
         var jobData = [];
 
+
         for (var job of jsonData.jobRankings) {
           jobData.push({jobTitle: job.jobName, companyName: job.companyName, jobID: job.jobID, ranking: job.percent});
         }
+
+
+        jobData.sort((a, b)=> {
+          if (a.ranking < b.ranking){
+            return -1;
+          } else if (a.ranking > b.ranking){
+            return 1;
+          } else {
+            return 0;
+          }
+        })
+
 
         this.setState({jobData: jobData});
 
@@ -71,6 +85,7 @@ var JobPostings = React.createClass({
         console.error(error.message);
       }
     });
+
 
     // might start using '=>' exclusively, otherwise everything inside the function
     // isn't part of the scope of where it's called from unless the function is
@@ -123,8 +138,10 @@ var JobPostings = React.createClass({
                   {
                     this.state.jobData.map(function(data) {
 
+
                       var link = "/#/JobDescription?id=" + data.jobID;
                       console.log(link);
+
 
                       return (
                         <tr>
@@ -142,31 +159,9 @@ var JobPostings = React.createClass({
               </table>
             </div >
           </form>
-          
-          <div className="columns medium-4 large-6 small-centered">
-            <ul className="pagination" role="navigation" aria-label="Pagination">
-              <li className="disabled">Previous
-                <span className="show-for-sr">page</span>
-              </li>
-              <li className="current">
-                <span className="show-for-sr">You're on page</span>
-                1</li>
-              <li>
-                <a href="#" aria-label="Page 2">2</a>
-              </li>
-              <li>
-                <a href="#" aria-label="Page 3">3</a>
-              </li>
-              <li>
-                <a href="#" aria-label="Page 4">4</a>
-              </li>
-              <li>
-                <a href="#" aria-label="Next page">Next
-                  <span className="show-for-sr">page</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+
+
+
         </div >
 
       </div>
