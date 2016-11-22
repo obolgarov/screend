@@ -36,6 +36,16 @@ var EditProfile = React.createClass({
 
                 for (var item of profile) {
 
+
+                        var name = document.createElement("INPUT");
+                        name.setAttribute("type", "text");
+                        name.setAttribute("name", "profileName[]");
+                        name.setAttribute("value", item.name);
+                        document.getElementById("name").appendChild(name);
+                        document.getElementById("name").appendChild(document.createElement("br"));
+
+
+
                     for (var i = 0; i < item.employmentHistory.length; i++) {
 
                         var employField = document.createElement("INPUT");
@@ -127,6 +137,7 @@ var EditProfile = React.createClass({
         var pSKills = document.getElementsByName("pSkills[]");
         var tSkills = document.getElementsByName("tSkills[]");
         var years = document.getElementsByName("year[]");
+        var name = document.getElementsByName("profileName[]");
         //  console.log(history[1].value );\
 
         function getParameterByName(name, url) {
@@ -152,8 +163,16 @@ var EditProfile = React.createClass({
                 achievements: [],
                 employmentHistory: [],
                 professionalSkills: [],
-                technicalSkills: []
+                technicalSkills: [],
+                name : []
             }
+
+    for (var x = 0; x < name.length; x++) {
+            data.name.push({
+                name: name[x].value
+            });
+        }
+
 
         for (var x = 0; x < education.length; x++) {
             data.education.push({
@@ -225,6 +244,15 @@ var EditProfile = React.createClass({
                 <div className="row">
                     <div className="columns medium-9 large-9 small-centered">
                         <h2 style={font}>Edit Profile</h2>
+
+
+
+                        <div>
+                            <h4> Profile Name</h4>
+
+                            <label id="name"></label>
+
+                        </div>
 
                         <div>
                             <h3> Employment History</h3>

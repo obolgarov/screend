@@ -42,6 +42,13 @@ var ViewProfile = React.createClass({
 
          for(var item of profile){
 
+            var name = document.createTextNode(item.name);
+          document.getElementById("name").appendChild(name);
+          document.getElementById("name").appendChild(document.createElement("br"));
+
+
+
+
         for (var i = 0; i < item.employmentHistory.length; i++) {
          var EmploymentHistory = document.createTextNode(item.employmentHistory[i].name);
           document.getElementById("history").appendChild(EmploymentHistory);
@@ -171,11 +178,20 @@ var ViewProfile = React.createClass({
                     <div className="columns medium-9 large-9 small-centered">
                         <h2 style={font}>Profile</h2>
 
+
+
+                        <div>
+                            <h4> Profile Name</h4>
+
+                            <label id="name"></label>
+
+                        </div>
+
+
+
+
                         <div>
                             <h4> Employment History</h4>
-
-                                <div>
-
                             <label id="history"></label>
 
                         </div>
@@ -225,7 +241,6 @@ var ViewProfile = React.createClass({
                     </div>
                 </div>
             </div>
-          </div>
         );
     }
 });
