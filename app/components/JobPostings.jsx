@@ -15,6 +15,7 @@ var JobPostings = React.createClass({
     return {jobData: [], profiles: []};
   },
 
+  //WOrking copy
   // run after page loads, and performs an async request which will change state when finished
   componentDidMount: function() {
 
@@ -141,6 +142,7 @@ var JobPostings = React.createClass({
               </table>
             </div >
           </form>
+          
           <div className="columns medium-4 large-6 small-centered">
             <ul className="pagination" role="navigation" aria-label="Pagination">
               <li className="disabled">Previous

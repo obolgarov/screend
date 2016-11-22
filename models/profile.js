@@ -5,6 +5,7 @@ var mongoose = require('mongoose')
 
 var profileSchema = new mongoose.Schema( {
   owner: String,
+  name : String,
   education: [{
     name: String
   }],
