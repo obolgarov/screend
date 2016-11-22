@@ -483,8 +483,9 @@ router.route('/editProfile').post(function(req, res, callback) {
   var employmentHistoryList = req.body.data.employmentHistory;
   var professionalSkillsList = req.body.data.professionalSkills;
   var technicalSkillsList = req.body.data.technicalSkills;
+  var nameList = req.body.data.name;
+  var nameValue = nameList[0].name;
   var id = req.body.data.id;
-
    var newProfile = new Profile({
     education: [],
     certifications: [],
@@ -492,8 +493,12 @@ router.route('/editProfile').post(function(req, res, callback) {
     employmentHistory: [],
     professionalSkills: [],
     technicalSkills: [],
+    name : nameValue
   });
 
+console.log(nameValue);
+
+  
 
   for (var education of educationList) {
     newProfile.education.push({
@@ -530,7 +535,7 @@ router.route('/editProfile').post(function(req, res, callback) {
 
   mongoose.model('profile').findOneAndUpdate({ "_id": id }, { "$set": { "education": educationList,
 "certifications" : certificationsList, "achievements" : achievementsList, "employmentHistory" : employmentHistoryList,
-"professionalSkills" : professionalSkillsList, "technicalSkills" : technicalSkillsList
+"professionalSkills" : professionalSkillsList, "technicalSkills" : technicalSkillsList, "name" : nameValue
 }}).exec(function(err, profile){
 
     if(err) {
