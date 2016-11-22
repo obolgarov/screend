@@ -62,7 +62,7 @@ var JobPostings = React.createClass({
 
         for (var job of jsonData.jobRankings) {
           if (job.percent > 30){
-            jobData.push({jobTitle: job.jobName, companyName: job.companyName, jobID: job.jobID, ranking: job.percent});
+            jobData.push({jobTitle: job.jobName, companyName: job.companyName, jobID: job.jobID, ranking: Math.floor(job.percent * 100);});
           }
         }
 
