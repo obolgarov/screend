@@ -31,7 +31,7 @@ var JobPostings = React.createClass({
 
 
         for (var i = 0; i < jsonData.length; i++) {
-          profiles.push(jsonData[i]._id);
+          profiles.push({id: jsonData[i]._id, name:jsonData[i].name });
         }
 
         this.setState({profiles: profiles})
@@ -62,7 +62,8 @@ var JobPostings = React.createClass({
 
         for (var job of jsonData.jobRankings) {
           if (job.percent > 30){
-            jobData.push({jobTitle: job.jobName, companyName: job.companyName, jobID: job.jobID, ranking: Math.floor(job.percent * 100)});
+              jobData.push({jobTitle: job.jobName, companyName: job.companyName, jobID: job.jobID, ranking: Math.floor(job.percent * 100)/100
+              });
           }
         }
 
@@ -121,7 +122,7 @@ var JobPostings = React.createClass({
                   <option value="" disabled selected>...</option>
                   {this.state.profiles.map((result, key) => {
                     //console.log(result);
-                    return <option key={key} value={result}>{result}</option>
+                    return <option key={key} value={result.id}>{result.name}</option>
                   })}
                 </select>
               </div>
