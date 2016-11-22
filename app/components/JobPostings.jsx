@@ -31,7 +31,7 @@ var JobPostings = React.createClass({
 
 
         for (var i = 0; i < jsonData.length; i++) {
-          profiles.push(jsonData[i]._id);
+          profiles.push({id: jsonData[i]._id, name:jsonData[i].name });
         }
 
         this.setState({profiles: profiles})
@@ -122,7 +122,7 @@ var JobPostings = React.createClass({
                   <option value="" disabled selected>...</option>
                   {this.state.profiles.map((result, key) => {
                     //console.log(result);
-                    return <option key={key} value={result}>{result}</option>
+                    return <option key={key} value={result.id}>{result.name}</option>
                   })}
                 </select>
               </div>
