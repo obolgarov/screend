@@ -46,7 +46,7 @@ var EmployerPostings = React.createClass({
         var userData = {
             PostedBy: dataBlob
         }
-            
+
         var dataQuerystring = querystring.stringify(userData);
 
             var httpOptions = {
@@ -67,14 +67,14 @@ var EmployerPostings = React.createClass({
             var req = http.request(httpOptions, (res) => {
 
               var output = '';
-      
+
               res.on('data', (dataBlob) => {
                 output += dataBlob;
 
                 var jsonData = JSON.parse(output);
                 console.log(jsonData);
                      var jobData = [];
-    
+
                         for (var job of jsonData) {
                             jobData.push({
                                 jobTitle: job.JobTitle,
@@ -131,10 +131,16 @@ var EmployerPostings = React.createClass({
             return (
                 <div>
                     <Nav />
-                    <form ref='metric_results' onSubmit={this.onSubmit}>
+                      <div className="callout large primary">
+                        <div className="row column text-center">
+                          <h1>My Postings</h1>
+                        </div>
+                      </div>
+                    <div className="columns medium-4 large-6 small-centered">
+                    <form ref='metric_results' onSubmit={this.onSubmit} >
                         <div id='Content-Length'>
-                            <h2 style={font}>My Postings</h2>
-                            <table ref="jobsTable" style={Table} className="columns medium-4 large-6 small-centered" >
+
+                            <table ref="jobsTable" style={Table}  >
 
                                 <tbody>
                                     <tr>
@@ -163,6 +169,7 @@ var EmployerPostings = React.createClass({
                             </table>
                         </div>
                     </form>
+                  </div>
                 </div>
             )
         } else {
