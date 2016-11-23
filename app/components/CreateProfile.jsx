@@ -4,7 +4,6 @@ var config = require('../../config')(); // to get the port
 var qs = require('qs'); // to send data inside the request
 var Nav = require('Nav');
 var FileInput = require('react-file-input');
-
 var httpGen = require('./httpGen.js');
 
 var CreateProfileFields = require('./CreateProfileFields.jsx');
@@ -122,8 +121,8 @@ var CreateProfile = React.createClass({
     var data = {
       token: cookie.load('userToken')
     }
-      
-      var profileName = this.refs.profileName.value;
+
+    var profileName = this.refs.profileName.value;
 
     httpGen.generate({
       data: data,
@@ -133,7 +132,7 @@ var CreateProfile = React.createClass({
 
         var profileData = {
           username: data,
-          name : profileName,
+          name: profileName,
           education: this.state.education,
           certifications: this.state.certifications,
           achievements: this.state.achievements,
@@ -170,108 +169,89 @@ var CreateProfile = React.createClass({
 
     //console.log(resumeData);
 
-        var pathComponents = this.refs.resumeupload.value.split('\\'), fileName = pathComponents[pathComponents.length - 1];
+    var pathComponents = this.refs.resumeupload.value.split('\\'),
+      fileName = pathComponents[pathComponents.length - 1];
 
-    httpGen.generate({
+    var fileReader = new FileReader();
 
+    console.log(this.refs.resumeupload.files.length);
 
+    if (this.refs.resumeupload.files.length > 0) {
+      fileReader.readAsText(this.refs.resumeupload.files[0]);
+    } else {
+      // not file found
+    }
 
-      data: {
-        resume: fileName
-      },
-      path: "/profile/uploadResume",
-      method: "POST",
-      onData: (data) => {
-        //var jsonData = JSON.parse(data);
+    fileReader.onload = (event) => {
 
-        // do something with jsonData if needed
-        //console.log("test");
-        var JSONData = JSON.parse(data);
+      var fileString = event.target.result;
 
-        if(!this.state.technicalSkills[0].locked){
-          this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
-        }
-        for (var skill of JSONData.technicalSkills){
-          this.state.technicalSkills.push({
-            id: generateRandomID(),
-            name: skill.skill,
-            years: skill.years,
-            locked: true,
-            data: 0
-          });
-        }
+      httpGen.generate({
 
-        if(!this.state.employmentHistory[0].locked){
-          this.deleteTechnicalSkillField(this.state.employmentHistory[0].id);
-        }
-        for(var emp of JSONData.employmentHistory){
-          this.state.employmentHistory.push({
-            id: generateRandomID(),
-            name : emp,
-            locked: true,
-            data:0
-          })
-        }
+        data: {
+          resume: fileString
+        },
+        path: "/profile/uploadResume",
+        method: "POST",
+        onData: (data) => {
+          //var jsonData = JSON.parse(data);
 
-        if(!this.state.education[0].locked){
-          this.deleteEducationField(this.state.education[0].id);
-        }
-        for(var edu of JSONData.education)
-        {
-          if(edu != null){
-            this.state.education.push({
-              id: generateRandomID(),
-              name : edu,
-              location:true,
-              data:0
-            })
+          // do something with jsonData if needed
+          //console.log("test");
+          var JSONData = JSON.parse(data);
+
+          if (!this.state.technicalSkills[0].locked) {
+            this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
           }
-        }
+          for (var skill of JSONData.technicalSkills) {
+            this.state.technicalSkills.push({id: generateRandomID(), name: skill.skill, years: skill.years, locked: true, data: 0});
+          }
 
-        if(!this.state.certifications[0].locked){
-          this.deleteCertificationField(this.state.certifications[0].id);
-        }
-        for(var cert of JSONData.certifications){
-          this.state.certifications.push({
-            id: generateRandomID(),
-            name : cert,
-            locked: true,
-            data:0
-          })
-        }
+          if (!this.state.employmentHistory[0].locked) {
+            this.deleteTechnicalSkillField(this.state.employmentHistory[0].id);
+          }
+          for (var emp of JSONData.employmentHistory) {
+            this.state.employmentHistory.push({id: generateRandomID(), name: emp, locked: true, data: 0})
+          }
 
-        if(!this.state.achievements[0].locked){
-          this.deleteAchievementField(this.state.achievements[0].id);
-        }
-        for(var achiev of JSONData.achievements){
-          this.state.achievements.push({
-            id: generateRandomID(),
-            name : achiev,
-            locked: true,
-            data:0
-          })
-        }
+          if (!this.state.education[0].locked) {
+            this.deleteEducationField(this.state.education[0].id);
+          }
+          for (var edu of JSONData.education) {
+            if (edu != null) {
+              this.state.education.push({id: generateRandomID(), name: edu, location: true, data: 0})
+            }
+          }
 
-        if(!this.state.professionalSkills[0].locked){
-          this.deleteProfessionalSkillField(this.state.professionalSkills[0].id);
+          if (!this.state.certifications[0].locked) {
+            this.deleteCertificationField(this.state.certifications[0].id);
+          }
+          for (var cert of JSONData.certifications) {
+            this.state.certifications.push({id: generateRandomID(), name: cert, locked: true, data: 0})
+          }
+
+          if (!this.state.achievements[0].locked) {
+            this.deleteAchievementField(this.state.achievements[0].id);
+          }
+          for (var achiev of JSONData.achievements) {
+            this.state.achievements.push({id: generateRandomID(), name: achiev, locked: true, data: 0})
+          }
+
+          if (!this.state.professionalSkills[0].locked) {
+            this.deleteProfessionalSkillField(this.state.professionalSkills[0].id);
+          }
+          for (var prof of JSONData.professionalSkills) {
+            this.state.professionalSkills.push({id: generateRandomID(), name: prof, locked: true, data: 0});
+          }
+
+          this.setState(this.state);
+
+        },
+        onError: (error) => {
+          console.err(error.message);
         }
-        for(var prof of JSONData.professionalSkills){
-          this.state.professionalSkills.push({
-            id: generateRandomID(),
-            name : prof,
-            locked: true,
-            data:0
-          });
-        }
-
-        this.setState(this.state);
-
-      },
-      onError: (error) => {
-        console.err(error.message);
-      }
-    });
-
+      });
+    }
 
   },
 
@@ -647,7 +627,7 @@ var CreateProfile = React.createClass({
     var button = {
       margin: "30px 00px 30px 00px"
     };
-  
+
     var font = {
       fontFamily: "Quicksand, sans-serif",
       marginTop: "150px"
@@ -666,17 +646,20 @@ var CreateProfile = React.createClass({
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
           </form>
           <form ref="profile">
-         
-           <div>
-              <label> <h3> Name: </h3></label>
-                <input type="text" name="profileName" ref="profileName"/>
-          </div>
+
+            <div>
+              <label>
+                <h3>
+                  Name:
+                </h3>
+              </label>
+              <input type="text" name="profileName" ref="profileName"/>
+            </div>
 
             <h3>Education</h3>
-            {
-              // map passes individual elements into the first param, and their index into the second, which is used as the React key
-              this.state.education.map((result, key) => {
-                return <EducationEntry key={key} entry={result} updateState={this.updateEducation} updateText={this.updateEducationText} deleteField={this.deleteEducationField}/>
+            {// map passes individual elements into the first param, and their index into the second, which is used as the React key
+            this.state.education.map((result, key) => {
+              return <EducationEntry key={key} entry={result} updateState={this.updateEducation} updateText={this.updateEducationText} deleteField={this.deleteEducationField}/>
             })}
             <input type="button" onClick={this.addEducation} value="+"/>
 
@@ -714,12 +697,14 @@ var CreateProfile = React.createClass({
             <h3>Profile Settings
             </h3>
             <table>
-              <tr>
-                <td><input type="radio" name="Publicity" value={"Public"} onChange={this.onChanged}/>Public</td>
-              </tr>
-              <tr>
-                <td><input type="radio" name="Publicity" value={"Private"} onChange={this.onChanged}/>Private</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td><input type="radio" name="Publicity" value={"Public"} onChange={this.onChanged}/>Public</td>
+                </tr>
+                <tr>
+                  <td><input type="radio" name="Publicity" value={"Private"} onChange={this.onChanged}/>Private</td>
+                </tr>
+              </tbody>
             </table>
 
             <input type="submit" value="SubmitProfile" ref="submitProfileButton" name="submitProfileButton" className="button hollow" style={button} onClick={this.handleSubmit}></input>
