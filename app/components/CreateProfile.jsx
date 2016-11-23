@@ -5,7 +5,6 @@ var qs = require('qs'); // to send data inside the request
 var Nav = require('Nav');
 var FileInput = require('react-file-input');
 var httpGen = require('./httpGen.js');
-
 var CreateProfileFields = require('./CreateProfileFields.jsx');
 
 import cookie from 'react-cookie';
@@ -177,7 +176,7 @@ var CreateProfile = React.createClass({
     console.log(this.refs.resumeupload.files.length);
 
     if (this.refs.resumeupload.files.length > 0) {
-      fileReader.readAsText(this.refs.resumeupload.files[0]);
+      fileReader.readAsDataURL(this.refs.resumeupload.files[0]);
     } else {
       // not file found
     }
@@ -185,7 +184,9 @@ var CreateProfile = React.createClass({
     fileReader.onload = (event) => {
 
       var fileString = event.target.result;
+      var file = this.refs.resumeupload.files[0].name;
 
+      console.log(fileString);
       httpGen.generate({
 
         data: {
@@ -641,7 +642,7 @@ var CreateProfile = React.createClass({
 
           <h2 style={font}>Create Profile</h2>
 
-          <form ref="resume" encType="multipart/form-data" onSubmit={this.uploadResume} action="/profile/uploadResume" method="POST">
+          <form ref="resume" encType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" onSubmit={this.uploadResume} action="/profile/uploadResume" method="POST">
             <input type="file" id="resume" name="resume" ref="resumeupload"></input>
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
           </form>
