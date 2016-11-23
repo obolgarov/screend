@@ -176,8 +176,10 @@ var CreateProfile = React.createClass({
     console.log(this.refs.resumeupload.files.length);
 
     if (this.refs.resumeupload.files.length > 0) {
-      fileReader.readAsDataURL(this.refs.resumeupload.files[0]);
-    } else {
+      //fileReader.readAsDataURL(this.refs.resumeupload.files[0]);
+      fileReader.readAsText(this.refs.resumeupload.files[0]);
+  
+  } else {
       // not file found
     }
 
@@ -185,8 +187,8 @@ var CreateProfile = React.createClass({
 
       var fileString = event.target.result;
       var file = this.refs.resumeupload.files[0].name;
+  
 
-      console.log(fileString);
       httpGen.generate({
 
         data: {
