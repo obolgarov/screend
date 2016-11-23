@@ -205,8 +205,8 @@ var CreateProfile = React.createClass({
           }
           for (var skill of JSONData.technicalSkills) {
             this.state.technicalSkills.push({id: generateRandomID(), name: skill.skill, years: skill.years, locked: true, data: 0});
-          }
 
+          }
           if (!this.state.employmentHistory[0].locked) {
             this.deleteTechnicalSkillField(this.state.employmentHistory[0].id);
           }
@@ -642,9 +642,10 @@ var CreateProfile = React.createClass({
           <h2 style={font}>Create Profile</h2>
 
           <form ref="resume" encType="multipart/form-data" onSubmit={this.uploadResume} action="/profile/uploadResume" method="POST">
-            <input type="file" name="resume" ref="resumeupload"></input>
+            <input type="file" id="resume" name="resume" ref="resumeupload"></input>
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
           </form>
+
           <form ref="profile">
 
             <div>
@@ -705,6 +706,7 @@ var CreateProfile = React.createClass({
                   <td><input type="radio" name="Publicity" value={"Private"} onChange={this.onChanged}/>Private</td>
                 </tr>
               </tbody>
+
             </table>
 
             <input type="submit" value="SubmitProfile" ref="submitProfileButton" name="submitProfileButton" className="button hollow" style={button} onClick={this.handleSubmit}></input>

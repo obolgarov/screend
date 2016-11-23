@@ -51,6 +51,8 @@ router.route('/')
     var username = req.body.username;
     var password = req.body.password;
 
+
+
     mongoose.model('admin').findOne({
       username : username,
       password : password
