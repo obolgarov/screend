@@ -33,6 +33,7 @@ var EditProfile = require('EditProfile');
 var ProfileSearch = require('ProfileSearch');
 var ProfileSearchResults = require('ProfileSearchResults');
 var EmployerViewProfile = require('EmployerViewProfile');
+var RankingResults= require('RankingResults');
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
 
@@ -71,6 +72,7 @@ ReactDOM.render(
   <Route path="ProfileSearchResults" components={ProfileSearchResults}/>
   <Route path="EditProfile" components={EditProfile}/>
   <Route path="EmployerViewProfile" components={EmployerViewProfile}/>
+  <Route path="RankingResults" components={RankingResults}/>
   <IndexRoute component={Welcome}/>
   </Route>
 </Router>,

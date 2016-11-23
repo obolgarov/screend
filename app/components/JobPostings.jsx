@@ -5,6 +5,8 @@ var querystring = require('querystring'); // to send data inside the request
 var i = 0;
 import {hashHistory} from 'react-router';
 var Nav = require('Nav');
+import cookie from 'react-cookie';
+var Cookies = require('js-cookie')
 
 var httpGen = require('./httpGen.js');
 
@@ -56,6 +58,8 @@ var JobPostings = React.createClass({
       onData: (data) => {
 
         var jsonData = JSON.parse(data);
+      //  sessionStorage.setItem('detailedResults', JSON.stringify(jsonData));
+        Cookies.set('ranking', jsonData,{ expires: 10 });
 
         var jobData = [];
 
@@ -102,8 +106,10 @@ var JobPostings = React.createClass({
     var Table = {
       margin: "30px"
     };
+                
 
     return (
+
 
       <div>
         <Nav/>
@@ -135,17 +141,22 @@ var JobPostings = React.createClass({
                       Job ID
                     </td>
                     <td>
-                      Qaulified
+                      Qualified
                     </td>
+                    <td>
+                      View Detailed Results
+                    </td>
+                  
+
                   </tr >
                   {
-                    this.state.jobData.map(function(data) {
 
+                                    
+
+                    this.state.jobData.map(function(data) {  
 
                       var link = "/#/JobDescription?id=" + data.jobID;
-                      console.log(link);
-
-
+                      var link2 = "/#/RankingResults?id=" + data.jobID;
                       return (
                         <tr>
                           <td>
@@ -154,10 +165,13 @@ var JobPostings = React.createClass({
                           <td>{data.companyName}</td>
                           <td>{data.jobID}</td>
                           <td>{data.ranking}</td>
+                          <td> <a href={link2}>View Results </a></td>
                         </tr>
                       );
                     })
-                  }
+                  
+                }
+                  
                 </tbody>
               </table>
             </div >

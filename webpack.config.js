@@ -56,7 +56,8 @@ plugins:[
       EditProfile : 'app/components/EditProfile.jsx',
       ProfileSearch : 'app/components/ProfileSearch.jsx',
       ProfileSearchResults : 'app/components/ProfileSearchResults.jsx',
-      EmployerViewProfile : 'app/components/EmployerViewProfile.jsx'
+      EmployerViewProfile : 'app/components/EmployerViewProfile.jsx',
+      RankingResults : 'app/components/RankingResults.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },
