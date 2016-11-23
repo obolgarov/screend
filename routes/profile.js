@@ -7,6 +7,8 @@ var extract = require('extract-zip')
 var fs = require('fs');
 var xml2js = require('xml2js');
 var jwt = require('jsonwebtoken');
+var multer = require("multer");
+var upload = multer({dest: 'uploads/' })
 
 module.exports = router;
 
@@ -159,9 +161,9 @@ router.route('/')
 router.route('/uploadResume').post((req, res) => {
   //var resume = req.body.data.resume;
   var userToken = req.body.token;
-  var filename = req.body.data.resume;
+  var fileString = req.body.data.resume;
 
-  console.log(filename);
+  console.log(fileString);
   //console.log(resume);
   //console.log(req.body);
   //console.log("uploaded");
@@ -402,7 +404,7 @@ router.route('/uploadResume').post((req, res) => {
         }
       }
 
-      console.log(sortedItems);
+      //console.log(sortedItems);
 
       res.format({
         json: function () {
@@ -498,7 +500,7 @@ router.route('/editProfile').post(function(req, res, callback) {
 
 console.log(nameValue);
 
-  
+
 
   for (var education of educationList) {
     newProfile.education.push({

@@ -60,6 +60,11 @@ var httpGen = {
 
     req.end();
 
+  },
+
+  getToken: function() {
+    var userToken = cookie.load('userToken');
+    return userToken;
   }
 
 }
