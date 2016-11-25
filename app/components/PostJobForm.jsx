@@ -47,89 +47,100 @@ var PostJobForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
 
+    if (this.refs.jobtitle.value != '' && this.refs.companyform.value != '' 
+   && this.refs.location.value != '' && this.refs.certification.value != ''
+   && this.refs.requirededucation.value !='' && this.refs.salary.value !='' 
+   && this.refs.description.value !='' && this.refs.instructions.value !='') {
 
-    var data = { token: cookie.load('userToken') }
 
-    var dataQuerystring = querystring.stringify(data);
+      var data = { token: cookie.load('userToken') }
 
-    var username = "";
+      var dataQuerystring = querystring.stringify(data);
 
-    var httpOptions = {
-      port: config.port,
-      path: "/messages/decode",
-      method: "POST", // insert data
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': Buffer.byteLength(dataQuerystring),
-        'Accept': 'application/json'
-      },
-      body: dataQuerystring
+      var username = "";
 
+      var httpOptions = {
+        port: config.port,
+        path: "/messages/decode",
+        method: "POST", // insert data
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(dataQuerystring),
+          'Accept': 'application/json'
+        },
+        body: dataQuerystring
+
+      }
+
+      var req = http.request(httpOptions, (res) => {
+        res.on('data', (dataBlob) => {
+
+          console.log(dataBlob);
+
+
+          var data = {
+            JobTitle: this.refs.jobtitle.value,
+            CompanyName: this.refs.companyform.value,
+            Location: this.refs.location.value,
+            Certification: this.refs.certification.value,
+            Requirededucation: this.refs.requirededucation.value,
+            Salary: this.refs.salary.value,
+            Description: this.refs.description.value,
+            Skills: this.state.data,
+            PostedBy: dataBlob,
+            Instructions: this.refs.instructions.value
+          }
+          console.log(data.PostedBy);
+
+
+
+          var dataQuerystring = querystring.stringify(data);
+          console.log(dataQuerystring);
+
+          var httpOptions = {
+            port: config.port,
+            path: "/job",
+            method: "POST", // insert data // change to get
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Content-Length': Buffer.byteLength(dataQuerystring),
+              'Accept': 'application/json'
+            }
+          };
+
+          //console.log("sending");
+
+          var req = http.request(httpOptions, (res) => {
+            res.on('data', (dataBlob) => {
+              var obj = JSON.parse(output);
+            });
+          });
+
+          req.on('error', function (err) {
+            res.send('error: ' + err.message);
+          })
+
+          req.write(dataQuerystring);
+
+          req.end();
+          hashHistory.push("Home");
+
+
+        });
+      });
+
+      req.on('error', function (err) {
+        res.send('error: ' + err.message);
+      })
+
+      req.write(dataQuerystring);
+
+      req.end();
     }
 
-    var req = http.request(httpOptions, (res) => {
-      res.on('data', (dataBlob) => {
-
-        console.log(dataBlob);
-
-        var data = {
-          JobTitle: this.refs.jobtitle.value,
-          CompanyName: this.refs.companyform.value,
-          Location: this.refs.location.value,
-          Certification: this.refs.certification.value,
-          Requirededucation: this.refs.requirededucation.value,
-          Salary: this.refs.salary.value,
-          Description: this.refs.description.value,
-          Skills: this.state.data,
-          PostedBy: dataBlob,
-          Instructions: this.refs.instructions.value
-        }
-        console.log(data.PostedBy);
-
-
-        var dataQuerystring = querystring.stringify(data);
-        console.log(dataQuerystring);
-
-        var httpOptions = {
-          port: config.port,
-          path: "/job",
-          method: "POST", // insert data // change to get
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': Buffer.byteLength(dataQuerystring),
-            'Accept': 'application/json'
-          }
-        };
-
-        //console.log("sending");
-
-        var req = http.request(httpOptions, (res) => {
-          res.on('data', (dataBlob) => {
-            var obj = JSON.parse(output);
-          });
-        });
-
-        req.on('error', function (err) {
-          res.send('error: ' + err.message);
-        })
-
-        req.write(dataQuerystring);
-
-        req.end();
-        hashHistory.push("Home");
-
-
-      });
-    });
-
-    req.on('error', function (err) {
-      res.send('error: ' + err.message);
-    })
-
-    req.write(dataQuerystring);
-
-    req.end();
-
+    else {
+      alert('Error : Please Check Your Fields')
+    }
 
   },
 
@@ -310,11 +321,11 @@ var PostJobForm = React.createClass({
       <div>
         <Nav />
 
-          <div className="callout large primary">
-            <div className="row column text-center">
-              <h1>Job Form</h1>
-            </div>
+        <div className="callout large primary">
+          <div className="row column text-center">
+            <h1>Job Form</h1>
           </div>
+        </div>
         <form ref='Job_form' method="Post" onSubmit={this.handleSubmit} className="columns medium-4 large-6 small-centered">
 
           <div>
