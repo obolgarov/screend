@@ -8,6 +8,12 @@ import { hashHistory } from 'react-router';
 var RegEmployer = React.createClass({
 
     onSubmit: function(e) {
+
+ if (this.refs.first.value != '' && this.refs.last.value != '' && this.refs.email.value != '' &&  this.refs.user.value != '' && this.refs.password.value 
+    != '' && this.refs.confirmPassword.value != null && this.refs.companyName.value != '' && this.refs.companyAddress.value != '' && 
+    this.refs.industry.value != '' &&  this.refs.attributes.value != '')
+    {
+
         var data = {
             firstName: this.refs.first.value,
             lastName: this.refs.last.value,
@@ -24,7 +30,7 @@ var RegEmployer = React.createClass({
         var dataQuerystring = querystring.stringify(data);
         if(data.userPass != data.confirmPassword)
         {
-            console.log("Do not match");
+           alert('Error : Passwords Do Not Match') 
 
         }
         else {
@@ -41,13 +47,8 @@ var RegEmployer = React.createClass({
               body: dataQuerystring
           }
 
-          console.log("body: " + JSON.stringify(data));
-
-          console.log("sending");
-
           var req = http.request(exists, function(res) {
 
-              console.log("sent");
 
               // res now contains new applicant data already inserted
               var output = '';
@@ -55,7 +56,6 @@ var RegEmployer = React.createClass({
 
               res.on('data', function(dataBlob) {
                   output += dataBlob;
-                  console.log("output: " + output);
 
                   var parse = JSON.parse(output);
 
@@ -77,22 +77,15 @@ var RegEmployer = React.createClass({
                           body: dataQuerystring
                       }
 
-                      console.log("body: " + JSON.stringify(data));
-
-                      console.log("sending");
 
                       var req = http.request(httpOptions, function(res) {
 
-                          console.log("sent");
 
                           // res now contains new applicant data already inserted
                           var output = '';
-                         //console.log(options.path + ':' + res.satusCode);
-                        //res.setEncoding('utf8');
 
                           res.on('data', function(dataBlob) {
                               output += dataBlob;
-                              console.log("output: " + output);
                           });
 
                           res.on('end', function() {
@@ -122,16 +115,13 @@ var RegEmployer = React.createClass({
                         }
                       }
 
-                      console.log("sending");
 
                       var req = http.request(httpThanks, function(res){
 
-                        console.log("sent");
                         var output = '';
 
                         res.on('data', function (dataBlob){
                           output += dataBlob;
-                          console.log("output: " + output);
 
                         });
                         res.on('end', function() {
@@ -173,7 +163,12 @@ var RegEmployer = React.createClass({
 
         }
 
+    }
+    else
+    {
+              alert('Error : Please Complete the Registration Process ')
 
+    }
 
         },
 

@@ -10,6 +10,9 @@ var RegSeeker = React.createClass({
 
   onSubmit: function(e) {
 
+    if (this.refs.first.value != '' && this.refs.last.value != '' && this.refs.email.value != '' &&  this.refs.user.value != '' && this.refs.password.value 
+    != '' && this.refs.confirmPassword.value != null)
+    {
     var data = {
       firstname: this.refs.first.value,
       lastname: this.refs.last.value,
@@ -21,8 +24,8 @@ var RegSeeker = React.createClass({
 
     var dataQuerystring = querystring.stringify(data);
     if (data.password != data.confirmPassword) {
-      console.log("Do not match");
-
+      alert('Passwords Do Not Match');
+      
     } else {
 
       var exists = {
@@ -37,20 +40,16 @@ var RegSeeker = React.createClass({
         body: dataQuerystring
       }
 
-      console.log("body: " + JSON.stringify(data));
 
-      console.log("sending");
 
       var req = http.request(exists, function(res) {
 
-        console.log("sent");
 
         // res now contains new applicant data already inserted
         var output = '';
 
         res.on('data', function(dataBlob) {
           output += dataBlob;
-          console.log("output: " + output);
 
           var parse = JSON.parse(output);
 
@@ -70,13 +69,10 @@ var RegSeeker = React.createClass({
               body: dataQuerystring
             }
 
-            console.log("body: " + JSON.stringify(data));
 
-            console.log("sending");
 
             var req = http.request(httpOptions, function(res) {
 
-              console.log("received response");
 
               // res now contains new applicant data already inserted
               var output = '';
@@ -85,7 +81,6 @@ var RegSeeker = React.createClass({
 
               res.on('data', function(dataBlob) {
                 output += dataBlob;
-                console.log("output: " + output);
               });
 
               res.on('end', function() {
@@ -116,11 +111,9 @@ var RegSeeker = React.createClass({
               }
             }
 
-            console.log("sending");
 
             var req = http.request(httpThanks, function(res) {
 
-              console.log("received response");
               var output = '';
 
               res.on('data', function(dataBlob) {
@@ -165,6 +158,12 @@ var RegSeeker = React.createClass({
         hashHistory.push("Login");
     }
 
+    }
+    else
+    {
+      alert('Error : Please Complete the Registration Process ')
+    }
+  
   },
 
   render: function() {
