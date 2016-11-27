@@ -151,13 +151,29 @@ var jobDescription = React.createClass({
     var jobId = document.getElementsByName("id");
     var job_id = jobId[0].innerHTML;
 
-    var profileId = document.getElementsByName("resume");
-    var profile_id = profiles[0].value
+    var profiles = document.getElementById('profiles');
+    
+      function getParameterByName(name, url) {
+
+            if (!url) {
+                url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var rank = getParameterByName('rank');
+
 
     var data =
     {
       job : job_id,
-      profile : profile_id
+      profile : profiles[profiles.selectedIndex].value,
+      rank : rank
     }
 
 

@@ -156,7 +156,7 @@ var JobPostings = React.createClass({
 
                     this.state.jobData.map(function(data) {  
 
-                      var link = "/#/JobDescription?id=" + data.jobID;
+                      var link = "/#/JobDescription?id=" + data.jobID + "&?rank=" + data.ranking;
                       var link2 = "/#/RankingResults?id=" + data.jobID + "&?profile=" + this.refs.profileSelect.value;
 
 

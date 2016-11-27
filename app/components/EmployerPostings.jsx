@@ -147,6 +147,7 @@ var EmployerPostings = React.createClass({
                                         <td> Job Name </td>
                                         <td> Company Name</td>
                                         <td> Job ID </td>
+                                        <td> View Applicants </td>
                                         <td> Delete </td>
                                     </tr>
                                     {
@@ -155,11 +156,13 @@ var EmployerPostings = React.createClass({
 
                                             var link = "/#/JobDescription?id=" + data.jobID;
                                             var deleteLink = "/#/HandleDelete?id=" + data.jobID;
+                                            var link2 = "/#/ViewApplicants?id=" + data.jobID;
                                             return (
                                                 <tr>
                                                     <td><a href={link}>{data.jobTitle}</a></td>
                                                     <td>{data.companyName}</td>
                                                     <td>{data.jobID}</td>
+                                                    <td> <a href={link2}> View Applicants</a></td>
                                                     <td><a href={deleteLink}>Delete Job </a> </td>
                                                 </tr>
                                             );
