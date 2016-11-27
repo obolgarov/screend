@@ -113,12 +113,15 @@ render: function(){
     margin : "30px 00px 30px 00px"
   };
 
+  var space = {
+    margin : "100px 00px 00px 00px"
+  }
   return(
 
-<div>
-  <h2>Password Reset - Job Seeker</h2>
+<div className="columns medium-4 large-6 small-centered">
+  <h2 style={space}>Password Reset - Job Seeker</h2>
 
-    <form ref='reset' onSubmit={this.onSubmit}>
+    <form ref='reset' onSubmit={this.onSubmit} >
 
 
         <div>

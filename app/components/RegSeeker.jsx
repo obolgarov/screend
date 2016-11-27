@@ -11,7 +11,7 @@ var RegSeeker = React.createClass({
 
   onSubmit: function(e) {
 
-    if (this.refs.first.value != '' && this.refs.last.value != '' && this.refs.email.value != '' &&  this.refs.user.value != '' && this.refs.password.value 
+    if (this.refs.first.value != '' && this.refs.last.value != '' && this.refs.email.value != '' &&  this.refs.user.value != '' && this.refs.password.value
     != '' && this.refs.confirmPassword.value != null)
     {
     var data = {
@@ -26,7 +26,7 @@ var RegSeeker = React.createClass({
     var dataQuerystring = querystring.stringify(data);
     if (data.password != data.confirmPassword) {
       alert('Passwords Do Not Match');
-      
+
     } else {
 
       var exists = {
@@ -164,7 +164,7 @@ var RegSeeker = React.createClass({
     {
       alert('Error : Please Complete the Registration Process ')
     }
-  
+
   },
 
   render: function() {
@@ -176,8 +176,13 @@ var RegSeeker = React.createClass({
     return (
       <div>
       <RegNav/>
-        <h2>Register Account - Job Seeker</h2>
 
+          <div className="callout large primary">
+            <div className="row column text-center">
+              <h1>Register Account - Job Seeker</h1>
+            </div>
+          </div>
+        <div className="columns medium-4 large-6 small-centered">
         <form ref='user_form' onSubmit={this.onSubmit}>
           <div>
             <label>First Name:
@@ -223,6 +228,7 @@ var RegSeeker = React.createClass({
         <div>
           <Link to="/Login">Back</Link>
         </div>
+      </div>
 
       </div>
     );
@@ -230,4 +236,3 @@ var RegSeeker = React.createClass({
 });
 
 module.exports = RegSeeker;
-

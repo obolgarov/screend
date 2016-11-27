@@ -84,8 +84,14 @@ var MyProfiles = React.createClass({
         return (
           <div>
               <Nav/>
+
+                <div className="callout large primary">
+                  <div className="row column text-center">
+                    <h1>Profiles</h1>
+                  </div>
+
+                </div>
               <div className="columns medium-9 large-9 small-centered">
-              <h2 style={font}>My Profiles</h2>
 
             <form ref='metric_results' onSubmit={this.onSubmit}>
               <div id='Content-Length'>
@@ -108,15 +114,12 @@ var MyProfiles = React.createClass({
                       </div>
 
 
-                        //   <tr>
-                        //     <td><a href={link}>View Profile</a></td>
-                        //
-                        // </tr>
+
                         )
                       })
                     }
                   </tbody>
-                        <p>Click on a profile to View, Edit or Delete Your Profile</p> 
+                        <p>Click on a profile to View, Edit or Delete Your Profile</p>
 
                 </div>
               </div>

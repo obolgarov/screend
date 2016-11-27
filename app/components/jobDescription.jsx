@@ -82,13 +82,10 @@ var jobDescription = React.createClass({
 
 
         for (var i = 0; i < job.Skills.length; i++) {
-          var Skills = document.createTextNode(job.Skills[i].SkillName);
+          var Skills = document.createTextNode(job.Skills[i].SkillName + " : " + job.Skills[i].Experience + "yrs");
           document.getElementById("skills").appendChild(Skills);
           document.getElementById("skills").appendChild(document.createElement("br"));
 
-          var Experience = document.createTextNode(job.Skills[i].Experience);
-          document.getElementById("skills").appendChild(Experience);
-          document.getElementById("skills").appendChild(document.createElement("br"));
         }
 
         var instructions = document.createTextNode(job.Instructions);
@@ -121,14 +118,21 @@ var jobDescription = React.createClass({
         for (var item of jsonOutput) {
           nameList.push(item.name);
         }
+                var idList = [];
+
+          for (var item of jsonOutput) {
+          idList.push(item._id);
+        }
+
 
         var select = document.getElementById('profiles');
 
         for (var i = 0; i < nameList.length; i++) {
           var opt = document.createElement('option');
-          
+
           opt.value = nameList[i];
           opt.setAttribute("name", "resume");
+          opt.setAttribute("value", idList[i]);
           opt.innerHTML = nameList[i];
           select.appendChild(opt);
 
@@ -145,10 +149,48 @@ var jobDescription = React.createClass({
 
   applyJob: function (event) {
     var jobId = document.getElementsByName("id");
-    console.log(jobId[0].innerHTML);
+    var job_id = jobId[0].innerHTML;
 
-    var profileId = document.getElementsByName("resume");
-    console.log(profile[0].innerHTML);
+    var profiles = document.getElementById('profiles');
+    
+      function getParameterByName(name, url) {
+
+            if (!url) {
+                url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var rank = getParameterByName('rank');
+
+
+    var data =
+    {
+      job : job_id,
+      profile : profiles[profiles.selectedIndex].value,
+      rank : rank
+    }
+
+
+    httpGen.generate({
+          data: data,
+          path: "/apply",
+          method: "POST",
+          onData: (data) => {
+          //  var jsonData = JSON.parse(data);
+
+            // do something with jsonData if needed
+          },
+          onError: (error) => {
+            console.err(error.message);
+          }
+      });
+
   },
 
   render: function () {
@@ -156,60 +198,88 @@ var jobDescription = React.createClass({
       margin: "30px 00px 30px 00px"
     };
 
+    var wrapper = {
+    width: "500px",
+    overflow: "hidden" /* add this to contain floated children */
+    };
+
+    var first = {
+    width: "300px",
+    float:"left", /* add this */
+    };
+
+    var second  = {
+        float: "left"
+    };
 
 
     return (
       <div>
         <Nav />
-        <div className="columns medium-4 large-6 small-centered" >
 
+          <div className="callout large primary">
+            <div className="row column text-center">
+              <h1>Job Post</h1>
+            </div>
+          </div>
 
+        <div className="columns medium-20 large-6 small-centered" >
+
+      <div style={wrapper}>
+        <div style={first}>
           <div>
-            <h4>Job Id:</h4>
+            <h5>Job Id:</h5>
             <label id="jobId"></label>
           </div>
-
-          <div>
-            <h4>Job Title:</h4>
+          <div >
+            <h5>Job Title:</h5>
             <label id="jobtitle"></label>
           </div>
-
           <div>
-            <h4>Company Name:</h4>
+            <h5>Company Name:</h5>
             <label id="companyname"></label>
           </div>
+        </div>
+        <div style={second}>
+        <div>
+          <h5>Location:</h5>
+          <label id="location"></label>
+        </div>
 
-          <div>
-            <h4>Certification:</h4>
+        <div>
+          <h5>Salary:</h5>
+          <label id="salary"></label>
+        </div>
+      </div>
+    </div>
+
+
+   <div>
+      <h5>Description:</h5>
+      <p id="description"></p>
+   </div>
+
+
+    <div style={wrapper}>
+          <div style={first}>
+            <h5>Certification:</h5>
             <label id="certification"></label>
           </div>
-
-          <div>
-            <h4>Location:</h4>
-            <label id="location"></label>
-          </div>
-
-          <div>
-            <h4>Required Education:</h4>
-            <label id="requirededucation"></label>
-          </div>
-
-          <div>
-            <h4>Salary:</h4>
-            <label id="salary"></label>
-          </div>
-
-          <div>
-            <h4>Description:</h4>
-            <p id="description"></p>
-          </div>
-          <div>
-            <h4>Skills (Name and Experience):</h4>
+          <div style={second}>
+            <h5>Skills:</h5>
             <p id="skills"></p>
           </div>
+   </div>
+
+
+
 
           <div>
-            <h4>How to apply:</h4>
+            <h5>Required Education:</h5>
+            <label id="requirededucation"></label>
+          </div>
+          <div>
+            <h5>How to apply:</h5>
             <p id="instructions"></p>
           </div>
 

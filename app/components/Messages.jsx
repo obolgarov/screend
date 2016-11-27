@@ -87,8 +87,13 @@ var myCookie = cookie.load('userToken');
         return (
           <div>
               <Nav/>
-              <h2 style={font}>Messages</h2>
+                <div className="callout large primary">
+                  <div className="row column text-center">
+                    <h1>Messages</h1>
+                  </div>
 
+                </div>
+          <div className="columns medium-9 large-9 small-centered">
             <form ref='metric_results' onSubmit={this.onSubmit}>
               <div id='Content-Length'>
                 <table ref="messageTable">
@@ -116,6 +121,7 @@ var myCookie = cookie.load('userToken');
               </div>
             </form>
           </div>
+        </div>
         )
       } else {
         return (

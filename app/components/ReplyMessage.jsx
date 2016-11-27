@@ -101,7 +101,7 @@ var ReplyMessage = React.createClass({
             <div>
                 <Nav/>
 
-                <div>
+                <div className="columns medium-4 large-6 small-centered">
                     <h2>Reply To Message</h2>
                     <form ref='Reply' onSubmit={this.onSubmit}>
 

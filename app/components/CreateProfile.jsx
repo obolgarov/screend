@@ -201,7 +201,7 @@ var CreateProfile = React.createClass({
       //zip.TextReader(fileString);
 
 
-      /*httpGen.generate({
+      httpGen.generate({
 
         data: {
           resume: fileString
@@ -265,7 +265,7 @@ var CreateProfile = React.createClass({
         onError: (error) => {
           console.err(error.message);
         }
-      });*/
+      });
     }
 
   },
@@ -652,9 +652,16 @@ var CreateProfile = React.createClass({
       <div>
         <Nav/>
 
+          <div className="callout large primary">
+            <div className="row column text-center">
+              <h1>Create Profile</h1>
+            </div>
+
+          </div>
+
         <div ref="uploadForm" id="uploadFormId" className="columns medium-4 large-6 small-centered">
 
-          <h2 style={font}>Create Profile</h2>
+
 
           <form ref="resume" encType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" onSubmit={this.uploadResume} action="/profile/uploadResume" method="POST">
             <input type="file" id="resume" name="resume" ref="resumeupload"></input>
