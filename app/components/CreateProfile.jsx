@@ -222,7 +222,6 @@ var CreateProfile = React.createClass({
           //console.log("test");
           var JSONData = JSON.parse(data);
 
-          console.log(JSONData);
 
           if (!this.state.technicalSkills[0].locked) {
             this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
@@ -277,7 +276,7 @@ var CreateProfile = React.createClass({
       });
           // var text=doc.getFullText();
        // console.log(text);
-    });
+    }.bind(this));
 
     }
 
