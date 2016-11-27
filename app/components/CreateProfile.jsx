@@ -198,7 +198,7 @@ var CreateProfile = React.createClass({
 
     loadFile(fileString,function(err,content){
         var doc=new Docxgen(content);
-        console.log(doc.zip.files);
+        console.log(doc.zip.files["word/document.xml"]);
         var text=doc.getFullText();
         console.log(text);
     });
