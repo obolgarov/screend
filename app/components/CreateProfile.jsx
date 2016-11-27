@@ -178,7 +178,7 @@ var CreateProfile = React.createClass({
     if (this.refs.resumeupload.files.length > 0) {
       //fileReader.readAsDataURL(this.refs.resumeupload.files[0]);
       fileReader.readAsText(this.refs.resumeupload.files[0]);
-  
+
   } else {
       // not file found
     }
@@ -187,7 +187,7 @@ var CreateProfile = React.createClass({
 
       var fileString = event.target.result;
       var file = this.refs.resumeupload.files[0].name;
-  
+
 
       httpGen.generate({
 
@@ -640,9 +640,16 @@ var CreateProfile = React.createClass({
       <div>
         <Nav/>
 
+          <div className="callout large primary">
+            <div className="row column text-center">
+              <h1>Create Profile</h1>
+            </div>
+
+          </div>
+
         <div ref="uploadForm" id="uploadFormId" className="columns medium-4 large-6 small-centered">
 
-          <h2 style={font}>Create Profile</h2>
+
 
           <form ref="resume" encType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" onSubmit={this.uploadResume} action="/profile/uploadResume" method="POST">
             <input type="file" id="resume" name="resume" ref="resumeupload"></input>
