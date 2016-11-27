@@ -107,9 +107,16 @@ var EmployerViewProfile = React.createClass({
 
             <div>
                 <Nav />
+
+                  <div className="callout large primary">
+                    <div className="row column text-center">
+                      <h1>Applicant Profile</h1>
+                    </div>
+
+                  </div>
                 <div className="row">
                     <div className="columns medium-9 large-9 small-centered">
-                        <h2 style={font}>Profile</h2>
+
 
                         <div>
                             <h4> Employment History</h4>
