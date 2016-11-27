@@ -154,10 +154,9 @@ var jobDescription = React.createClass({
     var jobId = document.getElementsByName("id");
     var job_id = jobId[0].innerHTML;
 
-    var profileId = document.getElementsByName("resume");
-    var profile_id = profiles[0].value
-
-       function getParameterByName(name, url) {
+    var profiles = document.getElementById('profiles');
+    
+      function getParameterByName(name, url) {
 
             if (!url) {
                 url = window.location.href;
@@ -176,7 +175,7 @@ var jobDescription = React.createClass({
     var data = 
     {
       job : job_id,
-      profile : profile_id,
+      profile : profiles[profiles.selectedIndex].value,
       rank : rank
     }
 
