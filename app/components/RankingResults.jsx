@@ -29,14 +29,14 @@ var RankingResults = React.createClass({
 
     for (var job of results.jobRankings) {
 
-      
+
       if (job.jobID == id) {
 
-            var rank = document.createTextNode(job.percent + "%");
-          document.getElementById("rank").appendChild(rank);
+        var rank = document.createTextNode(job.percent + "%");
+        document.getElementById("rank").appendChild(rank);
 
-          var title = document.createTextNode(job.jobName + " at " + job.companyName);
-          document.getElementById("title").appendChild(title);
+        var title = document.createTextNode(job.jobName + " at " + job.companyName);
+        document.getElementById("title").appendChild(title);
 
         for (var i = 0; i < job.jobSkills.length; i++) {
           var skills = document.createTextNode(job.jobSkills[i].skillName);
@@ -58,7 +58,7 @@ var RankingResults = React.createClass({
     var profileId = getParameterByName('profile');
 
     var data = {
-      id : profileId
+      id: profileId
     }
 
     httpGen.generate({
@@ -68,17 +68,19 @@ var RankingResults = React.createClass({
       onData: (data) => {
 
         var jsonData = JSON.parse(data);
+        console.log(jsonData);
 
+        for (var item of jsonData) {
+          if (item._id == profileId) {
 
-         for(var item of jsonData){
-        for (var i = 0; i < item.technicalSkills.length; i++) {
-         var tSkills = document.createTextNode(item.technicalSkills[i].name + " - " + item.technicalSkills[i].years + " years");
-          document.getElementById("tSkills").appendChild(tSkills);
-          document.getElementById("tSkills").appendChild(document.createElement("br"));
-         }
-         
-        
-      }
+            for (var i = 0; i < item.technicalSkills.length; i++) {
+              var tSkills = document.createTextNode(item.technicalSkills[i].name + " - " + item.technicalSkills[i].years + " years");
+              document.getElementById("tSkills").appendChild(tSkills);
+              document.getElementById("tSkills").appendChild(document.createElement("br"));
+            }
+          }
+
+        }
 
       },
       onError: (error) => {
@@ -97,16 +99,16 @@ var RankingResults = React.createClass({
         <Nav />
 
         <h4>Your Rank</h4>
-          <td>
+        <td>
           <p id="rank"></p>
-          </td>
-        
-        <h4>Job Title</h4>
-          <div>
-          <p id="title"></p>
-          </div>
+        </td>
 
-        
+        <h4>Job Title</h4>
+        <div>
+          <p id="title"></p>
+        </div>
+
+
 
         <h4>Job Skills / Skill Percentage</h4>
 
@@ -137,14 +139,14 @@ var RankingResults = React.createClass({
         </table>
 
         <h4>Your Skills</h4>
-                  <td>
-                <p id="tSkills"></p>
+        <td>
+          <p id="tSkills"></p>
 
-              </td>
+        </td>
 
 
 
-<h4>Skill Cost Breakdown</h4>
+        <h4>Skill Cost Breakdown</h4>
         <p>
           The skill rankings are defined as follows :
         <br />
