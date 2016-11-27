@@ -5,6 +5,8 @@ var qs = require('qs'); // to send data inside the request
 var Nav = require('Nav');
 var FileInput = require('react-file-input');
 var httpGen = require('./httpGen.js');
+var JSZip = require('jszip');
+var zlib = require('zlib');
 var CreateProfileFields = require('./CreateProfileFields.jsx');
 
 import cookie from 'react-cookie';
@@ -168,28 +170,38 @@ var CreateProfile = React.createClass({
 
     //console.log(resumeData);
 
-    var pathComponents = this.refs.resumeupload.value.split('\\'),
-      fileName = pathComponents[pathComponents.length - 1];
+    var pathComponents = this.refs.resumeupload.value.split('\\');
+    var fileName = pathComponents[pathComponents.length - 1];
 
     var fileReader = new FileReader();
-
-    console.log(this.refs.resumeupload.files.length);
 
     if (this.refs.resumeupload.files.length > 0) {
       //fileReader.readAsDataURL(this.refs.resumeupload.files[0]);
       fileReader.readAsText(this.refs.resumeupload.files[0]);
-  
-  } else {
+
+    } else {
       // not file found
     }
+
+    console.log(this.refs.resumeupload.files.length);
 
     fileReader.onload = (event) => {
 
       var fileString = event.target.result;
       var file = this.refs.resumeupload.files[0].name;
-  
+      //console.log(fileString);
 
-      httpGen.generate({
+      var unzipper = new JSZip();
+
+      zlib.unzip(fileString, (err, data) => {
+        console.log(err);
+        console.log(data);
+      })
+
+      //zip.TextReader(fileString);
+
+
+      /*httpGen.generate({
 
         data: {
           resume: fileString
@@ -253,7 +265,7 @@ var CreateProfile = React.createClass({
         onError: (error) => {
           console.err(error.message);
         }
-      });
+      });*/
     }
 
   },
@@ -464,7 +476,7 @@ var CreateProfile = React.createClass({
       if (technicalSkill.id == fieldID) {
 
         var technicalSkillIndex = currentState.technicalSkills.indexOf(technicalSkill);
-        currentState.technicalSkills[technicalSkillIndex].year = event.target.value;
+        currentState.technicalSkills[technicalSkillIndex].years = event.target.value;
 
         break;
       }
