@@ -196,17 +196,22 @@ var CreateProfile = React.createClass({
         JSZipUtils.getBinaryContent(url,callback);
     }
 
+
     loadFile(fileString,function(err,content){
         var doc=new Docxgen(content);
-        console.log(doc.zip.files["word/document.xml"]);
-        var text=doc.getFullText();
-        console.log(text);
-    });
+        var string = new TextDecoder("utf-8").decode((doc.zip.files["word/document.xml"]._data.getCompressedContent()));
+
+        var st = doc.zip.files["word/document.xml"]._data.getContent();
+       var binaryString = String.fromCharCode.apply(null, new Uint8Array(st));
+
+
+   
+
 
       httpGen.generate({
 
         data: {
-          resume: file
+          resume: binaryString
         },
         path: "/profile/uploadResume",
         method: "POST",
@@ -268,6 +273,10 @@ var CreateProfile = React.createClass({
           console.err(error.message);
         }
       });
+          // var text=doc.getFullText();
+       // console.log(text);
+    });
+
     }
 
   },
