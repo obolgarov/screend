@@ -8,10 +8,11 @@ var httpGen = require('./httpGen.js');
 var JSZip = require('jszip');
 var zlib = require('zlib');
 var CreateProfileFields = require('./CreateProfileFields.jsx');
-
+var JSZipUtils = require('jszip-utils');
 import cookie from 'react-cookie';
 var Cookies = require('js-cookie')
 import {hashHistory} from 'react-router';
+var Docxgen = require('docxtemplater');
 
 // field components are stored in here to keep this file smaller
 var EducationEntry = CreateProfileFields.EducationEntry;
@@ -176,8 +177,8 @@ var CreateProfile = React.createClass({
     var fileReader = new FileReader();
 
     if (this.refs.resumeupload.files.length > 0) {
-      //fileReader.readAsDataURL(this.refs.resumeupload.files[0]);
-      fileReader.readAsText(this.refs.resumeupload.files[0]);
+      fileReader.readAsDataURL(this.refs.resumeupload.files[0]);
+      //fileReader.readAsText(this.refs.resumeupload.files[0]);
 
     } else {
       // not file found
@@ -188,23 +189,24 @@ var CreateProfile = React.createClass({
     fileReader.onload = (event) => {
 
       var fileString = event.target.result;
-      var file = this.refs.resumeupload.files[0].name;
+      var file = this.refs.resumeupload.files[0];
       //console.log(fileString);
 
-      var unzipper = new JSZip();
+     var loadFile=function(url,callback){
+        JSZipUtils.getBinaryContent(url,callback);
+    }
 
-      zlib.unzip(fileString, (err, data) => {
-        console.log(err);
-        console.log(data);
-      })
-
-      //zip.TextReader(fileString);
-
+    loadFile(fileString,function(err,content){
+        var doc=new Docxgen(content);
+        console.log(doc.zip.files);
+        var text=doc.getFullText();
+        console.log(text);
+    });
 
       httpGen.generate({
 
         data: {
-          resume: fileString
+          resume: file
         },
         path: "/profile/uploadResume",
         method: "POST",

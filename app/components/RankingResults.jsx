@@ -32,7 +32,7 @@ var RankingResults = React.createClass({
 
       if (job.jobID == id) {
 
-        var rank = document.createTextNode(job.percent + "%");
+        var rank = document.createTextNode(Math.floor(job.percent * 100)/100 + "%");
         document.getElementById("rank").appendChild(rank);
 
         var title = document.createTextNode(job.jobName + " at " + job.companyName);
