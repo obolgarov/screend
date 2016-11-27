@@ -148,7 +148,6 @@ var ProfessionalSkillEntry = React.createClass({
 
 var TechnicalSkillEntry = React.createClass({
   render: function() {
-    //console.log(this.props.entry)
     if (this.props.entry.locked) {
       return (
         <div key={this.props.key} style={styles.inputContainer}>
@@ -157,7 +156,7 @@ var TechnicalSkillEntry = React.createClass({
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateNameText.bind(null, this.props.entry.id)}/>
-          <input type="text" value={this.props.entry.years}
+          <input type="number" value={this.props.entry.years}
             style={styles.lockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateYearText.bind(null, this.props.entry.id)}/>
@@ -170,7 +169,7 @@ var TechnicalSkillEntry = React.createClass({
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateNameText.bind(null, this.props.entry.id)}/>
-          <input type="text" value={this.props.entry.years}
+          <input type="number" value={this.props.entry.years}
             style={styles.unlockedInput}
             onBlur={this.props.updateState.bind(null, this.props.entry.id)}
             onChange={this.props.updateYearText.bind(null, this.props.entry.id)}/>
@@ -180,7 +179,6 @@ var TechnicalSkillEntry = React.createClass({
   }
 });
 
-//console.log(TechnicalSkillEntry);
 
 module.exports = {
   EducationEntry: EducationEntry,

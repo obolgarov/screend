@@ -432,6 +432,24 @@ router.route('/rank').post(function(req, res, callback) {
                 for (var profileSkill of profile.technicalSkills) {
                   //console.log(jobSkill.skillName + " : " + profileSkill.name);
                   if (profileSkill.name == jobSkill.skillName){
+
+                    console.log("skill: " + profileSkill.name);
+
+                    console.log("multiplier " + jobSkill.multiplier);
+                    console.log("profileSkill " + profileSkill.years);
+                    console.log("jobSkill " + skill.Experience);
+
+                    if (profileSkill.years < skill.Experience){
+                      // if profile experience less than job requirement experience,
+                      // lower multiplier linearly
+                      jobSkill.multiplier *= profileSkill.years / skill.Experience;
+                      console.log("profileSkill / jobSkill " + (profileSkill.years / skill.Experience));
+                    }
+
+                    console.log("multiplier " + jobSkill.multiplier);
+
+                    console.log("--------------------------------");
+                    
                     rankInfo.profilePoints += jobSkill.multiplier;
                   }
                 }
