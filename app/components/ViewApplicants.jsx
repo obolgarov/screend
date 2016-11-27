@@ -64,6 +64,8 @@ var ViewApplicants = React.createClass({
 
     },
 
+
+
     render: function () {
         if (this.state.data) {
 
@@ -73,7 +75,14 @@ var ViewApplicants = React.createClass({
                 <div>
                     <Nav />
 
-                    <div id='Content-Length'>
+                      <div className="callout large primary">
+                        <div className="row column text-center">
+                          <h1>Applicants</h1>
+                        </div>
+
+                      </div>
+
+                    <div id='Content-Length' className="columns medium-4 large-6 small-centered">
 
 
 
