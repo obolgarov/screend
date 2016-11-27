@@ -3,6 +3,7 @@ var http = require('http'); // to send request
 var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 import { hashHistory } from 'react-router';
+var RegNav = require('RegNav');
 
 var {Link} = require('react-router');
 
@@ -174,6 +175,7 @@ var RegSeeker = React.createClass({
 
     return (
       <div>
+      <RegNav/>
         <h2>Register Account - Job Seeker</h2>
 
         <form ref='user_form' onSubmit={this.onSubmit}>

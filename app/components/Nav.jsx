@@ -126,7 +126,7 @@ var Nav = React.createClass({
                 <Link to="/ContactUs" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact Us</Link>
               </li>
            <li>
-                <Link to="/Search" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Search Jobs</Link>
+                <Link to="/Search" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Search For Jobs</Link>
               </li>
           <li>
                 <Link to="/MyProfiles" activeClassName="active" activeStyle={{fontWeight: 'bold'}}> My Profiles</Link>

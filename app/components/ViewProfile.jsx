@@ -81,7 +81,6 @@ var ViewProfile = React.createClass({
          }
 
      for (var i = 0; i < item.technicalSkills.length; i++) {
-         console.log(item.technicalSkills);
          var tSkills = document.createTextNode(item.technicalSkills[i].name + " - " + item.technicalSkills[i].years + " years");
           document.getElementById("tSkills").appendChild(tSkills);
           document.getElementById("tSkills").appendChild(document.createElement("br"));
@@ -187,7 +186,7 @@ var ViewProfile = React.createClass({
 
                         </div>
 
-
+                                <br/>
 
 
                         <div>
@@ -196,12 +195,18 @@ var ViewProfile = React.createClass({
 
                         </div>
 
+                                <br/>
+
+
                         <div>
 
                             <h4>Education</h4>
 
                             <label id="education"></label>
                         </div>
+
+                                <br/>
+
 
                         <div>
                             <h4>Certification</h4>
@@ -210,12 +215,18 @@ var ViewProfile = React.createClass({
                             <label id="certification"></label>
                         </div>
 
+                                <br/>
+
+
                         <div>
 
                             <h4>Achievements</h4>
 
                             <label id="achievements"></label>
                         </div>
+
+                                <br/>
+
 
                         <div>
 
@@ -225,6 +236,9 @@ var ViewProfile = React.createClass({
                             <label id="pSkills"></label>
                         </div>
 
+                                     <br/>
+
+
                         <div>
 
                             <h4>Technical Skills</h4>
@@ -233,10 +247,11 @@ var ViewProfile = React.createClass({
                             <label id="tSkills"></label>
                         </div>
 
+                                <br/>
 
 
-                        <input type="button" onClick={this.delete} className="button hollow" value="Delete" />
-                        <input type="button" onClick={this.edit} className="button hollow"  style={mleft} value="Edit" />
+                        <input type="button" onClick={this.delete} className="button hollow" value="Delete Profile" />
+                        <input type="button" onClick={this.edit} className="button hollow"  style={mleft} value="Edit Profile" />
 
                     </div>
                 </div>

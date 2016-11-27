@@ -42,7 +42,9 @@ var MyProfiles = React.createClass({
         for ( var profile of jsonData ) {
               profileData.push({
                 id :  profile._id,
-                name : profile.owner
+                name : profile.owner,
+                profileName : profile.name,
+                vis : profile.vis
 
               });
 
@@ -101,10 +103,10 @@ var MyProfiles = React.createClass({
 
                         return (
                         <div>
-                          <h4><a href={link}>View Profile</a><small>3/6/2016</small></h4>
-                          <p> faucibus vestibulum. Nulla at nulla justo, eget luctus.</p>
-                   
+                          <h4><a href={link}>View Profile</a><small> {data.vis}</small></h4>
+                          <p id="profileName" >Profile Name : {data.profileName}</p>
                       </div>
+
 
                         //   <tr>
                         //     <td><a href={link}>View Profile</a></td>
@@ -114,6 +116,7 @@ var MyProfiles = React.createClass({
                       })
                     }
                   </tbody>
+                        <p>Click on a profile to View, Edit or Delete Your Profile</p> 
 
                 </div>
               </div>

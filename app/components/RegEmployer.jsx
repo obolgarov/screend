@@ -4,6 +4,7 @@ var config = require('../../config')(); // to get the port
 var querystring = require('querystring'); // to send data inside the request
 var {Link} = require('react-router');
 import { hashHistory } from 'react-router';
+var RegNav = require('RegNav');
 
 var RegEmployer = React.createClass({
 
@@ -179,6 +180,7 @@ var RegEmployer = React.createClass({
     return (
 
         <div>
+        <RegNav/>
             <h2>Register Account - Employer</h2>
 
             <form ref='employer_form' onSubmit={this.onSubmit}>

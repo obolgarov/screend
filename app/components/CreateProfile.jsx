@@ -712,7 +712,7 @@ var CreateProfile = React.createClass({
 
             </table>
 
-            <input type="submit" value="SubmitProfile" ref="submitProfileButton" name="submitProfileButton" className="button hollow" style={button} onClick={this.handleSubmit}></input>
+            <input type="submit" value="Create Profile" ref="submitProfileButton" name="submitProfileButton" className="button hollow" style={button} onClick={this.handleSubmit}></input>
           </form>
         </div>
       </div>
