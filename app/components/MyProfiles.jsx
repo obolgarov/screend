@@ -114,10 +114,7 @@ var MyProfiles = React.createClass({
                       </div>
 
 
-                        //   <tr>
-                        //     <td><a href={link}>View Profile</a></td>
-                        //
-                        // </tr>
+
                         )
                       })
                     }
