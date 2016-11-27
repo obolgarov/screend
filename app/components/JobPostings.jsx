@@ -107,9 +107,7 @@ var JobPostings = React.createClass({
       margin: "30px"
     };
                 
-
     return (
-
 
       <div>
         <Nav/>
@@ -121,17 +119,20 @@ var JobPostings = React.createClass({
         </div>
         <div className="columns medium-4 large-6 small-centered">
           <form ref='metric_results' onSubmit={this.onSubmit}>
+          
             <div id='Content-Length'>
+
               <div>
                 Profile:
                 <select ref="profileSelect" onChange={this.rankJobs}>
                   <option value="" disabled selected>...</option>
                   {this.state.profiles.map((result, key) => {
                     //console.log(result);
-                    return <option key={key} value={result.id}>{result.name}</option>
+                                        return <option key={key} value={result.id}>{result.name}</option>
                   })}
                 </select>
               </div>
+
               <table ref="jobsTable" style={Table}>
                 <tbody>
                   <tr>
@@ -146,17 +147,19 @@ var JobPostings = React.createClass({
                     <td>
                       View Detailed Results
                     </td>
-                  
-
+       
+       
                   </tr >
-                  {
-
-                                    
+                  
+                
+                     {
 
                     this.state.jobData.map(function(data) {  
 
                       var link = "/#/JobDescription?id=" + data.jobID;
-                      var link2 = "/#/RankingResults?id=" + data.jobID;
+                      var link2 = "/#/RankingResults?id=" + data.jobID + "&?profile=" + this.refs.profileSelect.value;
+
+
                       return (
                         <tr>
                           <td>
@@ -168,7 +171,7 @@ var JobPostings = React.createClass({
                           <td> <a href={link2}>View Results </a></td>
                         </tr>
                       );
-                    })
+                    }.bind(this))
                   
                 }
                   
