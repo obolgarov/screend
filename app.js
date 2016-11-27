@@ -17,6 +17,7 @@ var skill = require('./routes/skill');
 var message = require('./routes/message');
 var mail = require('./routes/mail');
 var admin = require('./routes/admin');
+var apply = require('./routes/apply');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/skill',skill);
 app.use('/mail',mail);
 app.use('/messages',message);
 app.use('/admin',admin);
+app.use('/apply',apply);
 app.set('view engine', 'react');
 app.set('views', __dirname + '/app');
 app.use(favicon(__dirname + '/public/favicon.ico'));
