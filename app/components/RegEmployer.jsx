@@ -10,8 +10,8 @@ var RegEmployer = React.createClass({
 
     onSubmit: function(e) {
 
- if (this.refs.first.value != '' && this.refs.last.value != '' && this.refs.email.value != '' &&  this.refs.user.value != '' && this.refs.password.value 
-    != '' && this.refs.confirmPassword.value != null && this.refs.companyName.value != '' && this.refs.companyAddress.value != '' && 
+ if (this.refs.first.value != '' && this.refs.last.value != '' && this.refs.email.value != '' &&  this.refs.user.value != '' && this.refs.password.value
+    != '' && this.refs.confirmPassword.value != null && this.refs.companyName.value != '' && this.refs.companyAddress.value != '' &&
     this.refs.industry.value != '' &&  this.refs.attributes.value != '')
     {
 
@@ -31,7 +31,7 @@ var RegEmployer = React.createClass({
         var dataQuerystring = querystring.stringify(data);
         if(data.userPass != data.confirmPassword)
         {
-           alert('Error : Passwords Do Not Match') 
+           alert('Error : Passwords Do Not Match')
 
         }
         else {
@@ -181,7 +181,14 @@ var RegEmployer = React.createClass({
 
         <div>
         <RegNav/>
-            <h2>Register Account - Employer</h2>
+          <div className="callout large primary">
+            <div className="row column text-center">
+              <h1>Register Account - Employer</h1>
+            </div>
+
+          </div>
+        <div className="columns medium-4 large-6 small-centered">
+
 
             <form ref='employer_form' onSubmit={this.onSubmit}>
                 <div>
@@ -252,6 +259,7 @@ var RegEmployer = React.createClass({
                 </div>
 
             </form>
+          </div>
         </div>
     );
 }
