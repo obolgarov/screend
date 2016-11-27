@@ -205,7 +205,7 @@ var CreateProfile = React.createClass({
        var binaryString = String.fromCharCode.apply(null, new Uint8Array(st));
 
 
-   
+
 
 
       httpGen.generate({
@@ -221,6 +221,8 @@ var CreateProfile = React.createClass({
           // do something with jsonData if needed
           //console.log("test");
           var JSONData = JSON.parse(data);
+
+          console.log(JSONData);
 
           if (!this.state.technicalSkills[0].locked) {
             this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
