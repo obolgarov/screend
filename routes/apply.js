@@ -44,10 +44,12 @@ router.route('/')
     .post(function (req, res, callback) {
         var profile_id = req.body.data.profile;
         var job_id = req.body.data.job;
+        var rank = req.body.data.rank;
 
         mongoose.model('apply').create({
             profileID: profile_id,
-            jobID: job_id
+            jobID: job_id,
+            rank : rank
         }, function (err, apply) {
             if (err) {
                 return console.error(err)
@@ -61,4 +63,24 @@ router.route('/')
 
 
 
+router.route('/find').post(function(req, res, callback) {
 
+    var id = req.body.data.job_id;
+
+    mongoose.model('apply').find({
+      jobID : id
+   }, function(err, apply) {
+
+    res.format({
+
+      json: function() {
+        console.log(apply);
+
+        res.json(apply);
+
+      }
+    });
+
+  });
+
+});
