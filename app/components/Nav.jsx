@@ -46,7 +46,7 @@ var Nav = React.createClass({
   },
 
     componentDidMount: function () {
-     
+
        var myCookie = cookie.load('userToken');
        var tokenData = {
       token : cookie.load('userToken')
@@ -131,7 +131,7 @@ var Nav = React.createClass({
           <li>
                 <Link to="/MyProfiles" activeClassName="active" activeStyle={{fontWeight: 'bold'}}> My Profiles</Link>
               </li>
-          
+
             </ul>
           </div>
           <div className="top-bar-right">
@@ -159,9 +159,7 @@ var Nav = React.createClass({
               <li>
                 <Link to="/messages" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Messages</Link>
               </li>
-              <li>
-                <Link to="/ContactUs" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact Us</Link>
-              </li>
+
               <li>
                 <Link to="/PostJobForm" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Post Job</Link>
               </li>
@@ -172,7 +170,11 @@ var Nav = React.createClass({
               <li>
                 <Link to="/ProfileSearch" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Search for Job Seekers</Link>
               </li>
+              <li>
+                <Link to="/ContactUs" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact Us</Link>
+              </li>
             </ul>
+
           </div>
           <div className="top-bar-right">
               <form onSubmit={this.onLogin}>
@@ -191,7 +193,7 @@ var Nav = React.createClass({
           </div>
         )
      }
-    
+
    }
 
     });

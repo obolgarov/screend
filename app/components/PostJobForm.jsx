@@ -47,9 +47,9 @@ var PostJobForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
 
-    if (this.refs.jobtitle.value != '' && this.refs.companyform.value != '' 
+    if (this.refs.jobtitle.value != '' && this.refs.companyform.value != ''
    && this.refs.location.value != '' && this.refs.certification.value != ''
-   && this.refs.requirededucation.value !='' && this.refs.salary.value !='' 
+   && this.refs.requirededucation.value !='' && this.refs.salary.value !=''
    && this.refs.description.value !='' && this.refs.instructions.value !='') {
 
 
