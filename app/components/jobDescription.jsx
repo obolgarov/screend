@@ -121,6 +121,12 @@ var jobDescription = React.createClass({
         for (var item of jsonOutput) {
           nameList.push(item.name);
         }
+                var idList = [];
+
+          for (var item of jsonOutput) {
+          idList.push(item._id);
+        }
+
 
         var select = document.getElementById('profiles');
 
@@ -129,6 +135,7 @@ var jobDescription = React.createClass({
           
           opt.value = nameList[i];
           opt.setAttribute("name", "resume");
+          opt.setAttribute("value", idList[i]);
           opt.innerHTML = nameList[i];
           select.appendChild(opt);
 
@@ -145,10 +152,32 @@ var jobDescription = React.createClass({
 
   applyJob: function (event) {
     var jobId = document.getElementsByName("id");
-    console.log(jobId[0].innerHTML);
+    var job_id = jobId[0].innerHTML;
 
     var profileId = document.getElementsByName("resume");
-    console.log(profile[0].innerHTML);
+    var profile_id = profiles[0].value
+
+    var data = 
+    {
+      job : job_id,
+      profile : profile_id
+    }
+
+
+    httpGen.generate({
+          data: data,
+          path: "/apply",
+          method: "POST",
+          onData: (data) => {
+          //  var jsonData = JSON.parse(data);
+
+            // do something with jsonData if needed
+          },
+          onError: (error) => {
+            console.err(error.message);
+          }
+      });
+
   },
 
   render: function () {
