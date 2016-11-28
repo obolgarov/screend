@@ -78,7 +78,7 @@ var RankingResults = React.createClass({
             for (var i = 0; i < item.technicalSkills.length; i++) {
         //      var tSkills = document.createTextNode(item.technicalSkills[i].name + " - " + item.technicalSkills[i].years + " years");
                         var skillName = document.createTextNode(item.technicalSkills[i].name);
-                        var skillYear = document.createTextNode(item.technicalSkills[i].name);
+                        var skillYear = document.createTextNode(item.technicalSkills[i].years);
                         var element = document.createElement("tr");
                         var row1 = document.createElement("td");
                         row1.appendChild(skillName);
