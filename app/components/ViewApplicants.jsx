@@ -50,10 +50,9 @@ var ViewApplicants = React.createClass({
 
                         });
                 }
-
-
+                
                 profileList.sort((a, b) => {
-                    if (a.ranking > b.ranking) {
+                    if (a.rank > b.rank) {
                         return -1;
                     } else if (a.rank < b.rank) {
                         return 1;
@@ -103,6 +102,7 @@ var ViewApplicants = React.createClass({
                                 <tbody>
                                     <tr>
                                         <td> View Applicant Profile </td>
+                                        <td> View Applicant Contact Infor</td>
                                         <td> Applicant Ranking </td>
                                     </tr>
 
@@ -110,10 +110,13 @@ var ViewApplicants = React.createClass({
 
                                         this.state.data.map(function(data) {
                                             var link = "/#/EmployerViewProfile?id=" + data.profileId;
+                                            var link2 = "/#/ViewPerson?id=" + data.profileId;
+
                                             return (
 
                                                 <tr>
                                                     <td>  <a href={link}>View Applicant</a></td>
+                                                    <td><a href={link2}>View Contact Info</a></td>
                                                     <td>{data.rank}</td>
                                                 </tr>
 
