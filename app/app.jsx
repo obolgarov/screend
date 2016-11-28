@@ -12,6 +12,7 @@ var RegSeeker = require('RegSeeker');
 var PasswordReset =require('PasswordReset');
 var postJobForm = require('postJobForm');
 var jobDescription = require('jobDescription');
+var EmployerJobDescription = require('EmployerJobDescription');
 var JobPostings = require('JobPostings');
 var Welcome = require('Welcome');
 var LoginEmployer = require('LoginEmployer');
@@ -46,6 +47,7 @@ ReactDOM.render(
   <Route path="Messages" components={Messages}/>
   <Route path="postJobForm" components={postJobForm}/>
   <Route path="jobDescription" components={jobDescription}/>
+  <Route path="EmployerJobDescription" components={EmployerJobDescription}/>
   <Route path="JobPostings" components={JobPostings}/>
   <Route path="UploadResume" components={UploadResume}/>
   <Route path="ContactUs" components={ContactUs}/>

@@ -152,7 +152,7 @@ var jobDescription = React.createClass({
     var job_id = jobId[0].innerHTML;
 
     var profiles = document.getElementById('profiles');
-    
+
       function getParameterByName(name, url) {
 
             if (!url) {

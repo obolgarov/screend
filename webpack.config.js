@@ -38,6 +38,7 @@ plugins:[
       PasswordReset: 'app/components/PasswordReset.jsx',
       postJobForm: 'app/components/PostJobForm.jsx',
       jobDescription: 'app/components/jobDescription.jsx',
+      EmployerJobDescription: 'app/components/EmployerJobDescription.jsx',
       Welcome : 'app/components/Welcome.jsx',
       LoginEmployer: 'app/components/LoginEmployer.jsx',
       PasswordResetEmployer:'app/components/PasswordResetEmployer.jsx',

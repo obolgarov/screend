@@ -154,7 +154,7 @@ var EmployerPostings = React.createClass({
 
                                         this.state.data.map(function (data) {
 
-                                            var link = "/#/JobDescription?id=" + data.jobID;
+                                            var link = "/#/EmployerJobDescription?id=" + data.jobID;
                                             var deleteLink = "/#/HandleDelete?id=" + data.jobID;
                                             var link2 = "/#/ViewApplicants?id=" + data.jobID;
                                             return (
