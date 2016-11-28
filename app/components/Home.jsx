@@ -67,7 +67,7 @@ var Home = React.createClass({
                 </div>
                 <div className="row">
                     <div className="medium-6 columns medium-push-6">
-                        <img className="thumbnail" src="http://placehold.it/750x350"></img>
+                        <img className="thumbnail" src="https://il2.picdn.net/shutterstock/videos/4105342/thumb/1.jpg"></img>
                     </div>
                     <div className="medium-6 columns medium-pull-6">
                         <h2>Our Agency, our selves.</h2>

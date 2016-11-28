@@ -398,7 +398,7 @@ router.route('/rank').post(function(req, res, callback) {
               //console.log(job.Skills);
 
               var rankInfo = {
-                jobSkills: [],  // storing skills here because it felt natural, don't know what to do eith them here actually
+                jobSkills: [],
                 profileSkills: [],
                 jobName: job.JobTitle,
                 companyName: job.CompanyName,
@@ -412,19 +412,26 @@ router.route('/rank').post(function(req, res, callback) {
 
                 var jobSkill = {
                   skillName: skill.SkillName,
-                  multiplier: 1
-                }
-                if (skill.Importance == "Mandatory"){
-                  jobSkill.multiplier = 1;
-                }
-                else if (skill.Importance == "Important"){
-                  jobSkill.multiplier = 0.6;
-                }
-                else if (skill.Importance == "Good to have"){
-                  jobSkill.multiplier = 0.3;
+                  yearMultiplier: 1,
+                  maxValue: 0,
+                  matched: false,
+                  finalValue: 0,
+                  yearsRequired: 0
                 }
 
-                rankInfo.jobPoints += jobSkill.multiplier;
+                jobSkill.yearsRequired = skill.Experience
+
+                if (skill.Importance == "Mandatory"){
+                  jobSkill.maxValue = 1;
+                }
+                else if (skill.Importance == "Important"){
+                  jobSkill.maxValue = 0.6;
+                }
+                else if (skill.Importance == "Good to have"){
+                  jobSkill.maxValue = 0.3;
+                }
+
+                rankInfo.jobPoints += jobSkill.maxValue;
 
                 rankInfo.jobSkills.push(jobSkill);
 
@@ -433,24 +440,28 @@ router.route('/rank').post(function(req, res, callback) {
                   //console.log(jobSkill.skillName + " : " + profileSkill.name);
                   if (profileSkill.name == jobSkill.skillName){
 
-                    console.log("skill: " + profileSkill.name);
+                    jobSkill.matched = true;
 
-                    console.log("multiplier " + jobSkill.multiplier);
+                    console.log("skill: " + profileSkill.name);
                     console.log("profileSkill " + profileSkill.years);
                     console.log("jobSkill " + skill.Experience);
 
                     if (profileSkill.years < skill.Experience){
                       // if profile experience less than job requirement experience,
                       // lower multiplier linearly
-                      jobSkill.multiplier *= profileSkill.years / skill.Experience;
-                      console.log("profileSkill / jobSkill " + (profileSkill.years / skill.Experience));
+                      jobSkill.yearMultiplier = profileSkill.years / jobSkill.yearsRequired;
                     }
 
-                    console.log("multiplier " + jobSkill.multiplier);
+                    console.log("yearMultiplier " + jobSkill.yearMultiplier);
+                    console.log("maxValue " + jobSkill.maxValue);
+
+                    jobSkill.finalValue = jobSkill.maxValue * jobSkill.yearMultiplier;
+
+                    console.log("finalValue " + jobSkill.finalValue);
+
+                    rankInfo.profilePoints +=  jobSkill.finalValue;
 
                     console.log("--------------------------------");
-                    
-                    rankInfo.profilePoints += jobSkill.multiplier;
                   }
                 }
               }
