@@ -109,7 +109,6 @@ var Login = React.createClass({
 
       <div className="columns medium-4 large-6 small-centered">
 
-        <RegNav/>
         <h2 style={font}>Login - Job Seeker</h2>
           <form ref='LogIn' onSubmit={this.onSubmit}>
 

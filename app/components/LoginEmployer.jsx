@@ -103,7 +103,6 @@ var LoginEmployer = React.createClass({
         return (
 
       <div className="columns medium-4 large-6 small-centered">
-      <RegNav/>
         <h2 style={font}>Login - Employer</h2>
 
         <form ref='LogIn' onSubmit={this.onSubmit}>
