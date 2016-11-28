@@ -472,6 +472,7 @@ router.route('/findProfile').post(function(req, res, callback) {
       res.format({
         json: function() {
           res.json(profile);
+          
         }
       });
 

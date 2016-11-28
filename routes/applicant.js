@@ -94,8 +94,7 @@ router.route('/')
   var password = req.body.password;
   var email = req.body.email;
   var firstname = req.body.firstname;
-  var lastname = req.body.lastName;
-
+  var lastname = req.body.lastname;
   mongoose.model('applicant').create({
     username : username,
     password : password,
@@ -252,6 +251,30 @@ router.route('/reset').post(function(req, res, callback) {
     });
   }
 
+});
+
+
+router.route('/find').post(function(req, res, callback) {
+
+var user = req.body.data.user;
+console.log(user);
+  mongoose.model('applicant').find({
+    username: user
+  }, function(err, applicant) {
+    if (err) {
+      return console.error(err);
+    } else {
+                console.log(applicant)
+
+      res.format({
+        json: function() {
+          res.json(applicant);
+          
+        }
+      });
+
+    }
+  });
 });
 
 router.route('/exists').post(function(req, res, callback) {

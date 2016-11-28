@@ -36,6 +36,7 @@ var EmployerViewProfile = require('EmployerViewProfile');
 var RankingResults= require('RankingResults');
 var RegNav = require('RegNav');
 var ViewApplicants= require('ViewApplicants');
+var ViewPerson = require('ViewPerson');
 require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
 
@@ -77,6 +78,7 @@ ReactDOM.render(
   <Route path="RankingResults" components={RankingResults}/>
   <Route path="RegNav" components={RegNav}/>
   <Route path="ViewApplicants" components={ViewApplicants}/>
+  <Route path="ViewPerson" components={ViewPerson}/>
   <IndexRoute component={Welcome}/>
   </Route>
 </Router>,
