@@ -78,7 +78,7 @@ var RankingResults = React.createClass({
             for (var i = 0; i < item.technicalSkills.length; i++) {
         //      var tSkills = document.createTextNode(item.technicalSkills[i].name + " - " + item.technicalSkills[i].years + " years");
                         var skillName = document.createTextNode(item.technicalSkills[i].name);
-                        var skillYear = document.createTextNode(item.technicalSkills[i].name);
+                        var skillYear = document.createTextNode(item.technicalSkills[i].years);
                         var element = document.createElement("tr");
                         var row1 = document.createElement("td");
                         row1.appendChild(skillName);
@@ -106,17 +106,23 @@ var RankingResults = React.createClass({
       <div>
         <Nav/>
 
-        <h4>Your Rank</h4>
+          <div className="callout large primary">
+            <div className="row column text-center">
+              <h1>Your Rank</h1>
+            </div>
+
+          </div>
+        <h4>Match:</h4>
         <div>
           <p id="rank"></p>
         </div>
 
-        <h4>Job Title</h4>
+        <h4>Job Title:</h4>
         <div>
           <p id="title"></p>
         </div>
 
-        <h4>Job Skills / Skill Percentage</h4>
+        <h4>Job Skills / Skill Percentage:</h4>
 
         <table width="100%">
           <tbody>
@@ -150,16 +156,25 @@ var RankingResults = React.createClass({
           </tbody>
         </table>
 
-        <h4>Your Skills</h4>
-        <table id="tSkills">
-
+        <h4>Your Skills:</h4>
+        <table >
+          <tbody id="tSkills">
+            <tr>
+              <td>
+                Skills
+              </td>
+              <td>
+                Years
+              </td>
+            </tr>
+          </tbody>
 
         </table>
 
 
 
-        <h4>Skill Cost Breakdown</h4>
-        The skill rankings are defined as follows :
+        <h4>Skill Cost Breakdown:</h4>
+        
         <table>
           <tr>
           <td>1</td>

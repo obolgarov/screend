@@ -248,41 +248,41 @@ var EditProfile = React.createClass({
 
 
                         <div>
-                            <h4> Profile Name</h4>
+                            <h4> Profile Name:</h4>
 
                             <label id="name"></label>
 
                         </div>
 
                         <div>
-                            <h3> Employment History</h3>
+                            <h3> Employment History:</h3>
 
                             <label id="history"></label>
 
                         </div>
 
                         <div>
-                            <h3>Education</h3>
+                            <h3>Education:</h3>
                             <label id="education"></label>
                         </div>
 
                         <div>
-                            <h3>Certification</h3>
+                            <h3>Certification:</h3>
                             <label id="certification"></label>
                         </div>
 
                         <div>
-                            <h3>Achievements</h3>
+                            <h3>Achievements:</h3>
                             <label id="achievements"></label>
                         </div>
 
                         <div>
-                            <h3>Professtional Skils</h3>
+                            <h3>Professtional Skills:</h3>
                             <label id="pSkills"></label>
                         </div>
 
 
-                    <h3>Technical Skils</h3>
+                    <h3>Technical Skills:</h3>
                     <table>
                         <tbody>
                             <tr>

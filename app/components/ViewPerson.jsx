@@ -77,6 +77,7 @@ var ViewPerson = React.createClass({
                         <h1>Contact Information</h1>
                     </div>
                 </div>
+                <div className="columns medium-9 large-9 small-centered">
                 <div>
                     <h4> Name</h4>
 
@@ -92,7 +93,7 @@ var ViewPerson = React.createClass({
 
 
                 </div>
-
+              </div>
             </div>
         );
     }

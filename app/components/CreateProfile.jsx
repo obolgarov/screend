@@ -700,45 +700,45 @@ var CreateProfile = React.createClass({
               <input type="text" name="profileName" ref="profileName"/>
             </div>
 
-            <h3>Education</h3>
+            <h3>Education:</h3>
             {// map passes individual elements into the first param, and their index into the second, which is used as the React key
             this.state.education.map((result, key) => {
               return <EducationEntry key={key} entry={result} updateState={this.updateEducation} updateText={this.updateEducationText} deleteField={this.deleteEducationField}/>
             })}
             <input type="button" onClick={this.addEducation} value="+"/>
 
-            <h3>Certification</h3>
+            <h3>Certification:</h3>
             {this.state.certifications.map((result, key) => {
               return <CertificationEntry key={key} entry={result} updateState={this.updateCertification} updateText={this.updateCertificationText} deleteField={this.deleteCertificationField}/>
             })}
             <input type="button" onClick={this.addCertification} value="+"/>
 
-            <h3>Achievements</h3>
+            <h3>Achievements:</h3>
             {this.state.achievements.map((result, key) => {
               return <AchievementEntry key={key} entry={result} updateState={this.updateAchievement} updateText={this.updateAchievementText} deleteField={this.deleteAchievementField}/>
             })}
             <input type="button" onClick={this.addAchievement} value="+"/>
 
-            <h3>Employment History</h3>
+            <h3>Employment History:</h3>
             {this.state.employmentHistory.map((result, key) => {
               return <EmploymentHistoryEntry key={key} entry={result} updateState={this.updateEmploymentHistory} updateText={this.updateEmploymentHistoryText} deleteField={this.deleteEmploymentHistoryField}/>
             })}
             <input type="button" onClick={this.addEmploymentHistory} value="+"/>
 
-            <h3>Professional Skills</h3>
+            <h3>Professional Skills:</h3>
             {this.state.professionalSkills.map((result, key) => {
               return <ProfessionalSkillEntry key={key} entry={result} updateState={this.updateProfessionalSkill} updateText={this.updateProfessionalSkillText} deleteField={this.deleteProfessionalSkillField}/>
             })}
             <input type="button" onClick={this.addProfessionalSkill} value="+"/>
 
-            <h3>Technical Skills</h3>
+            <h3>Technical Skills:</h3>
             {this.state.technicalSkills.map((result, key) => {
               return <TechnicalSkillEntry key={key} entry={result} updateState={this.updateTechnicalSkill} updateNameText={this.updateTechnicalSkillNameText} updateYearText={this.updateTechnicalSkillYearText} deleteField={this.deleteTechnicalSkillField}/>
             })}
             <input type="button" onClick={this.addTechnicalSkill} value="+"/>
             <br/>
 
-            <h3>Profile Settings
+            <h3>Profile Settings:
             </h3>
             <table>
               <tbody>
