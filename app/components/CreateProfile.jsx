@@ -79,7 +79,8 @@ var CreateProfile = React.createClass({
         locked: false,
         data: 0
       },
-      vis: ""
+      vis: "",
+      uploadError: ""
     };
 
     // when first loaded, initial data is a single-populated array per category with initial data
@@ -222,52 +223,59 @@ var CreateProfile = React.createClass({
           //console.log("test");
           var JSONData = JSON.parse(data);
 
+          if (JSONData.failed){
+            this.setState({uploadError: "Upload Error"});
+          } else {
 
-          if (!this.state.technicalSkills[0].locked) {
-            this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
-          }
-          for (var skill of JSONData.technicalSkills) {
-            this.state.technicalSkills.push({id: generateRandomID(), name: skill.skill, years: skill.years, locked: true, data: 0});
 
-          }
-          if (!this.state.employmentHistory[0].locked) {
-            this.deleteTechnicalSkillField(this.state.employmentHistory[0].id);
-          }
-          for (var emp of JSONData.employmentHistory) {
-            this.state.employmentHistory.push({id: generateRandomID(), name: emp, locked: true, data: 0})
-          }
-
-          if (!this.state.education[0].locked) {
-            this.deleteEducationField(this.state.education[0].id);
-          }
-          for (var edu of JSONData.education) {
-            if (edu != null) {
-              this.state.education.push({id: generateRandomID(), name: edu, location: true, data: 0})
+            if (!this.state.technicalSkills[0].locked) {
+              this.deleteTechnicalSkillField(this.state.technicalSkills[0].id);
             }
-          }
+            for (var skill of JSONData.technicalSkills) {
+              this.state.technicalSkills.push({id: generateRandomID(), name: skill.skill, years: skill.years, locked: true, data: 0});
 
-          if (!this.state.certifications[0].locked) {
-            this.deleteCertificationField(this.state.certifications[0].id);
-          }
-          for (var cert of JSONData.certifications) {
-            this.state.certifications.push({id: generateRandomID(), name: cert, locked: true, data: 0})
-          }
+            }
+            if (!this.state.employmentHistory[0].locked) {
+              this.deleteEmploymentHistoryField(this.state.employmentHistory[0].id);
+            }
+            for (var emp of JSONData.employmentHistory) {
+              this.state.employmentHistory.push({id: generateRandomID(), name: emp, locked: true, data: 0})
+            }
 
-          if (!this.state.achievements[0].locked) {
-            this.deleteAchievementField(this.state.achievements[0].id);
-          }
-          for (var achiev of JSONData.achievements) {
-            this.state.achievements.push({id: generateRandomID(), name: achiev, locked: true, data: 0})
-          }
+            if (!this.state.education[0].locked) {
+              this.deleteEducationField(this.state.education[0].id);
+            }
+            for (var edu of JSONData.education) {
+              if (edu != null) {
+                this.state.education.push({id: generateRandomID(), name: edu, locked: true, data: 0})
+              }
+            }
 
-          if (!this.state.professionalSkills[0].locked) {
-            this.deleteProfessionalSkillField(this.state.professionalSkills[0].id);
-          }
-          for (var prof of JSONData.professionalSkills) {
-            this.state.professionalSkills.push({id: generateRandomID(), name: prof, locked: true, data: 0});
-          }
+            if (!this.state.certifications[0].locked) {
+              this.deleteCertificationField(this.state.certifications[0].id);
+            }
+            for (var cert of JSONData.certifications) {
+              this.state.certifications.push({id: generateRandomID(), name: cert, locked: true, data: 0})
+            }
 
-          this.setState(this.state);
+            if (!this.state.achievements[0].locked) {
+              this.deleteAchievementField(this.state.achievements[0].id);
+            }
+            for (var achiev of JSONData.achievements) {
+              this.state.achievements.push({id: generateRandomID(), name: achiev, locked: true, data: 0})
+            }
+
+            if (!this.state.professionalSkills[0].locked) {
+              this.deleteProfessionalSkillField(this.state.professionalSkills[0].id);
+            }
+            for (var prof of JSONData.professionalSkills) {
+              this.state.professionalSkills.push({id: generateRandomID(), name: prof, locked: true, data: 0});
+            }
+
+            this.state.uploadError = "";
+
+            this.setState(this.state);
+          }
 
         },
         onError: (error) => {
@@ -679,6 +687,7 @@ var CreateProfile = React.createClass({
             <input type="file" id="resume" name="resume" ref="resumeupload"></input>
             <input type="submit" value="UploadResume" ref="resumesubmit" name="submit" className="button hollow" style={button} onChange={this.uploadResume}></input>
           </form>
+          {(this.state.uploadError != "") ? <p>{this.state.uploadError}</p> : null}
 
           <form ref="profile">
 
