@@ -4,145 +4,135 @@ var httpGen = require('./httpGen.js');
 
 var ViewApplicants = React.createClass({
 
-    getInitialState: function() {
-        return {
-            data: null
-        };
-    },
+  getInitialState: function() {
+    return {data: null};
+  },
 
-    componentDidMount() {
+  componentDidMount: function() {
 
-        function getParameterByName(name, url) {
+    function getParameterByName(name, url) {
 
-            if (!url) {
-                url = window.location.href;
-            }
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
+      if (!url) {
+        url = window.location.href;
+      }
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results)
+        return null;
+      if (!results[2])
+        return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    var id = getParameterByName('id');
+
+    var data = {
+      job_id: id
+    }
+
+    httpGen.generate({
+      data: data,
+      path: "/apply/find",
+      method: "POST",
+      onData: (data) => {
+        var jsonData = JSON.parse(data);
+        var profileList = [];
+
+
+        for (var item of jsonData) {
+          profileList.push({profileId: item.profileID, rank: item.rank});
         }
 
-        var id = getParameterByName('id');
+        console.log(profileList);
 
-
-        var data =
-            {
-                job_id: id
-            }
-
-
-        httpGen.generate({
-            data: data,
-            path: "/apply/find",
-            method: "POST",
-            onData: (data) => {
-                var jsonData = JSON.parse(data);
-                var profileList = [];
-
-                for (var item of jsonData) {
-                    profileList.push
-                        ({
-                            profileId: item.profileID,
-                            rank: item.rank
-
-                        });
-                }
-
-
-                profileList.sort((a, b) => {
-                    if (a.ranking > b.ranking) {
-                        return -1;
-                    } else if (a.rank < b.rank) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                })
-
-                this.setState({
-                    data: profileList
-                });
-            },
-            onError: (error) => {
-                console.err(error.message);
-            }
+        profileList.sort((a, b) => {
+          console.log("a: " + a.rank);
+          console.log("b: " + b.rank);
+          if (parseFloat(a.rank) > parseFloat(b.rank)) {
+            console.log( "a > b" );
+            return -1;
+          } else if (parseFloat(a.rank) < parseFloat(b.rank)) {
+            console.log( "a < b" );
+            return 1;
+          } else {
+            console.log( "a = b" );
+            return 0;
+          }
         });
 
+        console.log(profileList);
 
+        this.setState({data: profileList});
+      },
+      onError: (error) => {
+        console.err(error.message);
+      }
+    });
 
-    },
+  },
 
+  render: function() {
+    if (this.state.data) {
 
+      return (
+        <div>
+          <Nav/>
 
-    render: function() {
-        if (this.state.data) {
+          <div className="callout large primary">
+            <div className="row column text-center">
+              <h1>Applicants</h1>
+            </div>
 
+          </div>
 
+          <div id='Content-Length' className="columns medium-4 large-6 small-centered">
 
-            return (
-                <div>
-                    <Nav />
+            <div>
 
-                    <div className="callout large primary">
-                        <div className="row column text-center">
-                            <h1>Applicants</h1>
-                        </div>
+              <table ref="jobsTable">
+                <tbody>
+                  <tr>
+                    <td>
+                      View Applicant Profile
+                    </td>
+                    <td>
+                      Applicant Ranking
+                    </td>
+                  </tr>
 
-                    </div>
+                  {this.state.data.map(function(data) {
+                    var link = "/#/EmployerViewProfile?id=" + data.profileId;
+                    return (
 
-                    <div id='Content-Length' className="columns medium-4 large-6 small-centered">
+                      <tr>
+                        <td>
+                          <a href={link}>View Applicant</a>
+                        </td>
+                        <td>{data.rank}</td>
+                      </tr>
 
+                    )
+                  }.bind(this))
+}
 
+                </tbody>
 
-                        <div>
+              </table>
+            </div>
 
-                            <table ref="jobsTable">
-                                <tbody>
-                                    <tr>
-                                        <td> View Applicant Profile </td>
-                                        <td> Applicant Ranking </td>
-                                    </tr>
-
-                                    {
-
-                                        this.state.data.map(function(data) {
-                                            var link = "/#/EmployerViewProfile?id=" + data.profileId;
-                                            return (
-
-                                                <tr>
-                                                    <td>  <a href={link}>View Applicant</a></td>
-                                                    <td>{data.rank}</td>
-                                                </tr>
-
-
-
-                                            )
-                                        }.bind(this))
-                                    }
-
-                                </tbody>
-
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-            )
-        }
-
-        else {
-            return (
-                <div>
-                    <p>Loading...</p>
-                </div>
-            )
-        }
-
-
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <p>Loading...</p>
+        </div>
+      )
     }
+
+  }
 });
 
 module.exports = ViewApplicants;
