@@ -74,9 +74,18 @@ var RankingResults = React.createClass({
           if (item._id == profileId) {
 
             for (var i = 0; i < item.technicalSkills.length; i++) {
-              var tSkills = document.createTextNode(item.technicalSkills[i].name + " - " + item.technicalSkills[i].years + " years");
-              document.getElementById("tSkills").appendChild(tSkills);
-              document.getElementById("tSkills").appendChild(document.createElement("br"));
+        //      var tSkills = document.createTextNode(item.technicalSkills[i].name + " - " + item.technicalSkills[i].years + " years");
+                        var skillName = document.createTextNode(item.technicalSkills[i].name);
+                        var skillYear = document.createTextNode(item.technicalSkills[i].name);
+                        var element = document.createElement("tr");
+                        var row1 = document.createElement("td");
+                        row1.appendChild(skillName);
+
+                        var row2 = document.createElement("td");
+                        row2.appendChild(skillYear);
+                        element.appendChild(row1);
+                        element.appendChild(row2);
+              document.getElementById("tSkills").appendChild(element);
             }
           }
 
@@ -139,25 +148,33 @@ var RankingResults = React.createClass({
         </table>
 
         <h4>Your Skills</h4>
-        <td>
-          <p id="tSkills"></p>
+        <table id="tSkills">
 
-        </td>
+
+        </table>
 
 
 
         <h4>Skill Cost Breakdown</h4>
-        <p>
-          The skill rankings are defined as follows :
-        <br />
-          1 - If Skill on Profile match's with job skill "Mandatory"
-          <br />
-          0.6 - If Skill on Profile match's with job skill "Important"
-        <br />
-          0.3 - If Skill on Profile match's with job skill "Good To Have"
-          <br />
-          0 - If Skill does not match
-        </p>
+        The skill rankings are defined as follows :
+        <table>
+          <tr>
+          <td>1</td>
+          <td>If Skill on Profile match's with job skill "Mandatory"</td>
+          </tr>
+          <tr>
+          <td>0.6 </td>
+          <td>If Skill on Profile match's with job skill "Important"</td>
+          </tr>
+          <tr>
+            <td>0.3</td>
+            <td>If Skill on Profile match's with job skill "Good To Have"</td>
+         </tr>
+         <tr>
+          <td>0</td>
+          <td>If Skill does not match</td>
+         </tr>
+      </table>
 
 
       </div>
