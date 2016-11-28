@@ -4,7 +4,7 @@ var httpGen = require('./httpGen.js');
 
 var ViewApplicants = React.createClass({
 
-    getInitialState: function () {
+    getInitialState: function() {
         return {
             data: null
         };
@@ -51,6 +51,17 @@ var ViewApplicants = React.createClass({
                         });
                 }
 
+
+                profileList.sort((a, b) => {
+                    if (a.ranking > b.ranking) {
+                        return -1;
+                    } else if (a.rank < b.rank) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                })
+
                 this.setState({
                     data: profileList
                 });
@@ -66,7 +77,7 @@ var ViewApplicants = React.createClass({
 
 
 
-    render: function () {
+    render: function() {
         if (this.state.data) {
 
 
@@ -75,12 +86,12 @@ var ViewApplicants = React.createClass({
                 <div>
                     <Nav />
 
-                      <div className="callout large primary">
+                    <div className="callout large primary">
                         <div className="row column text-center">
-                          <h1>Applicants</h1>
+                            <h1>Applicants</h1>
                         </div>
 
-                      </div>
+                    </div>
 
                     <div id='Content-Length' className="columns medium-4 large-6 small-centered">
 
@@ -97,12 +108,12 @@ var ViewApplicants = React.createClass({
 
                                     {
 
-                                        this.state.data.map(function (data) {
-                                     var link = "/#/EmployerViewProfile?id=" + data.profileId;
+                                        this.state.data.map(function(data) {
+                                            var link = "/#/EmployerViewProfile?id=" + data.profileId;
                                             return (
 
                                                 <tr>
-                                                 <td>  <a href={link}>View Applicant</a></td>
+                                                    <td>  <a href={link}>View Applicant</a></td>
                                                     <td>{data.rank}</td>
                                                 </tr>
 
