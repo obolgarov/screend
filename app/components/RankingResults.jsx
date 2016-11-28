@@ -4,7 +4,6 @@ import cookie from 'react-cookie';
 var Cookies = require('js-cookie');
 var httpGen = require('./httpGen.js');
 
-
 var RankingResults = React.createClass({
 
   componentDidMount() {
@@ -18,21 +17,20 @@ var RankingResults = React.createClass({
       name = name.replace(/[\[\]]/g, "\\$&");
       var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
+      if (!results)
+        return null;
+      if (!results[2])
+        return '';
       return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
     var id = getParameterByName('id');
 
-
-
     for (var job of results.jobRankings) {
-
 
       if (job.jobID == id) {
 
-        var rank = document.createTextNode(Math.floor(job.percent * 100)/100 + "%");
+        var rank = document.createTextNode(Math.floor(job.percent * 100) / 100 + "%");
         document.getElementById("rank").appendChild(rank);
 
         var title = document.createTextNode(job.jobName + " at " + job.companyName);
@@ -45,15 +43,19 @@ var RankingResults = React.createClass({
         }
 
         for (var i = 0; i < job.jobSkills.length; i++) {
-          var ranking = document.createTextNode(job.jobSkills[i].multiplier);
+          var ranking = document.createTextNode(job.jobSkills[i].maxValue);
           document.getElementById("ranking").appendChild(ranking);
           document.getElementById("ranking").appendChild(document.createElement("br"));
         }
 
+        for (var i = 0; i < job.jobSkills.length; i++) {
+          var year = document.createTextNode(job.jobSkills[i].yearsRequired);
+          document.getElementById("years").appendChild(year);
+          document.getElementById("years").appendChild(document.createElement("br"));
+        }
 
       }
     }
-
 
     var profileId = getParameterByName('profile');
 
@@ -88,27 +90,22 @@ var RankingResults = React.createClass({
       }
     });
 
-
-
   },
 
-
-  render: function () {
+  render: function() {
     return (
       <div>
-        <Nav />
+        <Nav/>
 
         <h4>Your Rank</h4>
-        <td>
+        <div>
           <p id="rank"></p>
-        </td>
+        </div>
 
         <h4>Job Title</h4>
         <div>
           <p id="title"></p>
         </div>
-
-
 
         <h4>Job Skills / Skill Percentage</h4>
 
@@ -117,10 +114,13 @@ var RankingResults = React.createClass({
             <tr>
               <td>
                 Name of Skill
-            </td>
+              </td>
               <td>
                 Skill Points from Job
-           </td>
+              </td>
+              <td>
+                Required Years
+              </td>
 
             </tr>
 
@@ -131,7 +131,10 @@ var RankingResults = React.createClass({
 
               <td>
                 <p id="ranking"></p>
+              </td>
 
+              <td>
+                <p id="years"></p>
               </td>
 
             </tr>
@@ -139,26 +142,23 @@ var RankingResults = React.createClass({
         </table>
 
         <h4>Your Skills</h4>
-        <td>
+        <div>
           <p id="tSkills"></p>
 
-        </td>
-
-
+        </div>
 
         <h4>Skill Cost Breakdown</h4>
         <p>
           The skill rankings are defined as follows :
-        <br />
+          <br/>
           1 - If Skill on Profile match's with job skill "Mandatory"
-          <br />
+          <br/>
           0.6 - If Skill on Profile match's with job skill "Important"
-        <br />
+          <br/>
           0.3 - If Skill on Profile match's with job skill "Good To Have"
-          <br />
+          <br/>
           0 - If Skill does not match
         </p>
-
 
       </div>
     );
