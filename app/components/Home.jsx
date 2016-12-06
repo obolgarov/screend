@@ -70,7 +70,7 @@ var Home = React.createClass({
                         <img className="thumbnail" src="https://il2.picdn.net/shutterstock/videos/4105342/thumb/1.jpg"></img>
                     </div>
                     <div className="medium-6 columns medium-pull-6">
-                        <h2>Our Agency, our selves.</h2>
+                        <h2>Our Agency, ourselves.</h2>
                         <p>Screen'd is a unique job website that uses an innovative algorithm which matches candidate skills to ideal positions.
                         Our job at Screen'd is to make sure our users are able to find ideal jobs in an effortless and efficient manner and make
                         it easier for employers to see why they are the ideal candidate</p>
