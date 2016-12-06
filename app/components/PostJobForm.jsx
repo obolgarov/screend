@@ -285,7 +285,7 @@ var PostJobForm = React.createClass({
             <input type="text" value={skillData.skill} style={lockedStyle} onBlur={this.updateSkillState.bind(this, skillData.id)} onChange={this.updateSkillText.bind(this, skillData.id)} />
             <input type="number" value={skillData.exp} style={{ display: "inline-block", width: "auto", margin: "0 10px" }} onChange={this.updateExperience.bind(this, skillData.id)} />
             <select value={skillData.importance} style={{ display: "inline-block", width: "auto", margin: "0 10px" }} onChange={this.updateImportance.bind(this, skillData.id)}>
-              <option value="Mandatory">Manditory</option>
+              <option value="Mandatory">Mandatory</option>
               <option value="Important">Important</option>
               <option value="Good to have">Good to have</option>
             </select>
