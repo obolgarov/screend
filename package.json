@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack && node app.js"
   },
-  "author": "Abdullah Fasih",
+  "author": "Abdullah Fasih, Oleksandr Bolgarov, Chris Goguen",
   "license": "MIT",
   "dependencies": {
     "adm-zip": "^0.4.7",
@@ -46,7 +46,7 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.9.0",
     "foundation-sites": "^6.2.0",
-    "jquery": "^2.2.1",
+    "jquery": "^3.0.0",
     "script-loader": "^0.6.1",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.0",
