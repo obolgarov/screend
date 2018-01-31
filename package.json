@@ -1,8 +1,12 @@
 {
-  "name": "boilerplate",
+  "name": "screend",
   "version": "1.0.0",
   "description": "Simple react app",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/obolgarov/screend.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack && node app.js"
@@ -24,7 +28,7 @@
     "mongoose": "^4.6.1",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
-    "nodemailer": "^2.6.4",
+    "node-mailer": "^0.1.1",
     "pdf2json": "^1.1.7",
     "qs": "^6.3.0",
     "react": "^0.14.7",
